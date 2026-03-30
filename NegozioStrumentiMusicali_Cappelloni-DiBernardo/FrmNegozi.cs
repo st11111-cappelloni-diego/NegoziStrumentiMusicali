@@ -38,7 +38,7 @@ namespace NegozioStrumentiMusicali
         private void tbRicerca_Enter(object sender, EventArgs e)
         {
             //L'utente mette il cursore sulla textbox
-            //Rimuovo il testo di sfondo
+            //Perciò rimuovo il testo di sfondo
             if(tbRicerca.Text == "Cerca per id o per nome...")
             {
                 tbRicerca.Clear();
