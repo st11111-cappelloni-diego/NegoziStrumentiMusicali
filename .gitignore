@@ -1,0 +1,25 @@
+# Visual Studio
+.vs/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Build
+bin/
+obj/
+
+# SQLite / DB
+*.db
+*.db-wal
+*.db-shm
+
+# IDE temp
+*.ide
+*.ide-wal
+*.ide-shm
+
+# Altro
+*.cache
+*.pdb
+*.exe
