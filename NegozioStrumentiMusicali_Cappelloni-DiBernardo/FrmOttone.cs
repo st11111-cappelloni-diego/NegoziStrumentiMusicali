@@ -16,5 +16,10 @@ namespace NegozioStrumentiMusicali
         {
             InitializeComponent();
         }
+
+        private void FrmOttone_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
