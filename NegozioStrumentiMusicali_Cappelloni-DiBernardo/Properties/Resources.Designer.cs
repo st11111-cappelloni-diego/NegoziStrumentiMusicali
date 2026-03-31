@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace NegozioStrumentiMusicali.Properties {
+namespace NegozioStrumentiMusicali_Cappelloni_DiBernardo.Properties {
     using System;
     
     
@@ -57,6 +57,26 @@ namespace NegozioStrumentiMusicali.Properties {
             }
             set {
                 resourceCulture = value;
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una risorsa localizzata di tipo System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap iconaVisualizza1_23x16 {
+            get {
+                object obj = ResourceManager.GetObject("iconaVisualizza1_23x16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una risorsa localizzata di tipo System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap iconaVisualizza1_30x21 {
+            get {
+                object obj = ResourceManager.GetObject("iconaVisualizza1_30x21", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
     }
