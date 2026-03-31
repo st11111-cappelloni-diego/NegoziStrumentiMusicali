@@ -10,11 +10,19 @@ using System.Windows.Forms;
 
 namespace NegozioStrumentiMusicali
 {
+    /// <summary>
+    /// Sviluppo e GUI: Diego Cappelloni
+    /// </summary>
     public partial class FrmOttone : Form
     {
         public FrmOttone()
         {
             InitializeComponent();
+        }
+
+        private void FrmOttone_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
