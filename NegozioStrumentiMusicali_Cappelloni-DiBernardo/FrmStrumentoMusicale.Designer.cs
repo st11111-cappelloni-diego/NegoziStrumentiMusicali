@@ -322,6 +322,7 @@
             // btnEliminaCaratteristica
             // 
             this.btnEliminaCaratteristica.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnEliminaCaratteristica.Image = global::NegozioStrumentiMusicali_Cappelloni_DiBernardo.Properties.Resources.iconaCestino1_35x35;
             this.btnEliminaCaratteristica.Location = new System.Drawing.Point(276, 386);
             this.btnEliminaCaratteristica.Name = "btnEliminaCaratteristica";
             this.btnEliminaCaratteristica.Size = new System.Drawing.Size(40, 40);
@@ -331,6 +332,7 @@
             // btnModificaCaratteristica
             // 
             this.btnModificaCaratteristica.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnModificaCaratteristica.Image = global::NegozioStrumentiMusicali_Cappelloni_DiBernardo.Properties.Resources.iconaModifica1_30x30;
             this.btnModificaCaratteristica.Location = new System.Drawing.Point(322, 386);
             this.btnModificaCaratteristica.Name = "btnModificaCaratteristica";
             this.btnModificaCaratteristica.Size = new System.Drawing.Size(40, 40);
@@ -340,6 +342,7 @@
             // btnNuovaCaratteristica
             // 
             this.btnNuovaCaratteristica.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnNuovaCaratteristica.Image = global::NegozioStrumentiMusicali_Cappelloni_DiBernardo.Properties.Resources.iconaNuovo1_30x30;
             this.btnNuovaCaratteristica.Location = new System.Drawing.Point(368, 386);
             this.btnNuovaCaratteristica.Name = "btnNuovaCaratteristica";
             this.btnNuovaCaratteristica.Size = new System.Drawing.Size(40, 40);

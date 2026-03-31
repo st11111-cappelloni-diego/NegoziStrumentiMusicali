@@ -247,5 +247,29 @@
   <ItemGroup>
     <None Include="Resources\iconaVisualizza1_30x21.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\iconaCestino1_35x35.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\iconaModifica1_39x39.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\iconaModifica1_30x30.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\iconaNuovo1_30x30.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\iconaInformazioni1_50x50.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\iconaInformazioni1_45x45.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\iconaLenteRicerca1_28x28.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\iconaOrdina1_40x40.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

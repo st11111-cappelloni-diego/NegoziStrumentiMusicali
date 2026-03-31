@@ -473,6 +473,7 @@
             // btnEliminaTom
             // 
             this.btnEliminaTom.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnEliminaTom.Image = global::NegozioStrumentiMusicali_Cappelloni_DiBernardo.Properties.Resources.iconaCestino1_35x35;
             this.btnEliminaTom.Location = new System.Drawing.Point(99, 176);
             this.btnEliminaTom.Name = "btnEliminaTom";
             this.btnEliminaTom.Size = new System.Drawing.Size(40, 40);
@@ -510,6 +511,7 @@
             // btnModificaTom
             // 
             this.btnModificaTom.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnModificaTom.Image = global::NegozioStrumentiMusicali_Cappelloni_DiBernardo.Properties.Resources.iconaModifica1_30x30;
             this.btnModificaTom.Location = new System.Drawing.Point(53, 177);
             this.btnModificaTom.Name = "btnModificaTom";
             this.btnModificaTom.Size = new System.Drawing.Size(40, 40);
@@ -529,6 +531,7 @@
             // btnNuovoTom
             // 
             this.btnNuovoTom.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnNuovoTom.Image = global::NegozioStrumentiMusicali_Cappelloni_DiBernardo.Properties.Resources.iconaNuovo1_30x30;
             this.btnNuovoTom.Location = new System.Drawing.Point(7, 176);
             this.btnNuovoTom.Name = "btnNuovoTom";
             this.btnNuovoTom.Size = new System.Drawing.Size(40, 40);
