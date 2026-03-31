@@ -12,6 +12,7 @@ namespace NegozioStrumentiMusicali
 {
     /// <summary>
     /// GUI: Diego Cappelloni
+    /// Sviluppo: Di Bernardo Leonardo
     /// </summary>
     public partial class FrmNegozi : Form
     {
