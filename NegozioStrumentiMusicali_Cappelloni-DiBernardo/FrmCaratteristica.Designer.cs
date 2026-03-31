@@ -34,31 +34,35 @@
             // 
             // rtbCaratteristica
             // 
-            this.rtbCaratteristica.Location = new System.Drawing.Point(12, 12);
+            this.rtbCaratteristica.Location = new System.Drawing.Point(16, 15);
+            this.rtbCaratteristica.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.rtbCaratteristica.Name = "rtbCaratteristica";
-            this.rtbCaratteristica.Size = new System.Drawing.Size(543, 332);
+            this.rtbCaratteristica.Size = new System.Drawing.Size(723, 408);
             this.rtbCaratteristica.TabIndex = 0;
             this.rtbCaratteristica.Text = "";
             // 
             // btnSalva
             // 
             this.btnSalva.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSalva.Location = new System.Drawing.Point(452, 409);
+            this.btnSalva.Location = new System.Drawing.Point(603, 503);
+            this.btnSalva.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnSalva.Name = "btnSalva";
-            this.btnSalva.Size = new System.Drawing.Size(105, 29);
+            this.btnSalva.Size = new System.Drawing.Size(140, 36);
             this.btnSalva.TabIndex = 21;
             this.btnSalva.Text = "Salva";
             this.btnSalva.UseVisualStyleBackColor = true;
             // 
             // FrmCaratteristica
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(569, 450);
+            this.ClientSize = new System.Drawing.Size(759, 554);
             this.Controls.Add(this.btnSalva);
             this.Controls.Add(this.rtbCaratteristica);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "FrmCaratteristica";
             this.Text = "FrmCaratteristica";
+            this.Load += new System.EventHandler(this.FrmCaratteristica_Load);
             this.ResumeLayout(false);
 
         }

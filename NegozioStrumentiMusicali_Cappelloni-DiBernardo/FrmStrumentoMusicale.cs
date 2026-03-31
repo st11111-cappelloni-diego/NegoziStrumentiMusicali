@@ -26,6 +26,7 @@ namespace NegozioStrumentiMusicali
         public FrmStrumentoMusicale()
         {
             InitializeComponent();
+            //Carico sull'apposita combobox i tipi di strumento
             cbStrumento.DataSource = Enum.GetNames(typeof(eTIPO_STRUMENTO));
         }
 

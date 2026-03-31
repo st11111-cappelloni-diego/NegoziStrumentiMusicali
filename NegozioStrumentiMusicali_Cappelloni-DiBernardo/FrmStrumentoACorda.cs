@@ -16,7 +16,7 @@ namespace NegozioStrumentiMusicali
         {
             InitializeComponent();
 
-            //Popolo le combobox
+            //Popolo le varie combobox
             cbMaterialeCorde.DataSource = Enum.GetNames(typeof(ClsStrumentoACorda.eMATERIALE_CORDE));
             cbMaterialeCorpo.DataSource = Enum.GetNames(typeof(Program.eLEGNO));
             cbMaterialeManico.DataSource = Enum.GetNames(typeof(Program.eLEGNO));
