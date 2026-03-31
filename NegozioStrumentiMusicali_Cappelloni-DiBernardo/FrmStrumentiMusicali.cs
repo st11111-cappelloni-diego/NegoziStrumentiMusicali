@@ -31,6 +31,7 @@ namespace NegozioStrumentiMusicali
 
         private void FrmStrumentiMusicali_Load(object sender, EventArgs e)
         {
+            //Popolo l'apposita combobox con i parametri di ricerca
             cbParametriDiOrdinamento.DataSource = Enum.GetNames(typeof(ePARAMETRO_DI_ORDINAMENTO));
         }
     }
