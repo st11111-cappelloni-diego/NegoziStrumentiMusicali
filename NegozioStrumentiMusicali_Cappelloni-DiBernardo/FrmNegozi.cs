@@ -12,6 +12,7 @@ namespace NegozioStrumentiMusicali
 {
     /// <summary>
     /// GUI: Diego Cappelloni
+    /// Sviluppo: Di Bernardo Leonardo
     /// </summary>
     public partial class FrmNegozi : Form
     {
@@ -32,6 +33,7 @@ namespace NegozioStrumentiMusicali
             tbRicerca.Text = "Cerca per id o per nome...";
             tbRicerca.ForeColor = Color.Gray;
 
+            //Popolo l'apposita combobox coi parametri di ordinamento
             cbParametriDiOrdinamento.DataSource = Enum.GetNames(typeof(ePARAMETRI_DI_ORDINAMENTO));
         }
 
