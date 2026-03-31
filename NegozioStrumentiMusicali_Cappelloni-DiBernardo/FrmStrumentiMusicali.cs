@@ -11,7 +11,7 @@ using System.Windows.Forms;
 namespace NegozioStrumentiMusicali
 {
     /// <summary>
-    /// GUI: Diego Cappelloni
+    /// GUI e Sviluppo: Diego Cappelloni
     /// </summary>
     public partial class FrmStrumentiMusicali : Form
     {
