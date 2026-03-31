@@ -242,61 +242,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\iconaLenteRicerca1_28x28.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\iconaCestino1_35x35.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\iconaModifica1_39x39.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\iconaModifica1_30x30.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\iconaNuovo1_30x30.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\negozi1_temaScuro.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\negozio1.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\negozioStrumentiMusicali1.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\iconaUtente1_189x189.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\utente1_335x335.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\iconaOrdina1_50x50.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\iconaOrdina1_40x40.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\iconaVisualizza1_23x16.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\iconaVisualizza1_30x21.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\iconaUtente1_589x589.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\produzioneChitarra1.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\logo1 %281%29.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\iconaInformazioni1_50x50.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\liutaio1.png" />
+    <Folder Include="Resources\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
