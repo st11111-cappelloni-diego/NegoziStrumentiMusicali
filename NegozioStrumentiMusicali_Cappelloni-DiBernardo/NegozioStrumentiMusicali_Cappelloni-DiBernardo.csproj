@@ -241,12 +241,11 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
-    <None Include="Resources\iconaCestino1_35x35.png" />
+    <None Include="Resources\iconaVisualizza1_23x16.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\iconaCestino2_45x45.png" />
+    <None Include="Resources\iconaVisualizza1_30x21.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
