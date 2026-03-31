@@ -47,8 +47,8 @@
             this.tbRicerca = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.cbNegozio = new System.Windows.Forms.ComboBox();
-            this.btnVisualizza = new System.Windows.Forms.Button();
             this.btnInfoNegozio = new System.Windows.Forms.Button();
+            this.btnVisualizza = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // lvNegozi
@@ -66,10 +66,11 @@
             this.lvNegozi.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lvNegozi.FullRowSelect = true;
             this.lvNegozi.HideSelection = false;
-            this.lvNegozi.Location = new System.Drawing.Point(14, 99);
+            this.lvNegozi.Location = new System.Drawing.Point(19, 122);
+            this.lvNegozi.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.lvNegozi.MultiSelect = false;
             this.lvNegozi.Name = "lvNegozi";
-            this.lvNegozi.Size = new System.Drawing.Size(997, 580);
+            this.lvNegozi.Size = new System.Drawing.Size(1328, 713);
             this.lvNegozi.TabIndex = 60;
             this.lvNegozi.UseCompatibleStateImageBehavior = false;
             this.lvNegozi.View = System.Windows.Forms.View.Details;
@@ -107,27 +108,30 @@
             // btnElimina
             // 
             this.btnElimina.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnElimina.Location = new System.Drawing.Point(1017, 547);
+            this.btnElimina.Location = new System.Drawing.Point(1356, 673);
+            this.btnElimina.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnElimina.Name = "btnElimina";
-            this.btnElimina.Size = new System.Drawing.Size(40, 40);
+            this.btnElimina.Size = new System.Drawing.Size(53, 49);
             this.btnElimina.TabIndex = 59;
             this.btnElimina.UseVisualStyleBackColor = true;
             // 
             // btnModifica
             // 
             this.btnModifica.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnModifica.Location = new System.Drawing.Point(1017, 593);
+            this.btnModifica.Location = new System.Drawing.Point(1356, 730);
+            this.btnModifica.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnModifica.Name = "btnModifica";
-            this.btnModifica.Size = new System.Drawing.Size(40, 40);
+            this.btnModifica.Size = new System.Drawing.Size(53, 49);
             this.btnModifica.TabIndex = 58;
             this.btnModifica.UseVisualStyleBackColor = true;
             // 
             // btnNuovo
             // 
             this.btnNuovo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnNuovo.Location = new System.Drawing.Point(1017, 639);
+            this.btnNuovo.Location = new System.Drawing.Point(1356, 786);
+            this.btnNuovo.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnNuovo.Name = "btnNuovo";
-            this.btnNuovo.Size = new System.Drawing.Size(40, 40);
+            this.btnNuovo.Size = new System.Drawing.Size(53, 49);
             this.btnNuovo.TabIndex = 57;
             this.btnNuovo.UseVisualStyleBackColor = true;
             // 
@@ -135,9 +139,10 @@
             // 
             this.btnOrdinaStrumento.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnOrdinaStrumento.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnOrdinaStrumento.Location = new System.Drawing.Point(1063, 639);
+            this.btnOrdinaStrumento.Location = new System.Drawing.Point(1417, 786);
+            this.btnOrdinaStrumento.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnOrdinaStrumento.Name = "btnOrdinaStrumento";
-            this.btnOrdinaStrumento.Size = new System.Drawing.Size(109, 40);
+            this.btnOrdinaStrumento.Size = new System.Drawing.Size(145, 49);
             this.btnOrdinaStrumento.TabIndex = 65;
             this.btnOrdinaStrumento.Text = "Ordina";
             this.btnOrdinaStrumento.UseVisualStyleBackColor = true;
@@ -145,9 +150,10 @@
             // btnOrdina
             // 
             this.btnOrdina.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnOrdina.Location = new System.Drawing.Point(1017, 89);
+            this.btnOrdina.Location = new System.Drawing.Point(1356, 110);
+            this.btnOrdina.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnOrdina.Name = "btnOrdina";
-            this.btnOrdina.Size = new System.Drawing.Size(40, 40);
+            this.btnOrdina.Size = new System.Drawing.Size(53, 49);
             this.btnOrdina.TabIndex = 80;
             this.btnOrdina.UseVisualStyleBackColor = true;
             // 
@@ -156,9 +162,10 @@
             this.cbParametriDiOrdinamento.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbParametriDiOrdinamento.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cbParametriDiOrdinamento.FormattingEnabled = true;
-            this.cbParametriDiOrdinamento.Location = new System.Drawing.Point(121, 64);
+            this.cbParametriDiOrdinamento.Location = new System.Drawing.Point(161, 79);
+            this.cbParametriDiOrdinamento.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.cbParametriDiOrdinamento.Name = "cbParametriDiOrdinamento";
-            this.cbParametriDiOrdinamento.Size = new System.Drawing.Size(260, 28);
+            this.cbParametriDiOrdinamento.Size = new System.Drawing.Size(345, 33);
             this.cbParametriDiOrdinamento.TabIndex = 79;
             // 
             // label2
@@ -166,9 +173,10 @@
             this.label2.BackColor = System.Drawing.SystemColors.ControlDark;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.Color.Black;
-            this.label2.Location = new System.Drawing.Point(10, 63);
+            this.label2.Location = new System.Drawing.Point(13, 78);
+            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(105, 28);
+            this.label2.Size = new System.Drawing.Size(140, 34);
             this.label2.TabIndex = 78;
             this.label2.Text = "Ordina per:";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -177,9 +185,10 @@
             // 
             this.btnFiltriRicerca.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnFiltriRicerca.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnFiltriRicerca.Location = new System.Drawing.Point(927, 63);
+            this.btnFiltriRicerca.Location = new System.Drawing.Point(1236, 78);
+            this.btnFiltriRicerca.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnFiltriRicerca.Name = "btnFiltriRicerca";
-            this.btnFiltriRicerca.Size = new System.Drawing.Size(75, 30);
+            this.btnFiltriRicerca.Size = new System.Drawing.Size(100, 37);
             this.btnFiltriRicerca.TabIndex = 77;
             this.btnFiltriRicerca.Text = "Filtri...";
             this.btnFiltriRicerca.UseVisualStyleBackColor = true;
@@ -187,9 +196,10 @@
             // btnCerca
             // 
             this.btnCerca.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnCerca.Location = new System.Drawing.Point(1017, 49);
+            this.btnCerca.Location = new System.Drawing.Point(1356, 60);
+            this.btnCerca.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnCerca.Name = "btnCerca";
-            this.btnCerca.Size = new System.Drawing.Size(40, 40);
+            this.btnCerca.Size = new System.Drawing.Size(53, 49);
             this.btnCerca.TabIndex = 76;
             this.btnCerca.UseVisualStyleBackColor = true;
             // 
@@ -198,9 +208,10 @@
             this.tbRicerca.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tbRicerca.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbRicerca.Location = new System.Drawing.Point(387, 66);
+            this.tbRicerca.Location = new System.Drawing.Point(516, 81);
+            this.tbRicerca.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tbRicerca.Name = "tbRicerca";
-            this.tbRicerca.Size = new System.Drawing.Size(534, 26);
+            this.tbRicerca.Size = new System.Drawing.Size(711, 30);
             this.tbRicerca.TabIndex = 75;
             // 
             // label1
@@ -208,9 +219,10 @@
             this.label1.BackColor = System.Drawing.SystemColors.ControlDark;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.Black;
-            this.label1.Location = new System.Drawing.Point(10, 9);
+            this.label1.Location = new System.Drawing.Point(13, 11);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(105, 28);
+            this.label1.Size = new System.Drawing.Size(140, 34);
             this.label1.TabIndex = 74;
             this.label1.Text = "Negozio:";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -222,35 +234,38 @@
             this.cbNegozio.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbNegozio.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cbNegozio.FormattingEnabled = true;
-            this.cbNegozio.Location = new System.Drawing.Point(121, 9);
+            this.cbNegozio.Location = new System.Drawing.Point(161, 11);
+            this.cbNegozio.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.cbNegozio.Name = "cbNegozio";
-            this.cbNegozio.Size = new System.Drawing.Size(890, 28);
+            this.cbNegozio.Size = new System.Drawing.Size(1185, 33);
             this.cbNegozio.TabIndex = 73;
-            // 
-            // btnVisualizza
-            // 
-            this.btnVisualizza.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnVisualizza.Location = new System.Drawing.Point(1017, 501);
-            this.btnVisualizza.Name = "btnVisualizza";
-            this.btnVisualizza.Size = new System.Drawing.Size(40, 40);
-            this.btnVisualizza.TabIndex = 81;
-            this.btnVisualizza.UseVisualStyleBackColor = true;
             // 
             // btnInfoNegozio
             // 
             this.btnInfoNegozio.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnInfoNegozio.Location = new System.Drawing.Point(1017, 3);
+            this.btnInfoNegozio.Location = new System.Drawing.Point(1356, 4);
+            this.btnInfoNegozio.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnInfoNegozio.Name = "btnInfoNegozio";
-            this.btnInfoNegozio.Size = new System.Drawing.Size(40, 40);
+            this.btnInfoNegozio.Size = new System.Drawing.Size(53, 49);
             this.btnInfoNegozio.TabIndex = 82;
             this.btnInfoNegozio.UseVisualStyleBackColor = true;
             // 
+            // btnVisualizza
+            // 
+            this.btnVisualizza.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnVisualizza.Location = new System.Drawing.Point(1356, 617);
+            this.btnVisualizza.Margin = new System.Windows.Forms.Padding(4);
+            this.btnVisualizza.Name = "btnVisualizza";
+            this.btnVisualizza.Size = new System.Drawing.Size(53, 49);
+            this.btnVisualizza.TabIndex = 81;
+            this.btnVisualizza.UseVisualStyleBackColor = true;
+            // 
             // FrmStrumentiMusicali
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.ClientSize = new System.Drawing.Size(1184, 686);
+            this.ClientSize = new System.Drawing.Size(1579, 844);
             this.Controls.Add(this.btnInfoNegozio);
             this.Controls.Add(this.btnVisualizza);
             this.Controls.Add(this.btnOrdina);
@@ -266,6 +281,7 @@
             this.Controls.Add(this.btnElimina);
             this.Controls.Add(this.btnModifica);
             this.Controls.Add(this.btnNuovo);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "FrmStrumentiMusicali";
             this.Text = "Strumenti";
             this.Load += new System.EventHandler(this.FrmStrumentiMusicali_Load);
