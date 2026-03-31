@@ -42,7 +42,7 @@ namespace NegozioStrumentiMusicali
                     ClsArchivio.NoteMusicali[ClsArchivio.NoteMusicali.Count - 1].Alterazione = ClsNotaMusicale.eALTERAZIONE.Diesis; //Cambio l'alterazione in diesis
 
                     //Metto la nota alterata dopo la nota naturale indicata dall'indice j
-                    
+                    //Scrivere codice
                 }
             }
 
