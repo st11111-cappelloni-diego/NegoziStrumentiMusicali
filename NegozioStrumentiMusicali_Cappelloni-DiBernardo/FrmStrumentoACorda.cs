@@ -10,6 +10,9 @@ using System.Windows.Forms;
 
 namespace NegozioStrumentiMusicali
 {
+    /// <summary>
+    /// GUI e Sviluppo: Diego Cappelloni
+    /// </summary>
     public partial class FrmStrumentoACorda : Form
     {
         public FrmStrumentoACorda()
