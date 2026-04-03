@@ -67,6 +67,11 @@ namespace NegozioStrumentiMusicali
             }
 
             //Ora che ho tutte le note dell'ottava 0, accodo la lista e addiziono all'ottava 1 fino ad ottenere 10 ottave
+            List<ClsNotaMusicale> _temp2 = new List<ClsNotaMusicale>(ClsArchivio.NoteMusicali);
+            for(int l = 1; l <= 10; l++)
+            {
+                //Aumento l'ottava di tutte le note
+            }
 
             #endregion
         }
