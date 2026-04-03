@@ -24,5 +24,10 @@ namespace NegozioStrumentiMusicali
         {
 
         }
+
+        private void cbStrumento_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            
+        }
     }
 }
