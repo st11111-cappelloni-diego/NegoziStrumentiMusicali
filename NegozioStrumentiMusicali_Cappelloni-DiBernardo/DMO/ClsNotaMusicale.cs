@@ -28,34 +28,33 @@ namespace NegozioStrumentiMusicali
             Naturale,
             Diesis,
         }
-        public enum eOTTAVA
-        {
-            Zero,
-            Uno,
-            Due,
-            Tre,
-            Quattro,
-            Cinque,
-            Sei,
-            Sette,
-            Otto,
-            Nove,
-            Dieci
-        }
 
         #endregion
 
         #region Attributi
         private eNOTA_BASE _notaBase;
         private eALTERAZIONE _alterazione;
-        private eOTTAVA _ottava;
+        private int _ottava;
 
         #endregion
 
         #region Proprietà
         public eNOTA_BASE NotaBase { get => _notaBase; set => _notaBase = value; }
         public eALTERAZIONE Alterazione { get => _alterazione; set => _alterazione = value; }
-        public eOTTAVA Ottava { get => _ottava; set => _ottava = value; }
+        public int Ottava
+        { get => _ottava;
+            set
+            {
+                if(value < 0 && value > 10)
+                {
+                    throw new Exception("Il valore dell'ottava può andare da 0 a 10");
+                }
+                else
+                {
+                    _ottava = value;
+                }
+            }
+        }
 
         #endregion
 
