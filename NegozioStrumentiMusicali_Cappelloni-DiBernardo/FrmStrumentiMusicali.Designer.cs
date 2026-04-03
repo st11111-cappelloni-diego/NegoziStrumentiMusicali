@@ -239,6 +239,7 @@
             this.btnNuovo.Size = new System.Drawing.Size(40, 40);
             this.btnNuovo.TabIndex = 57;
             this.btnNuovo.UseVisualStyleBackColor = true;
+            this.btnNuovo.Click += new System.EventHandler(this.btnNuovo_Click);
             // 
             // FrmStrumentiMusicali
             // 

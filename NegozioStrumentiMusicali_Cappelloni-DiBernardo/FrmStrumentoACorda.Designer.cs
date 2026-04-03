@@ -62,7 +62,7 @@
             this.label17 = new System.Windows.Forms.Label();
             this.nudTasti = new System.Windows.Forms.NumericUpDown();
             this.label11 = new System.Windows.Forms.Label();
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.pnlPickup = new System.Windows.Forms.Panel();
             this.label20 = new System.Windows.Forms.Label();
             this.cbPickup3 = new System.Windows.Forms.ComboBox();
             this.label19 = new System.Windows.Forms.Label();
@@ -84,7 +84,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.nudLunghezzaCorpo)).BeginInit();
             this.pnlTastiera.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudTasti)).BeginInit();
-            this.panel1.SuspendLayout();
+            this.pnlPickup.SuspendLayout();
             this.SuspendLayout();
             // 
             // cbStrumento
@@ -96,6 +96,7 @@
             this.cbStrumento.Name = "cbStrumento";
             this.cbStrumento.Size = new System.Drawing.Size(717, 28);
             this.cbStrumento.TabIndex = 0;
+            this.cbStrumento.SelectedIndexChanged += new System.EventHandler(this.cbStrumento_SelectedIndexChanged);
             // 
             // label1
             // 
@@ -470,19 +471,19 @@
             this.label11.Text = "Tastiera";
             this.label11.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // panel1
+            // pnlPickup
             // 
-            this.panel1.Controls.Add(this.label20);
-            this.panel1.Controls.Add(this.cbPickup3);
-            this.panel1.Controls.Add(this.label19);
-            this.panel1.Controls.Add(this.cbPickup2);
-            this.panel1.Controls.Add(this.label18);
-            this.panel1.Controls.Add(this.cbPickup1);
-            this.panel1.Controls.Add(this.label22);
-            this.panel1.Location = new System.Drawing.Point(556, 40);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(266, 211);
-            this.panel1.TabIndex = 16;
+            this.pnlPickup.Controls.Add(this.label20);
+            this.pnlPickup.Controls.Add(this.cbPickup3);
+            this.pnlPickup.Controls.Add(this.label19);
+            this.pnlPickup.Controls.Add(this.cbPickup2);
+            this.pnlPickup.Controls.Add(this.label18);
+            this.pnlPickup.Controls.Add(this.cbPickup1);
+            this.pnlPickup.Controls.Add(this.label22);
+            this.pnlPickup.Location = new System.Drawing.Point(556, 40);
+            this.pnlPickup.Name = "pnlPickup";
+            this.pnlPickup.Size = new System.Drawing.Size(266, 211);
+            this.pnlPickup.TabIndex = 16;
             // 
             // label20
             // 
@@ -591,7 +592,7 @@
             this.Controls.Add(this.btnSalva);
             this.Controls.Add(this.tbLunghezzaTotale);
             this.Controls.Add(this.label21);
-            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.pnlPickup);
             this.Controls.Add(this.pnlTastiera);
             this.Controls.Add(this.pnlCorpo);
             this.Controls.Add(this.pnlManico);
@@ -614,7 +615,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.nudLunghezzaCorpo)).EndInit();
             this.pnlTastiera.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.nudTasti)).EndInit();
-            this.panel1.ResumeLayout(false);
+            this.pnlPickup.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -656,7 +657,7 @@
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.NumericUpDown nudTasti;
-        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel pnlPickup;
         private System.Windows.Forms.Label label18;
         private System.Windows.Forms.ComboBox cbPickup1;
         private System.Windows.Forms.Label label22;

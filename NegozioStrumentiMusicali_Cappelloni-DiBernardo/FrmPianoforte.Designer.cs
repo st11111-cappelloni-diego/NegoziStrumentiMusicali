@@ -37,13 +37,13 @@
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
-            this.comboBox3 = new System.Windows.Forms.ComboBox();
+            this.cbTipo = new System.Windows.Forms.ComboBox();
+            this.cbMaterialeTastiBianchi = new System.Windows.Forms.ComboBox();
+            this.cbMaterialeTastiNeri = new System.Windows.Forms.ComboBox();
             this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
             this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
             this.numericUpDown3 = new System.Windows.Forms.NumericUpDown();
-            this.comboBox4 = new System.Windows.Forms.ComboBox();
+            this.cbMaterialeCorpoPFAcustico = new System.Windows.Forms.ComboBox();
             this.btnSalva = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.nudID)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
@@ -72,7 +72,7 @@
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(296, 23);
             this.label4.TabIndex = 19;
-            this.label4.Text = "Materiale Corpo PF Acustica";
+            this.label4.Text = "Materiale Corpo PF Acustico\r\n";
             this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label3
@@ -160,32 +160,36 @@
             this.label8.Text = "Profondità (cm)";
             this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // comboBox1
+            // cbTipo
             // 
-            this.comboBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(12, 35);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(341, 33);
-            this.comboBox1.TabIndex = 25;
+            this.cbTipo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbTipo.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbTipo.FormattingEnabled = true;
+            this.cbTipo.Location = new System.Drawing.Point(12, 35);
+            this.cbTipo.Name = "cbTipo";
+            this.cbTipo.Size = new System.Drawing.Size(341, 33);
+            this.cbTipo.TabIndex = 25;
+            this.cbTipo.SelectedIndexChanged += new System.EventHandler(this.cbTipo_SelectedIndexChanged);
             // 
-            // comboBox2
+            // cbMaterialeTastiBianchi
             // 
-            this.comboBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(12, 181);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(341, 33);
-            this.comboBox2.TabIndex = 26;
+            this.cbMaterialeTastiBianchi.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbMaterialeTastiBianchi.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbMaterialeTastiBianchi.FormattingEnabled = true;
+            this.cbMaterialeTastiBianchi.Location = new System.Drawing.Point(12, 181);
+            this.cbMaterialeTastiBianchi.Name = "cbMaterialeTastiBianchi";
+            this.cbMaterialeTastiBianchi.Size = new System.Drawing.Size(341, 33);
+            this.cbMaterialeTastiBianchi.TabIndex = 26;
             // 
-            // comboBox3
+            // cbMaterialeTastiNeri
             // 
-            this.comboBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.comboBox3.FormattingEnabled = true;
-            this.comboBox3.Location = new System.Drawing.Point(12, 257);
-            this.comboBox3.Name = "comboBox3";
-            this.comboBox3.Size = new System.Drawing.Size(341, 33);
-            this.comboBox3.TabIndex = 27;
+            this.cbMaterialeTastiNeri.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbMaterialeTastiNeri.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbMaterialeTastiNeri.FormattingEnabled = true;
+            this.cbMaterialeTastiNeri.Location = new System.Drawing.Point(12, 257);
+            this.cbMaterialeTastiNeri.Name = "cbMaterialeTastiNeri";
+            this.cbMaterialeTastiNeri.Size = new System.Drawing.Size(341, 33);
+            this.cbMaterialeTastiNeri.TabIndex = 27;
             // 
             // numericUpDown1
             // 
@@ -226,14 +230,15 @@
             this.numericUpDown3.Size = new System.Drawing.Size(341, 31);
             this.numericUpDown3.TabIndex = 30;
             // 
-            // comboBox4
+            // cbMaterialeCorpoPFAcustico
             // 
-            this.comboBox4.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.comboBox4.FormattingEnabled = true;
-            this.comboBox4.Location = new System.Drawing.Point(416, 35);
-            this.comboBox4.Name = "comboBox4";
-            this.comboBox4.Size = new System.Drawing.Size(341, 33);
-            this.comboBox4.TabIndex = 31;
+            this.cbMaterialeCorpoPFAcustico.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbMaterialeCorpoPFAcustico.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbMaterialeCorpoPFAcustico.FormattingEnabled = true;
+            this.cbMaterialeCorpoPFAcustico.Location = new System.Drawing.Point(416, 35);
+            this.cbMaterialeCorpoPFAcustico.Name = "cbMaterialeCorpoPFAcustico";
+            this.cbMaterialeCorpoPFAcustico.Size = new System.Drawing.Size(341, 33);
+            this.cbMaterialeCorpoPFAcustico.TabIndex = 31;
             // 
             // btnSalva
             // 
@@ -251,13 +256,13 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(772, 379);
             this.Controls.Add(this.btnSalva);
-            this.Controls.Add(this.comboBox4);
+            this.Controls.Add(this.cbMaterialeCorpoPFAcustico);
             this.Controls.Add(this.numericUpDown3);
             this.Controls.Add(this.numericUpDown2);
             this.Controls.Add(this.numericUpDown1);
-            this.Controls.Add(this.comboBox3);
-            this.Controls.Add(this.comboBox2);
-            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.cbMaterialeTastiNeri);
+            this.Controls.Add(this.cbMaterialeTastiBianchi);
+            this.Controls.Add(this.cbTipo);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.label6);
@@ -267,6 +272,7 @@
             this.Controls.Add(this.nudID);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
+            this.MaximizeBox = false;
             this.Name = "FrmPianoforte";
             this.Text = "FrmPianoforte";
             this.Load += new System.EventHandler(this.FrmPianoforte_Load);
@@ -288,13 +294,13 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.ComboBox comboBox2;
-        private System.Windows.Forms.ComboBox comboBox3;
+        private System.Windows.Forms.ComboBox cbTipo;
+        private System.Windows.Forms.ComboBox cbMaterialeTastiBianchi;
+        private System.Windows.Forms.ComboBox cbMaterialeTastiNeri;
         private System.Windows.Forms.NumericUpDown numericUpDown1;
         private System.Windows.Forms.NumericUpDown numericUpDown2;
         private System.Windows.Forms.NumericUpDown numericUpDown3;
-        private System.Windows.Forms.ComboBox comboBox4;
+        private System.Windows.Forms.ComboBox cbMaterialeCorpoPFAcustico;
         private System.Windows.Forms.Button btnSalva;
     }
 }

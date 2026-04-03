@@ -222,7 +222,7 @@ namespace NegozioStrumentiMusicali
                     || Strumento == eSTRUMENTI_A_CORDA.Violino
                     || Strumento == eSTRUMENTI_A_CORDA.Violoncello)
                 {
-                    _tasti = -1;
+                    _tasti = 0;
                 }
                 //Min tasti: 3; Max tasti: 32
                 else if (value >= 3 && value <= 32)
