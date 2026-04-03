@@ -276,7 +276,7 @@
             // label10
             // 
             this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.Location = new System.Drawing.Point(276, 228);
+            this.label10.Location = new System.Drawing.Point(276, 236);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(512, 20);
             this.label10.TabIndex = 27;
