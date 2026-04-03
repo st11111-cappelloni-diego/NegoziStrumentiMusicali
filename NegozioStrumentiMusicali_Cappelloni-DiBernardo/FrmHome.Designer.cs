@@ -28,82 +28,89 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.msHome = new System.Windows.Forms.MenuStrip();
             this.mioUtenteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.utentiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.negoziToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ordiniToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.strumentiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.caseProduttriciToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuStrip1.SuspendLayout();
+            this.msHome.SuspendLayout();
             this.SuspendLayout();
             // 
-            // menuStrip1
+            // msHome
             // 
-            this.menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.msHome.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.msHome.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.mioUtenteToolStripMenuItem,
             this.utentiToolStripMenuItem,
             this.negoziToolStripMenuItem,
             this.ordiniToolStripMenuItem,
             this.strumentiToolStripMenuItem,
             this.caseProduttriciToolStripMenuItem});
-            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
-            this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1184, 24);
-            this.menuStrip1.TabIndex = 0;
-            this.menuStrip1.Text = "menuStrip1";
+            this.msHome.Location = new System.Drawing.Point(0, 0);
+            this.msHome.Name = "msHome";
+            this.msHome.Padding = new System.Windows.Forms.Padding(8, 2, 0, 2);
+            this.msHome.Size = new System.Drawing.Size(1579, 28);
+            this.msHome.TabIndex = 0;
+            this.msHome.Text = "menuStrip1";
             // 
             // mioUtenteToolStripMenuItem
             // 
             this.mioUtenteToolStripMenuItem.Name = "mioUtenteToolStripMenuItem";
-            this.mioUtenteToolStripMenuItem.Size = new System.Drawing.Size(101, 20);
+            this.mioUtenteToolStripMenuItem.Size = new System.Drawing.Size(123, 24);
             this.mioUtenteToolStripMenuItem.Text = "<nomeUtente>";
+            this.mioUtenteToolStripMenuItem.Click += new System.EventHandler(this.mioUtenteToolStripMenuItem_Click);
             // 
             // utentiToolStripMenuItem
             // 
             this.utentiToolStripMenuItem.Name = "utentiToolStripMenuItem";
-            this.utentiToolStripMenuItem.Size = new System.Drawing.Size(51, 20);
+            this.utentiToolStripMenuItem.Size = new System.Drawing.Size(61, 24);
             this.utentiToolStripMenuItem.Text = "Utenti";
+            this.utentiToolStripMenuItem.Click += new System.EventHandler(this.utentiToolStripMenuItem_Click);
             // 
             // negoziToolStripMenuItem
             // 
             this.negoziToolStripMenuItem.Name = "negoziToolStripMenuItem";
-            this.negoziToolStripMenuItem.Size = new System.Drawing.Size(56, 20);
+            this.negoziToolStripMenuItem.Size = new System.Drawing.Size(69, 24);
             this.negoziToolStripMenuItem.Text = "Negozi";
+            this.negoziToolStripMenuItem.Click += new System.EventHandler(this.negoziToolStripMenuItem_Click);
             // 
             // ordiniToolStripMenuItem
             // 
             this.ordiniToolStripMenuItem.Name = "ordiniToolStripMenuItem";
-            this.ordiniToolStripMenuItem.Size = new System.Drawing.Size(52, 20);
+            this.ordiniToolStripMenuItem.Size = new System.Drawing.Size(62, 24);
             this.ordiniToolStripMenuItem.Text = "Ordini";
+            this.ordiniToolStripMenuItem.Click += new System.EventHandler(this.ordiniToolStripMenuItem_Click);
             // 
             // strumentiToolStripMenuItem
             // 
             this.strumentiToolStripMenuItem.Name = "strumentiToolStripMenuItem";
-            this.strumentiToolStripMenuItem.Size = new System.Drawing.Size(71, 20);
+            this.strumentiToolStripMenuItem.Size = new System.Drawing.Size(85, 24);
             this.strumentiToolStripMenuItem.Text = "Strumenti";
+            this.strumentiToolStripMenuItem.Click += new System.EventHandler(this.strumentiToolStripMenuItem_Click);
             // 
             // caseProduttriciToolStripMenuItem
             // 
             this.caseProduttriciToolStripMenuItem.Name = "caseProduttriciToolStripMenuItem";
-            this.caseProduttriciToolStripMenuItem.Size = new System.Drawing.Size(103, 20);
+            this.caseProduttriciToolStripMenuItem.Size = new System.Drawing.Size(126, 24);
             this.caseProduttriciToolStripMenuItem.Text = "Case produttrici";
+            this.caseProduttriciToolStripMenuItem.Click += new System.EventHandler(this.caseProduttriciToolStripMenuItem_Click);
             // 
             // FrmHome
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.ClientSize = new System.Drawing.Size(1184, 711);
-            this.Controls.Add(this.menuStrip1);
-            this.MainMenuStrip = this.menuStrip1;
-            this.Margin = new System.Windows.Forms.Padding(2);
+            this.ClientSize = new System.Drawing.Size(1579, 875);
+            this.Controls.Add(this.msHome);
+            this.MainMenuStrip = this.msHome;
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "FrmHome";
             this.Text = "Negozi di strumenti musicali";
-            this.Load += new System.EventHandler(this.msHome_Load);
-            this.menuStrip1.ResumeLayout(false);
-            this.menuStrip1.PerformLayout();
+            this.Load += new System.EventHandler(this.FrmHome_Load);
+            this.msHome.ResumeLayout(false);
+            this.msHome.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -111,7 +118,7 @@
 
         #endregion
 
-        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.MenuStrip msHome;
         private System.Windows.Forms.ToolStripMenuItem mioUtenteToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem negoziToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem ordiniToolStripMenuItem;
