@@ -64,7 +64,7 @@ namespace NegozioStrumentiMusicali
             
         }
 
-        public ClsNotaMusicale(eNOTA_BASE notaBase, eALTERAZIONE alterazione, eOTTAVA ottava)
+        public ClsNotaMusicale(eNOTA_BASE notaBase, eALTERAZIONE alterazione, int ottava)
         {
             NotaBase = notaBase;
             Alterazione = alterazione;
