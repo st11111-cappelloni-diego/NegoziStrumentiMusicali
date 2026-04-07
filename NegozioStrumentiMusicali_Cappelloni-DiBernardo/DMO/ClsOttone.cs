@@ -86,6 +86,11 @@ namespace NegozioStrumentiMusicali
         {
 
         }
+        //Costruttore ereditato dalla classe madre
+        public ClsOttone(int id) : base(id)
+        {
+
+        }
 
         #endregion
     }

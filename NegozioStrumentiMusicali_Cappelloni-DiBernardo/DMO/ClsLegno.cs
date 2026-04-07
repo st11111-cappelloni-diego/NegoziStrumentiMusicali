@@ -114,6 +114,11 @@ namespace NegozioStrumentiMusicali
         {
 
         }
+        //Costruttore ereditato dalla classe madre
+        public ClsLegno(int id) : base(id)
+        {
+
+        }
 
         #endregion
     }
