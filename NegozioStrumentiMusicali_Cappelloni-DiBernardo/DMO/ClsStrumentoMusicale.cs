@@ -12,7 +12,7 @@ namespace NegozioStrumentiMusicali
     public class ClsStrumentoMusicale
     {
         #region Attributi
-        private int _idArticolo;
+        private int _id;
         private int _quantita;
         private string _colori;
         private string _immagine;
@@ -26,15 +26,15 @@ namespace NegozioStrumentiMusicali
         #endregion
 
         #region Proprietà
-        public int IDArticolo
+        public int ID
         {
             get
             {
-                return _idArticolo;
+                return _id;
             }
             set
             {
-                if(_idArticolo < 0)
+                if(_id < 0)
                 {
                     throw new Exception("ID Articolo minore di 0");
                 }
@@ -44,7 +44,7 @@ namespace NegozioStrumentiMusicali
                 }*/
                 else
                 {
-                    _idArticolo = value;
+                    _id = value;
                 }
             }
         }
@@ -154,9 +154,9 @@ namespace NegozioStrumentiMusicali
 
         }
 
-        public ClsStrumentoMusicale(int idArticolo)
+        public ClsStrumentoMusicale(int id)
         {
-            IDArticolo = idArticolo;
+            ID = id;
         }
 
         #endregion

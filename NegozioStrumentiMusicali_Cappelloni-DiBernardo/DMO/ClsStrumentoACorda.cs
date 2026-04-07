@@ -263,8 +263,13 @@ namespace NegozioStrumentiMusicali
         #region Costruttore
         public ClsStrumentoACorda()
 	    {
-	
+	        
 	    }
+        //Costruttore ereditato dalla classe madre
+        public ClsStrumentoACorda(int id) : base(id)
+        {
+
+        }
 
         #endregion
     }
