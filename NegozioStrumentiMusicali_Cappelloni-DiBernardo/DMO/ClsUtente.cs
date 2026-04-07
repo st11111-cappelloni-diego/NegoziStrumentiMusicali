@@ -140,5 +140,17 @@ namespace NegozioStrumentiMusicali
             }
         }
         #endregion
+
+        #region Costruttore
+        public ClsUtente()
+        {
+
+        }
+        public ClsUtente(string username)
+        {
+            Username = username;
+        }
+
+        #endregion
     }
 }

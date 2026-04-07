@@ -34,6 +34,12 @@ namespace NegozioStrumentiMusicali
             Bandito = bandito;
         }
 
+        //Costruttore ereditato dalla classe madre
+        public ClsCliente(string username) : base(username)
+        {
+
+        }
+
         #endregion
     }
 }
