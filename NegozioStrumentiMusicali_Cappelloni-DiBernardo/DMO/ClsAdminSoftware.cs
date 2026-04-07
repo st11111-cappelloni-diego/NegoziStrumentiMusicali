@@ -15,7 +15,11 @@ namespace NegozioStrumentiMusicali
         public ClsAdminSoftware()
         {
         }
+        //Costruttore ereditato dalla classe madre
+        public ClsAdminSoftware(string username) : base(username)
+        {
 
+        }
 
         #endregion
 
