@@ -271,5 +271,20 @@
   <ItemGroup>
     <None Include="Resources\iconaOrdina1_40x40.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\iconaUtente1_589x589.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\iconaUtente1_335x335.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\iconaUtente1_189x189.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\iconaNegozio1_323x323.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\iconaLogo1_323x323.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

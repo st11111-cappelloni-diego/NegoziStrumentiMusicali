@@ -10,6 +10,10 @@ using System.Windows.Forms;
 
 namespace NegozioStrumentiMusicali
 {
+    /// <summary>
+    /// GUI: Diego Cappelloni
+    /// Sviluppo: Leonardo di Bernardo
+    /// </summary>
     public partial class FrmUtenti : Form
     {
         public enum ePARAMETRI_DI_ORDINAMENTO
@@ -27,12 +31,13 @@ namespace NegozioStrumentiMusicali
 
         private void FrmUtenti_Load(object sender, EventArgs e)
         {
-
             //Scrivo il testo di sfondo della textbox di ricerca
             tbRicerca.Text = "Cerca per nome, cognome, username o email...";
             tbRicerca.ForeColor = Color.Gray;
 
+            //Popolo le combobox
             cbParametriDiOrdinamento.DataSource = Enum.GetNames(typeof(ePARAMETRI_DI_ORDINAMENTO));
+            cbGenere.DataSource = Enum.GetNames(typeof(ClsUtente.eGENERE));
         }
 
         private void tbRicerca_Enter(object sender, EventArgs e)

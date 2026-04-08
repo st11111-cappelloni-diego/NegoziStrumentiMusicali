@@ -33,7 +33,6 @@
             this.tbEmail = new System.Windows.Forms.TextBox();
             this.nudID = new System.Windows.Forms.NumericUpDown();
             this.label2 = new System.Windows.Forms.Label();
-            this.btnEliminaSede = new System.Windows.Forms.Button();
             this.btnModificaSede = new System.Windows.Forms.Button();
             this.btnNuovaSede = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
@@ -43,14 +42,11 @@
             this.chCAP = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.chNazione = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.btnSalva = new System.Windows.Forms.Button();
-            this.pbLogo = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
             this.tbNome = new System.Windows.Forms.TextBox();
             this.pnlMaster = new System.Windows.Forms.Panel();
-            this.btnOrdina = new System.Windows.Forms.Button();
             this.cbParametriDiOrdinamento = new System.Windows.Forms.ComboBox();
             this.label8 = new System.Windows.Forms.Label();
-            this.btnCerca = new System.Windows.Forms.Button();
             this.tbRicerca = new System.Windows.Forms.TextBox();
             this.lvNegozi = new System.Windows.Forms.ListView();
             this.chNome = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -58,10 +54,14 @@
             this.btnEliminaCasaProduttrice = new System.Windows.Forms.Button();
             this.btnModificaCasaProduttrice = new System.Windows.Forms.Button();
             this.btnNuovaCasaProduttrice = new System.Windows.Forms.Button();
+            this.btnEliminaSede = new System.Windows.Forms.Button();
+            this.pbLogo = new System.Windows.Forms.PictureBox();
+            this.btnOrdina = new System.Windows.Forms.Button();
+            this.btnCerca = new System.Windows.Forms.Button();
             this.pnlDetail.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudID)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbLogo)).BeginInit();
             this.pnlMaster.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbLogo)).BeginInit();
             this.SuspendLayout();
             // 
             // pnlDetail
@@ -136,18 +136,10 @@
             this.label2.Text = "ID";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // btnEliminaSede
-            // 
-            this.btnEliminaSede.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnEliminaSede.Location = new System.Drawing.Point(484, 213);
-            this.btnEliminaSede.Name = "btnEliminaSede";
-            this.btnEliminaSede.Size = new System.Drawing.Size(40, 40);
-            this.btnEliminaSede.TabIndex = 54;
-            this.btnEliminaSede.UseVisualStyleBackColor = true;
-            // 
             // btnModificaSede
             // 
             this.btnModificaSede.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnModificaSede.Image = global::NegozioStrumentiMusicali_Cappelloni_DiBernardo.Properties.Resources.iconaModifica1_30x30;
             this.btnModificaSede.Location = new System.Drawing.Point(484, 259);
             this.btnModificaSede.Name = "btnModificaSede";
             this.btnModificaSede.Size = new System.Drawing.Size(40, 40);
@@ -157,6 +149,7 @@
             // btnNuovaSede
             // 
             this.btnNuovaSede.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnNuovaSede.Image = global::NegozioStrumentiMusicali_Cappelloni_DiBernardo.Properties.Resources.iconaNuovo1_30x30;
             this.btnNuovaSede.Location = new System.Drawing.Point(484, 305);
             this.btnNuovaSede.Name = "btnNuovaSede";
             this.btnNuovaSede.Size = new System.Drawing.Size(40, 40);
@@ -224,18 +217,6 @@
             this.btnSalva.Text = "Salva modifiche";
             this.btnSalva.UseVisualStyleBackColor = true;
             // 
-            // pbLogo
-            // 
-            this.pbLogo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.pbLogo.BackColor = System.Drawing.Color.Transparent;
-            this.pbLogo.Location = new System.Drawing.Point(0, 356);
-            this.pbLogo.Name = "pbLogo";
-            this.pbLogo.Size = new System.Drawing.Size(323, 323);
-            this.pbLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
-            this.pbLogo.TabIndex = 13;
-            this.pbLogo.TabStop = false;
-            // 
             // label1
             // 
             this.label1.BackColor = System.Drawing.Color.Transparent;
@@ -273,17 +254,8 @@
             this.pnlMaster.Controls.Add(this.btnNuovaCasaProduttrice);
             this.pnlMaster.Location = new System.Drawing.Point(2, 0);
             this.pnlMaster.Name = "pnlMaster";
-            this.pnlMaster.Size = new System.Drawing.Size(642, 686);
+            this.pnlMaster.Size = new System.Drawing.Size(637, 686);
             this.pnlMaster.TabIndex = 45;
-            // 
-            // btnOrdina
-            // 
-            this.btnOrdina.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnOrdina.Location = new System.Drawing.Point(549, 4);
-            this.btnOrdina.Name = "btnOrdina";
-            this.btnOrdina.Size = new System.Drawing.Size(40, 40);
-            this.btnOrdina.TabIndex = 79;
-            this.btnOrdina.UseVisualStyleBackColor = true;
             // 
             // cbParametriDiOrdinamento
             // 
@@ -294,7 +266,7 @@
             this.cbParametriDiOrdinamento.FormattingEnabled = true;
             this.cbParametriDiOrdinamento.Location = new System.Drawing.Point(117, 8);
             this.cbParametriDiOrdinamento.Name = "cbParametriDiOrdinamento";
-            this.cbParametriDiOrdinamento.Size = new System.Drawing.Size(426, 28);
+            this.cbParametriDiOrdinamento.Size = new System.Drawing.Size(421, 28);
             this.cbParametriDiOrdinamento.TabIndex = 78;
             // 
             // label8
@@ -309,15 +281,6 @@
             this.label8.Text = "Ordina per:";
             this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // btnCerca
-            // 
-            this.btnCerca.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnCerca.Location = new System.Drawing.Point(549, 53);
-            this.btnCerca.Name = "btnCerca";
-            this.btnCerca.Size = new System.Drawing.Size(40, 40);
-            this.btnCerca.TabIndex = 76;
-            this.btnCerca.UseVisualStyleBackColor = true;
-            // 
             // tbRicerca
             // 
             this.tbRicerca.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
@@ -326,7 +289,7 @@
             this.tbRicerca.ForeColor = System.Drawing.Color.Gray;
             this.tbRicerca.Location = new System.Drawing.Point(8, 67);
             this.tbRicerca.Name = "tbRicerca";
-            this.tbRicerca.Size = new System.Drawing.Size(535, 26);
+            this.tbRicerca.Size = new System.Drawing.Size(530, 26);
             this.tbRicerca.TabIndex = 75;
             this.tbRicerca.Text = "Cerca per id o per nome...\r\n";
             // 
@@ -344,7 +307,7 @@
             this.lvNegozi.Location = new System.Drawing.Point(8, 99);
             this.lvNegozi.MultiSelect = false;
             this.lvNegozi.Name = "lvNegozi";
-            this.lvNegozi.Size = new System.Drawing.Size(581, 580);
+            this.lvNegozi.Size = new System.Drawing.Size(576, 580);
             this.lvNegozi.TabIndex = 52;
             this.lvNegozi.UseCompatibleStateImageBehavior = false;
             this.lvNegozi.View = System.Windows.Forms.View.Details;
@@ -362,7 +325,8 @@
             // btnEliminaCasaProduttrice
             // 
             this.btnEliminaCasaProduttrice.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnEliminaCasaProduttrice.Location = new System.Drawing.Point(595, 547);
+            this.btnEliminaCasaProduttrice.Image = global::NegozioStrumentiMusicali_Cappelloni_DiBernardo.Properties.Resources.iconaCestino1_35x35;
+            this.btnEliminaCasaProduttrice.Location = new System.Drawing.Point(590, 547);
             this.btnEliminaCasaProduttrice.Name = "btnEliminaCasaProduttrice";
             this.btnEliminaCasaProduttrice.Size = new System.Drawing.Size(40, 40);
             this.btnEliminaCasaProduttrice.TabIndex = 51;
@@ -371,7 +335,8 @@
             // btnModificaCasaProduttrice
             // 
             this.btnModificaCasaProduttrice.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnModificaCasaProduttrice.Location = new System.Drawing.Point(595, 593);
+            this.btnModificaCasaProduttrice.Image = global::NegozioStrumentiMusicali_Cappelloni_DiBernardo.Properties.Resources.iconaModifica1_30x30;
+            this.btnModificaCasaProduttrice.Location = new System.Drawing.Point(590, 593);
             this.btnModificaCasaProduttrice.Name = "btnModificaCasaProduttrice";
             this.btnModificaCasaProduttrice.Size = new System.Drawing.Size(40, 40);
             this.btnModificaCasaProduttrice.TabIndex = 50;
@@ -380,11 +345,55 @@
             // btnNuovaCasaProduttrice
             // 
             this.btnNuovaCasaProduttrice.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnNuovaCasaProduttrice.Location = new System.Drawing.Point(595, 639);
+            this.btnNuovaCasaProduttrice.Image = global::NegozioStrumentiMusicali_Cappelloni_DiBernardo.Properties.Resources.iconaNuovo1_30x30;
+            this.btnNuovaCasaProduttrice.Location = new System.Drawing.Point(590, 639);
             this.btnNuovaCasaProduttrice.Name = "btnNuovaCasaProduttrice";
             this.btnNuovaCasaProduttrice.Size = new System.Drawing.Size(40, 40);
             this.btnNuovaCasaProduttrice.TabIndex = 49;
             this.btnNuovaCasaProduttrice.UseVisualStyleBackColor = true;
+            // 
+            // btnEliminaSede
+            // 
+            this.btnEliminaSede.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnEliminaSede.Image = global::NegozioStrumentiMusicali_Cappelloni_DiBernardo.Properties.Resources.iconaCestino1_35x35;
+            this.btnEliminaSede.Location = new System.Drawing.Point(484, 213);
+            this.btnEliminaSede.Name = "btnEliminaSede";
+            this.btnEliminaSede.Size = new System.Drawing.Size(40, 40);
+            this.btnEliminaSede.TabIndex = 54;
+            this.btnEliminaSede.UseVisualStyleBackColor = true;
+            // 
+            // pbLogo
+            // 
+            this.pbLogo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.pbLogo.BackColor = System.Drawing.Color.Transparent;
+            this.pbLogo.Image = global::NegozioStrumentiMusicali_Cappelloni_DiBernardo.Properties.Resources.iconaLogo1_323x323;
+            this.pbLogo.Location = new System.Drawing.Point(0, 356);
+            this.pbLogo.Name = "pbLogo";
+            this.pbLogo.Size = new System.Drawing.Size(323, 323);
+            this.pbLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.pbLogo.TabIndex = 13;
+            this.pbLogo.TabStop = false;
+            // 
+            // btnOrdina
+            // 
+            this.btnOrdina.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnOrdina.Image = global::NegozioStrumentiMusicali_Cappelloni_DiBernardo.Properties.Resources.iconaOrdina1_40x40;
+            this.btnOrdina.Location = new System.Drawing.Point(544, 4);
+            this.btnOrdina.Name = "btnOrdina";
+            this.btnOrdina.Size = new System.Drawing.Size(40, 40);
+            this.btnOrdina.TabIndex = 79;
+            this.btnOrdina.UseVisualStyleBackColor = true;
+            // 
+            // btnCerca
+            // 
+            this.btnCerca.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnCerca.Image = global::NegozioStrumentiMusicali_Cappelloni_DiBernardo.Properties.Resources.iconaLenteRicerca1_28x28;
+            this.btnCerca.Location = new System.Drawing.Point(544, 53);
+            this.btnCerca.Name = "btnCerca";
+            this.btnCerca.Size = new System.Drawing.Size(40, 40);
+            this.btnCerca.TabIndex = 76;
+            this.btnCerca.UseVisualStyleBackColor = true;
             // 
             // FrmCaseProduttrici
             // 
@@ -401,9 +410,9 @@
             this.pnlDetail.ResumeLayout(false);
             this.pnlDetail.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudID)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbLogo)).EndInit();
             this.pnlMaster.ResumeLayout(false);
             this.pnlMaster.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbLogo)).EndInit();
             this.ResumeLayout(false);
 
         }
