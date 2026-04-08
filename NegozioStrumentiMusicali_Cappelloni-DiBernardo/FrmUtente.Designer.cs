@@ -243,6 +243,7 @@
             // 
             this.cbGenere.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.cbGenere.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbGenere.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cbGenere.FormattingEnabled = true;
             this.cbGenere.Location = new System.Drawing.Point(12, 395);
@@ -253,6 +254,7 @@
             // btnVisualizzaPassword
             // 
             this.btnVisualizzaPassword.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnVisualizzaPassword.Image = global::NegozioStrumentiMusicali_Cappelloni_DiBernardo.Properties.Resources.iconaVisualizza1_23x16;
             this.btnVisualizzaPassword.Location = new System.Drawing.Point(464, 129);
             this.btnVisualizzaPassword.Name = "btnVisualizzaPassword";
             this.btnVisualizzaPassword.Size = new System.Drawing.Size(46, 25);
@@ -262,6 +264,7 @@
             // pbFotoProfilo
             // 
             this.pbFotoProfilo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.pbFotoProfilo.Image = global::NegozioStrumentiMusicali_Cappelloni_DiBernardo.Properties.Resources.iconaUtente1_589x589;
             this.pbFotoProfilo.Location = new System.Drawing.Point(583, 9);
             this.pbFotoProfilo.Name = "pbFotoProfilo";
             this.pbFotoProfilo.Size = new System.Drawing.Size(589, 589);
@@ -295,6 +298,7 @@
             this.Controls.Add(this.tbUsername);
             this.Controls.Add(this.label1);
             this.ForeColor = System.Drawing.Color.Black;
+            this.MaximizeBox = false;
             this.Name = "FrmUtente";
             this.Text = "MioUtente";
             this.Load += new System.EventHandler(this.FrmUtente_Load);

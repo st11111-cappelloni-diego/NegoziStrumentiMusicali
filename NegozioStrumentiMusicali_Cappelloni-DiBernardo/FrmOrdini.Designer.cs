@@ -324,6 +324,7 @@
             // btnOrdina
             // 
             this.btnOrdina.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnOrdina.Image = global::NegozioStrumentiMusicali_Cappelloni_DiBernardo.Properties.Resources.iconaOrdina1_40x40;
             this.btnOrdina.Location = new System.Drawing.Point(595, 89);
             this.btnOrdina.Name = "btnOrdina";
             this.btnOrdina.Size = new System.Drawing.Size(40, 40);
@@ -366,6 +367,7 @@
             // btnCerca
             // 
             this.btnCerca.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnCerca.Image = global::NegozioStrumentiMusicali_Cappelloni_DiBernardo.Properties.Resources.iconaLenteRicerca1_28x28;
             this.btnCerca.Location = new System.Drawing.Point(595, 43);
             this.btnCerca.Name = "btnCerca";
             this.btnCerca.Size = new System.Drawing.Size(40, 40);
@@ -456,6 +458,7 @@
             // btnElimina
             // 
             this.btnElimina.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnElimina.Image = global::NegozioStrumentiMusicali_Cappelloni_DiBernardo.Properties.Resources.iconaCestino1_35x35;
             this.btnElimina.Location = new System.Drawing.Point(595, 639);
             this.btnElimina.Name = "btnElimina";
             this.btnElimina.Size = new System.Drawing.Size(40, 40);

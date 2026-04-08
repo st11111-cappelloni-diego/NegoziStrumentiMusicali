@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmNegozi));
             this.pnlMaster = new System.Windows.Forms.Panel();
             this.btnOrdina = new System.Windows.Forms.Button();
             this.cbParametriDiOrdinamento = new System.Windows.Forms.ComboBox();
@@ -44,7 +43,6 @@
             this.btnNuovo = new System.Windows.Forms.Button();
             this.pnlDetail = new System.Windows.Forms.Panel();
             this.btnSalva = new System.Windows.Forms.Button();
-            this.pbImmagine = new System.Windows.Forms.PictureBox();
             this.ckbBandito = new System.Windows.Forms.CheckBox();
             this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
             this.label5 = new System.Windows.Forms.Label();
@@ -56,11 +54,12 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.tbNome = new System.Windows.Forms.TextBox();
+            this.pbImmagine = new System.Windows.Forms.PictureBox();
             this.pnlMaster.SuspendLayout();
             this.pnlDetail.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pbImmagine)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudID)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbImmagine)).BeginInit();
             this.SuspendLayout();
             // 
             // pnlMaster
@@ -86,6 +85,7 @@
             // btnOrdina
             // 
             this.btnOrdina.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnOrdina.Image = global::NegozioStrumentiMusicali_Cappelloni_DiBernardo.Properties.Resources.iconaOrdina1_40x40;
             this.btnOrdina.Location = new System.Drawing.Point(549, 4);
             this.btnOrdina.Name = "btnOrdina";
             this.btnOrdina.Size = new System.Drawing.Size(40, 40);
@@ -119,6 +119,7 @@
             // btnCerca
             // 
             this.btnCerca.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnCerca.Image = global::NegozioStrumentiMusicali_Cappelloni_DiBernardo.Properties.Resources.iconaLenteRicerca1_28x28;
             this.btnCerca.Location = new System.Drawing.Point(549, 53);
             this.btnCerca.Name = "btnCerca";
             this.btnCerca.Size = new System.Drawing.Size(40, 40);
@@ -177,6 +178,7 @@
             // btnElimina
             // 
             this.btnElimina.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnElimina.Image = global::NegozioStrumentiMusicali_Cappelloni_DiBernardo.Properties.Resources.iconaCestino1_35x35;
             this.btnElimina.Location = new System.Drawing.Point(595, 547);
             this.btnElimina.Name = "btnElimina";
             this.btnElimina.Size = new System.Drawing.Size(40, 40);
@@ -186,6 +188,7 @@
             // btnModifica
             // 
             this.btnModifica.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnModifica.Image = global::NegozioStrumentiMusicali_Cappelloni_DiBernardo.Properties.Resources.iconaModifica1_30x30;
             this.btnModifica.Location = new System.Drawing.Point(595, 593);
             this.btnModifica.Name = "btnModifica";
             this.btnModifica.Size = new System.Drawing.Size(40, 40);
@@ -195,6 +198,7 @@
             // btnNuovo
             // 
             this.btnNuovo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnNuovo.Image = global::NegozioStrumentiMusicali_Cappelloni_DiBernardo.Properties.Resources.iconaNuovo1_30x30;
             this.btnNuovo.Location = new System.Drawing.Point(595, 639);
             this.btnNuovo.Name = "btnNuovo";
             this.btnNuovo.Size = new System.Drawing.Size(40, 40);
@@ -234,19 +238,6 @@
             this.btnSalva.TabIndex = 14;
             this.btnSalva.Text = "Salva modifiche";
             this.btnSalva.UseVisualStyleBackColor = true;
-            // 
-            // pbImmagine
-            // 
-            this.pbImmagine.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.pbImmagine.BackColor = System.Drawing.Color.Transparent;
-            this.pbImmagine.Image = ((System.Drawing.Image)(resources.GetObject("pbImmagine.Image")));
-            this.pbImmagine.Location = new System.Drawing.Point(0, 351);
-            this.pbImmagine.Name = "pbImmagine";
-            this.pbImmagine.Size = new System.Drawing.Size(323, 323);
-            this.pbImmagine.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
-            this.pbImmagine.TabIndex = 13;
-            this.pbImmagine.TabStop = false;
             // 
             // ckbBandito
             // 
@@ -370,6 +361,19 @@
             this.tbNome.Size = new System.Drawing.Size(524, 31);
             this.tbNome.TabIndex = 1;
             // 
+            // pbImmagine
+            // 
+            this.pbImmagine.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.pbImmagine.BackColor = System.Drawing.Color.Transparent;
+            this.pbImmagine.Image = global::NegozioStrumentiMusicali_Cappelloni_DiBernardo.Properties.Resources.iconaNegozio1_323x323;
+            this.pbImmagine.Location = new System.Drawing.Point(0, 351);
+            this.pbImmagine.Name = "pbImmagine";
+            this.pbImmagine.Size = new System.Drawing.Size(323, 323);
+            this.pbImmagine.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.pbImmagine.TabIndex = 13;
+            this.pbImmagine.TabStop = false;
+            // 
             // FrmNegozi
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -386,9 +390,9 @@
             this.pnlMaster.PerformLayout();
             this.pnlDetail.ResumeLayout(false);
             this.pnlDetail.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pbImmagine)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudID)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbImmagine)).EndInit();
             this.ResumeLayout(false);
 
         }
