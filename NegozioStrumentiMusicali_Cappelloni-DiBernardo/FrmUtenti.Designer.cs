@@ -35,7 +35,7 @@
             this.label7 = new System.Windows.Forms.Label();
             this.dtpDataDiNascita = new System.Windows.Forms.DateTimePicker();
             this.label6 = new System.Windows.Forms.Label();
-            this.ù = new System.Windows.Forms.TextBox();
+            this.tbCognome = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.tbNome = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
@@ -45,7 +45,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.tbUsername = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.cbVediPassword = new System.Windows.Forms.CheckBox();
             this.btnSalva = new System.Windows.Forms.Button();
             this.ckbBandito = new System.Windows.Forms.CheckBox();
             this.pnlMaster = new System.Windows.Forms.Panel();
@@ -79,7 +78,7 @@
             this.pnlDetail.Controls.Add(this.label7);
             this.pnlDetail.Controls.Add(this.dtpDataDiNascita);
             this.pnlDetail.Controls.Add(this.label6);
-            this.pnlDetail.Controls.Add(this.ù);
+            this.pnlDetail.Controls.Add(this.tbCognome);
             this.pnlDetail.Controls.Add(this.label5);
             this.pnlDetail.Controls.Add(this.tbNome);
             this.pnlDetail.Controls.Add(this.label4);
@@ -89,7 +88,6 @@
             this.pnlDetail.Controls.Add(this.label2);
             this.pnlDetail.Controls.Add(this.tbUsername);
             this.pnlDetail.Controls.Add(this.label1);
-            this.pnlDetail.Controls.Add(this.cbVediPassword);
             this.pnlDetail.Controls.Add(this.btnSalva);
             this.pnlDetail.Controls.Add(this.ckbBandito);
             this.pnlDetail.Location = new System.Drawing.Point(650, 0);
@@ -100,6 +98,7 @@
             // btnVisualizzaPassword
             // 
             this.btnVisualizzaPassword.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnVisualizzaPassword.Image = global::NegozioStrumentiMusicali_Cappelloni_DiBernardo.Properties.Resources.iconaVisualizza1_23x16;
             this.btnVisualizzaPassword.Location = new System.Drawing.Point(476, 168);
             this.btnVisualizzaPassword.Name = "btnVisualizzaPassword";
             this.btnVisualizzaPassword.Size = new System.Drawing.Size(46, 29);
@@ -108,6 +107,7 @@
             // 
             // pbImmagineProfilo
             // 
+            this.pbImmagineProfilo.Image = global::NegozioStrumentiMusicali_Cappelloni_DiBernardo.Properties.Resources.iconaUtente1_189x189;
             this.pbImmagineProfilo.Location = new System.Drawing.Point(8, 485);
             this.pbImmagineProfilo.Name = "pbImmagineProfilo";
             this.pbImmagineProfilo.Size = new System.Drawing.Size(189, 189);
@@ -116,6 +116,7 @@
             // 
             // cbGenere
             // 
+            this.cbGenere.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbGenere.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cbGenere.FormattingEnabled = true;
             this.cbGenere.Location = new System.Drawing.Point(3, 443);
@@ -154,13 +155,13 @@
             this.label6.Text = "Data di nascita";
             this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // ù
+            // tbCognome
             // 
-            this.ù.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ù.Location = new System.Drawing.Point(3, 323);
-            this.ù.Name = "ù";
-            this.ù.Size = new System.Drawing.Size(519, 31);
-            this.ù.TabIndex = 36;
+            this.tbCognome.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbCognome.Location = new System.Drawing.Point(3, 323);
+            this.tbCognome.Name = "tbCognome";
+            this.tbCognome.Size = new System.Drawing.Size(519, 31);
+            this.tbCognome.TabIndex = 36;
             // 
             // label5
             // 
@@ -250,17 +251,6 @@
             this.label1.Text = "Username\r\n";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // cbVediPassword
-            // 
-            this.cbVediPassword.AutoSize = true;
-            this.cbVediPassword.Location = new System.Drawing.Point(-312, 400);
-            this.cbVediPassword.Margin = new System.Windows.Forms.Padding(4);
-            this.cbVediPassword.Name = "cbVediPassword";
-            this.cbVediPassword.Size = new System.Drawing.Size(106, 17);
-            this.cbVediPassword.TabIndex = 26;
-            this.cbVediPassword.Text = "Password visibile";
-            this.cbVediPassword.UseVisualStyleBackColor = true;
-            // 
             // btnSalva
             // 
             this.btnSalva.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
@@ -307,6 +297,7 @@
             // btnOrdina
             // 
             this.btnOrdina.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnOrdina.Image = global::NegozioStrumentiMusicali_Cappelloni_DiBernardo.Properties.Resources.iconaOrdina1_40x40;
             this.btnOrdina.Location = new System.Drawing.Point(549, 4);
             this.btnOrdina.Name = "btnOrdina";
             this.btnOrdina.Size = new System.Drawing.Size(40, 40);
@@ -340,6 +331,7 @@
             // btnCerca
             // 
             this.btnCerca.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnCerca.Image = global::NegozioStrumentiMusicali_Cappelloni_DiBernardo.Properties.Resources.iconaLenteRicerca1_28x28;
             this.btnCerca.Location = new System.Drawing.Point(549, 53);
             this.btnCerca.Name = "btnCerca";
             this.btnCerca.Size = new System.Drawing.Size(40, 40);
@@ -410,6 +402,7 @@
             // btnElimina
             // 
             this.btnElimina.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnElimina.Image = global::NegozioStrumentiMusicali_Cappelloni_DiBernardo.Properties.Resources.iconaCestino1_35x35;
             this.btnElimina.Location = new System.Drawing.Point(595, 547);
             this.btnElimina.Name = "btnElimina";
             this.btnElimina.Size = new System.Drawing.Size(40, 40);
@@ -419,6 +412,7 @@
             // btnModifica
             // 
             this.btnModifica.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnModifica.Image = global::NegozioStrumentiMusicali_Cappelloni_DiBernardo.Properties.Resources.iconaModifica1_30x30;
             this.btnModifica.Location = new System.Drawing.Point(595, 593);
             this.btnModifica.Name = "btnModifica";
             this.btnModifica.Size = new System.Drawing.Size(40, 40);
@@ -428,6 +422,7 @@
             // btnNuovo
             // 
             this.btnNuovo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnNuovo.Image = global::NegozioStrumentiMusicali_Cappelloni_DiBernardo.Properties.Resources.iconaNuovo1_30x30;
             this.btnNuovo.Location = new System.Drawing.Point(595, 639);
             this.btnNuovo.Name = "btnNuovo";
             this.btnNuovo.Size = new System.Drawing.Size(40, 40);
@@ -465,7 +460,6 @@
         private System.Windows.Forms.Button btnElimina;
         private System.Windows.Forms.Button btnModifica;
         private System.Windows.Forms.Button btnNuovo;
-        private System.Windows.Forms.CheckBox cbVediPassword;
         private System.Windows.Forms.ListView lvNegozi;
         private System.Windows.Forms.ColumnHeader chNome;
         private System.Windows.Forms.ColumnHeader chCognome;
@@ -473,7 +467,7 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.DateTimePicker dtpDataDiNascita;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.TextBox ù;
+        private System.Windows.Forms.TextBox tbCognome;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox tbNome;
         private System.Windows.Forms.Label label4;
