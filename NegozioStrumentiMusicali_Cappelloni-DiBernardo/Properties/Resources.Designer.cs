@@ -103,6 +103,16 @@ namespace NegozioStrumentiMusicali_Cappelloni_DiBernardo.Properties {
         /// <summary>
         ///   Cerca una risorsa localizzata di tipo System.Drawing.Bitmap.
         /// </summary>
+        public static System.Drawing.Bitmap iconaLogo1_323x323 {
+            get {
+                object obj = ResourceManager.GetObject("iconaLogo1_323x323", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una risorsa localizzata di tipo System.Drawing.Bitmap.
+        /// </summary>
         public static System.Drawing.Bitmap iconaModifica1_30x30 {
             get {
                 object obj = ResourceManager.GetObject("iconaModifica1_30x30", resourceCulture);
@@ -123,6 +133,16 @@ namespace NegozioStrumentiMusicali_Cappelloni_DiBernardo.Properties {
         /// <summary>
         ///   Cerca una risorsa localizzata di tipo System.Drawing.Bitmap.
         /// </summary>
+        public static System.Drawing.Bitmap iconaNegozio1_323x323 {
+            get {
+                object obj = ResourceManager.GetObject("iconaNegozio1_323x323", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una risorsa localizzata di tipo System.Drawing.Bitmap.
+        /// </summary>
         public static System.Drawing.Bitmap iconaNuovo1_30x30 {
             get {
                 object obj = ResourceManager.GetObject("iconaNuovo1_30x30", resourceCulture);
@@ -136,6 +156,36 @@ namespace NegozioStrumentiMusicali_Cappelloni_DiBernardo.Properties {
         public static System.Drawing.Bitmap iconaOrdina1_40x40 {
             get {
                 object obj = ResourceManager.GetObject("iconaOrdina1_40x40", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una risorsa localizzata di tipo System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap iconaUtente1_189x189 {
+            get {
+                object obj = ResourceManager.GetObject("iconaUtente1_189x189", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una risorsa localizzata di tipo System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap iconaUtente1_335x335 {
+            get {
+                object obj = ResourceManager.GetObject("iconaUtente1_335x335", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una risorsa localizzata di tipo System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap iconaUtente1_589x589 {
+            get {
+                object obj = ResourceManager.GetObject("iconaUtente1_589x589", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
