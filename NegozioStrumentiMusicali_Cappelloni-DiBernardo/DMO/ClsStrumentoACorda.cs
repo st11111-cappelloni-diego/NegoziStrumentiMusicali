@@ -35,7 +35,7 @@ namespace NegozioStrumentiMusicali
         }
         public enum eNUMERO_CORDE
         {
-            Uno,
+            Uno = 1,
             Due,
             Tre,
             Quattro,
