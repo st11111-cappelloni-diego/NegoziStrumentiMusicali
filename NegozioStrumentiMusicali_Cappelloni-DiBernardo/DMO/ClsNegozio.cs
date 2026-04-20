@@ -12,17 +12,16 @@ namespace NegozioStrumentiMusicali
     public class ClsNegozio
     {
         #region Attributi
-        int _id;
-        string _nome;
-        bool _bandito;
-        string _immagine;
-        ClsIndirizzo _indirizzo;
-        List<ClsOrdine> _ordini;
+        private int _id;
+        private string _nome;
+        private bool _bandito;
+        private string _pathImmagine;
+        private int _indirizzoID;
        
         #endregion
 
         #region Proprietà
-        public int Id
+        public int ID
         {
             get
             {
@@ -59,26 +58,8 @@ namespace NegozioStrumentiMusicali
             }
         }
         public bool Bandito { get => _bandito; set => _bandito = value; }
-        public string Immagine
-        {
-            get
-            {
-                return _immagine;
-            }
-            set
-            {
-                if (String.IsNullOrWhiteSpace(value))
-                {
-                    throw new Exception("Immagine non inserita");
-                }
-                else
-                {
-                    _immagine = value;
-                }
-            }
-        }
-        public ClsIndirizzo Indirizzo { get => _indirizzo; set => _indirizzo = value; }
-        public List<ClsOrdine> Ordini { get => _ordini; set => _ordini = value; }
+        public string PathImmagine { get => _pathImmagine; set => _pathImmagine = value; }
+        public int IndirizzoID { get => _indirizzoID; set => _indirizzoID = value; }
 
         #endregion
 
@@ -90,7 +71,7 @@ namespace NegozioStrumentiMusicali
 
         public ClsNegozio(int id)
         {
-            Id = id;
+            ID = id;
         }
 
         #endregion

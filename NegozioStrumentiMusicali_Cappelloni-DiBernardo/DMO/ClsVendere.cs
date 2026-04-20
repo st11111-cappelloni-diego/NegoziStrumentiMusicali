@@ -9,50 +9,27 @@ namespace NegozioStrumentiMusicali
     /// <summary>
     /// Sviluppata da Leonardo Di Bernardo
     /// </summary>
-    public class ClsOrdine
+    public class ClsVendere
     {
         #region Attributi
-        int _id;
-        int _quantita;
-        DateTime _dataOra;
+        private int _id;
+        private int _quantita;
+        private decimal _prezzo;
         private int _strumentoMusicaleID;
         private int _negozioID;
-        private int _indirizzoID;
-        private string _usernameCliente;
 
         #endregion
 
         #region Proprietà
-        public int ID
-        {
-            get
-            {
-                return _id;
-            }
-            set
-            {
-                if (_id < 0)
-                {
-                    throw new Exception("ID Ordine minore di 0");
-                }
-                else
-                {
-                    _id = value;
-                }
-            }
-        }
-
+        public int ID { get => _id; set => _id = value; }
         public int Quantita
         {
-            get
-            {
-                return _quantita;
-            }
+            get => _quantita;
             set
             {
-                if (_quantita <= 0)
+                if(value < 0)
                 {
-                    throw new Exception("Quantità minore uguale a 0");
+                    throw new Exception("La quantità non può essere un numero negativo");
                 }
                 else
                 {
@@ -60,24 +37,37 @@ namespace NegozioStrumentiMusicali
                 }
             }
         }
-        public DateTime DataOra { get => _dataOra; set => _dataOra = value; }
+        public decimal Prezzo
+        {
+            get => _prezzo;
+            set
+            {
+                if (value <= 0)
+                {
+                    throw new Exception("Prezzo minore o uguale a 0");
+                }
+                else
+                {
+                    _prezzo = value;
+                }
+            }
+        }
         public int StrumentoMusicaleID { get => _strumentoMusicaleID; set => _strumentoMusicaleID = value; }
         public int NegozioID { get => _negozioID; set => _negozioID = value; }
-        public int IndirizzoID { get => _indirizzoID; set => _indirizzoID = value; }
-        public string UsernameCliente { get => _usernameCliente; set => _usernameCliente = value; }
 
         #endregion
 
         #region Costruttore
-        public ClsOrdine()
+        public ClsVendere()
         {
 
         }
 
-        public ClsOrdine(int idOrdine)
+        public ClsVendere(int id)
         {
-            ID = idOrdine;
+            ID = id;
         }
+
         #endregion
     }
 }
