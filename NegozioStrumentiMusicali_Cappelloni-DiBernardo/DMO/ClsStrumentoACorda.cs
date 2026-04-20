@@ -33,21 +33,7 @@ namespace NegozioStrumentiMusicali
             Violino,
             Violoncello
         }
-        public enum eNUMERO_CORDE
-        {
-            Uno = 1,
-            Due,
-            Tre,
-            Quattro,
-            Cinque,
-            Sei,
-            Sette,
-            Otto,
-            Nove,
-            Dieci,
-            Undici,
-            Dodici
-        }
+
         public enum eMATERIALE_CORDE
         {
             Acciaio,
@@ -72,7 +58,7 @@ namespace NegozioStrumentiMusicali
 
         #region Attributi
         private eSTRUMENTI_A_CORDA _strumento;
-        private eNUMERO_CORDE _numeroCorde;
+        private ushort _numeroCorde;
         private eMATERIALE_CORDE _materialeCorde;
         private float _lunghezzaCorpoCM;
         private float _ampiezzaCorpoCM;
@@ -92,7 +78,7 @@ namespace NegozioStrumentiMusicali
 
         #region Proprietà
         public eSTRUMENTI_A_CORDA Strumento { get => _strumento; set => _strumento = value; }
-        public eNUMERO_CORDE NumeroCorde { get => _numeroCorde; set => _numeroCorde = value; }
+        public ushort NumeroCorde { get => _numeroCorde; set => _numeroCorde = value; }
         public eMATERIALE_CORDE MaterialeCorde { get => _materialeCorde; set => _materialeCorde = value; }
         public float LunghezzaCorpoCM
         {
