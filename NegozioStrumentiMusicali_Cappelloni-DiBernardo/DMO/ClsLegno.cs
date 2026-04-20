@@ -59,6 +59,8 @@ namespace NegozioStrumentiMusicali
         private eLEGNI _strumento;
         private eMATERIALE_CORPO_LEGNI _materialeCorpo;
         private eMATERIALE_CHIAVI _materialeChiavi;
+        private float _lunghezzaCM;
+        private float _larghezzaCM;
         private float _altezzaCM;
 
         #endregion
@@ -88,6 +90,42 @@ namespace NegozioStrumentiMusicali
             }
         }
         public eMATERIALE_CHIAVI MaterialeChiavi { get => _materialeChiavi; set => _materialeChiavi = value; }
+        public float LunghezzaCM
+        {
+            get
+            {
+                return _lunghezzaCM;
+            }
+            set
+            {
+                if (value <= 0)
+                {
+                    throw new Exception("La lunghezza deve essere maggiore di 0");
+                }
+                else
+                {
+                    _lunghezzaCM = value;
+                }
+            }
+        }
+        public float LarghezzaCM
+        {
+            get
+            {
+                return _larghezzaCM;
+            }
+            set
+            {
+                if (value <= 0)
+                {
+                    throw new Exception("La larghezza deve essere maggiore di 0");
+                }
+                else
+                {
+                    _larghezzaCM = value;
+                }
+            }
+        }
         public float AltezzaCM
         {
             get
@@ -96,9 +134,9 @@ namespace NegozioStrumentiMusicali
             }
             set
             {
-                if(value <= 0)
+                if (value <= 0)
                 {
-                    throw new Exception("Altezza dello strumento minore o uguale a 0");
+                    throw new Exception("L'altezza deve essere maggiore di 0");
                 }
                 else
                 {

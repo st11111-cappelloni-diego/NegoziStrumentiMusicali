@@ -50,6 +50,9 @@
     <Compile Include="DMO\ClsAdminSoftware.cs" />
     <Compile Include="DMO\ClsArchivio.cs" />
     <Compile Include="DMO\ClsBatteria.cs" />
+    <Compile Include="DMO\ClsBatteriaPiatto.cs" />
+    <Compile Include="DMO\ClsBatteriaTamburo.cs" />
+    <Compile Include="DMO\ClsCaratteristica.cs" />
     <Compile Include="DMO\ClsCasaProdruttrice.cs" />
     <Compile Include="DMO\ClsCliente.cs" />
     <Compile Include="DMO\ClsGestire.cs" />
@@ -60,8 +63,10 @@
     <Compile Include="DMO\ClsOrdine.cs" />
     <Compile Include="DMO\ClsOttone.cs" />
     <Compile Include="DMO\ClsPianoforte.cs" />
+    <Compile Include="DMO\ClsPiatto.cs" />
     <Compile Include="DMO\ClsStrumentoACorda.cs" />
     <Compile Include="DMO\ClsStrumentoMusicale.cs" />
+    <Compile Include="DMO\ClsTamburo.cs" />
     <Compile Include="DMO\ClsUtente.cs" />
     <Compile Include="FrmBatteria.cs">
       <SubType>Form</SubType>

@@ -68,6 +68,9 @@ namespace NegozioStrumentiMusicali
         private eTIPO_PLACCATURA _placcatura;
         private eMATERIALE_BOCCHINO _materialeBocchino;
         private eRIVESTIMENTO_BOCCHINO _rivestimentoBocchino;
+        private float _lunghezzaCM;
+        private float _larghezzaCM;
+        private float _altezzaCM;
 
         #endregion
 
@@ -78,6 +81,60 @@ namespace NegozioStrumentiMusicali
         public eTIPO_PLACCATURA Placcatura { get => _placcatura; set => _placcatura = value; }
         public eMATERIALE_BOCCHINO MaterialeBocchino { get => _materialeBocchino; set => _materialeBocchino = value; }
         public eRIVESTIMENTO_BOCCHINO RivestimentoBocchino { get => _rivestimentoBocchino; set => _rivestimentoBocchino = value; }
+        public float LunghezzaCM
+        {
+            get
+            {
+                return _lunghezzaCM;
+            }
+            set
+            {
+                if(value <= 0)
+                {
+                    throw new Exception("La lunghezza deve essere maggiore di 0");
+                }
+                else
+                {
+                    _lunghezzaCM = value;
+                }
+            }
+        }
+        public float LarghezzaCM
+        {
+            get
+            {
+                return _larghezzaCM;
+            }
+            set
+            {
+                if (value <= 0)
+                {
+                    throw new Exception("La larghezza deve essere maggiore di 0");
+                }
+                else
+                {
+                    _larghezzaCM = value;
+                }
+            }
+        }
+        public float AltezzaCM
+        {
+            get
+            {
+                return _altezzaCM;
+            }
+            set
+            {
+                if (value <= 0)
+                {
+                    throw new Exception("L'altezza deve essere maggiore di 0");
+                }
+                else
+                {
+                    _altezzaCM = value;
+                }
+            }
+        }
 
         #endregion
 
