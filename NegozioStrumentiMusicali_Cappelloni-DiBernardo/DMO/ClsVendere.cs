@@ -7,61 +7,63 @@ using System.Threading.Tasks;
 namespace NegozioStrumentiMusicali
 {
     /// <summary>
-    /// Sviluppata da: Diego Cappelloni
+    /// Sviluppata da Leonardo Di Bernardo
     /// </summary>
-    public class ClsCaratteristica
+    public class ClsVendere
     {
         #region Attributi
         private int _id;
-        private string _titolo;
-        private string _testo;
+        private int _quantita;
+        private decimal _prezzo;
         private int _strumentoMusicaleID;
+        private int _negozioID;
 
         #endregion
 
         #region Proprietà
         public int ID { get => _id; set => _id = value; }
-        public string Titolo
+        public int Quantita
         {
-            get => _titolo;
+            get => _quantita;
             set
             {
-                if(String.IsNullOrWhiteSpace(value))
+                if(value < 0)
                 {
-                    throw new Exception("Titolo della caratteristica vuoto");
+                    throw new Exception("La quantità non può essere un numero negativo");
                 }
                 else
                 {
-                    _titolo = value;
+                    _quantita = value;
                 }
             }
         }
-        public string Testo
+        public decimal Prezzo
         {
-            get => _testo;
+            get => _prezzo;
             set
             {
-                if(String.IsNullOrWhiteSpace(value))
+                if (value <= 0)
                 {
-                    throw new Exception("Testo della caratteristica vuoto");
+                    throw new Exception("Prezzo minore o uguale a 0");
                 }
                 else
                 {
-                    _testo = value;
+                    _prezzo = value;
                 }
             }
         }
         public int StrumentoMusicaleID { get => _strumentoMusicaleID; set => _strumentoMusicaleID = value; }
+        public int NegozioID { get => _negozioID; set => _negozioID = value; }
 
         #endregion
 
         #region Costruttore
-        public ClsCaratteristica()
+        public ClsVendere()
         {
 
         }
 
-        public ClsCaratteristica(int id)
+        public ClsVendere(int id)
         {
             ID = id;
         }

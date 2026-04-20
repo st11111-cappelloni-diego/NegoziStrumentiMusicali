@@ -12,52 +12,36 @@ namespace NegozioStrumentiMusicali
     public class ClsOrdine
     {
         #region Attributi
-        int _idOrdine;
-        int _idArticolo;
+        int _id;
         int _quantita;
-        DateTime _data;
-        ClsIndirizzo _indirizzo;
-        ClsCliente _cliente;
+        DateTime _dataOra;
+        private int _strumentoMusicaleID;
+        private int _negozioID;
+        private int _indirizzoID;
+        private string _usernameCliente;
 
         #endregion
 
         #region Proprietà
-        public int IDOrdine
+        public int ID
         {
             get
             {
-                return _idOrdine;
+                return _id;
             }
             set
             {
-                if (_idOrdine < 0)
+                if (_id < 0)
                 {
                     throw new Exception("ID Ordine minore di 0");
                 }
                 else
                 {
-                    _idOrdine = value;
+                    _id = value;
                 }
             }
         }
-        public int IDArticolo
-        {
-            get
-            {
-                return _idArticolo;
-            }
-            set
-            {
-                if (_idArticolo < 0)
-                {
-                    throw new Exception("ID Articolo minore di 0");
-                }
-                else
-                {
-                    _idArticolo = value;
-                }
-            }
-        }
+
         public int Quantita
         {
             get
@@ -66,9 +50,9 @@ namespace NegozioStrumentiMusicali
             }
             set
             {
-                if (_quantita < 0)
+                if (_quantita <= 0)
                 {
-                    throw new Exception("Quantità minore di 0");
+                    throw new Exception("Quantità minore uguale a 0");
                 }
                 else
                 {
@@ -76,10 +60,11 @@ namespace NegozioStrumentiMusicali
                 }
             }
         }
-        public DateTime Data { get => _data; set => _data = value; }
-
-        public ClsIndirizzo Indirizzo { get => _indirizzo; set => _indirizzo = value; }
-        public ClsCliente Cliente { get => _cliente; set => _cliente = value; }
+        public DateTime DataOra { get => _dataOra; set => _dataOra = value; }
+        public int StrumentoMusicaleID { get => _strumentoMusicaleID; set => _strumentoMusicaleID = value; }
+        public int NegozioID { get => _negozioID; set => _negozioID = value; }
+        public int IndirizzoID { get => _indirizzoID; set => _indirizzoID = value; }
+        public string UsernameCliente { get => _usernameCliente; set => _usernameCliente = value; }
 
         #endregion
 
@@ -91,7 +76,7 @@ namespace NegozioStrumentiMusicali
 
         public ClsOrdine(int idOrdine)
         {
-            IDOrdine = idOrdine;
+            ID = idOrdine;
         }
         #endregion
     }

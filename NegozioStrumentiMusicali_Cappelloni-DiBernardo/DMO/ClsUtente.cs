@@ -10,21 +10,24 @@ namespace NegozioStrumentiMusicali
     /// Sviluppata da Leonardo Di Bernardo
     /// </summary>
     
-    public abstract class ClsUtente
+    public class ClsUtente
     {
         #region Enumeratori
         public enum eGENERE { Uomo, Donna, Non_dichiarato }
         #endregion
 
         #region Attributi
-        string _username;
-        string _password;
-        string _nome;
-        string _cognome;
-        string _email;
-        DateTime _dataDiNascita;
-        eGENERE _genere;
-        string _immagineProfilo;
+        private string _username;
+        private string _password;
+        private string _nome;
+        private string _cognome;
+        private string _email;
+        private DateTime _dataDiNascita;
+        private eGENERE _genere;
+        private string _pathImmagine;
+        private bool _adminSoftware;
+        private bool _adminNegozio;
+        private bool _bandito;
 
         #endregion
 
@@ -121,24 +124,20 @@ namespace NegozioStrumentiMusicali
         }
         public DateTime DataDiNascita { get => _dataDiNascita; set => _dataDiNascita = value; }
         public eGENERE Genere { get => _genere; set => _genere = value; }
-        public string ImmagineProfilo
+        public string PathImmagine
         {
             get
             {
-                return _immagineProfilo;
+                return _pathImmagine;
             }
             set
             {
-                if (String.IsNullOrWhiteSpace(value))
-                {
-                    throw new Exception("Immagine profilo non inserita");
-                }
-                else
-                {
-                    _immagineProfilo = value;
-                }
+                _pathImmagine = value;
             }
         }
+        public bool AdminSoftware { get => _adminSoftware; set => _adminSoftware = value; }
+        public bool AdminNegozio { get => _adminNegozio; set => _adminNegozio = value; }
+        public bool Bandito { get => _bandito; set => _bandito = value; }
         #endregion
 
         #region Costruttore
