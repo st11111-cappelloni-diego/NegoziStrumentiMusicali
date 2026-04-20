@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace NegozioStrumentiMusicali
 {
-    public partial class FrmSede : Form
+    public partial class FrmIndirizzo : Form
     {
-        public FrmSede()
+        public FrmIndirizzo()
         {
             InitializeComponent();
         }

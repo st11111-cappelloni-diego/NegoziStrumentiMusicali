@@ -46,15 +46,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DMO\ClsAdminNegozio.cs" />
-    <Compile Include="DMO\ClsAdminSoftware.cs" />
     <Compile Include="DMO\ClsArchivio.cs" />
     <Compile Include="DMO\ClsBatteria.cs" />
     <Compile Include="DMO\ClsBatteriaPiatto.cs" />
     <Compile Include="DMO\ClsBatteriaTamburo.cs" />
     <Compile Include="DMO\ClsCaratteristica.cs" />
     <Compile Include="DMO\ClsCasaProdruttrice.cs" />
-    <Compile Include="DMO\ClsCliente.cs" />
     <Compile Include="DMO\ClsGestire.cs" />
     <Compile Include="DMO\ClsIndirizzo.cs" />
     <Compile Include="DMO\ClsLegno.cs" />
@@ -68,6 +65,7 @@
     <Compile Include="DMO\ClsStrumentoMusicale.cs" />
     <Compile Include="DMO\ClsTamburo.cs" />
     <Compile Include="DMO\ClsUtente.cs" />
+    <Compile Include="DMO\ClsVendere.cs" />
     <Compile Include="FrmBatteria.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -116,11 +114,11 @@
     <Compile Include="FrmPianoforte.Designer.cs">
       <DependentUpon>FrmPianoforte.cs</DependentUpon>
     </Compile>
-    <Compile Include="FrmSede.cs">
+    <Compile Include="FrmIndirizzo.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmSede.Designer.cs">
-      <DependentUpon>FrmSede.cs</DependentUpon>
+    <Compile Include="FrmIndirizzo.Designer.cs">
+      <DependentUpon>FrmIndirizzo.cs</DependentUpon>
     </Compile>
     <Compile Include="FrmStrumentoACorda.cs">
       <SubType>Form</SubType>
@@ -196,8 +194,8 @@
     <EmbeddedResource Include="FrmPianoforte.resx">
       <DependentUpon>FrmPianoforte.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmSede.resx">
-      <DependentUpon>FrmSede.cs</DependentUpon>
+    <EmbeddedResource Include="FrmIndirizzo.resx">
+      <DependentUpon>FrmIndirizzo.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmStrumentoACorda.resx">
       <DependentUpon>FrmStrumentoACorda.cs</DependentUpon>
