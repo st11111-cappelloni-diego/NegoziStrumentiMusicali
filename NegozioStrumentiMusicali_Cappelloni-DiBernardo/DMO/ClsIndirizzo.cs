@@ -12,15 +12,18 @@ namespace NegozioStrumentiMusicali
     public class ClsIndirizzo
     {
         #region Attributi
-        string _comune;
-        string _via;
-        int _cap;
-        string _nazione;
+        private int _id;
+        private string _comune;
+        private string _via;
+        private string _codicePostale;
+        private string _nazione;
+        private bool _essereSede;
+        private int _casaProduttriceID;
 
-        
         #endregion
 
         #region Proprietà
+        public int ID { get => _id; set => _id = value; }
         public string Comune
         {
             get
@@ -57,18 +60,18 @@ namespace NegozioStrumentiMusicali
                 }
             }
         }
-        public int Cap
+        public string CodicePostale
         {
-            get => _cap;
+            get => _codicePostale;
             set
             {
-                if(value < 0)
+                if(String.IsNullOrWhiteSpace(value))
                 {
-                    throw new Exception("Il CAP non può essere un numero negativo");
+                    throw new Exception("Codice postale non inserito");
                 }
                 else
                 {
-                    _cap = value;
+                    _codicePostale = value;
                 }
             }
         }
@@ -91,6 +94,9 @@ namespace NegozioStrumentiMusicali
             }
         }
 
+        public bool EssereSede { get => _essereSede; set => _essereSede = value; }
+        public int CasaProduttriceID { get => _casaProduttriceID; set => _casaProduttriceID = value; }
+
 
         #endregion
 
@@ -98,6 +104,11 @@ namespace NegozioStrumentiMusicali
         public ClsIndirizzo()
         {
 
+        }
+
+        public ClsIndirizzo(int id)
+        {
+            ID = id;
         }
 
         #endregion

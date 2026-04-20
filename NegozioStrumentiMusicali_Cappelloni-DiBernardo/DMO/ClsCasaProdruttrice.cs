@@ -15,12 +15,12 @@ namespace NegozioStrumentiMusicali
         int _id;
         string _nome;
         string _email;
-        string _logo;
+        string _pathLogo;
 
         #endregion
 
         #region Proprietà
-        public int Id
+        public int ID
         {
             get
             {
@@ -75,22 +75,15 @@ namespace NegozioStrumentiMusicali
                 }
             }
         }
-        public string Logo
+        public string PathLogo
         {
             get
             {
-                return _logo;
+                return _pathLogo;
             }
             set
-            {
-                if (String.IsNullOrWhiteSpace(value))
-                {
-                    throw new Exception("Logo non inserito");
-                }
-                else
-                {
-                    _logo = value;
-                }
+            {           
+                _pathLogo = value;
             }
         }
 
@@ -104,7 +97,7 @@ namespace NegozioStrumentiMusicali
 
         public ClsCasaProdruttrice(int id)
         {
-            Id = id;
+            ID = id;
         }
 
         #endregion
