@@ -13,15 +13,12 @@ namespace NegozioStrumentiMusicali
     {
         #region Attributi
         private int _id;
-        private int _quantita;
         private string _colori;
         private string _immagine;
-        private decimal _prezzo;
         private string _modello;
-        private ClsNotaMusicale _notaMinima;
-        private ClsNotaMusicale _notaMassima;
+        private int _notaMinimaID;
+        private int _notaMassimaID;
         private float _pesoKG;
-        private List<string> _altreCaratteristiche = new List<string>();
 
         #endregion
 
@@ -36,37 +33,15 @@ namespace NegozioStrumentiMusicali
             {
                 if(_id < 0)
                 {
-                    throw new Exception("ID Articolo minore di 0");
+                    throw new Exception("ID minore di 0");
                 }
-                /*else if() //Oggetto con id inserito già presente nel negozio o oggetto con stessa casa produttrice, modello e colori già presente nel negozio
-                {
-                    throw new Exception("Articolo già esistente");
-                }*/
                 else
                 {
                     _id = value;
                 }
             }
         }
-        public int Quantita
-        {
-            get
-            {
-                return _quantita;
-            }
-            set
-            {
-                if(_quantita < 0)
-                {
-                    throw new Exception("Quantita è un numero negativo");
-                }
-                else
-                {
-                    _quantita = value;
 
-                }
-            }
-        }
         public string Colori
         {
             get
@@ -84,25 +59,6 @@ namespace NegozioStrumentiMusicali
                     _colori = value;
                 }
             }
-        }
-        public decimal Prezzo
-        {
-            get
-            {
-                return _prezzo;
-            }
-            set
-            {
-                if (_prezzo <= 0)
-                {
-                    throw new Exception("Prezzo minore o uguale a 0");
-                }
-                else
-                {
-                    _prezzo = value;
-                }
-            }
-
         }
         public string Modello
         {
@@ -123,8 +79,8 @@ namespace NegozioStrumentiMusicali
             }
         }
         public string Immagine { get => _immagine; set => _immagine = value; }
-        public ClsNotaMusicale NotaMinima { get => _notaMinima; set => _notaMinima = value; }
-        public ClsNotaMusicale NotaMassima { get => _notaMassima; set => _notaMassima = value; }
+        public int NotaMinimaID { get => _notaMinimaID; set => _notaMinimaID = value; }
+        public int NotaMassimaID { get => _notaMassimaID; set => _notaMassimaID = value; }
         public float PesoKG
         {
             get
@@ -143,7 +99,6 @@ namespace NegozioStrumentiMusicali
                 }
             }
         }
-        public List<string> AltreCaratteristiche { get => _altreCaratteristiche; set => _altreCaratteristiche = value; }
 
 
         #endregion
