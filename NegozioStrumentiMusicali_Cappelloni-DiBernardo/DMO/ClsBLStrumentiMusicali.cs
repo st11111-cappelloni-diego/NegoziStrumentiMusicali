@@ -53,14 +53,16 @@ namespace NegozioStrumentiMusicali
                 if (_numRec == 1) //1 significa che il comando è stato eseguito con successo
                     _ID = _cmd.LastInsertedId; //Ottengo l'ID generato in automatico dal DBMS
 
-                //Chiudo la connessione
-                connection.Close();
-
                 comunicazione = "Strumento musicale inserito con successo nel DataBase";
             }
             catch(Exception ex)
             {
                 comunicazione = ex.Message;
+            }
+            finally
+            {
+                //Chiudo la connessione
+                connection.Close();
             }
 
             return _ID;
@@ -196,7 +198,7 @@ namespace NegozioStrumentiMusicali
         /// <param name="strumentoACorda">Oggetto da inserire</param>
         /// <param name="comunicazione"></param>
         /// <returns></returns>
-        public static void InsertOttoni(ref MySqlConnection connection, ClsOttone ottone, out string comunicazione)
+        public static void InsertOttone(ref MySqlConnection connection, ClsOttone ottone, out string comunicazione)
         {
             comunicazione = String.Empty;
 
@@ -244,14 +246,113 @@ namespace NegozioStrumentiMusicali
                 connection.Close();
             }
         }
+        /// <summary>
+        /// Insert recor dentro notemusicali
+        /// </summary>
+        /// <param name="connection">Stringa di connessione</param>
+        /// <param name="notaMusicale">Nota da inserire</param>
+        /// <param name="comunicazione"></param>
+        /// <returns></returns>
+        public static long InsertNotaMusicale(ref MySqlConnection connection, ClsNotaMusicale notaMusicale, out string comunicazione)
+        {
+            //VARIABILI
+            long _ID = 0;
+            comunicazione = String.Empty;
 
+            try
+            {
+                //Apro la connessione
+                connection.Open();
+
+                //Compongo il comando in DML
+                string _dml =
+                    "INSERT into notemusicali (notabase, alterazione, ottava) " +
+                    "VALUES(@notabase, @alterazione, @ottava)";
+
+                //Creo il command
+                MySqlCommand _cmd = new MySqlCommand(_dml, connection);
+
+                //Inserisco i valori
+                _cmd.Parameters.AddWithValue("@notabase", notaMusicale.NotaBase.ToString().ToLower());
+                _cmd.Parameters.AddWithValue("@alterazione", notaMusicale.NotaBase.ToString().ToLower());
+                _cmd.Parameters.AddWithValue("@ottava", notaMusicale.Ottava);
+
+                //Eseguo il comando
+                int _numRec = _cmd.ExecuteNonQuery();
+                if (_numRec == 1) //1 significa che il comando è stato eseguito con successo
+                    _ID = _cmd.LastInsertedId; //Ottengo l'ID generato in automatico dal DBMS
+            }
+            catch(Exception ex)
+            {
+
+            }
+            finally
+            {
+                //Chiudo la connessione
+                connection.Close();
+            }
+
+            return _ID;
+        }
+        /// <summary>
+        /// Inserimento di record in tamburi
+        /// </summary>
+        /// <param name="connection">Stringa di connessione</param>
+        /// <param name="tamburo"></param>
+        /// <param name="comunicazione"></param>
+        /// <returns>Restituisce l'ID del nuovo tamburo</returns>
+        public static long InsertTamburo(ref MySqlConnection connection, ClsTamburo tamburo, out string comunicazione)
+        {
+            //VARIABILI
+            long _ID = 0;
+            comunicazione = string.Empty;
+
+            try
+            {
+                //Apro la connessione
+                connection.Open();
+
+                //Compongo il comando DML
+                string _dml =
+                    "INSERT into tamburi (tipo, diametroin, materiale, strati) " +
+                    "VALUES(@tipo, @diametroin, @materiale, @strati)";
+
+                //Creo il command
+                MySqlCommand _cmd = new MySqlCommand(_dml, connection);
+
+                //Inserisco i valori
+                _cmd.Parameters.AddWithValue("@tipo", tamburo.Tipo.ToString().ToLower());
+                _cmd.Parameters.AddWithValue("@diametroin", tamburo.DiametroIN.ToString().ToLower());
+                _cmd.Parameters.AddWithValue("@materiale", tamburo.Materiale.ToString().ToLower());
+                _cmd.Parameters.AddWithValue("@strati", tamburo.Strati);
+
+                //Eseguo il comando
+                int _numRec = _cmd.ExecuteNonQuery();
+                if (_numRec == 1) //1 significa che il comando è stato eseguito con successo
+                    _ID = _cmd.LastInsertedId; //Ottengo l'ID generato in automatico dal DBMS
+
+                comunicazione = "Tamburo inserito con successo nel DataBase";
+
+            }
+            catch(Exception ex)
+            {
+                comunicazione = ex.Message;
+            }
+            finally
+            {
+                //Chiudo la connessione
+                connection.Close();
+            }
+
+            return _ID;
+        }
         #endregion
 
         #region Update
         /// <summary>
         /// Update di record di strumentimusicali
         /// </summary>
-        /// <param name="connection"></param>
+        /// <param name="connection">Stringa di connessione</param>
         /// <param name="strumentoMusicale"></param>
         /// <param name="comunicazione"></param>
         public static void UpdateStrumentoMusicale(ref MySqlConnection connection, ClsStrumentoMusicale strumentoMusicale, out string comunicazione)
@@ -303,7 +404,7 @@ namespace NegozioStrumentiMusicali
         /// <summary>
         /// Update di record di pianoforti
         /// </summary>
-        /// <param name="connection"></param>
+        /// <param name="connection">Stringa di connessione</param>
         /// <param name="strumentoMusicale"></param>
         /// <param name="comunicazione"></param>
         public static void UpdatePianoforte(ref MySqlConnection connection, ClsPianoforte pianoforte, out string comunicazione)
@@ -361,11 +462,10 @@ namespace NegozioStrumentiMusicali
                 connection.Close();
             }
         }
-
         /// <summary>
         /// Update di record di strumentiacorda
         /// </summary>
-        /// <param name="connection"></param>
+        /// <param name="connection">Stringa di connessione</param>
         /// <param name="strumentoMusicale"></param>
         /// <param name="comunicazione"></param>
         public static void UpdateStrumentoACorda(ref MySqlConnection connection, ClsStrumentoACorda strumentoACorda, out string comunicazione)
@@ -427,6 +527,163 @@ namespace NegozioStrumentiMusicali
                 comunicazione = "Pianoforte aggiornato correttamente nel DataBase";
             }
             catch (Exception ex)
+            {
+                comunicazione = ex.Message;
+            }
+            finally
+            {
+                //Chiudo la connessione
+                connection.Close();
+            }
+        }
+        /// <summary>
+        /// Update di record di ottoni
+        /// </summary>
+        /// <param name="connection">Stringa di connessione</param>
+        /// <param name="strumentoMusicale"></param>
+        /// <param name="comunicazione"></param>
+        public static void UpdateOttone(ref MySqlConnection connection, ClsOttone ottone, out string comunicazione)
+        {
+            //VARIABILI
+            comunicazione = String.Empty;
+
+            try
+            {
+                //Apro la connessione
+                connection.Open();
+
+                //Compongo il comando dml
+                string _dml =
+                    "UPDATE strumentiacorda " +
+                    "SET strumento = @strumento, " +
+                    "materialecorpo = @materialecorpo, " +
+                    "laccatura = @laccatura, " +
+                    "placcatura = @placcatura, " +
+                    "materialebocchino = @materialebocchino, " +
+                    "rivestimentobocchino = @rivestimentobocchino, " +
+                    "lunghezzacm = @lunghezzacm, " +
+                    "larghezzacm = @larghezzacm, " +
+                    "altezzacm = @altezzacm " +
+                    "WHERE strumentomusicaleID = @ID";
+
+
+                //Creo l'oggetto command
+                MySqlCommand _cmd = new MySqlCommand(_dml, connection);
+
+                //Inserisco i valori
+                _cmd.Parameters.AddWithValue("@strumentomusicaleID", ottone.ID); 
+                _cmd.Parameters.AddWithValue("@strumento", ottone.Strumento.ToString().ToLower());
+                _cmd.Parameters.AddWithValue("@materialecorpo", ottone.MaterialeCorpo.ToString().ToLower());
+                _cmd.Parameters.AddWithValue("@laccatura", ottone.Laccatura);
+                _cmd.Parameters.AddWithValue("@placcatura", ottone.Placcatura.ToString().ToLower());
+                _cmd.Parameters.AddWithValue("@materialebocchino", ottone.MaterialeBocchino.ToString().ToLower());
+                _cmd.Parameters.AddWithValue("@rivestimentobocchino", ottone.RivestimentoBocchino.ToString().ToLower());
+                _cmd.Parameters.AddWithValue("@lunghezzacm", ottone.LunghezzaCM);
+                _cmd.Parameters.AddWithValue("@larghezzacm", ottone.LarghezzaCM);
+                _cmd.Parameters.AddWithValue("@altezzacm", ottone.AltezzaCM);
+
+
+                //Eseguo il comando
+                _cmd.ExecuteNonQuery();
+
+                comunicazione = "Strumento della famiglia degli ottoni aggiornato correttamente nel DataBase";
+            }
+            catch (Exception ex)
+            {
+                comunicazione = ex.Message;
+            }
+            finally
+            {
+                //Chiudo la connessione
+                connection.Close();
+            }
+        }
+        /// <summary>
+        /// Update record di notemusicali
+        /// </summary>
+        /// <param name="connection">Stringa di connessione</param>
+        /// <param name="notaMusicale"></param>
+        /// <param name="comunicazione"></param>
+        public static void UpdateNotaMusicale(ref MySqlConnection connection, ClsNotaMusicale notaMusicale, out string comunicazione)
+        {
+            comunicazione = String.Empty;
+
+            try
+            {
+                //Apro la connessione
+                connection.Open();
+
+                //Compongo il comando DML
+                string _dml =
+                    "UPDATE notemusicali " +
+                    "SET notabase = @notabase, " +
+                    "alterazione = @alterazione, " +
+                    "ottava = @ottava, " +
+                    "WHERE ID = @ID";
+
+                //Creo il command
+                MySqlCommand _cmd = new MySqlCommand(_dml, connection);
+
+                //Inserisco i valori
+                _cmd.Parameters.AddWithValue("@notabase", notaMusicale.NotaBase.ToString().ToLower());
+                _cmd.Parameters.AddWithValue("@alterazione", notaMusicale.NotaBase.ToString().ToLower());
+                _cmd.Parameters.AddWithValue("@ottava", notaMusicale.Ottava);
+
+                //Eseguo il comando
+                _cmd.ExecuteNonQuery();
+
+                comunicazione = "Nota musicale aggiornata correttamente nel DataBase";
+            }
+            catch(Exception ex)
+            {
+                comunicazione = ex.Message;
+            }
+            finally
+            {
+                //Chiudo la connessione
+                connection.Close();
+            }
+        }
+        /// <summary>
+        /// Update record di tamburi
+        /// </summary>
+        /// <param name="connection">Stringa di connessione</param>
+        /// <param name="tamburo"></param>
+        /// <param name="comunicazione"></param>
+        public static void UpdateTamburo(ref MySqlConnection connection, ClsTamburo tamburo, out string comunicazione)
+        {
+            comunicazione = String.Empty;
+
+            try
+            {
+                //Apro la connessione
+                connection.Open();
+
+                //Compongo il comando DML
+                string _dml =
+                    "UPDATE tamburi " +
+                    "SET tipo = @tipo, " +
+                    "diametroin = @diametroin, " +
+                    "materiale = @materiale, " +
+                    "strati = @strati " +
+                    "WHERE ID = @ID";
+
+                //Creo il command
+                MySqlCommand _cmd = new MySqlCommand(_dml, connection);
+
+                //Inserisco i valori
+                _cmd.Parameters.AddWithValue("@ID", tamburo.ID);
+                _cmd.Parameters.AddWithValue("@tipo", tamburo.Tipo.ToString().ToLower());
+                _cmd.Parameters.AddWithValue("@diametroin", tamburo.DiametroIN.ToString().ToLower());
+                _cmd.Parameters.AddWithValue("@materiale", tamburo.Materiale.ToString().ToLower());
+                _cmd.Parameters.AddWithValue("@strati", tamburo.Strati);
+
+                //Eseguo il comando
+                _cmd.ExecuteNonQuery();
+
+                comunicazione = "Tamburo aggiornato correttamente nel DataBase";
+            }
+            catch(Exception ex)
             {
                 comunicazione = ex.Message;
             }
