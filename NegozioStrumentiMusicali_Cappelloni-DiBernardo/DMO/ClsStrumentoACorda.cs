@@ -9,7 +9,7 @@ namespace NegozioStrumentiMusicali
     /// <summary>
     /// Sviluppata da Diego Cappelloni
     /// </summary>
-    class ClsStrumentoACorda : ClsStrumentoMusicale
+    public class ClsStrumentoACorda : ClsStrumentoMusicale
     {
         #region Enumeratori
         /// <summary>

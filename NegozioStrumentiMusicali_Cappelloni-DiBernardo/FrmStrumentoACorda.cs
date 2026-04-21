@@ -24,7 +24,6 @@ namespace NegozioStrumentiMusicali
             cbMaterialeCorpo.DataSource = Enum.GetNames(typeof(Program.eLEGNO));
             cbMaterialeManico.DataSource = Enum.GetNames(typeof(Program.eLEGNO));
             cbMaterialeTastiera.DataSource = Enum.GetNames(typeof(Program.eLEGNO));
-            cbNumeroCorde.DataSource = Enum.GetNames(typeof(ClsStrumentoACorda.eNUMERO_CORDE));
             cbPickup1.DataSource = Enum.GetNames(typeof(ClsStrumentoACorda.ePICKUP));
             cbPickup2.DataSource = Enum.GetNames(typeof(ClsStrumentoACorda.ePICKUP));
             cbPickup3.DataSource = Enum.GetNames(typeof(ClsStrumentoACorda.ePICKUP));
