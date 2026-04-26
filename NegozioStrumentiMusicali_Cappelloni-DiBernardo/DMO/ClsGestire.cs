@@ -14,14 +14,14 @@ namespace NegozioStrumentiMusicali
         #region Attributi
         private int _id;
         private int _negozioID;
-        private int _utenteID;
+        private string _utenteUsername;
 
         #endregion
 
         #region Proprietà
         public int ID { get => _id; set => _id = value; }
         public int NegozioID { get => _negozioID; set => _negozioID = value; }
-        public int UtenteID { get => _utenteID; set => _utenteID = value; }
+        public string UtenteUsername { get => _utenteUsername; set => _utenteUsername = value; }
 
         #endregion
 
