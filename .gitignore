@@ -1,0 +1,74 @@
+############################
+#   Visual Studio / C#
+############################
+
+# VS cache
+.vs/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Build
+bin/
+obj/
+[Bb]uild/
+[Ll]og/
+
+# NuGet
+*.nupkg
+*.snupkg
+packages/
+*.nuget.props
+*.nuget.targets
+
+# Auto-generated NuGet restore folder
+**/packages/*
+!**/packages/build/
+!**/packages/repositories.config
+
+# Roslyn
+*.ide
+*.ide-wal
+*.ide-shm
+
+############################
+#   Database / SQLite
+############################
+*.db
+*.db-wal
+*.db-shm
+
+############################
+#   Others
+############################
+*.cache
+*.pdb
+*.mdb
+*.exe
+*.dll
+*.log
+*.tmp
+*.bak
+
+# Rider / JetBrains
+.idea/
+*.DotSettings.user
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Recycle Bin
+$RECYCLE.BIN/
+
+############################
+#   Keep important files
+############################
+!*.cs
+!*.Designer.cs
+!*.resx
+!*.config
+!*.json
+!*.xml
