@@ -81,6 +81,7 @@
     <Compile Include="DMO\ClsBatteria.cs" />
     <Compile Include="DMO\ClsBatteriaPiatto.cs" />
     <Compile Include="DMO\ClsBatteriaTamburo.cs" />
+    <Compile Include="DMO\ClsBLNegoziUtenza.cs" />
     <Compile Include="DMO\ClsBLStrumentiMusicali.cs" />
     <Compile Include="DMO\ClsCaratteristica.cs" />
     <Compile Include="DMO\ClsCasaProdruttrice.cs" />
