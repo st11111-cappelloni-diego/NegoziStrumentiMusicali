@@ -1,0 +1,181 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using MySqlConnector;
+
+namespace NegozioStrumentiMusicali
+{
+    /// <summary>
+    /// Sviluppata da Diego Cappelloni
+    /// </summary>
+    public static class ClsOttoneBL
+    {
+        /// <summary>
+        /// Inserimento di record in ottoni + informazioni generali in strumentimusicali
+        /// </summary>
+        /// <param name="connection">Connessione al DB</param>
+        /// <param name="ottone">Oggetto da inserire</param>
+        /// <param name="comunicazione">Comunicazione in uscita</param>
+        /// <returns>ID del nuovo record. Se -1 insert non riuscito</returns>
+        public static long InsertOttone(ref MySqlConnection connection, ClsOttone ottone, out string comunicazione)
+        {
+            //VARIABILI LOCALI
+            long _ID = -1;
+            comunicazione = String.Empty;
+
+            try
+            {
+                //Inserisco le informazioni generali in strumentimusicali
+                _ID = ClsStrumentoMusicaleBL.InsertStrumentoMusicale(ref connection, ottone, out comunicazione);
+
+                //Riapro la connessione dopo che si è chiusa in InsertStrumentoMusicale
+                connection.Open();
+
+                //Creo il comando DML
+                string _dml =
+                    "INSERT into ottoni " +
+                    "(strumentomusicaleID, strumento, materialecorpo, laccatura, placcatura, materialebocchino," +
+                    "rivestimentobocchino, lunghezzacm, larghezzacm, altezzacm) " +
+                    "VALUES(@strumentomusicaleID, @strumento, @materialecorpo, @laccatura, @placcatura, @materialebocchino," +
+                    "@rivestimentobocchino, @lunghezzacm, @larghezzacm, @altezzacm";
+
+                //Creo l'oggetto command
+                MySqlCommand _cmd = new MySqlCommand(_dml, connection);
+
+                //Inserisco i valori
+                _cmd.Parameters.AddWithValue("@strumentomusicaleID", _ID); //Prima di inserire lo strumento a corda bisogna inserire lo strumento musicale ad esso associato
+                _cmd.Parameters.AddWithValue("@strumento", ottone.Strumento.ToString().ToLower());
+                _cmd.Parameters.AddWithValue("@materialecorpo", ottone.MaterialeCorpo.ToString().ToLower());
+                _cmd.Parameters.AddWithValue("@laccatura", ottone.Laccatura);
+                _cmd.Parameters.AddWithValue("@placcatura", ottone.Placcatura.ToString().ToLower());
+                _cmd.Parameters.AddWithValue("@materialebocchino", ottone.MaterialeBocchino.ToString().ToLower());
+                _cmd.Parameters.AddWithValue("@rivestimentobocchino", ottone.RivestimentoBocchino.ToString().ToLower());
+                _cmd.Parameters.AddWithValue("@lunghezzacm", ottone.LunghezzaCM);
+                _cmd.Parameters.AddWithValue("@larghezzacm", ottone.LarghezzaCM);
+                _cmd.Parameters.AddWithValue("@altezzacm", ottone.AltezzaCM);
+
+                //Eseguo il comando
+                _cmd.ExecuteNonQuery();
+
+                comunicazione = "Strumento della famiglia degli ottoni inserito con successo nel DataBase";
+            }
+            catch (Exception ex)
+            {
+                comunicazione = ex.Message;
+            }
+            finally
+            {
+                //Chiudo la connessione
+                connection.Close();
+            }
+
+            return _ID;
+        }
+        /// <summary>
+        /// Update di un record in otoni + dettagli generali in strumentimusicali
+        /// </summary>
+        /// <param name="connection">Connessione al DB</param>
+        /// <param name="ottone">Dati record da aggiornare</param>
+        /// <param name="comunicazione">Stringa di comunicazione in uscita</param>
+        public static void UpdateOttone(ref MySqlConnection connection, ClsOttone ottone, out string comunicazione)
+        {
+            //VARIABILI LOCALI
+            comunicazione = String.Empty;
+
+            try
+            {
+                //Aggiorno le info generali in strumentimusicali
+                ClsStrumentoMusicaleBL.UpdateStrumentoMusicale(ref connection, ottone, out comunicazione);
+
+                //Riapro la connessione dopo che si è chiusa in UpdateStrumentoMusicale
+                connection.Open();
+
+                //Compongo il comando dml
+                string _dml =
+                    "UPDATE ottoni " +
+                    "SET strumento = @strumento, " +
+                    "materialecorpo = @materialecorpo, " +
+                    "laccatura = @laccatura, " +
+                    "placcatura = @placcatura, " +
+                    "materialebocchino = @materialebocchino, " +
+                    "rivestimentobocchino = @rivestimentobocchino, " +
+                    "lunghezzacm = @lunghezzacm, " +
+                    "larghezzacm = @larghezzacm, " +
+                    "altezzacm = @altezzacm " +
+                    "WHERE strumentomusicaleID = @ID";
+
+
+                //Creo l'oggetto command
+                MySqlCommand _cmd = new MySqlCommand(_dml, connection);
+
+                //Inserisco i valori
+                _cmd.Parameters.AddWithValue("@strumentomusicaleID", ottone.ID);
+                _cmd.Parameters.AddWithValue("@strumento", ottone.Strumento.ToString().ToLower());
+                _cmd.Parameters.AddWithValue("@materialecorpo", ottone.MaterialeCorpo.ToString().ToLower());
+                _cmd.Parameters.AddWithValue("@laccatura", ottone.Laccatura);
+                _cmd.Parameters.AddWithValue("@placcatura", ottone.Placcatura.ToString().ToLower());
+                _cmd.Parameters.AddWithValue("@materialebocchino", ottone.MaterialeBocchino.ToString().ToLower());
+                _cmd.Parameters.AddWithValue("@rivestimentobocchino", ottone.RivestimentoBocchino.ToString().ToLower());
+                _cmd.Parameters.AddWithValue("@lunghezzacm", ottone.LunghezzaCM);
+                _cmd.Parameters.AddWithValue("@larghezzacm", ottone.LarghezzaCM);
+                _cmd.Parameters.AddWithValue("@altezzacm", ottone.AltezzaCM);
+
+                //Eseguo il comando
+                _cmd.ExecuteNonQuery();
+
+                comunicazione = "Strumento della famiglia degli ottoni aggiornato correttamente nel DataBase";
+            }
+            catch (Exception ex)
+            {
+                comunicazione = ex.Message;
+            }
+            finally
+            {
+                //Chiudo la connessione
+                connection.Close();
+            }
+        }
+        /// <summary>
+        /// Eliminazione di un record da ottoni
+        /// </summary>
+        /// <param name="connection">Connessione al DB</param>
+        /// <param name="ottone">Record da eliminare</param>
+        /// <param name="comunicazione">Comunicazione in uscita</param>
+        public static void DeleteStrumentoMusicale(ref MySqlConnection connection, ClsOttone ottone, out string comunicazione)
+        {
+            //VARIABILI LOCALI
+            comunicazione = String.Empty;
+
+            try
+            {
+                //Apro la connessione
+                connection.Open();
+
+                //Compongo il comando DML
+                string _dml = "DELETE FROM ottoni WHERE ID = @ID";
+
+                //Creo l'oggetto command
+                MySqlCommand _cmd = new MySqlCommand(_dml, connection);
+
+                //Inserisco i valori
+                _cmd.Parameters.AddWithValue("@ID", ottone.ID);
+
+                //Eseguo il comando
+                _cmd.ExecuteNonQuery();
+
+                comunicazione = "Strumento della famiglia degli ottoni eliminato correttamente dal DataBase";
+            }
+            catch (Exception ex)
+            {
+                comunicazione = ex.Message;
+            }
+            finally
+            {
+                //Chiudo la connessione
+                connection.Close();
+            }
+        }
+    }
+}
