@@ -77,12 +77,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BL\ClsLegnoBL.cs" />
+    <Compile Include="BL\ClsNotaMusicaleBL.cs" />
+    <Compile Include="BL\ClsOttoneBL.cs" />
+    <Compile Include="BL\ClsPianoforteBL.cs" />
+    <Compile Include="BL\ClsStrumentoACordaBL.cs" />
+    <Compile Include="BL\ClsStrumentoMusicaleBL.cs" />
+    <Compile Include="BL\ClsTamburoBL.cs" />
     <Compile Include="DMO\ClsArchivio.cs" />
     <Compile Include="DMO\ClsBatteria.cs" />
     <Compile Include="DMO\ClsBatteriaPiatto.cs" />
     <Compile Include="DMO\ClsBatteriaTamburo.cs" />
     <Compile Include="DMO\ClsBLNegoziUtenza.cs" />
-    <Compile Include="DMO\ClsBLStrumentiMusicali.cs" />
     <Compile Include="DMO\ClsCaratteristica.cs" />
     <Compile Include="DMO\ClsCasaProdruttrice.cs" />
     <Compile Include="DMO\ClsGestire.cs" />
@@ -323,8 +329,6 @@
   <ItemGroup>
     <None Include="Resources\iconaLogo1_323x323.png" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="BL\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
