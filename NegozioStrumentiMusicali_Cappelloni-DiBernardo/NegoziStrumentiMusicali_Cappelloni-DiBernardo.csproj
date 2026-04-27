@@ -323,5 +323,8 @@
   <ItemGroup>
     <None Include="Resources\iconaLogo1_323x323.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="BL\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
