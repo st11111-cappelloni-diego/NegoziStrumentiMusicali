@@ -74,7 +74,7 @@ namespace NegozioStrumentiMusicali
             return _ID;
         }
         /// <summary>
-        /// Update di un record in otoni + dettagli generali in strumentimusicali
+        /// Update di un record in ottoni + dettagli generali in strumentimusicali
         /// </summary>
         /// <param name="connection">Connessione al DB</param>
         /// <param name="ottone">Dati record da aggiornare</param>
@@ -143,7 +143,7 @@ namespace NegozioStrumentiMusicali
         /// <param name="connection">Connessione al DB</param>
         /// <param name="ottone">Record da eliminare</param>
         /// <param name="comunicazione">Comunicazione in uscita</param>
-        public static void DeleteStrumentoMusicale(ref MySqlConnection connection, ClsOttone ottone, out string comunicazione)
+        public static void DeleteOttone(ref MySqlConnection connection, ClsOttone ottone, out string comunicazione)
         {
             //VARIABILI LOCALI
             comunicazione = String.Empty;
@@ -154,7 +154,7 @@ namespace NegozioStrumentiMusicali
                 connection.Open();
 
                 //Compongo il comando DML
-                string _dml = "DELETE FROM ottoni WHERE ID = @ID";
+                string _dml = "DELETE FROM ottoni WHERE strumentomusicaleID = @ID";
 
                 //Creo l'oggetto command
                 MySqlCommand _cmd = new MySqlCommand(_dml, connection);
