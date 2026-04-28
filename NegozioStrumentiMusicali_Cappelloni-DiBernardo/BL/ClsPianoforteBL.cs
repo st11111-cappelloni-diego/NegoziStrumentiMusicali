@@ -162,7 +162,7 @@ namespace NegozioStrumentiMusicali
                 connection.Open();
 
                 //Compongo il comando DML
-                string _dml = "DELETE FROM pianoforti WHERE ID = @ID";
+                string _dml = "DELETE FROM pianoforti WHERE strumentomusicaleID = @ID";
 
                 //Creo l'oggetto command
                 MySqlCommand _cmd = new MySqlCommand(_dml, connection);

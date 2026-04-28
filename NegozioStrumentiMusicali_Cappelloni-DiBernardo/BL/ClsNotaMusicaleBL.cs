@@ -108,5 +108,45 @@ namespace NegozioStrumentiMusicali
                 connection.Close();
             }
         }
+        /// <summary>
+        /// Eliminazione di un record da notemusicali
+        /// </summary>
+        /// <param name="connection">Connessione al DB</param>
+        /// <param name="notamusicale">Record da eliminare</param>
+        /// <param name="comunicazione">Comunicazione in uscita</param>
+        public static void DeleteNotaMusicale(ref MySqlConnection connection, ClsNotaMusicale notamusicale, out string comunicazione)
+        {
+            //VARIABILI LOCALI
+            comunicazione = String.Empty;
+
+            try
+            {
+                //Apro la connessione
+                connection.Open();
+
+                //Compongo il comando DML
+                string _dml = "DELETE FROM notemusicali WHERE ID = @ID";
+
+                //Creo l'oggetto command
+                MySqlCommand _cmd = new MySqlCommand(_dml, connection);
+
+                //Inserisco i valori
+                _cmd.Parameters.AddWithValue("@ID", notamusicale.ID);
+
+                //Eseguo il comando
+                _cmd.ExecuteNonQuery();
+
+                comunicazione = "Nota musicale eliminata correttamente dal DataBase";
+            }
+            catch (Exception ex)
+            {
+                comunicazione = ex.Message;
+            }
+            finally
+            {
+                //Chiudo la connessione
+                connection.Close();
+            }
+        }
     }
 }
