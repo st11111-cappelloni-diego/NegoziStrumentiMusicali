@@ -10,20 +10,20 @@ namespace NegozioStrumentiMusicali
     /// <summary>
     /// Sviluppata da Diego Cappelloni
     /// </summary>
-    public static class ClsTamburoBL
+    public static class ClsPiattoBL
     {
         /// <summary>
-        /// Inserimento di un record in tamburi
+        /// Inserimento di un record in piatti
         /// </summary>
         /// <param name="connection">Connessione al DB</param>
-        /// <param name="tamburo">Oggetto da inserire</param>
-        /// <param name="comunicazione">Stringa di comunicazione in uscita</param>
+        /// <param name="piatto">Record da inserire</param>
+        /// <param name="comunicazione">Comunicazione in uscita</param>
         /// <returns>ID del nuovo record. Se -1 insert non riuscito</returns>
-        public static long InsertTamburo(ref MySqlConnection connection, ClsTamburo tamburo, out string comunicazione)
+        public static long InsertPiatto(ref MySqlConnection connection, ClsPiatto piatto, out string comunicazione)
         {
-            //VARIABILI
+            //VARIABILI LOCALI
             long _ID = -1;
-            comunicazione = string.Empty;
+            comunicazione = String.Empty;
 
             try
             {
@@ -32,27 +32,25 @@ namespace NegozioStrumentiMusicali
 
                 //Compongo il comando DML
                 string _dml =
-                    "INSERT into tamburi (tipo, diametroin, materiale, strati) " +
-                    "VALUES(@tipo, @diametroin, @materiale, @strati)";
+                    "INSERT into piatti (tipo, diametroin, materiale) " +
+                    "VALUES(@tipo, @diametroin, @materiale)";
 
-                //Creo il command
+                //Creo l'oggetto command
                 MySqlCommand _cmd = new MySqlCommand(_dml, connection);
 
                 //Inserisco i valori
-                _cmd.Parameters.AddWithValue("@tipo", tamburo.Tipo.ToString().ToLower());
-                _cmd.Parameters.AddWithValue("@diametroin", tamburo.DiametroIN.ToString().ToLower());
-                _cmd.Parameters.AddWithValue("@materiale", tamburo.Materiale.ToString().ToLower());
-                _cmd.Parameters.AddWithValue("@strati", tamburo.Strati);
+                _cmd.Parameters.AddWithValue("@tipo", piatto.Tipo.ToString().ToLower());
+                _cmd.Parameters.AddWithValue("@diametroin", piatto.DiametroIN);
+                _cmd.Parameters.AddWithValue("@materiale", piatto.Materiale.ToString().ToLower());
 
                 //Eseguo il comando
                 int _numRec = _cmd.ExecuteNonQuery();
                 if (_numRec == 1) //1 significa che il comando è stato eseguito con successo
                     _ID = _cmd.LastInsertedId; //Ottengo l'ID generato in automatico dal DBMS
 
-                comunicazione = "Tamburo inserito con successo nel DataBase";
-
+                comunicazione = "Piatto inserito con successo nel DataBase";
             }
-            catch (Exception ex)
+            catch(Exception ex)
             {
                 comunicazione = ex.Message;
             }
@@ -65,13 +63,14 @@ namespace NegozioStrumentiMusicali
             return _ID;
         }
         /// <summary>
-        /// Update di un record di tamburi
+        /// Update di un record in piatti
         /// </summary>
         /// <param name="connection">Connessione al DB</param>
-        /// <param name="tamburo">Dati record da aggiornare</param>
+        /// <param name="piatto">Dati record da aggiornare</param>
         /// <param name="comunicazione">Comunicazione in uscita</param>
-        public static void UpdateTamburo(ref MySqlConnection connection, ClsTamburo tamburo, out string comunicazione)
+        public static void UpdatePiatto(ref MySqlConnection connection, ClsPiatto piatto, out string comunicazione)
         {
+            //VARIABILI GLOBALI
             comunicazione = String.Empty;
 
             try
@@ -81,29 +80,27 @@ namespace NegozioStrumentiMusicali
 
                 //Compongo il comando DML
                 string _dml =
-                    "UPDATE tamburi " +
+                    "UPDATE piatti " +
                     "SET tipo = @tipo, " +
                     "diametroin = @diametroin, " +
-                    "materiale = @materiale, " +
-                    "strati = @strati " +
+                    "materiale = @materiale " +
                     "WHERE ID = @ID";
 
-                //Creo il command
+                //Creo l'oggetto command
                 MySqlCommand _cmd = new MySqlCommand(_dml, connection);
 
                 //Inserisco i valori
-                _cmd.Parameters.AddWithValue("@ID", tamburo.ID);
-                _cmd.Parameters.AddWithValue("@tipo", tamburo.Tipo.ToString().ToLower());
-                _cmd.Parameters.AddWithValue("@diametroin", tamburo.DiametroIN.ToString().ToLower());
-                _cmd.Parameters.AddWithValue("@materiale", tamburo.Materiale.ToString().ToLower());
-                _cmd.Parameters.AddWithValue("@strati", tamburo.Strati);
+                _cmd.Parameters.AddWithValue("@tipo", piatto.Tipo.ToString().ToLower());
+                _cmd.Parameters.AddWithValue("@diametroin", piatto.DiametroIN);
+                _cmd.Parameters.AddWithValue("@materiale", piatto.Materiale.ToString().ToLower());
+                _cmd.Parameters.AddWithValue("@ID", piatto.ID);
 
                 //Eseguo il comando
                 _cmd.ExecuteNonQuery();
 
-                comunicazione = "Tamburo aggiornato correttamente nel DataBase";
+                comunicazione = "Piatto aggiornato correttamente nel DataBase";
             }
-            catch (Exception ex)
+            catch(Exception ex)
             {
                 comunicazione = ex.Message;
             }
@@ -114,12 +111,12 @@ namespace NegozioStrumentiMusicali
             }
         }
         /// <summary>
-        /// Eliminazione di un record da tamburi
+        /// Eliminazione di un record da piatti
         /// </summary>
         /// <param name="connection">Connessione al DB</param>
-        /// <param name="tamburo">Record da eliminare</param>
+        /// <param name="piatto">Record da eliminare</param>
         /// <param name="comunicazione">Comunicazione in uscita</param>
-        public static void DeleteTamburo(ref MySqlConnection connection, ClsTamburo tamburo, out string comunicazione)
+        public static void DeleteTamburo(ref MySqlConnection connection, ClsPiatto piatto, out string comunicazione)
         {
             //VARIABILI LOCALI
             comunicazione = String.Empty;
@@ -130,18 +127,18 @@ namespace NegozioStrumentiMusicali
                 connection.Open();
 
                 //Compongo il comando DML
-                string _dml = "DELETE FROM tamburi WHERE ID = @ID";
+                string _dml = "DELETE FROM piatti WHERE ID = @ID";
 
                 //Creo l'oggetto command
                 MySqlCommand _cmd = new MySqlCommand(_dml, connection);
 
                 //Inserisco i valori
-                _cmd.Parameters.AddWithValue("@ID", tamburo.ID);
+                _cmd.Parameters.AddWithValue("@ID", piatto.ID);
 
                 //Eseguo il comando
                 _cmd.ExecuteNonQuery();
 
-                comunicazione = "Tamburo eliminato correttamente dal DataBase";
+                comunicazione = "Piatto eliminato correttamente dal DataBase";
             }
             catch (Exception ex)
             {

@@ -158,5 +158,45 @@ namespace NegozioStrumentiMusicali
                 connection.Close();
             }
         }
+        /// <summary>
+        /// Eliminazione di un record da strumentiacorda
+        /// </summary>
+        /// <param name="connection">Connessione al DB</param>
+        /// <param name="strumentoACorda">Record da eliminare</param>
+        /// <param name="comunicazione">Comunicazione in uscita</param>
+        public static void DeleteStrumentoACorda(ref MySqlConnection connection, ClsStrumentoACorda strumentoACorda, out string comunicazione)
+        {
+            //VARIABILI LOCALI
+            comunicazione = String.Empty;
+
+            try
+            {
+                //Apro la connessione
+                connection.Open();
+
+                //Compongo il comando DML
+                string _dml = "DELETE FROM strumentiacorda WHERE strumentomusicaleID = @ID";
+
+                //Creo l'oggetto command
+                MySqlCommand _cmd = new MySqlCommand(_dml, connection);
+
+                //Inserisco i valori
+                _cmd.Parameters.AddWithValue("@ID", strumentoACorda.ID);
+
+                //Eseguo il comando
+                _cmd.ExecuteNonQuery();
+
+                comunicazione = "Strumento a corda eliminato correttamente dal DataBase";
+            }
+            catch (Exception ex)
+            {
+                comunicazione = ex.Message;
+            }
+            finally
+            {
+                //Chiudo la connessione
+                connection.Close();
+            }
+        }
     }
 }

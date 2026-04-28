@@ -67,5 +67,102 @@ namespace NegozioStrumentiMusicali
 
             return _ID;
         }
+        /// <summary>
+        /// Update di un record in legni + dettagli generali in strumentimusicali
+        /// </summary>
+        /// <param name="connection">Connessione al DB</param>
+        /// <param name="legno">Dati record da aggiornare</param>
+        /// <param name="comunicazione">Stringa di comunicazione in uscita</param>
+        public static void UpdateLegno(ref MySqlConnection connection, ClsLegno legno, out string comunicazione)
+        {
+            //VARIABILI LOCALI
+            comunicazione = String.Empty;
+
+            try
+            {
+                //Aggiorno le info generali in strumentimusicali
+                ClsStrumentoMusicaleBL.UpdateStrumentoMusicale(ref connection, legno, out comunicazione);
+
+                //Riapro la connessione dopo che si è chiusa in UpdateStrumentoMusicale
+                connection.Open();
+
+                //Compongo il comando DML
+                string _dml =
+                    "UPDATE legni " +
+                    "SET strumento = @strumento, " +
+                    "materialecorpo = @materialecorpo, " +
+                    "materialechiavi = @materialechiavi, " +
+                    "lunghezzacm = @lunghezzacm, " +
+                    "larghezzacm = @larghezzacm, " +
+                    "altezzacm = @altezzacm " +
+                    "WHERE strumentomusicaleID = @ID";
+
+                //Creo l'oggetto command
+                MySqlCommand _cmd = new MySqlCommand(_dml, connection);
+
+                //Inserisco i valori
+                _cmd.Parameters.AddWithValue("@strumento", legno.Strumento.ToString().ToLower());
+                _cmd.Parameters.AddWithValue("@materialecorpo", legno.MaterialeCorpo.ToString().ToLower());
+                _cmd.Parameters.AddWithValue("@materialechiavi", legno.MaterialeChiavi.ToString().ToLower());
+                _cmd.Parameters.AddWithValue("@lunghezzacm", legno.LunghezzaCM);
+                _cmd.Parameters.AddWithValue("@larghezzacm", legno.LarghezzaCM);
+                _cmd.Parameters.AddWithValue("@altezzacm", legno.AltezzaCM);
+                _cmd.Parameters.AddWithValue("@ID", legno.ID);
+
+                //Eseguo il comando
+                _cmd.ExecuteNonQuery();
+
+                comunicazione = "Strumento della famiglia legni aggiornato correttamente nel DataBase";
+            }
+            catch(Exception ex)
+            {
+                comunicazione = ex.Message;
+            }
+            finally
+            {
+                //Chiudo la connessione
+                connection.Close();
+            }
+        }
+        /// <summary>
+        /// Eliminazione di un record da legni
+        /// </summary>
+        /// <param name="connection">Connessione al DB</param>
+        /// <param name="legno">Record da eliminare</param>
+        /// <param name="comunicazione">Comunicazione in uscita</param>
+        public static void DeleteLegno(ref MySqlConnection connection, ClsLegno legno, out string comunicazione)
+        {
+            //VARIABILI LOCALI
+            comunicazione = String.Empty;
+
+            try
+            {
+                //Apro la connessione
+                connection.Open();
+
+                //Compongo il comando DML
+                string _dml = "DELETE FROM legni WHERE strumentomusicaleID = @ID";
+
+                //Creo l'oggetto command
+                MySqlCommand _cmd = new MySqlCommand(_dml, connection);
+
+                //Inserisco i valori
+                _cmd.Parameters.AddWithValue("@ID", legno.ID);
+
+                //Eseguo il comando
+                _cmd.ExecuteNonQuery();
+
+                comunicazione = "Strumento della famiglia dei legni eliminato correttamente dal DataBase";
+            }
+            catch (Exception ex)
+            {
+                comunicazione = ex.Message;
+            }
+            finally
+            {
+                //Chiudo la connessione
+                connection.Close();
+            }
+        }
     }
 }

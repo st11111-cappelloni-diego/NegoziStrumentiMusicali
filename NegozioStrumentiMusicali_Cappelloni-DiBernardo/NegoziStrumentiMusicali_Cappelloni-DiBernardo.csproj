@@ -77,10 +77,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BL\ClsCaratteristicaBL.cs" />
     <Compile Include="BL\ClsLegnoBL.cs" />
     <Compile Include="BL\ClsNotaMusicaleBL.cs" />
     <Compile Include="BL\ClsOttoneBL.cs" />
     <Compile Include="BL\ClsPianoforteBL.cs" />
+    <Compile Include="BL\ClsPiattoBL.cs" />
     <Compile Include="BL\ClsStrumentoACordaBL.cs" />
     <Compile Include="BL\ClsStrumentoMusicaleBL.cs" />
     <Compile Include="BL\ClsTamburoBL.cs" />
