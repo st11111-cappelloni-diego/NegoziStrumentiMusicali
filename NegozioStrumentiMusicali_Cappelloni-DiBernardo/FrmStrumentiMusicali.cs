@@ -28,7 +28,7 @@ namespace NegozioStrumentiMusicali
         #endregion
 
         #region Metodi della form
-        void PopolaListViewStrumentiMusicali(ListView listView, List<ClsStrumentoMusicale> listaStrumenti)
+        void PopolaListView(ListView listView, List<ClsStrumentoMusicale> listaStrumenti)
         {
             //Rimuovo tutti gli elementi dalla listview
             listView.Clear();
@@ -37,6 +37,20 @@ namespace NegozioStrumentiMusicali
             for(int i = 0; i < listaStrumenti.Count; i++)
             {
                 //Creo il listViewItem
+
+            }
+        }
+        void PopolaCombobox(ComboBox comboBox, List<ClsNegozio> listaNegozi)
+        {
+            //Rimuovo tutti gli elementi dalla combobox
+            comboBox.Items.Clear();
+
+            //Scorro tutti gli elementi della lista
+            {
+                for(int i = 0; i < listaNegozi.Count; i++)
+                {
+                    
+                }
             }
         }
 
@@ -46,6 +60,9 @@ namespace NegozioStrumentiMusicali
         public FrmStrumentiMusicali()
         {
             InitializeComponent();
+
+            //Popolo l'apposita combobox con i parametri di ricerca
+            cbParametriDiOrdinamento.DataSource = Enum.GetNames(typeof(ePARAMETRO_DI_ORDINAMENTO));
         }
 
         #endregion
@@ -53,8 +70,8 @@ namespace NegozioStrumentiMusicali
         #region Eventi
         private void FrmStrumentiMusicali_Load(object sender, EventArgs e)
         {
-            //Popolo l'apposita combobox con i parametri di ricerca
-            cbParametriDiOrdinamento.DataSource = Enum.GetNames(typeof(ePARAMETRO_DI_ORDINAMENTO));
+            //Popolo la combobox dei negozi 
+            
         }
 
         private void btnNuovo_Click(object sender, EventArgs e)
@@ -63,5 +80,10 @@ namespace NegozioStrumentiMusicali
         }
 
         #endregion
+
+        private void cbNegozio_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
