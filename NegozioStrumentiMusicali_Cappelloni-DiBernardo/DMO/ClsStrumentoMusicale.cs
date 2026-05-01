@@ -19,6 +19,7 @@ namespace NegozioStrumentiMusicali
         private int _notaMinimaID;
         private int _notaMassimaID;
         private float _pesoKG;
+        private int _casaProduttriceID;
 
         #endregion
 
@@ -99,6 +100,7 @@ namespace NegozioStrumentiMusicali
                 }
             }
         }
+        public int CasaProduttriceID { get => _casaProduttriceID; set => _casaProduttriceID = value; }
 
 
         #endregion
