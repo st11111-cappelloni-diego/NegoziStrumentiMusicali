@@ -169,6 +169,7 @@
             this.cbNegozio.Name = "cbNegozio";
             this.cbNegozio.Size = new System.Drawing.Size(890, 28);
             this.cbNegozio.TabIndex = 73;
+            this.cbNegozio.SelectedIndexChanged += new System.EventHandler(this.cbNegozio_SelectedIndexChanged);
             // 
             // btnInfoNegozio
             // 

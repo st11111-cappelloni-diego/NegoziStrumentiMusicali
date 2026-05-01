@@ -15,7 +15,19 @@ namespace NegozioStrumentiMusicali
         #endregion
 
         #region Proprietà
-        public static List<ClsNegozio> Negozi { get => _negozi; set => _negozi = value; }
+        public static List<ClsNegozio> Negozi
+        {
+            get => _negozi;
+            set
+            {
+                //TESTING
+                value.Add(new ClsNegozio(0));
+                value[value.Count - 1].Bandito = false;
+                value[value.Count - 1].Nome = "NegozioTest";
+                value[value.Count - 1].PathImmagine = null;
+                value[value.Count - 1].IndirizzoID = 0;
+            }
+        }
         public static List<ClsNotaMusicale> NoteMusicali { get => _noteMusicali; set => _noteMusicali = value; }
 
         #endregion
