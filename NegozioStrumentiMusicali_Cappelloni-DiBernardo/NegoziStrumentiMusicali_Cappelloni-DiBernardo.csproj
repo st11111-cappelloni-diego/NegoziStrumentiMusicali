@@ -77,6 +77,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BL\ClsBatteriaPiattoBL.cs" />
+    <Compile Include="BL\ClsBatteriaTamburoBL.cs" />
     <Compile Include="BL\ClsCaratteristicaBL.cs" />
     <Compile Include="BL\ClsLegnoBL.cs" />
     <Compile Include="BL\ClsNotaMusicaleBL.cs" />
