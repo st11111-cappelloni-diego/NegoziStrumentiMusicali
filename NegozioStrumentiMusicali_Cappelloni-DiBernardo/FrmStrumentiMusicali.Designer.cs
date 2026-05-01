@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.lvNegozi = new System.Windows.Forms.ListView();
+            this.lvStrumenti = new System.Windows.Forms.ListView();
             this.chID = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.chCasaProduttrice = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Modello = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -50,28 +50,28 @@
             this.btnNuovo = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // lvNegozi
+            // lvStrumenti
             // 
-            this.lvNegozi.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.lvStrumenti.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.lvNegozi.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.lvStrumenti.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.chID,
             this.chCasaProduttrice,
             this.Modello,
             this.chColori,
             this.chPrezzo,
             this.chQuantità});
-            this.lvNegozi.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lvNegozi.FullRowSelect = true;
-            this.lvNegozi.HideSelection = false;
-            this.lvNegozi.Location = new System.Drawing.Point(14, 99);
-            this.lvNegozi.MultiSelect = false;
-            this.lvNegozi.Name = "lvNegozi";
-            this.lvNegozi.Size = new System.Drawing.Size(997, 580);
-            this.lvNegozi.TabIndex = 60;
-            this.lvNegozi.UseCompatibleStateImageBehavior = false;
-            this.lvNegozi.View = System.Windows.Forms.View.Details;
+            this.lvStrumenti.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lvStrumenti.FullRowSelect = true;
+            this.lvStrumenti.HideSelection = false;
+            this.lvStrumenti.Location = new System.Drawing.Point(14, 99);
+            this.lvStrumenti.MultiSelect = false;
+            this.lvStrumenti.Name = "lvStrumenti";
+            this.lvStrumenti.Size = new System.Drawing.Size(997, 580);
+            this.lvStrumenti.TabIndex = 60;
+            this.lvStrumenti.UseCompatibleStateImageBehavior = false;
+            this.lvStrumenti.View = System.Windows.Forms.View.Details;
             // 
             // chID
             // 
@@ -258,7 +258,7 @@
             this.Controls.Add(this.tbRicerca);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.cbNegozio);
-            this.Controls.Add(this.lvNegozi);
+            this.Controls.Add(this.lvStrumenti);
             this.Controls.Add(this.btnElimina);
             this.Controls.Add(this.btnModifica);
             this.Controls.Add(this.btnNuovo);
@@ -271,7 +271,7 @@
         }
 
         #endregion
-        private System.Windows.Forms.ListView lvNegozi;
+        private System.Windows.Forms.ListView lvStrumenti;
         private System.Windows.Forms.ColumnHeader chID;
         private System.Windows.Forms.ColumnHeader chCasaProduttrice;
         private System.Windows.Forms.ColumnHeader Modello;

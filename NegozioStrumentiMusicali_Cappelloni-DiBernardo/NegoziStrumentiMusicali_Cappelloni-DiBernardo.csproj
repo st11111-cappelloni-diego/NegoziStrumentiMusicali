@@ -109,7 +109,6 @@
     <Compile Include="DMO\ClsTamburo.cs" />
     <Compile Include="DMO\ClsUtente.cs" />
     <Compile Include="DMO\ClsVendere.cs" />
-    <Compile Include="DMO\ComboBoxItem.cs" />
     <Compile Include="FrmBatteria.cs">
       <SubType>Form</SubType>
     </Compile>
