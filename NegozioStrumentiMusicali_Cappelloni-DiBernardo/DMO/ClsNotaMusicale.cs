@@ -32,7 +32,7 @@ namespace NegozioStrumentiMusicali
         #endregion
 
         #region Attributi
-        private int _id;
+        private long _id;
         private eNOTA_BASE _notaBase;
         private eALTERAZIONE _alterazione;
         private int _ottava;
@@ -40,7 +40,7 @@ namespace NegozioStrumentiMusicali
         #endregion
 
         #region Proprietà
-        public int ID { get => _id; set => _id = value; }
+        public long ID { get => _id; set => _id = value; }
         public eNOTA_BASE NotaBase { get => _notaBase; set => _notaBase = value; }
         public eALTERAZIONE Alterazione { get => _alterazione; set => _alterazione = value; }
         public int Ottava
@@ -66,7 +66,7 @@ namespace NegozioStrumentiMusicali
             
         }
 
-        public ClsNotaMusicale(int id)
+        public ClsNotaMusicale(long id)
         {
             ID = id;
         }

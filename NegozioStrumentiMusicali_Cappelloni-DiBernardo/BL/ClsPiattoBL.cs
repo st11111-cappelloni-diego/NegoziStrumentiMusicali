@@ -2,6 +2,7 @@
 using MySqlConnector;
 using System.Collections.Generic;
 using System.Linq;
+using System.Data;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -149,6 +150,13 @@ namespace NegozioStrumentiMusicali
                 //Chiudo la connessione
                 connection.Close();
             }
+        }
+        public static List<ClsPiatto> SelectAllPiatti(ref MySqlConnection connection, out string comunicazione)
+        {
+            //VARIABILI
+            DataTable _dataTable = new DataTable();
+            List<ClsPiatto> _piatti = new List<ClsPiatto>();
+            comunicazione = String.Empty;
         }
     }
 }

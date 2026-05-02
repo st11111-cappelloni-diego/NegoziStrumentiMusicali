@@ -12,7 +12,7 @@ namespace NegozioStrumentiMusicali
     public class ClsCasaProdruttrice
     {
         #region Attributi
-        int _id;
+        long _id;
         string _nome;
         string _email;
         string _pathLogo;
@@ -20,7 +20,7 @@ namespace NegozioStrumentiMusicali
         #endregion
 
         #region Proprietà
-        public int ID
+        public long ID
         {
             get
             {
@@ -95,7 +95,7 @@ namespace NegozioStrumentiMusicali
 
         }
 
-        public ClsCasaProdruttrice(int id)
+        public ClsCasaProdruttrice(long id)
         {
             ID = id;
         }
