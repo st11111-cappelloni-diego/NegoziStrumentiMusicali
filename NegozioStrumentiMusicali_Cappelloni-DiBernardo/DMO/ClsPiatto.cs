@@ -11,16 +11,16 @@ namespace NegozioStrumentiMusicali
         #region Enumeratori
         public enum eTIPO
         {
-            Charleston,
-            China,
-            Crash,
-            Ride
+            charleston,
+            china,
+            crash,
+            ride
         }
         public enum eMATERIALE
         {
-            Bronzo_B8,
-            Bronzo_B20,
-            Ottone
+            bronzo_B8,
+            bronzo_B20,
+            ottone
         }
 
         #endregion

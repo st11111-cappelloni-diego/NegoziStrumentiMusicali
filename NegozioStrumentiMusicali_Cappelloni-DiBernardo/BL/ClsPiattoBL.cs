@@ -151,12 +151,68 @@ namespace NegozioStrumentiMusicali
                 connection.Close();
             }
         }
-        public static List<ClsPiatto> SelectAllPiatti(ref MySqlConnection connection, out string comunicazione)
+        /// <summary>
+        /// Caricamento di tutti i record di piatti
+        /// </summary>
+        /// <param name="connection">Connessione al DB</param>
+        /// <param name="comunicazione">Comunicaziopiatti</returns>
+        public static List<ClsPiatto> GetAllPiatti(ref MySqlConnection connection, out string comunicazione)
         {
             //VARIABILI
-            DataTable _dataTable = new DataTable();
             List<ClsPiatto> _piatti = new List<ClsPiatto>();
             comunicazione = String.Empty;
+
+            try
+            {
+                //Apro la connessione
+                connection.Open();
+
+                //Compongo la query
+                string _query = "SELECT * FROM piatti";
+
+                //Creo l'oggetto command
+                MySqlCommand _cmd = new MySqlCommand(_query, connection);
+
+                //Eseguo il command creando l'oggetto DataReader
+                MySqlDataReader _dataReader = _cmd.ExecuteReader();
+
+                if(_dataReader.HasRows) //Controllo se la tabella contiene dei record
+                {
+                    while(_dataReader.Read()) //Se ce li ha li leggo tutti
+                    {
+                        ClsPiatto _piatto = new ClsPiatto();
+                        _piatto.ID = (long)_dataReader["ID"];
+                        _piatto.Materiale = (ClsPiatto.eMATERIALE)Enum.Parse
+                        (
+                            typeof(ClsPiatto.eMATERIALE), 
+                            _dataReader["materiale"].ToString()
+                        );
+                        _piatto.Tipo = (ClsPiatto.eTIPO)Enum.Parse
+                        (
+                            typeof(ClsPiatto.eTIPO),
+                            _dataReader["tipo"].ToString()
+                        );
+                        _piatto.DiametroIN = (ushort)_dataReader["diametroin"];
+
+                        _piatti.Add(_piatto);
+                    }
+                }
+
+                _dataReader.Close();
+
+                comunicazione = "Piatti caricati correttamente dal DataBase";
+            }
+            catch(Exception ex)
+            {
+                comunicazione = ex.Message;
+            }
+            finally
+            {
+                //Chiudo la connessione
+                connection.Close();
+            }
+
+            return _piatti;
         }
     }
 }
