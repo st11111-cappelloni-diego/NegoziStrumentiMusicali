@@ -12,16 +12,16 @@ namespace NegozioStrumentiMusicali
     public class ClsNegozio
     {
         #region Attributi
-        private int _id;
+        private long _id;
         private string _nome;
         private bool _bandito;
         private string _pathImmagine;
-        private int _indirizzoID;
+        private long _indirizzoID;
        
         #endregion
 
         #region Proprietà
-        public int ID
+        public long ID
         {
             get
             {
@@ -59,7 +59,7 @@ namespace NegozioStrumentiMusicali
         }
         public bool Bandito { get => _bandito; set => _bandito = value; }
         public string PathImmagine { get => _pathImmagine; set => _pathImmagine = value; }
-        public int IndirizzoID { get => _indirizzoID; set => _indirizzoID = value; }
+        public long IndirizzoID { get => _indirizzoID; set => _indirizzoID = value; }
 
         #endregion
 
@@ -69,7 +69,7 @@ namespace NegozioStrumentiMusicali
 
         }
 
-        public ClsNegozio(int id)
+        public ClsNegozio(long id)
         {
             ID = id;
         }

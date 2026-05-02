@@ -12,15 +12,15 @@ namespace NegozioStrumentiMusicali
     public class ClsGestire
     {
         #region Attributi
-        private int _id;
-        private int _negozioID;
+        private long _id;
+        private long _negozioID;
         private string _utenteUsername;
 
         #endregion
 
         #region Proprietà
-        public int ID { get => _id; set => _id = value; }
-        public int NegozioID { get => _negozioID; set => _negozioID = value; }
+        public long ID { get => _id; set => _id = value; }
+        public long NegozioID { get => _negozioID; set => _negozioID = value; }
         public string UtenteUsername { get => _utenteUsername; set => _utenteUsername = value; }
 
         #endregion
@@ -31,7 +31,7 @@ namespace NegozioStrumentiMusicali
 
         }
 
-        public ClsGestire(int id)
+        public ClsGestire(long id)
         {
             ID = id;
         }
