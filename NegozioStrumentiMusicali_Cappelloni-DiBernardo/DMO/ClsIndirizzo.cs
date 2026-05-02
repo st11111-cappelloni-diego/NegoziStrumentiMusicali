@@ -12,18 +12,18 @@ namespace NegozioStrumentiMusicali
     public class ClsIndirizzo
     {
         #region Attributi
-        private int _id;
+        private long _id;
         private string _comune;
         private string _via;
         private string _codicePostale;
         private string _nazione;
         private bool _essereSede;
-        private int _casaProduttriceID;
+        private long _casaProduttriceID;
 
         #endregion
 
         #region Proprietà
-        public int ID { get => _id; set => _id = value; }
+        public long ID { get => _id; set => _id = value; }
         public string Comune
         {
             get
@@ -95,7 +95,7 @@ namespace NegozioStrumentiMusicali
         }
 
         public bool EssereSede { get => _essereSede; set => _essereSede = value; }
-        public int CasaProduttriceID { get => _casaProduttriceID; set => _casaProduttriceID = value; }
+        public long CasaProduttriceID { get => _casaProduttriceID; set => _casaProduttriceID = value; }
 
 
         #endregion
