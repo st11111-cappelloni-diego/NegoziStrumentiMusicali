@@ -165,10 +165,9 @@ namespace NegozioStrumentiMusicali
         /// <param name="connection">Connessione al DB</param>
         /// <param name="comunicazione">Comunicazione in uscita</param>
         /// <returns>La lista di tutti i record di strumentimusicali</returns>
-        public static List<ClsStrumentoMusicale> SelectAllStrumentiMusicali(ref MySqlConnection connection, out string comunicazione)
+        public static List<ClsStrumentoMusicale> GetAllStrumentiMusicali(ref MySqlConnection connection, out string comunicazione)
         {
             //VARIABILI
-            DataTable _dataTable = new DataTable();
             List<ClsStrumentoMusicale> _strumentiMusicali = new List<ClsStrumentoMusicale>();
             comunicazione = String.Empty;
 
@@ -200,9 +199,12 @@ namespace NegozioStrumentiMusicali
                         _strumentoMusicale.NotaMassimaID = (long)_dataReader["notamassimaID"];
                         _strumentoMusicale.NotaMinimaID = (long)_dataReader["notaminimaID"];
                         _strumentoMusicale.PesoKG = (float)_dataReader["pesokg"];
+
                         _strumentiMusicali.Add(_strumentoMusicale);
                     }
                 }
+
+                _dataReader.Close();
 
                 comunicazione = "Strumenti musicali caricati correttamente dal DataBase";
             }
