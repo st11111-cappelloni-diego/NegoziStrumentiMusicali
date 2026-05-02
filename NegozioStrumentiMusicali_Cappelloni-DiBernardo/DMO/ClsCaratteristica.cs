@@ -12,15 +12,15 @@ namespace NegozioStrumentiMusicali
     public class ClsCaratteristica
     {
         #region Attributi
-        private int _id;
+        private long _id;
         private string _titolo;
         private string _testo;
-        private int _strumentoMusicaleID;
+        private long _strumentoMusicaleID;
 
         #endregion
 
         #region Proprietà
-        public int ID { get => _id; set => _id = value; }
+        public long ID { get => _id; set => _id = value; }
         public string Titolo
         {
             get => _titolo;
@@ -51,7 +51,7 @@ namespace NegozioStrumentiMusicali
                 }
             }
         }
-        public int StrumentoMusicaleID { get => _strumentoMusicaleID; set => _strumentoMusicaleID = value; }
+        public long StrumentoMusicaleID { get => _strumentoMusicaleID; set => _strumentoMusicaleID = value; }
 
         #endregion
 

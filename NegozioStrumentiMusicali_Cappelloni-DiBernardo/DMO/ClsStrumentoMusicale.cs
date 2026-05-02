@@ -12,19 +12,19 @@ namespace NegozioStrumentiMusicali
     public class ClsStrumentoMusicale
     {
         #region Attributi
-        private int _id;
+        private long _id;
         private string _colori;
         private string _immagine;
         private string _modello;
-        private int _notaMinimaID;
-        private int _notaMassimaID;
+        private long _notaMinimaID;
+        private long _notaMassimaID;
         private float _pesoKG;
         private int _casaProduttriceID;
 
         #endregion
 
         #region Proprietà
-        public int ID
+        public long ID
         {
             get
             {
@@ -80,8 +80,8 @@ namespace NegozioStrumentiMusicali
             }
         }
         public string Immagine { get => _immagine; set => _immagine = value; }
-        public int NotaMinimaID { get => _notaMinimaID; set => _notaMinimaID = value; }
-        public int NotaMassimaID { get => _notaMassimaID; set => _notaMassimaID = value; }
+        public long NotaMinimaID { get => _notaMinimaID; set => _notaMinimaID = value; }
+        public long NotaMassimaID { get => _notaMassimaID; set => _notaMassimaID = value; }
         public float PesoKG
         {
             get
@@ -111,7 +111,7 @@ namespace NegozioStrumentiMusicali
 
         }
 
-        public ClsStrumentoMusicale(int id)
+        public ClsStrumentoMusicale(long id)
         {
             ID = id;
         }

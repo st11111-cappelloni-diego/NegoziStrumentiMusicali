@@ -17,7 +17,7 @@ namespace NegozioStrumentiMusicali
 
         }
         //Costruttore ereditato dalla classe madre
-        public ClsBatteria(int id) : base(id)
+        public ClsBatteria(long id) : base(id)
         {
 
         }

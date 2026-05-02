@@ -26,7 +26,7 @@ namespace NegozioStrumentiMusicali
         #endregion
 
         #region Attributi
-        private int _id;
+        private long _id;
         private eTIPO _tipo;
         private ushort _diametroIN;
         private eMATERIALE _materiale;
@@ -34,7 +34,7 @@ namespace NegozioStrumentiMusicali
         #endregion
 
         #region Proprietà
-        public int ID { get => _id; set => _id = value; }
+        public long ID { get => _id; set => _id = value; }
         public eTIPO Tipo { get => _tipo; set => _tipo = value; }
         /// <summary>
         /// IN sta per inches (ovvero pollici)
