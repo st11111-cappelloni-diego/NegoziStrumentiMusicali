@@ -12,16 +12,16 @@ namespace NegozioStrumentiMusicali
     public class ClsVendere
     {
         #region Attributi
-        private int _id;
+        private long _id;
         private int _quantita;
         private decimal _prezzo;
-        private int _strumentoMusicaleID;
-        private int _negozioID;
+        private long _strumentoMusicaleID;
+        private long _negozioID;
 
         #endregion
 
         #region Proprietà
-        public int ID { get => _id; set => _id = value; }
+        public long ID { get => _id; set => _id = value; }
         public int Quantita
         {
             get => _quantita;
@@ -52,8 +52,8 @@ namespace NegozioStrumentiMusicali
                 }
             }
         }
-        public int StrumentoMusicaleID { get => _strumentoMusicaleID; set => _strumentoMusicaleID = value; }
-        public int NegozioID { get => _negozioID; set => _negozioID = value; }
+        public long StrumentoMusicaleID { get => _strumentoMusicaleID; set => _strumentoMusicaleID = value; }
+        public long NegozioID { get => _negozioID; set => _negozioID = value; }
 
         #endregion
 
@@ -63,7 +63,7 @@ namespace NegozioStrumentiMusicali
 
         }
 
-        public ClsVendere(int id)
+        public ClsVendere(long id)
         {
             ID = id;
         }
