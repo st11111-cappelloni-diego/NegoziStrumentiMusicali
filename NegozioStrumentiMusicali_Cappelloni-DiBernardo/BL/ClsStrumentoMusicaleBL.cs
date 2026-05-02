@@ -3,6 +3,7 @@ using MySqlConnector;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Data;
 using System.Threading.Tasks;
 
 namespace NegozioStrumentiMusicali
@@ -157,6 +158,65 @@ namespace NegozioStrumentiMusicali
                 //Chiudo la connessione
                 connection.Close();
             }
+        }
+        /// <summary>
+        /// Caricamento di tutti i record di strumentimusicali
+        /// </summary>
+        /// <param name="connection">Connessione al DB</param>
+        /// <param name="comunicazione">Comunicazione in uscita</param>
+        /// <returns>La lista di tutti i record di strumentimusicali</returns>
+        public static List<ClsStrumentoMusicale> SelectAllStrumentiMusicali(ref MySqlConnection connection, out string comunicazione)
+        {
+            //VARIABILI
+            DataTable _dataTable = new DataTable();
+            List<ClsStrumentoMusicale> _strumentiMusicali = new List<ClsStrumentoMusicale>();
+            comunicazione = String.Empty;
+
+            try
+            {
+                //Apro la connessione
+                connection.Open();
+
+                //Compongo la query
+                string _query = "SELECT * FROM strumentimusicali";
+
+                //Creo l'oggetto command
+                MySqlCommand _cmd = new MySqlCommand(_query, connection);
+
+                //Eseguo il comando creando l'oggetto DataReader
+                MySqlDataReader _dataReader = _cmd.ExecuteReader();
+
+                if(_dataReader.HasRows) //Controllo se la tabella contiene dei record
+                {
+                    while(_dataReader.Read()) //Se ce li ha li leggo tutti
+                    {
+                        //Carico i dati dal DB
+                        ClsStrumentoMusicale _strumentoMusicale = new ClsStrumentoMusicale();
+                        _strumentoMusicale.ID = (long)_dataReader["ID"];
+                        _strumentoMusicale.CasaProduttriceID = (int)_dataReader["casaproduttriceID"];
+                        _strumentoMusicale.Colori = _dataReader["colori"].ToString();
+                        _strumentoMusicale.Immagine = _dataReader["pathimmagine"].ToString();
+                        _strumentoMusicale.Modello = _dataReader["modello"].ToString();
+                        _strumentoMusicale.NotaMassimaID = (long)_dataReader["notamassimaID"];
+                        _strumentoMusicale.NotaMinimaID = (long)_dataReader["notaminimaID"];
+                        _strumentoMusicale.PesoKG = (float)_dataReader["pesokg"];
+                        _strumentiMusicali.Add(_strumentoMusicale);
+                    }
+                }
+
+                comunicazione = "Strumenti musicali caricati correttamente dal DataBase";
+            }
+            catch(Exception ex)
+            {
+                comunicazione = ex.Message;
+            }
+            finally
+            {
+                //Chiudo la connessione
+                connection.Close();
+            }
+
+            return _strumentiMusicali;
         }
     }
 

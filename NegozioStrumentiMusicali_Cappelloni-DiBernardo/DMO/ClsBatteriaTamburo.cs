@@ -12,16 +12,16 @@ namespace NegozioStrumentiMusicali
     public class ClsBatteriaTamburo
     {
         #region Attributi
-        private int _id;
-        private int _batteriaID;
-        private int _tamburoID;
+        private long _id;
+        private long _batteriaID;
+        private long _tamburoID;
 
         #endregion
 
         #region Proprietà
-        public int ID { get => _id; set => _id = value; }
-        public int BatteriaID { get => _batteriaID; set => _batteriaID = value; }
-        public int TamburoID { get => _tamburoID; set => _tamburoID = value; }
+        public long ID { get => _id; set => _id = value; }
+        public long BatteriaID { get => _batteriaID; set => _batteriaID = value; }
+        public long TamburoID { get => _tamburoID; set => _tamburoID = value; }
 
         #endregion
 
@@ -31,7 +31,7 @@ namespace NegozioStrumentiMusicali
 
         }
 
-        public ClsBatteriaTamburo(int id)
+        public ClsBatteriaTamburo(long id)
         {
             ID = id;
         }
