@@ -43,7 +43,7 @@ namespace NegozioStrumentiMusicali
                 ListViewItem _lvi = new ListViewItem(listaStrumenti[i].ID.ToString()); //Prima colonna: ID
                 
                 //Seconda colonna: casa produttrice --> trovo il la casa in base a CasaProduttriceID (cerco su RAM)
-                ClsCasaProdruttrice _casaProduttrice = ClsArchivio.CaseProduttrici.FirstOrDefault(cp => cp.ID == listaStrumenti[i].CasaProduttriceID);
+                ClsCasaProduttrice _casaProduttrice = ClsArchivio.CaseProduttrici.FirstOrDefault(cp => cp.ID == listaStrumenti[i].CasaProduttriceID);
                 _lvi.SubItems.Add(_casaProduttrice.Nome); //Aggiungo il nome della casa
                 
                 //Terza colonna: modello
