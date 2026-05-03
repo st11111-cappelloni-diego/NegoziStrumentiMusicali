@@ -91,19 +91,19 @@ namespace NegozioStrumentiMusicali
             for (int i = 0; i < Enum.GetValues(typeof(ClsNotaMusicale.eNOTA_BASE)).Length; i++) 
             {
                 //(ClsNotaMusicale.eNOTA_BASE)i = associo il numero intero al valore dell'enum (il primo valore è di default 0, il secondo 1, ecc... infatti i inizia con valore 0)
-                ClsArchivio.NoteMusicali.Add(new ClsNotaMusicale((ClsNotaMusicale.eNOTA_BASE)i, ClsNotaMusicale.eALTERAZIONE.Naturale, 0));
+                ClsArchivio.NoteMusicali.Add(new ClsNotaMusicale((ClsNotaMusicale.eNOTA_BASE)i, ClsNotaMusicale.eALTERAZIONE.naturale, 0));
             }
 
             //Successivamente, aggiungo le note non naturali sempre dell'ottava 0. Scelgo come alterazione il diesis (#)
             for(int j = 0; j < ClsArchivio.NoteMusicali.Count(); j++) //Scorro la lista appena popolata con le note naturali
             {
                 //Deve generare solo le alterazioni delle note naturali ad eccezione di MI e SI
-                if (ClsArchivio.NoteMusicali[j].NotaBase != ClsNotaMusicale.eNOTA_BASE.Mi)  //MI# = FA Naturale
+                if (ClsArchivio.NoteMusicali[j].NotaBase != ClsNotaMusicale.eNOTA_BASE.mi)  //MI# = FA Naturale
  
                 {
-                    if(ClsArchivio.NoteMusicali[j].NotaBase != ClsNotaMusicale.eNOTA_BASE.Si)
+                    if(ClsArchivio.NoteMusicali[j].NotaBase != ClsNotaMusicale.eNOTA_BASE.si)
                     {
-                        if (ClsArchivio.NoteMusicali[j].Alterazione == ClsNotaMusicale.eALTERAZIONE.Naturale)
+                        if (ClsArchivio.NoteMusicali[j].Alterazione == ClsNotaMusicale.eALTERAZIONE.naturale)
                         {
                             //Aggiungo la nota attuale con alterazione diesis e non naturale alla lista
                             //Aggiungo la nota in coda alla lista
@@ -112,7 +112,7 @@ namespace NegozioStrumentiMusicali
                                 ClsArchivio.NoteMusicali[j].NotaBase,
                                 ClsArchivio.NoteMusicali[j].Alterazione,
                                 ClsArchivio.NoteMusicali[j].Ottava));
-                            ClsArchivio.NoteMusicali[ClsArchivio.NoteMusicali.Count - 1].Alterazione = ClsNotaMusicale.eALTERAZIONE.Diesis; //Cambio l'alterazione in diesis
+                            ClsArchivio.NoteMusicali[ClsArchivio.NoteMusicali.Count - 1].Alterazione = ClsNotaMusicale.eALTERAZIONE.diesis; //Cambio l'alterazione in diesis
 
                             //Metto la nota alterata dopo la nota naturale indicata dall'indice j
                             //Metto la nota alterata in una variabile temporanea
