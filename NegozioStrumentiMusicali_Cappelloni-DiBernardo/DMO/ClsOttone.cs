@@ -17,46 +17,46 @@ namespace NegozioStrumentiMusicali
         /// </summary>
         public enum eOTTONI
         {
-            Bombardino,
-            Cornetta,
-            Corno_francese,
-            Eufonio,
-            Flicorno_contralto,
-            Flicorno_sopranino,
-            Flicorno_soprano,
-            Tromba,
-            Trombone,
-            Tuba
+            bombardino,
+            cornetta,
+            corno_francese,
+            eufonio,
+            flicorno_contralto,
+            flicorno_sopranino,
+            flicorno_soprano,
+            tromba,
+            trombone,
+            tuba
         }
         public enum eMATERIALE_BOCCHINO
         {
-            Acciaio_inossidabile,
-            Acrilico,
-            Derlin,
-            Lexan,
-            Ottone,
-            Titanio
+            acciaio_inossidabile,
+            acrilico,
+            derlin,
+            lexan,
+            ottone,
+            titanio
         }
         /// <summary>
         /// Contiene i tipi di ottone (materiale) usati per il corpo degli strumenti della famiglia degli ottoni
         /// </summary>
         public enum eTIPO_OTTONE
         {
-            Ottone_giallo,
-            Ottone_oro,
-            Ottone_rosso
+            ottone_giallo,
+            ottone_oro,
+            ottone_rosso
         }
         public enum eRIVESTIMENTO_BOCCHINO
         {
-            No,
-            Argentatura,
-            Doratura
+            no,
+            argentatura,
+            doratura
         }
         public enum eTIPO_PLACCATURA
         {
-            No,
-            Argento,
-            Oro
+            no,
+            argento,
+            oro
         }
 
         #endregion

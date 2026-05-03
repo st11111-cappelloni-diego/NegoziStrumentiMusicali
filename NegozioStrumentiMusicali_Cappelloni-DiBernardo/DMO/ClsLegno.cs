@@ -14,43 +14,43 @@ namespace NegozioStrumentiMusicali
         #region Enumeratori
         public enum eLEGNI
         {
-            Clarinetto,
-            Clarinetto_basso,
-            Clarinetto_contralto,
-            Clarinetto_contrabbasso,
-            Clarinetto_piccolo,
-            Flauto_dolce,
-            Flauto_traverso,
-            Ottavino,
-            Sassofono_basso,
-            Sassofono_baritono,
-            Sassofono_contralto,
-            Sassofono_sopranino,
-            Sassofono_tenore
+            clarinetto,
+            clarinetto_basso,
+            clarinetto_contralto,
+            clarinetto_contrabbasso,
+            clarinetto_piccolo,
+            flauto_dolce,
+            flauto_traverso,
+            ottavino,
+            sassofono_basso,
+            sassofono_baritono,
+            sassofono_contralto,
+            sassofono_sopranino,
+            sassofono_tenore
         }
         public enum eMATERIALE_CORPO_LEGNI
         {
-            Acero,
-            Argento,
-            Bosso,
-            Cocobolo,
-            Grenadilla,
-            Oro,
-            Ottone,
-            Ottone_argentato,
-            Ottone_nichelato,
-            Palissandro,
-            Plastica,
-            Quercia
+            acero,
+            argento,
+            bosso,
+            cocobolo,
+            grenadilla,
+            oro,
+            ottone,
+            ottone_argentato,
+            ottone_nichelato,
+            palissandro,
+            plastica,
+            quercia
         }
         public enum eMATERIALE_CHIAVI
         {
-            Alpacca,
-            Argento,
-            Avorio,
-            Ebano,
-            Oro,
-            Osso
+            alpacca,
+            argento,
+            avorio,
+            ebano,
+            oro,
+            osso
         }
 
         #endregion
@@ -72,14 +72,14 @@ namespace NegozioStrumentiMusicali
             get => _materialeCorpo;
             set
             {
-                if((Strumento == eLEGNI.Sassofono_baritono
-                    || Strumento == eLEGNI.Sassofono_basso
-                    || Strumento == eLEGNI.Sassofono_contralto
-                    || Strumento == eLEGNI.Sassofono_sopranino
-                    || Strumento == eLEGNI.Sassofono_tenore)
-                    && !(value == eMATERIALE_CORPO_LEGNI.Ottone
-                    || value == eMATERIALE_CORPO_LEGNI.Ottone_argentato
-                    || value == eMATERIALE_CORPO_LEGNI.Ottone_nichelato))
+                if((Strumento == eLEGNI.sassofono_baritono
+                    || Strumento == eLEGNI.sassofono_basso
+                    || Strumento == eLEGNI.sassofono_contralto
+                    || Strumento == eLEGNI.sassofono_sopranino
+                    || Strumento == eLEGNI.sassofono_tenore)
+                    && !(value == eMATERIALE_CORPO_LEGNI.ottone
+                    || value == eMATERIALE_CORPO_LEGNI.ottone_argentato
+                    || value == eMATERIALE_CORPO_LEGNI.ottone_nichelato))
                 {
                     throw new Exception("L'unico materiale ammissibile per il corpo di un sassofono è l'ottone");
                 }
