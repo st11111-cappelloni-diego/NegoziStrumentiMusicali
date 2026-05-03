@@ -9,7 +9,7 @@ namespace NegozioStrumentiMusicali
     /// <summary>
     /// Sviluppata da Leonardo Di Bernardo
     /// </summary>
-    public class ClsCasaProdruttrice
+    public class ClsCasaProduttrice
     {
         #region Attributi
         long _id;
@@ -90,12 +90,12 @@ namespace NegozioStrumentiMusicali
         #endregion
 
         #region Costruttore
-        public ClsCasaProdruttrice()
+        public ClsCasaProduttrice()
         {
 
         }
 
-        public ClsCasaProdruttrice(long id)
+        public ClsCasaProduttrice(long id)
         {
             ID = id;
         }

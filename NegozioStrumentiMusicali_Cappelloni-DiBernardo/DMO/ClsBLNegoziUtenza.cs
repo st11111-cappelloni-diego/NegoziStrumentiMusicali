@@ -10,7 +10,7 @@ namespace NegozioStrumentiMusicali
     /// <summary>
     /// Sviluppata da Leonardo di Bernardo
     /// </summary>
-    public class ClsBLNegoziUtenza
+    public static class ClsBLNegoziUtenza
     {
         #region ClsNegozio
 
@@ -508,7 +508,7 @@ namespace NegozioStrumentiMusicali
         /// <param name="casaprodruttrice">Oggetto da inserire</param>
         /// <param name="errore"></param>
         /// <returns></returns>
-        public static long InsertCasaProdruttrice(ref MySqlConnection connection, ClsCasaProdruttrice casaProdruttrice, out string errore)
+        public static long InsertCasaProdruttrice(ref MySqlConnection connection, ClsCasaProduttrice casaProdruttrice, out string errore)
         {
             //VARIABILI 
             long _ID = 0;
@@ -560,7 +560,7 @@ namespace NegozioStrumentiMusicali
         /// <param name="casaProdruttrice"></param>
         /// <param name="comunicazione"></param>
         ///
-        public static void UpdateCasaProdruttrice(ref MySqlConnection connection, ClsCasaProdruttrice casaProdruttrice, out string comunicazione)
+        public static void UpdateCasaProdruttrice(ref MySqlConnection connection, ClsCasaProduttrice casaProdruttrice, out string comunicazione)
         {
             //VARIABILI
             comunicazione = String.Empty;

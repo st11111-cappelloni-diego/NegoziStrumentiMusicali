@@ -13,7 +13,7 @@ namespace NegozioStrumentiMusicali
     public class ClsUtente
     {
         #region Enumeratori
-        public enum eGENERE { Uomo, Donna, Non_dichiarato }
+        public enum eGENERE { uomo, donna, nondichiarato }
         #endregion
 
         #region Attributi
