@@ -34,7 +34,7 @@ namespace NegozioStrumentiMusicali
 
         private void cbTipo_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if(cbTipo.SelectedIndex == (int)ClsPianoforte.eTIPO_PF.Elettrico)
+            if(cbTipo.SelectedIndex == (int)ClsPianoforte.eTIPO_PF.elettrico)
             {
                 //Se un pianoforte è elettrico l'attributo materialeCorpoPFAcustico non è previsto
                 cbMaterialeCorpoPFAcustico.SelectedIndex = 0;

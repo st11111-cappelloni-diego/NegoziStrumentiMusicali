@@ -48,7 +48,7 @@ namespace NegozioStrumentiMusicali
                 _cmd.Parameters.AddWithValue("@strumentomusicaleID", _ID); //Prima di inserire il pianoforte bisogna inserire lo strumento musicale ad esso associato
                 _cmd.Parameters.AddWithValue("@tipo", "'" + pianoforte.Tipo.ToString().ToLower() + "'");
                 _cmd.Parameters.AddWithValue("@numerotasti", pianoforte.NumeroTasti);
-                if (pianoforte.Tipo == ClsPianoforte.eTIPO_PF.Acustico)
+                if (pianoforte.Tipo == ClsPianoforte.eTIPO_PF.acustico)
                 {
                     _cmd.Parameters.AddWithValue("materialecorpopfacustico", pianoforte.MaterialeCorpoPFAcustico.ToString().ToLower());
                 }
