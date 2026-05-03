@@ -81,6 +81,7 @@
     <Compile Include="BL\ClsBatteriaTamburoBL.cs" />
     <Compile Include="BL\ClsCaratteristicaBL.cs" />
     <Compile Include="BL\ClsCasaProduttriceBL.cs" />
+    <Compile Include="BL\ClsGestireBL.cs" />
     <Compile Include="BL\ClsIndirizzoBL.cs" />
     <Compile Include="BL\ClsLegnoBL.cs" />
     <Compile Include="BL\ClsNegozioBL.cs" />
@@ -93,11 +94,11 @@
     <Compile Include="BL\ClsStrumentoMusicaleBL.cs" />
     <Compile Include="BL\ClsTamburoBL.cs" />
     <Compile Include="BL\ClsUtenteBL.cs" />
+    <Compile Include="BL\ClsVendereBL.cs" />
     <Compile Include="DMO\ClsArchivio.cs" />
     <Compile Include="DMO\ClsBatteria.cs" />
     <Compile Include="DMO\ClsBatteriaPiatto.cs" />
     <Compile Include="DMO\ClsBatteriaTamburo.cs" />
-    <Compile Include="DMO\ClsBLNegoziUtenza.cs" />
     <Compile Include="DMO\ClsCaratteristica.cs" />
     <Compile Include="DMO\ClsCasaProdruttrice.cs" />
     <Compile Include="DMO\ClsGestire.cs" />
