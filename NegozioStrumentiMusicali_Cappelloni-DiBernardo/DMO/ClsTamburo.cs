@@ -14,17 +14,17 @@ namespace NegozioStrumentiMusicali
         #region Enumeratori
         public enum eTIPO
         {
-            Cassa,
-            Rullante,
-            Timpano,
-            Tom
+            cassa,
+            rullante,
+            timpano,
+            tom
         }
         public enum eMATERIALE
         {
-            Fyberskin,
-            Mylar,
-            Pelle_di_capra,
-            Pelle_di_vitello
+            fyberskin,
+            mylar,
+            pelle_di_capra,
+            pelle_di_vitello
         }
 
         #endregion

@@ -14,18 +14,18 @@ namespace NegozioStrumentiMusicali
         #region Enumeratori
         public enum eTIPO_PF
         {
-            Acustico,
-            Elettrico
+            acustico,
+            elettrico
         }
 
         public enum eMATERIALE_TASTI_PF
         {
-            Avorio,
-            Galatite,
-            Ivorite,
-            Legno,
-            Neotex,
-            Plastica
+            avorio,
+            galatite,
+            ivorite,
+            legno,
+            neotex,
+            plastica
         }
 
         #endregion

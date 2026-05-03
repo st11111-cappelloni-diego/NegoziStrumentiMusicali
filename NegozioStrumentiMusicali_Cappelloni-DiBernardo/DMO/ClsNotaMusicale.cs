@@ -14,19 +14,22 @@ namespace NegozioStrumentiMusicali
         #region Enumeratori
         public enum eNOTA_BASE
         {
-            Do,
-            Re,
-            Mi,
-            Fa,
-            Sol,
-            La,
-            Si
+            //Metto la chiocciola sennò il compilatore lo interpreta come parola chiave
+            //Quando faccio .ToString() restituisce 'do'
+            //Infatti il nome reale della costante è do
+            @do, 
+            re,
+            mi,
+            fa,
+            sol,
+            la,
+            si
         }
         public enum eALTERAZIONE
         {
-            Bemolle,
-            Naturale,
-            Diesis,
+            bemolle,
+            naturale,
+            diesis,
         }
 
         #endregion

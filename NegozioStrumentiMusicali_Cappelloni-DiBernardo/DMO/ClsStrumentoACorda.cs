@@ -17,42 +17,41 @@ namespace NegozioStrumentiMusicali
         /// </summary>
         public enum eSTRUMENTI_A_CORDA
         {
-            Balalaika,
-            Banjo,
-            Basso_acustico,
-            Basso_elettrico,
-            Chitarra_acustica,
-            Chitarra_elettrica,
-	        Chitarra_resofonica,
-            Chitarra_semiacustica,
-            Contrabbasso,
-            Guitalele,
-	        Lap_steel_guitar,
-            Ukulele,
-            Viola,
-            Violino,
-            Violoncello
+            balalaika,
+            banjo,
+            basso_acustico,
+            basso_elettrico,
+            chitarra_acustica,
+            chitarra_elettrica,
+            chitarra_resofonica,
+            chitarra_semiacustica,
+            contrabbasso,
+            guitalele,
+            lap_steel_guitar,
+            ukulele,
+            viola,
+            violino,
+            violoncello
         }
 
         public enum eMATERIALE_CORDE
         {
-            Acciaio,
-            Budello,
-            Dacron,
-            Dyneema,
-            Kevlar,
-            Nylon,
-            Oro,
-            Spectra
-
+            acciaio,
+            budello,
+            dacron,
+            dyneema,
+            kevlar,
+            nylon,
+            oro,
+            spectra
         }
-	    public enum ePICKUP
+        public enum ePICKUP
 	    {
-		    No,
-		    Humbucker,
-		    P90,
-		    Single_coil
-	    }
+            no,
+            humbucker,
+            p90,
+            single_coil
+        }
 
         #endregion
 
