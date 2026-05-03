@@ -153,5 +153,72 @@ namespace NegozioStrumentiMusicali
                 connection.Close();
             }
         }
+        /// <summary>
+        /// Caricamento di tutti i record di tamburi
+        /// </summary>
+        /// <param name="connection">Connessione al DB</param>
+        /// <param name="comunicazione">Comunicazione in uscita</param>
+        /// <returns>La lista di tutti i record di tamburi</returns>
+        public static List<ClsTamburo> GetAllTamburi(ref MySqlConnection connection, out string comunicazione)
+        {
+            //VARIABILI
+            List<ClsTamburo> _tamburi = new List<ClsTamburo>();
+            comunicazione = String.Empty;
+
+            try
+            {
+                //Apro la connessione
+                connection.Open();
+
+                //Compongo la query
+                string _query = "SELECT * from tamburi";
+
+                //Creo l'oggetto command
+                MySqlCommand _cmd = new MySqlCommand(_query, connection);
+
+                //Eseguo il comando creando il DataReader
+                MySqlDataReader _dataReader = _cmd.ExecuteReader();
+
+                if(_dataReader.HasRows) //Controllo se la tabella ha dei record
+                {
+                    while(_dataReader.Read()) //Se ne ha li leggo tutti
+                    {
+                        //Carico i dati sulla lista
+                        ClsTamburo _tamburo = new ClsTamburo();
+
+                        _tamburo.ID = (long)_dataReader["ID"];
+                        _tamburo.DiametroIN = (ushort)_dataReader["diametroin"];
+                        _tamburo.Strati = (ushort)_dataReader["strati"];
+                        _tamburo.Materiale = (ClsTamburo.eMATERIALE)Enum.Parse
+                        (
+                            typeof(ClsTamburo.eMATERIALE),
+                            _dataReader["materiale"].ToString()
+                        );
+                        _tamburo.Tipo = (ClsTamburo.eTIPO)Enum.Parse
+                        (
+                            typeof(ClsTamburo.eTIPO),
+                            _dataReader["tipo"].ToString()
+                        );
+
+                        _tamburi.Add(_tamburo);
+                    }
+
+                    _dataReader.Close();
+
+                    comunicazione = "Tamburi caricati correttamente dal DataBase";
+                }
+            }
+            catch(Exception ex)
+            {
+                comunicazione = ex.Message;
+            }
+            finally
+            {
+                //Chiudo la connessione
+                connection.Close();
+            }
+
+            return _tamburi;
+        }
     }
 }
