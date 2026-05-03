@@ -37,10 +37,10 @@ namespace NegozioStrumentiMusicali
 
         private void cbStrumento_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if(cbStrumento.SelectedIndex != (int)ClsStrumentoACorda.eSTRUMENTI_A_CORDA.Basso_elettrico
-                && cbStrumento.SelectedIndex != (int)ClsStrumentoACorda.eSTRUMENTI_A_CORDA.Chitarra_elettrica
-                && cbStrumento.SelectedIndex != (int)ClsStrumentoACorda.eSTRUMENTI_A_CORDA.Chitarra_semiacustica
-                && cbStrumento.SelectedIndex != (int)ClsStrumentoACorda.eSTRUMENTI_A_CORDA.Lap_steel_guitar)
+            if(cbStrumento.SelectedIndex != (int)ClsStrumentoACorda.eSTRUMENTI_A_CORDA.basso_elettrico
+                && cbStrumento.SelectedIndex != (int)ClsStrumentoACorda.eSTRUMENTI_A_CORDA.chitarra_elettrica
+                && cbStrumento.SelectedIndex != (int)ClsStrumentoACorda.eSTRUMENTI_A_CORDA.chitarra_semiacustica
+                && cbStrumento.SelectedIndex != (int)ClsStrumentoACorda.eSTRUMENTI_A_CORDA.lap_steel_guitar)
             {
                 /*
                 Se lo strumento non è uno dei seguenti:
@@ -50,9 +50,9 @@ namespace NegozioStrumentiMusicali
                 -Chitarra semiacustica
                 Allora ha tutti gli attributi di tipo ePICKUP a 'No'
                 */
-                cbPickup1.SelectedIndex = (int)ClsStrumentoACorda.ePICKUP.No;
-                cbPickup2.SelectedIndex = (int)ClsStrumentoACorda.ePICKUP.No;
-                cbPickup3.SelectedIndex = (int)ClsStrumentoACorda.ePICKUP.No;
+                cbPickup1.SelectedIndex = (int)ClsStrumentoACorda.ePICKUP.no;
+                cbPickup2.SelectedIndex = (int)ClsStrumentoACorda.ePICKUP.no;
+                cbPickup3.SelectedIndex = (int)ClsStrumentoACorda.ePICKUP.no;
                 pnlPickup.Enabled = false;
             }
             else
@@ -63,10 +63,10 @@ namespace NegozioStrumentiMusicali
                 cbPickup3.SelectedIndex = 0;
             }
 
-            if(cbStrumento.SelectedIndex == (int)ClsStrumentoACorda.eSTRUMENTI_A_CORDA.Contrabbasso
-                || cbStrumento.SelectedIndex == (int)ClsStrumentoACorda.eSTRUMENTI_A_CORDA.Viola
-                || cbStrumento.SelectedIndex == (int)ClsStrumentoACorda.eSTRUMENTI_A_CORDA.Violino
-                || cbStrumento.SelectedIndex == (int)ClsStrumentoACorda.eSTRUMENTI_A_CORDA.Violoncello)
+            if(cbStrumento.SelectedIndex == (int)ClsStrumentoACorda.eSTRUMENTI_A_CORDA.contrabbasso
+                || cbStrumento.SelectedIndex == (int)ClsStrumentoACorda.eSTRUMENTI_A_CORDA.viola
+                || cbStrumento.SelectedIndex == (int)ClsStrumentoACorda.eSTRUMENTI_A_CORDA.violino
+                || cbStrumento.SelectedIndex == (int)ClsStrumentoACorda.eSTRUMENTI_A_CORDA.violoncello)
             {
                 //In questi strumenti l'attributo tasti non è previsto
                 nudTasti.Value = 0;

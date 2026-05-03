@@ -202,10 +202,10 @@ namespace NegozioStrumentiMusicali
 		    }
 		    set
 		    {              
-                if(Strumento == eSTRUMENTI_A_CORDA.Contrabbasso
-                    || Strumento == eSTRUMENTI_A_CORDA.Viola
-                    || Strumento == eSTRUMENTI_A_CORDA.Violino
-                    || Strumento == eSTRUMENTI_A_CORDA.Violoncello)
+                if(Strumento == eSTRUMENTI_A_CORDA.contrabbasso
+                    || Strumento == eSTRUMENTI_A_CORDA.viola
+                    || Strumento == eSTRUMENTI_A_CORDA.violino
+                    || Strumento == eSTRUMENTI_A_CORDA.violoncello)
                 {
                     _tasti = 0;
                 }
