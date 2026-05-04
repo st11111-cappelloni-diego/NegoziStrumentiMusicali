@@ -191,14 +191,14 @@ namespace NegozioStrumentiMusicali
                     {
                         //Carico i dati dal DB
                         ClsStrumentoMusicale _strumentoMusicale = new ClsStrumentoMusicale();
-                        _strumentoMusicale.ID = (long)_dataReader["ID"];
-                        _strumentoMusicale.CasaProduttriceID = (int)_dataReader["casaproduttriceID"];
+                        _strumentoMusicale.ID = Convert.ToInt64(_dataReader["ID"]);
+                        _strumentoMusicale.CasaProduttriceID = Convert.ToInt64(_dataReader["casaproduttriceID"]);
                         _strumentoMusicale.Colori = _dataReader["colori"].ToString();
                         _strumentoMusicale.Immagine = _dataReader["pathimmagine"].ToString();
                         _strumentoMusicale.Modello = _dataReader["modello"].ToString();
-                        _strumentoMusicale.NotaMassimaID = (long)_dataReader["notamassimaID"];
-                        _strumentoMusicale.NotaMinimaID = (long)_dataReader["notaminimaID"];
-                        _strumentoMusicale.PesoKG = (float)_dataReader["pesokg"];
+                        _strumentoMusicale.NotaMassimaID = Convert.ToInt64(_dataReader["notamassimaID"]);
+                        _strumentoMusicale.NotaMinimaID = Convert.ToInt64(_dataReader["notaminimaID"]);
+                        _strumentoMusicale.PesoKG = Convert.ToSingle(_dataReader["pesokg"]);
 
                         _strumentiMusicali.Add(_strumentoMusicale);
                     }

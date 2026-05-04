@@ -38,7 +38,7 @@ namespace NegozioStrumentiMusicali
         private long _id;
         private eNOTA_BASE _notaBase;
         private eALTERAZIONE _alterazione;
-        private int _ottava;
+        private byte _ottava;
 
         #endregion
 
@@ -46,18 +46,12 @@ namespace NegozioStrumentiMusicali
         public long ID { get => _id; set => _id = value; }
         public eNOTA_BASE NotaBase { get => _notaBase; set => _notaBase = value; }
         public eALTERAZIONE Alterazione { get => _alterazione; set => _alterazione = value; }
-        public int Ottava
-        { get => _ottava;
+        public byte Ottava
+        {
+            get => _ottava;
             set
             {
-                if(value < 0 && value > 10)
-                {
-                    throw new Exception("Il valore dell'ottava può andare da 0 a 10");
-                }
-                else
-                {
-                    _ottava = value;
-                }
+                _ottava = value;
             }
         }
 
@@ -74,7 +68,7 @@ namespace NegozioStrumentiMusicali
             ID = id;
         }
 
-        public ClsNotaMusicale(eNOTA_BASE notaBase, eALTERAZIONE alterazione, int ottava)
+        public ClsNotaMusicale(eNOTA_BASE notaBase, eALTERAZIONE alterazione, byte ottava)
         {
             NotaBase = notaBase;
             Alterazione = alterazione;

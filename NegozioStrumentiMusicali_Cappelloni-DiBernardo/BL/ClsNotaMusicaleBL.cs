@@ -148,5 +148,64 @@ namespace NegozioStrumentiMusicali
                 connection.Close();
             }
         }
+        public static List<ClsNotaMusicale> GetAllNoteMusicali(ref MySqlConnection connection, out string comunicazione)
+        {
+            //VARIABILI
+            List<ClsNotaMusicale> _noteMusicali = new List<ClsNotaMusicale>();
+            comunicazione = String.Empty;
+
+            try
+            {
+                //Apro la connessione
+                connection.Open();
+
+                //Compongo la query
+                string _query = "SELECT * FROM notemusicali";
+
+                //Creo l'oggetto command
+                MySqlCommand _cmd = new MySqlCommand(_query, connection);
+
+                //Eseguo il comando creando il DataReader
+                MySqlDataReader _dataReader = _cmd.ExecuteReader();
+
+                if(_dataReader.HasRows) //Controllo se la tabella ha dei record
+                {
+                    while(_dataReader.Read()) //Se ne ha li leggo tutti
+                    {
+                        ClsNotaMusicale _notaMusicale = new ClsNotaMusicale();
+
+                        _notaMusicale.ID = Convert.ToInt64(_dataReader["ID"]);
+                        _notaMusicale.Alterazione = (ClsNotaMusicale.eALTERAZIONE)Enum.Parse
+                        (
+                            typeof(ClsNotaMusicale.eALTERAZIONE),
+                            _dataReader["alterazione"].ToString()
+                        );
+                        _notaMusicale.NotaBase = (ClsNotaMusicale.eNOTA_BASE)Enum.Parse
+                        (
+                            typeof(ClsNotaMusicale.eNOTA_BASE),
+                            _dataReader["notabase"].ToString()
+                        );
+                        _notaMusicale.Ottava = Convert.ToByte(_dataReader["ottava"]);
+
+                        _noteMusicali.Add(_notaMusicale);
+                    }
+                }
+
+                _dataReader.Close();
+
+                comunicazione = "Note musicali caricate correttamente dal DataBase";
+            }
+            catch(Exception ex)
+            {
+                comunicazione = ex.Message;
+            }
+            finally
+            {
+                //Chiudo la connessione
+                connection.Close();
+            }
+
+            return _noteMusicali;
+        }
     }
 }
