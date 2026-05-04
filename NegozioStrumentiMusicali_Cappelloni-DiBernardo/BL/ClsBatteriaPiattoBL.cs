@@ -149,6 +149,20 @@ namespace NegozioStrumentiMusicali
             }
         }
         /// <summary>
+        /// Caricamento dei dati del DataReader ad un'istanza di ClsBatteriaPiatto
+        /// </summary>
+        /// <param name="dataReader"></param>
+        /// <returns></returns>
+        private static ClsBatteriaPiatto CaricaSingoloBatteriaPiatto(ref MySqlDataReader dataReader)
+        {
+            ClsBatteriaPiatto _batteriaPiatto = new ClsBatteriaPiatto();
+            _batteriaPiatto.ID = Convert.ToInt64(dataReader["ID"]);
+            _batteriaPiatto.BatteriaID = Convert.ToInt64(dataReader["batteriaID"]);
+            _batteriaPiatto.PiattoID = Convert.ToInt64(dataReader["piattoID"]);
+
+            return _batteriaPiatto;
+        }
+        /// <summary>
         /// Caricamento di tutti i record di batteriapiatto
         /// </summary>
         /// <param name="connection">Connessione al DB</param>
@@ -178,13 +192,8 @@ namespace NegozioStrumentiMusicali
                 {
                     while(_dataReader.Read()) //Se ce li ha la leggo tutta
                     {
-                        //Carico i dati
-                        ClsBatteriaPiatto _batteriaPiatto = new ClsBatteriaPiatto();
-                        _batteriaPiatto.ID = (long)_dataReader["ID"];
-                        _batteriaPiatto.BatteriaID = (long)_dataReader["batteriaID"];
-                        _batteriaPiatto.PiattoID = (long)_dataReader["piattoID"];
-
-                        _listaBatteriaPiatto.Add(_batteriaPiatto);
+                        //Carico i dati dal DB
+                        _listaBatteriaPiatto.Add(CaricaSingoloBatteriaPiatto(ref _dataReader));
                     }
                 }
 
@@ -193,6 +202,86 @@ namespace NegozioStrumentiMusicali
                 comunicazione = "Relazioni tra batteria e piatto caricate correttamente dal DataBase";
             }
             catch (Exception ex)
+            {
+                comunicazione = ex.Message;
+            }
+            finally
+            {
+                //Chiudo la connessione
+                connection.Close();
+            }
+
+            return _listaBatteriaPiatto;
+        }
+        /// <summary>
+        /// Caricamento di alcuni record di batteriapiatto in base a batteriaID o piattoID.
+        /// Escludi batteriaID passando come valore -1, escludi piattoID passando come valore -1
+        /// </summary>
+        /// <param name="connection"></param>
+        /// <param name="comunicazione"></param>
+        /// <param name="batteriaID"></param>
+        /// <param name="piattoID"></param>
+        /// <returns></returns>
+        public static List<ClsBatteriaPiatto> GetSomeBatteriaPiatto(ref MySqlConnection connection, out string comunicazione, long batteriaID = -1, long piattoID = -1)
+        {
+            //VARIABILI
+            comunicazione = String.Empty;
+            List<ClsBatteriaPiatto> _listaBatteriaPiatto = new List<ClsBatteriaPiatto>();
+
+            try
+            {
+                //Apro la connessione
+                connection.Open();
+
+                //Compongo la query
+                string _query = "SELECT * FROM batteriapiatto WHERE ";
+                //Posso cercare per solo un campo alla volta perciò controllo in questo ordine: batteriaID, piattoID
+                if(batteriaID > -1)
+                {
+                    //BatteriaID è il campo di ricerca
+                    _query += "batteriaID = @batteriaID";
+
+                }
+                else
+                {
+                    //PiattoID è il campo di ricerca
+                    _query += "piattoID = @piattoID";
+                }
+
+                //Creo l'oggetto command
+                MySqlCommand _cmd = new MySqlCommand(_query, connection);
+
+                //Inserisco i valori
+                //Posso cercare per solo un campo alla volta perciò controllo in questo ordine: batteriaID, piattoID
+                if (batteriaID > -1)
+                {
+                    //BatteriaID è il campo di ricerca
+                    _cmd.Parameters.AddWithValue("@batteriaID", batteriaID);
+
+                }
+                else
+                {
+                    //PiattoID è il campo di ricerca
+                    _cmd.Parameters.AddWithValue("@piattoID", piattoID);
+                }
+
+                //Eseguo il comando creando il DataReader
+                MySqlDataReader _dataReader = _cmd.ExecuteReader();
+
+                if(_dataReader.HasRows) //Controllo se la tabella ha dei record
+                {
+                    while(_dataReader.Read()) //Se ne ha li leggo tutti
+                    {
+                        //Carico i dati dal DB
+                        _listaBatteriaPiatto.Add(CaricaSingoloBatteriaPiatto(ref _dataReader));
+                    }
+                }
+
+                _dataReader.Close();
+
+                comunicazione = "Relazioni tra batteria e piatto caricate correttamente dal DataBase";
+            }
+            catch(Exception ex)
             {
                 comunicazione = ex.Message;
             }
