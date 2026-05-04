@@ -18,6 +18,8 @@ namespace NegozioStrumentiMusicali
         private string _pathImmagine;
         private long _indirizzoID;
         private string _sito;
+        private string _email;
+        private string _telefono;
        
         #endregion
 
@@ -62,6 +64,8 @@ namespace NegozioStrumentiMusicali
         public string PathImmagine { get => _pathImmagine; set => _pathImmagine = value; }
         public long IndirizzoID { get => _indirizzoID; set => _indirizzoID = value; }
         public string Sito { get => _sito; set => _sito = value; }
+        public string Email { get => _email; set => _email = value; }
+        public string Telefono { get => _telefono; set => _telefono = value; }
 
         #endregion
 
