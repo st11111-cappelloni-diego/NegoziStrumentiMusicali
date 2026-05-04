@@ -113,5 +113,104 @@ namespace NegozioStrumentiMusicali
                 connection.Close();
             }
         }
+
+        /// <summary>
+        /// Eliminazione di un record da caseproduttrici
+        /// </summary>
+        /// <param name="connection">Connessione al DB</param>
+        /// <param name="casaProduttrice">Record da eliminare</param>
+        /// <param name="comunicazione">Comunicazione in uscita</param>
+        public static void DeleteCasaproduttrice(ref MySqlConnection connection, ClsCasaProduttrice casaProduttrice, out string comunicazione)
+        {
+            //VARIABILI LOCALI
+            comunicazione = String.Empty;
+
+            try
+            {
+                //Apro la connessione
+                connection.Open();
+
+                //Compongo il comando DML
+                string _dml = "DELETE FROM caseproduttrici WHERE ID = @ID";
+
+                //Creo l'oggetto command
+                MySqlCommand _cmd = new MySqlCommand(_dml, connection);
+
+                //Inserisco i valori
+                _cmd.Parameters.AddWithValue("@ID", casaProduttrice.ID);
+
+                //Eseguo il comando
+                _cmd.ExecuteNonQuery();
+
+                comunicazione = "Casa Produttrice eliminata correttamente dal DataBase";
+            }
+            catch (Exception ex)
+            {
+                comunicazione = ex.Message;
+            }
+            finally
+            {
+                //Chiudo la connessione
+                connection.Close();
+            }
+        }
+        /// <summary>
+        /// Caricamento di tutti i record di caseproduttrici
+        /// </summary>
+        /// <param name="connection">Connessione al DB</param>
+        /// <param name="comunicazione">Comunicazione in uscita</param>
+        /// <returns>La lista di tutti i record di caseproduttrici</returns>
+        public static List<ClsCasaProduttrice> GetAllCaseProduttrici(ref MySqlConnection connection, out string comunicazione)
+        {
+            //VARIABILI
+            List<ClsCasaProduttrice> _caseProduttrici = new List<ClsCasaProduttrice>();
+            comunicazione = String.Empty;
+
+            try
+            {
+                //Apro la connessione
+                connection.Open();
+
+                //Compongo la query
+                string _query = "SELECT * FROM caseproduttrici";
+
+                //Creo l'oggetto command
+                MySqlCommand _cmd = new MySqlCommand(_query, connection);
+
+                //Eseguo il comando creando l'oggetto DataReader
+                MySqlDataReader _dataReader = _cmd.ExecuteReader();
+
+                if (_dataReader.HasRows) //Controllo se la tabella contiene dei record
+                {
+                    while (_dataReader.Read()) //Se ce li ha li leggo tutti
+                    {
+                        //Carico i dati dal DB
+                        ClsCasaProduttrice _casaProduttrice = new ClsCasaProduttrice();
+                        _casaProduttrice.ID = (long)_dataReader["ID"];
+                        _casaProduttrice.Nome = _dataReader["nome"].ToString();
+                        _casaProduttrice.Email = _dataReader["email"].ToString();
+                        _casaProduttrice.PathLogo = _dataReader["pathlogo"].ToString();
+
+                        _caseProduttrici.Add(_casaProduttrice);
+                    }
+                }
+
+                _dataReader.Close();
+
+                comunicazione = "Case produttricii caricate correttamente dal DataBase";
+            }
+            catch (Exception ex)
+            {
+                comunicazione = ex.Message;
+            }
+            finally
+            {
+                //Chiudo la connessione
+                connection.Close();
+            }
+
+            return _caseProduttrici;
+        }
+
     }
 }
