@@ -33,8 +33,8 @@ namespace NegozioStrumentiMusicali
                 //Creo il comando DML
                 string _dml =
                     "INSERT into indirizzi " +
-                    "(codicepostale, comune, via, nazione, essereSede, casaProduttriceID)" +
-                    "VALUES(@codicepostale, @comune, @via, @nazione, @essereSede, @casaProduttriceID)";
+                    "(codicepostale, comune, via, nazione, numerocivico, letteracivico, essereSede, casaProduttriceID)" +
+                    "VALUES(@codicepostale, @comune, @via, @nazione, @numerocivico, @letteracivico, @essereSede, @casaProduttriceID)";
 
                 //Creo l'oggetto command
                 MySqlCommand _cmd = new MySqlCommand(_dml, connection);
@@ -46,6 +46,8 @@ namespace NegozioStrumentiMusicali
                 _cmd.Parameters.AddWithValue("@nazione", indirizzo.Nazione);
                 _cmd.Parameters.AddWithValue("@essereSede", indirizzo.EssereSede);
                 _cmd.Parameters.AddWithValue("@casaProduttriceID", indirizzo.CasaProduttriceID);
+                _cmd.Parameters.AddWithValue("@numerocivico", indirizzo.NumeroCivico);
+                _cmd.Parameters.AddWithValue("@letteracivico", indirizzo.LetteraCivico);
 
 
                 //Eseguo il comando
@@ -89,6 +91,8 @@ namespace NegozioStrumentiMusicali
                     "UPDATE indirizzi SET " +
                     "codicepostale = @codicepostale, " +
                     "comune = @comune, " +
+                    "numerocivico = @numerocivico, " +
+                    "letteracivico = @letteracivico, " +
                     "via = @via, " +
                     "nazione = @nazione, " +
                     "essereSede = @essereSede, " +
@@ -107,6 +111,8 @@ namespace NegozioStrumentiMusicali
                 _cmd.Parameters.AddWithValue("@essereSede", indirizzo.EssereSede);
                 _cmd.Parameters.AddWithValue("@casaProdruttriceID", indirizzo.CasaProduttriceID);
                 _cmd.Parameters.AddWithValue("@ID", indirizzo.ID);
+                _cmd.Parameters.AddWithValue("@numerocivico", indirizzo.NumeroCivico);
+                _cmd.Parameters.AddWithValue("@letteracivico", indirizzo.LetteraCivico);
 
                 //Eseguo il comando
                 _cmd.ExecuteNonQuery();
@@ -165,15 +171,15 @@ namespace NegozioStrumentiMusicali
             }
         }
         /// <summary>
-        /// Caricamento di tutti i record di insirizzi
+        /// Caricamento di tutti i record di indirizzi
         /// </summary>
         /// <param name="connection">Connessione al DB</param>
         /// <param name="comunicazione">Comunicazione in uscita</param>
         /// <returns>La lista di tutti i record di indirizzi</returns>
-        public static List<ClsStrumentoMusicale> GetAllIndirizzi(ref MySqlConnection connection, out string comunicazione)
+        public static List<ClsIndirizzo> GetAllIndirizzi(ref MySqlConnection connection, out string comunicazione)
         {
             //VARIABILI
-            List<ClsIndirizzo> _Indirizzi = new List<ClsIndirizzo>();
+            List<ClsIndirizzo> _indirizzi = new List<ClsIndirizzo>();
             comunicazione = String.Empty;
 
             try
@@ -203,14 +209,16 @@ namespace NegozioStrumentiMusicali
                         _indirizzo.Nazione = _dataReader["nazione"].ToString();
                         _indirizzo.EssereSede = (bool)_dataReader["esseresede"];
                         _indirizzo.CasaProduttriceID = (long)_dataReader["casaproduttriceID"];
+                        _indirizzo.NumeroCivico = (ushort)_dataReader["numerocivico"];
+                        _indirizzo.LetteraCivico = (char)_dataReader["letteracivico"];
 
-                        _Indirizzi.Add(_indirizzo);
+                        _indirizzi.Add(_indirizzo);
                     }
                 }
 
                 _dataReader.Close();
 
-                comunicazione = "Strumenti musicali caricati correttamente dal DataBase";
+                comunicazione = "Indirizzi caricati correttamente dal DataBase";
             }
             catch (Exception ex)
             {
@@ -222,7 +230,7 @@ namespace NegozioStrumentiMusicali
                 connection.Close();
             }
 
-            return _Indirizzi;
+            return _indirizzi;
         }
 
     }

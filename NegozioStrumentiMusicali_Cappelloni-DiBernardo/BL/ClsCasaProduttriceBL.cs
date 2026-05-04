@@ -33,8 +33,8 @@ namespace NegozioStrumentiMusicali
                 //Creo il comando DML
                 string _dml =
                     "INSERT into caseproduttrici " +
-                    "(nome, email, pathlogo)" +
-                    "VALUES(@nome, @email, @pathlogo)";
+                    "(nome, email, pathlogo, sito)" +
+                    "VALUES(@nome, @email, @pathlogo, @sito)";
 
                 //Creo l'oggetto command
                 MySqlCommand _cmd = new MySqlCommand(_dml, connection);
@@ -43,7 +43,7 @@ namespace NegozioStrumentiMusicali
                 _cmd.Parameters.AddWithValue("@nome", casaProduttrice.Nome);
                 _cmd.Parameters.AddWithValue("@email", casaProduttrice.Email);
                 _cmd.Parameters.AddWithValue("@pathlogo", casaProduttrice.PathLogo);
-
+                _cmd.Parameters.AddWithValue("@sito", casaProduttrice.Sito);
 
                 //Eseguo il comando
                 int _numRec = _cmd.ExecuteNonQuery();
@@ -85,7 +85,8 @@ namespace NegozioStrumentiMusicali
                     "UPDATE caseproduttrici SET " +
                     "nome = @nome, " +
                     "email = @email, " +
-                    "pathlogo = @pathlogo " +
+                    "pathlogo = @pathlogo," +
+                    "sito = @sito  " +
                     "WHERE ID = @ID";
 
 
@@ -97,6 +98,7 @@ namespace NegozioStrumentiMusicali
                 _cmd.Parameters.AddWithValue("@email", casaProduttrice.Email);
                 _cmd.Parameters.AddWithValue("@pathlogo", casaProduttrice.PathLogo);
                 _cmd.Parameters.AddWithValue("@ID", casaProduttrice.ID);
+                _cmd.Parameters.AddWithValue("@sito", casaProduttrice.Sito);
 
                 //Eseguo il comando
                 _cmd.ExecuteNonQuery();
@@ -190,6 +192,7 @@ namespace NegozioStrumentiMusicali
                         _casaProduttrice.Nome = _dataReader["nome"].ToString();
                         _casaProduttrice.Email = _dataReader["email"].ToString();
                         _casaProduttrice.PathLogo = _dataReader["pathlogo"].ToString();
+                        _casaProduttrice.Sito = _dataReader["sito"].ToString();
 
                         _caseProduttrici.Add(_casaProduttrice);
                     }
@@ -197,7 +200,7 @@ namespace NegozioStrumentiMusicali
 
                 _dataReader.Close();
 
-                comunicazione = "Case produttricii caricate correttamente dal DataBase";
+                comunicazione = "Case produttrici caricate correttamente dal DataBase";
             }
             catch (Exception ex)
             {
