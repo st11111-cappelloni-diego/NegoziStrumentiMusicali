@@ -181,7 +181,7 @@ namespace NegozioStrumentiMusicali
                     while(_dataReader.Read()) //Se ce li ha li leggo tutti
                     {
                         ClsPiatto _piatto = new ClsPiatto();
-                        _piatto.ID = (long)_dataReader["ID"];
+                        _piatto.ID = Convert.ToUInt32(_dataReader["ID"]);
                         _piatto.Materiale = (ClsPiatto.eMATERIALE)Enum.Parse
                         (
                             typeof(ClsPiatto.eMATERIALE), 
@@ -192,7 +192,7 @@ namespace NegozioStrumentiMusicali
                             typeof(ClsPiatto.eTIPO),
                             _dataReader["tipo"].ToString()
                         );
-                        _piatto.DiametroIN = (ushort)_dataReader["diametroin"];
+                        _piatto.DiametroIN = Convert.ToByte(_dataReader["diametroin"]);
 
                         _piatti.Add(_piatto);
                     }
