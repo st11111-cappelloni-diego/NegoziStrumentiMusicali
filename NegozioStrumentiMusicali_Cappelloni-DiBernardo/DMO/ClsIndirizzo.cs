@@ -17,6 +17,8 @@ namespace NegozioStrumentiMusicali
         private string _via;
         private string _codicePostale;
         private string _nazione;
+        private ushort _numeroCivico;
+        private char _letteraCivico;
         private bool _essereSede;
         private long _casaProduttriceID;
 
@@ -96,6 +98,8 @@ namespace NegozioStrumentiMusicali
 
         public bool EssereSede { get => _essereSede; set => _essereSede = value; }
         public long CasaProduttriceID { get => _casaProduttriceID; set => _casaProduttriceID = value; }
+        public ushort NumeroCivico { get => _numeroCivico; set => _numeroCivico = value; }
+        public char LetteraCivico { get => _letteraCivico; set => _letteraCivico = value; }
 
 
         #endregion
@@ -106,7 +110,7 @@ namespace NegozioStrumentiMusicali
 
         }
 
-        public ClsIndirizzo(int id)
+        public ClsIndirizzo(long id)
         {
             ID = id;
         }
