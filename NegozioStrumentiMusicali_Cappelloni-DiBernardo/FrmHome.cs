@@ -103,7 +103,13 @@ namespace NegozioStrumentiMusicali
         #region Eventi
         private void FrmHome_Load(object sender, EventArgs e)
         {
-
+            /*
+            string _comunicazione = String.Empty;
+            ClsArchivio.Piatti = ClsPiattoBL.GetAllPiatti(ref Program._connessioneAlDB, out _comunicazione);
+            MessageBox.Show(_comunicazione);
+            ClsArchivio.Tamburi = ClsTamburoBL.GetAllTamburi(ref Program._connessioneAlDB, out _comunicazione);
+            MessageBox.Show(_comunicazione);
+            */
         }
         private void mioUtenteToolStripMenuItem_Click(object sender, EventArgs e)
         {

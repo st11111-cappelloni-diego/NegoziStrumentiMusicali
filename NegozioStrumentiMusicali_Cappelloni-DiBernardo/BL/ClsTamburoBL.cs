@@ -186,9 +186,9 @@ namespace NegozioStrumentiMusicali
                         //Carico i dati sulla lista
                         ClsTamburo _tamburo = new ClsTamburo();
 
-                        _tamburo.ID = (long)_dataReader["ID"];
-                        _tamburo.DiametroIN = (ushort)_dataReader["diametroin"];
-                        _tamburo.Strati = (ushort)_dataReader["strati"];
+                        _tamburo.ID = Convert.ToInt32(_dataReader["ID"]);
+                        _tamburo.DiametroIN = Convert.ToByte(_dataReader["diametroin"]);
+                        _tamburo.Strati = Convert.ToByte(_dataReader["strati"]);
                         _tamburo.Materiale = (ClsTamburo.eMATERIALE)Enum.Parse
                         (
                             typeof(ClsTamburo.eMATERIALE),

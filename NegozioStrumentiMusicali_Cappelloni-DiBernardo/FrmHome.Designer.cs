@@ -50,61 +50,62 @@
             this.caseProduttriciToolStripMenuItem});
             this.msHome.Location = new System.Drawing.Point(0, 0);
             this.msHome.Name = "msHome";
-            this.msHome.Size = new System.Drawing.Size(1184, 24);
+            this.msHome.Padding = new System.Windows.Forms.Padding(8, 2, 0, 2);
+            this.msHome.Size = new System.Drawing.Size(1579, 28);
             this.msHome.TabIndex = 0;
             this.msHome.Text = "menuStrip1";
             // 
             // mioUtenteToolStripMenuItem
             // 
             this.mioUtenteToolStripMenuItem.Name = "mioUtenteToolStripMenuItem";
-            this.mioUtenteToolStripMenuItem.Size = new System.Drawing.Size(101, 20);
+            this.mioUtenteToolStripMenuItem.Size = new System.Drawing.Size(123, 24);
             this.mioUtenteToolStripMenuItem.Text = "<nomeUtente>";
             this.mioUtenteToolStripMenuItem.Click += new System.EventHandler(this.mioUtenteToolStripMenuItem_Click);
             // 
             // utentiToolStripMenuItem
             // 
             this.utentiToolStripMenuItem.Name = "utentiToolStripMenuItem";
-            this.utentiToolStripMenuItem.Size = new System.Drawing.Size(51, 20);
+            this.utentiToolStripMenuItem.Size = new System.Drawing.Size(61, 24);
             this.utentiToolStripMenuItem.Text = "Utenti";
             this.utentiToolStripMenuItem.Click += new System.EventHandler(this.utentiToolStripMenuItem_Click);
             // 
             // negoziToolStripMenuItem
             // 
             this.negoziToolStripMenuItem.Name = "negoziToolStripMenuItem";
-            this.negoziToolStripMenuItem.Size = new System.Drawing.Size(56, 20);
+            this.negoziToolStripMenuItem.Size = new System.Drawing.Size(69, 24);
             this.negoziToolStripMenuItem.Text = "Negozi";
             this.negoziToolStripMenuItem.Click += new System.EventHandler(this.negoziToolStripMenuItem_Click);
             // 
             // ordiniToolStripMenuItem
             // 
             this.ordiniToolStripMenuItem.Name = "ordiniToolStripMenuItem";
-            this.ordiniToolStripMenuItem.Size = new System.Drawing.Size(52, 20);
+            this.ordiniToolStripMenuItem.Size = new System.Drawing.Size(62, 24);
             this.ordiniToolStripMenuItem.Text = "Ordini";
             this.ordiniToolStripMenuItem.Click += new System.EventHandler(this.ordiniToolStripMenuItem_Click);
             // 
             // strumentiToolStripMenuItem
             // 
             this.strumentiToolStripMenuItem.Name = "strumentiToolStripMenuItem";
-            this.strumentiToolStripMenuItem.Size = new System.Drawing.Size(71, 20);
+            this.strumentiToolStripMenuItem.Size = new System.Drawing.Size(85, 24);
             this.strumentiToolStripMenuItem.Text = "Strumenti";
             this.strumentiToolStripMenuItem.Click += new System.EventHandler(this.strumentiToolStripMenuItem_Click);
             // 
             // caseProduttriciToolStripMenuItem
             // 
             this.caseProduttriciToolStripMenuItem.Name = "caseProduttriciToolStripMenuItem";
-            this.caseProduttriciToolStripMenuItem.Size = new System.Drawing.Size(103, 20);
+            this.caseProduttriciToolStripMenuItem.Size = new System.Drawing.Size(126, 24);
             this.caseProduttriciToolStripMenuItem.Text = "Case produttrici";
             this.caseProduttriciToolStripMenuItem.Click += new System.EventHandler(this.caseProduttriciToolStripMenuItem_Click);
             // 
             // FrmHome
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.ClientSize = new System.Drawing.Size(1184, 711);
+            this.ClientSize = new System.Drawing.Size(1579, 875);
             this.Controls.Add(this.msHome);
             this.MainMenuStrip = this.msHome;
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "FrmHome";
             this.Text = "Negozi di strumenti musicali";
             this.Load += new System.EventHandler(this.FrmHome_Load);
