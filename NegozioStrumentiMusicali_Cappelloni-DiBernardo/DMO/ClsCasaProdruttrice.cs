@@ -16,6 +16,7 @@ namespace NegozioStrumentiMusicali
         string _nome;
         string _email;
         string _pathLogo;
+        string _sito;
 
         #endregion
 
@@ -86,6 +87,8 @@ namespace NegozioStrumentiMusicali
                 _pathLogo = value;
             }
         }
+
+        public string Sito { get => _sito; set => _sito = value; }
 
         #endregion
 

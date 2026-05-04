@@ -17,6 +17,7 @@ namespace NegozioStrumentiMusicali
         private bool _bandito;
         private string _pathImmagine;
         private long _indirizzoID;
+        private string _sito;
        
         #endregion
 
@@ -60,6 +61,7 @@ namespace NegozioStrumentiMusicali
         public bool Bandito { get => _bandito; set => _bandito = value; }
         public string PathImmagine { get => _pathImmagine; set => _pathImmagine = value; }
         public long IndirizzoID { get => _indirizzoID; set => _indirizzoID = value; }
+        public string Sito { get => _sito; set => _sito = value; }
 
         #endregion
 
