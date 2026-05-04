@@ -148,5 +148,61 @@ namespace NegozioStrumentiMusicali
                 connection.Close();
             }
         }
+        /// <summary>
+        /// Caricamento di tutti i record di batteriapiatto
+        /// </summary>
+        /// <param name="connection">Connessione al DB</param>
+        /// <param name="comunicazione">Comunicazione in uscita</param>
+        /// <returns>La lista con tutti i record di batteriapiatto</returns>
+        public static List<ClsBatteriaPiatto> GetAllBatteriaPiatto(ref MySqlConnection connection, out string comunicazione)
+        {
+            //VARIABILI
+            comunicazione = String.Empty;
+            List<ClsBatteriaPiatto> _listaBatteriaPiatto = new List<ClsBatteriaPiatto>();
+
+            try
+            {
+                //Apro la connessione
+                connection.Open();
+
+                //Compongo la query
+                string _query = "SELECT * FROM batteriapiatto";
+
+                //Creo l'oggetto command
+                MySqlCommand _cmd = new MySqlCommand(_query, connection);
+
+                //Eseguo il comando creando il DataReader
+                MySqlDataReader _dataReader = _cmd.ExecuteReader();
+
+                if(_dataReader.HasRows) //Controllo se la tabella ha dei record
+                {
+                    while(_dataReader.Read()) //Se ce li ha la leggo tutta
+                    {
+                        //Carico i dati
+                        ClsBatteriaPiatto _batteriaPiatto = new ClsBatteriaPiatto();
+                        _batteriaPiatto.ID = (long)_dataReader["ID"];
+                        _batteriaPiatto.BatteriaID = (long)_dataReader["batteriaID"];
+                        _batteriaPiatto.PiattoID = (long)_dataReader["piattoID"];
+
+                        _listaBatteriaPiatto.Add(_batteriaPiatto);
+                    }
+                }
+
+                _dataReader.Close();
+
+                comunicazione = "Relazioni tra batteria e piatto caricate correttamente dal DataBase";
+            }
+            catch (Exception ex)
+            {
+                comunicazione = ex.Message;
+            }
+            finally
+            {
+                //Chiudo la connessione
+                connection.Close();
+            }
+
+            return _listaBatteriaPiatto;
+        }
     }
 }

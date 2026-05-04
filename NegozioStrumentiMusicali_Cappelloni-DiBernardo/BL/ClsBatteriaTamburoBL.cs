@@ -148,5 +148,62 @@ namespace NegozioStrumentiMusicali
                 connection.Close();
             }
         }
+        /// <summary>
+        /// Caricamento di tutti i record di batteriatamburo 
+        /// </summary>
+        /// <param name="connection">Connessione al DB</param>
+        /// <param name="comunicazione">Comunicazione in uscita</param>
+        /// <returns>La lista con tutti i record di batteriatamburo</returns>
+        public static List<ClsBatteriaTamburo> GetAllBatteriaTamburo(ref MySqlConnection connection, out string comunicazione)
+        {
+            //VARIABILI
+            comunicazione = String.Empty;
+            List<ClsBatteriaTamburo> _listaBatteriaTamburo = new List<ClsBatteriaTamburo>();
+
+            try
+            {
+                //Apro la connessione
+                connection.Open();
+
+                //Compongo la query
+                string _query = "SELECT * FROM batteriatamburo";
+
+                //Creo l'oggetto command
+                MySqlCommand _cmd = new MySqlCommand(_query, connection);
+
+                //Eseguo il comando creando il DataReader
+                MySqlDataReader _dataReader = _cmd.ExecuteReader();
+
+                if (_dataReader.HasRows) //Controllo se la tabella ha dei record
+                {
+                    while (_dataReader.Read()) //Se ce li ha la leggo tutta
+                    {
+                        //Carico i dati
+                        ClsBatteriaTamburo _batteriaTamburo = new ClsBatteriaTamburo();
+                        _batteriaTamburo.ID = (long)_dataReader["ID"];
+                        _batteriaTamburo.BatteriaID = (long)_dataReader["batteriaID"];
+                        _batteriaTamburo.TamburoID = (long)_dataReader["piattoID"];
+
+                        _listaBatteriaTamburo.Add(_batteriaTamburo);
+                    }
+                }
+
+                _dataReader.Close();
+
+                comunicazione = "Relazioni tra batteria e tamburo caricate correttamente dal DataBase";
+            }
+            catch (Exception ex)
+            {
+                comunicazione = ex.Message;
+            }
+            finally
+            {
+                //Chiudo la connessione
+                connection.Close();
+            }
+
+            return _listaBatteriaTamburo;
+        }
     }
+}
 }
