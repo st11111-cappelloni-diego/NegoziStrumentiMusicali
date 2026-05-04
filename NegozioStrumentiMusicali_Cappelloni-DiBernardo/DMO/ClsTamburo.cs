@@ -32,9 +32,9 @@ namespace NegozioStrumentiMusicali
         #region Attributi
         private long _id;
         private eTIPO _tipo;
-        private ushort _diametroIN;
+        private int _diametroIN;
         private eMATERIALE _materiale;
-        private ushort _strati;
+        private int _strati;
 
         #endregion
 
@@ -44,9 +44,9 @@ namespace NegozioStrumentiMusicali
         /// <summary>
         /// IN sta per inches (ovvero pollici)
         /// </summary>
-        public ushort DiametroIN { get => _diametroIN; set => _diametroIN = value; }
+        public int DiametroIN { get => _diametroIN; set => _diametroIN = value; }
         public eMATERIALE Materiale { get => _materiale; set => _materiale = value; }
-        public ushort Strati { get => _strati; set => _strati = value; }
+        public int Strati { get => _strati; set => _strati = value; }
 
         #endregion
 

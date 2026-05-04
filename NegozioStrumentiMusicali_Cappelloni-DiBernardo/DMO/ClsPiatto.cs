@@ -18,8 +18,8 @@ namespace NegozioStrumentiMusicali
         }
         public enum eMATERIALE
         {
-            bronzo_B8,
-            bronzo_B20,
+            bronzo_b8,
+            bronzo_b20,
             ottone
         }
 
@@ -28,7 +28,7 @@ namespace NegozioStrumentiMusicali
         #region Attributi
         private long _id;
         private eTIPO _tipo;
-        private ushort _diametroIN;
+        private byte _diametroIN;
         private eMATERIALE _materiale;
 
         #endregion
@@ -39,7 +39,7 @@ namespace NegozioStrumentiMusicali
         /// <summary>
         /// IN sta per inches (ovvero pollici)
         /// </summary>
-        public ushort DiametroIN { get => _diametroIN; set => _diametroIN = value; }
+        public byte DiametroIN { get => _diametroIN; set => _diametroIN = value; }
         public eMATERIALE Materiale { get => _materiale; set => _materiale = value; }
 
         #endregion

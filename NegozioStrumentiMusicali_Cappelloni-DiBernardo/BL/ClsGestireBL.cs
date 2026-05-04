@@ -156,7 +156,7 @@ namespace NegozioStrumentiMusicali
         /// <param name="connection">Connessione al DB</param>
         /// <param name="comunicazione">Comunicazione in uscita</param>
         /// <returns>La lista di tutti i record di caseproduttrici</returns>
-        public static List<ClsCasaProduttrice> GetAllGestire(ref MySqlConnection connection, out string comunicazione)
+        public static List<ClsGestire> GetAllGestire(ref MySqlConnection connection, out string comunicazione)
         {
             //VARIABILI
             List<ClsGestire> _listaGestire = new List<ClsGestire>();
@@ -192,7 +192,7 @@ namespace NegozioStrumentiMusicali
 
                 _dataReader.Close();
 
-                comunicazione = "Case produttricii caricate correttamente dal DataBase";
+                comunicazione = "Relazioni di tipo gestire caricate correttamente dal DataBase";
             }
             catch (Exception ex)
             {
