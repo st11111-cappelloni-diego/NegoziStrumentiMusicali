@@ -1,10 +1,6 @@
-﻿using System;
-using MySqlConnector;
+﻿using MySqlConnector;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Data;
-using System.Threading.Tasks;
 
 namespace NegozioStrumentiMusicali
 {
@@ -160,6 +156,25 @@ namespace NegozioStrumentiMusicali
             }
         }
         /// <summary>
+        /// Caricamento dei dati dal DataReader ad un'istanza di ClsStrumentoMusicale
+        /// </summary>
+        /// <param name="dataReader"></param>
+        /// <returns></returns>
+        private static ClsStrumentoMusicale CaricaSingoloStrumento(ref MySqlDataReader dataReader)
+        {
+            ClsStrumentoMusicale _strumentoMusicale = new ClsStrumentoMusicale();
+            _strumentoMusicale.ID = Convert.ToInt64(dataReader["ID"]);
+            _strumentoMusicale.CasaProduttriceID = Convert.ToInt64(dataReader["casaproduttriceID"]);
+            _strumentoMusicale.Colori = dataReader["colori"].ToString();
+            _strumentoMusicale.Immagine = dataReader["pathimmagine"].ToString();
+            _strumentoMusicale.Modello = dataReader["modello"].ToString();
+            _strumentoMusicale.NotaMassimaID = Convert.ToInt64(dataReader["notamassimaID"]);
+            _strumentoMusicale.NotaMinimaID = Convert.ToInt64(dataReader["notaminimaID"]);
+            _strumentoMusicale.PesoKG = Convert.ToSingle(dataReader["pesokg"]);
+
+            return _strumentoMusicale;
+        }
+        /// <summary>
         /// Caricamento di tutti i record di strumentimusicali
         /// </summary>
         /// <param name="connection">Connessione al DB</param>
@@ -190,17 +205,96 @@ namespace NegozioStrumentiMusicali
                     while(_dataReader.Read()) //Se ce li ha li leggo tutti
                     {
                         //Carico i dati dal DB
-                        ClsStrumentoMusicale _strumentoMusicale = new ClsStrumentoMusicale();
-                        _strumentoMusicale.ID = Convert.ToInt64(_dataReader["ID"]);
-                        _strumentoMusicale.CasaProduttriceID = Convert.ToInt64(_dataReader["casaproduttriceID"]);
-                        _strumentoMusicale.Colori = _dataReader["colori"].ToString();
-                        _strumentoMusicale.Immagine = _dataReader["pathimmagine"].ToString();
-                        _strumentoMusicale.Modello = _dataReader["modello"].ToString();
-                        _strumentoMusicale.NotaMassimaID = Convert.ToInt64(_dataReader["notamassimaID"]);
-                        _strumentoMusicale.NotaMinimaID = Convert.ToInt64(_dataReader["notaminimaID"]);
-                        _strumentoMusicale.PesoKG = Convert.ToSingle(_dataReader["pesokg"]);
+                        _strumentiMusicali.Add(CaricaSingoloStrumento(ref _dataReader));
+                    }
+                }
 
-                        _strumentiMusicali.Add(_strumentoMusicale);
+                _dataReader.Close();
+
+                comunicazione = "Strumenti musicali caricati correttamente dal DataBase";
+            }
+            catch(Exception ex)
+            {
+                comunicazione = ex.Message;
+            }
+            finally
+            {
+                //Chiudo la connessione
+                connection.Close();
+            }
+
+            return _strumentiMusicali;
+        }
+        /// <summary>
+        /// Caricamento di alcuni record di strumentimusicali in base a casa produttrice, modello o colori.
+        /// Escludi casaproduttrice mettendo come valore -1, escludi modello mettendo come valore null, escludi colori mettendo come valore null
+        /// </summary>
+        /// <param name="connection">Connessione al DB</param>
+        /// <param name="comunicazione">Comunicazione in uscita</param>
+        /// <param name="colori"></param>
+        /// <param name="modello"></param>
+        /// <param name="casaProduttriceID"></param>
+        /// <returns></returns>
+        public static List<ClsStrumentoMusicale> GetSomeStrumentiMusicali(ref MySqlConnection connection, out string comunicazione, string colori, string modello, long casaProduttriceID)
+        {
+            //VARIABILI
+            comunicazione = String.Empty;
+            List<ClsStrumentoMusicale> _strumentiMusicali = new List<ClsStrumentoMusicale>();
+
+            try
+            {
+                //Apro la connessione
+                connection.Open();
+
+                //Compongo la query
+                string _query = "SELECT * from strumentimusicali WHERE ";
+                //Posso ricercare per un solo campo alla volta perciò li controllo nell'ordine: casaProduttriceID, modello, colori)
+                if(casaProduttriceID > -1)
+                {
+                    //Casa produttrice è il campo di ricerca
+                    _query += "casaproduttriceID = @casaproduttriceID";
+                }
+                else if(modello != null)
+                {
+                    //Modello è il campo di ricerca
+                    _query += "modello LIKE '@modello%'";
+                }
+                else
+                {
+                    //Colori è il campo di ricerca
+                    _query += "colori LIKE '@colori%'";
+                }
+
+                //Creo l'oggetto command
+                MySqlCommand _cmd = new MySqlCommand(_query, connection);
+
+                //Inserisco i valori in base al campo di ricerca
+                //Posso ricercare per un solo campo alla volta perciò li controllo nell'ordine: casaProduttriceID, modello, colori)
+                if (casaProduttriceID > -1)
+                {
+                    //Casa produttrice è il campo di ricerca
+                    _cmd.Parameters.AddWithValue("@casaproduttriceID", casaProduttriceID);
+                }
+                else if (modello != null)
+                {
+                    //Modello è il campo di ricerca
+                    _cmd.Parameters.AddWithValue("@modello", modello);
+                }
+                else
+                {
+                    //Colori è il campo di ricerca
+                    _cmd.Parameters.AddWithValue("@colori", colori);
+                }
+
+                //Eseguo il comando creando il DataReader
+                MySqlDataReader _dataReader = _cmd.ExecuteReader();
+
+                if(_dataReader.HasRows) //Controllo se la tabella ha dei record
+                {
+                    while(_dataReader.Read()) //Se ne ha li leggo tutti
+                    {
+                        //Carico i dati dal DB
+                        _strumentiMusicali.Add(CaricaSingoloStrumento(ref _dataReader));
                     }
                 }
 
