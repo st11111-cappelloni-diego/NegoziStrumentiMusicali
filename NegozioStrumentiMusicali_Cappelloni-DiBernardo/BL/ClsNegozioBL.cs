@@ -33,8 +33,8 @@ namespace NegozioStrumentiMusicali
                 //Creo il comando DML
                 string _dml =
                     "INSERT into negozi " +
-                    "(nome, bandito, pathimmagine, sito, indirizzoID)" +
-                    "VALUES(@nome, @bandito, @pathimmagine, @sito, @indirizzoID)";
+                    "(nome, bandito, pathimmagine, sito, telefono, email, indirizzoID)" +
+                    "VALUES(@nome, @bandito, @pathimmagine, @sito, @telefono, @email, @indirizzoID)";
 
                 //Creo l'oggetto command
                 MySqlCommand _cmd = new MySqlCommand(_dml, connection);
@@ -43,6 +43,8 @@ namespace NegozioStrumentiMusicali
                 _cmd.Parameters.AddWithValue("@nome", negozio.Nome);
                 _cmd.Parameters.AddWithValue("@bandito", negozio.Bandito);
                 _cmd.Parameters.AddWithValue("@pathimmagine", negozio.PathImmagine);
+                _cmd.Parameters.AddWithValue("@telefono", negozio.Telefono);
+                _cmd.Parameters.AddWithValue("@email", negozio.Email);
                 _cmd.Parameters.AddWithValue("@indirizzoID", negozio.IndirizzoID);
                 _cmd.Parameters.AddWithValue("@sito", negozio.Sito);
 
@@ -89,6 +91,8 @@ namespace NegozioStrumentiMusicali
                     "bandito = @bandito, " +
                     "pathimmagine = @pathimmagine, " +
                     "sito = @sito, " +
+                    "email = @email, " +
+                    "telefono = @telefono, " +
                     "indirizzoID = @indirizzoID " +
                     "WHERE ID = @ID";
 
@@ -103,6 +107,8 @@ namespace NegozioStrumentiMusicali
                 _cmd.Parameters.AddWithValue("@sito", negozio.Sito);
                 _cmd.Parameters.AddWithValue("@indirizzoID", negozio.IndirizzoID);
                 _cmd.Parameters.AddWithValue("@ID", negozio.ID);
+                _cmd.Parameters.AddWithValue("@telefono", negozio.Telefono);
+                _cmd.Parameters.AddWithValue("@email", negozio.Email);
 
 
                 //Eseguo il comando
