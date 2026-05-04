@@ -181,7 +181,7 @@ namespace NegozioStrumentiMusicali
                     while(_dataReader.Read()) //Se ce li ha li leggo tutti
                     {
                         ClsPiatto _piatto = new ClsPiatto();
-                        _piatto.ID = Convert.ToUInt32(_dataReader["ID"]);
+                        _piatto.ID = Convert.ToInt64(_dataReader["ID"]);
                         _piatto.Materiale = (ClsPiatto.eMATERIALE)Enum.Parse
                         (
                             typeof(ClsPiatto.eMATERIALE), 
