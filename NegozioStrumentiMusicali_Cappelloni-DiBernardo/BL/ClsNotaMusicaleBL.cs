@@ -19,7 +19,7 @@ namespace NegozioStrumentiMusicali
         /// <param name="notaMusicale">Oggetto da inserire</param>
         /// <param name="comunicazione">Stringa di comunicazione in uscita</param>
         /// <returns>ID del nuovo record. Se -1 insert non riuscito</returns>
-        public static long InsertNotaMusicale(ref MySqlConnection connection, ClsNotaMusicale notaMusicale, out string comunicazione)
+        public static long InsertNotaMusicale(MySqlConnection connection, ClsNotaMusicale notaMusicale, out string comunicazione)
         {
             //VARIABILI
             long _ID = -1;
@@ -40,7 +40,7 @@ namespace NegozioStrumentiMusicali
 
                 //Inserisco i valori
                 _cmd.Parameters.AddWithValue("@notabase", notaMusicale.NotaBase.ToString().ToLower());
-                _cmd.Parameters.AddWithValue("@alterazione", notaMusicale.NotaBase.ToString().ToLower());
+                _cmd.Parameters.AddWithValue("@alterazione", notaMusicale.Alterazione.ToString().ToLower());
                 _cmd.Parameters.AddWithValue("@ottava", notaMusicale.Ottava);
 
                 //Eseguo il comando

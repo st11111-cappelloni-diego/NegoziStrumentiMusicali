@@ -123,5 +123,107 @@ namespace NegozioStrumentiMusicali
                 connection.Close();
             }
         }
+
+        /// <summary>
+        /// Eliminazione di un record da indirizzi
+        /// </summary>
+        /// <param name="connection">Connessione al DB</param>
+        /// <param name="indirizzi">Record da eliminare</param>
+        /// <param name="comunicazione">Comunicazione in uscita</param>
+        public static void DeleteIndirizzi(ref MySqlConnection connection, ClsIndirizzo indirizzo, out string comunicazione)
+        {
+            //VARIABILI LOCALI
+            comunicazione = String.Empty;
+
+            try
+            {
+                //Apro la connessione
+                connection.Open();
+
+                //Compongo il comando DML
+                string _dml = "DELETE FROM indirizzi WHERE ID = @ID";
+
+                //Creo l'oggetto command
+                MySqlCommand _cmd = new MySqlCommand(_dml, connection);
+
+                //Inserisco i valori
+                _cmd.Parameters.AddWithValue("@ID", indirizzo.ID);
+
+                //Eseguo il comando
+                _cmd.ExecuteNonQuery();
+
+                comunicazione = "Indirizzo eliminato correttamente dal DataBase";
+            }
+            catch (Exception ex)
+            {
+                comunicazione = ex.Message;
+            }
+            finally
+            {
+                //Chiudo la connessione
+                connection.Close();
+            }
+        }
+        /// <summary>
+        /// Caricamento di tutti i record di insirizzi
+        /// </summary>
+        /// <param name="connection">Connessione al DB</param>
+        /// <param name="comunicazione">Comunicazione in uscita</param>
+        /// <returns>La lista di tutti i record di indirizzi</returns>
+        public static List<ClsStrumentoMusicale> GetAllIndirizzi(ref MySqlConnection connection, out string comunicazione)
+        {
+            //VARIABILI
+            List<ClsIndirizzo> _Indirizzi = new List<ClsIndirizzo>();
+            comunicazione = String.Empty;
+
+            try
+            {
+                //Apro la connessione
+                connection.Open();
+
+                //Compongo la query
+                string _query = "SELECT * FROM indirizzi";
+
+                //Creo l'oggetto command
+                MySqlCommand _cmd = new MySqlCommand(_query, connection);
+
+                //Eseguo il comando creando l'oggetto DataReader
+                MySqlDataReader _dataReader = _cmd.ExecuteReader();
+
+                if (_dataReader.HasRows) //Controllo se la tabella contiene dei record
+                {
+                    while (_dataReader.Read()) //Se ce li ha li leggo tutti
+                    {
+                        //Carico i dati dal DB
+                        ClsIndirizzo _indirizzo = new ClsIndirizzo();
+                        _indirizzo.ID = (long)_dataReader["ID"];
+                        _indirizzo.CodicePostale = _dataReader["codicepostale"].ToString();
+                        _indirizzo.Comune = _dataReader["comune"].ToString();
+                        _indirizzo.Via = _dataReader["via"].ToString();
+                        _indirizzo.Nazione = _dataReader["nazione"].ToString();
+                        _indirizzo.EssereSede = (bool)_dataReader["esseresede"];
+                        _indirizzo.CasaProduttriceID = (long)_dataReader["casaproduttriceID"];
+
+                        _Indirizzi.Add(_indirizzo);
+                    }
+                }
+
+                _dataReader.Close();
+
+                comunicazione = "Strumenti musicali caricati correttamente dal DataBase";
+            }
+            catch (Exception ex)
+            {
+                comunicazione = ex.Message;
+            }
+            finally
+            {
+                //Chiudo la connessione
+                connection.Close();
+            }
+
+            return _Indirizzi;
+        }
+
     }
 }
