@@ -116,7 +116,7 @@ namespace NegozioStrumentiMusicali
         /// <param name="connection">Connessione al DB</param>
         /// <param name="caratteristica">Record da eliminare</param>
         /// <param name="comunicazione">Comunicazione in uscita</param>
-        public static void DeleteCaratteristica(ref MySqlConnection connection, ClsPiatto caratteristica, out string comunicazione)
+        public static void DeleteCaratteristica(ref MySqlConnection connection, ClsCaratteristica caratteristica, out string comunicazione)
         {
             //VARIABILI LOCALI
             comunicazione = String.Empty;
