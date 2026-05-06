@@ -38,11 +38,31 @@ namespace NegozioStrumentiMusicali
 
                 //Inserisco i valori
                 _cmd.Parameters.AddWithValue("@colori", strumentoMusicale.Colori);
+
                 _cmd.Parameters.AddWithValue("@pathimmagine", strumentoMusicale.Immagine);
+
                 _cmd.Parameters.AddWithValue("@modello", strumentoMusicale.Modello);
+
+                if (strumentoMusicale.NotaMinimaID <= -1)
+                {
+                    _cmd.Parameters.AddWithValue("@notaminimaID", null);
+                }
+                else
+                {
+                    _cmd.Parameters.AddWithValue("@notaminimaID", strumentoMusicale.NotaMinimaID);
+                }
+
+                if (strumentoMusicale.NotaMassimaID <= -1)
+                {
+                    _cmd.Parameters.AddWithValue("@notamassimaID", null);
+                }
+                else
+                {
+                    _cmd.Parameters.AddWithValue("@notamassimaID", strumentoMusicale.NotaMassimaID);
+                }
+
                 _cmd.Parameters.AddWithValue("@pesokg", strumentoMusicale.PesoKG);
-                _cmd.Parameters.AddWithValue("@notaminimaID", strumentoMusicale.NotaMinimaID);
-                _cmd.Parameters.AddWithValue("@notaMassimaID", strumentoMusicale.NotaMassimaID);
+
 
                 //Eseguo il comando
                 int _numRec = _cmd.ExecuteNonQuery();
@@ -96,12 +116,33 @@ namespace NegozioStrumentiMusicali
 
                 //Inserisco i valori
                 _cmd.Parameters.AddWithValue("@colori", strumentoMusicale.Colori);
+
                 _cmd.Parameters.AddWithValue("@pathimmagine", strumentoMusicale.Immagine);
+
                 _cmd.Parameters.AddWithValue("@modello", strumentoMusicale.Modello);
-                _cmd.Parameters.AddWithValue("@notaminimaID", strumentoMusicale.NotaMinimaID);
-                _cmd.Parameters.AddWithValue("@notamassimaID", strumentoMusicale.NotaMassimaID);
+                
+                if(strumentoMusicale.NotaMinimaID <= -1)
+                {
+                    _cmd.Parameters.AddWithValue("@notaminimaID", null);
+                }
+                else
+                {
+                    _cmd.Parameters.AddWithValue("@notaminimaID", strumentoMusicale.NotaMinimaID);
+                }
+
+                if (strumentoMusicale.NotaMassimaID <= -1)
+                {
+                    _cmd.Parameters.AddWithValue("@notamassimaID", null);
+                }
+                else
+                {
+                    _cmd.Parameters.AddWithValue("@notamassimaID", strumentoMusicale.NotaMassimaID);
+                }
+
                 _cmd.Parameters.AddWithValue("@pesokg", strumentoMusicale.PesoKG);
+
                 _cmd.Parameters.AddWithValue("@ID", strumentoMusicale.ID);
+
 
                 comunicazione = "Strumento musicale aggiornato correttamente nel DataBase";
             }
@@ -163,14 +204,51 @@ namespace NegozioStrumentiMusicali
         private static ClsStrumentoMusicale CaricaSingoloStrumento(ref MySqlDataReader dataReader)
         {
             ClsStrumentoMusicale _strumentoMusicale = new ClsStrumentoMusicale();
+
             _strumentoMusicale.ID = Convert.ToInt64(dataReader["ID"]);
+
             _strumentoMusicale.CasaProduttriceID = Convert.ToInt64(dataReader["casaproduttriceID"]);
-            _strumentoMusicale.Colori = dataReader["colori"].ToString();
-            _strumentoMusicale.Immagine = dataReader["pathimmagine"].ToString();
+
+            if(dataReader["colori"] == DBNull.Value)
+            {
+                _strumentoMusicale.Colori = null;
+            }
+            else
+            {
+                _strumentoMusicale.Colori = dataReader["colori"].ToString();
+            }
+
+            if(dataReader["pathimmagine"] == DBNull.Value)
+            {
+                _strumentoMusicale.Immagine = null;
+            }
+            else
+            {
+                _strumentoMusicale.Immagine = dataReader["pathimmagine"].ToString();
+            }
+
             _strumentoMusicale.Modello = dataReader["modello"].ToString();
-            _strumentoMusicale.NotaMassimaID = Convert.ToInt64(dataReader["notamassimaID"]);
-            _strumentoMusicale.NotaMinimaID = Convert.ToInt64(dataReader["notaminimaID"]);
+
+            if(dataReader["notamassimaID"] == DBNull.Value)
+            {
+                _strumentoMusicale.NotaMassimaID = -1;
+            }
+            else
+            {
+                _strumentoMusicale.NotaMassimaID = Convert.ToInt64(dataReader["notamassimaID"]);
+            }
+
+            if (dataReader["notaminimaID"] == DBNull.Value)
+            {
+                _strumentoMusicale.NotaMinimaID = -1;
+            }
+            else
+            {
+                _strumentoMusicale.NotaMinimaID = Convert.ToInt64(dataReader["notaminimaID"]);
+            }
+
             _strumentoMusicale.PesoKG = Convert.ToSingle(dataReader["pesokg"]);
+
 
             return _strumentoMusicale;
         }
