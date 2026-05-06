@@ -56,7 +56,7 @@ namespace NegozioStrumentiMusicali
 
         }
 
-        public ClsTamburo(int id)
+        public ClsTamburo(long id)
         {
             ID = id;
         }

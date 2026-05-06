@@ -54,9 +54,11 @@ namespace NegozioStrumentiMusicali
         }
         public enum eTIPO_PLACCATURA
         {
-            no,
-            argento,
-            oro
+            no, argento, oro, nickel, rodio, rame, palladio, platino, titanio
+        }
+        public enum eTIPO_LACCATURA
+        {
+            no, trasparente, oro, ambra, miele, satinata, spazzolata, nera, colorata, vintage, antique, raw_brass
         }
 
         #endregion
@@ -64,7 +66,7 @@ namespace NegozioStrumentiMusicali
         #region Attributi
         private eOTTONI _strumento;
         private eTIPO_OTTONE _materialeCorpo;
-        private bool _laccatura;
+        private eTIPO_LACCATURA _laccatura;
         private eTIPO_PLACCATURA _placcatura;
         private eMATERIALE_BOCCHINO _materialeBocchino;
         private eRIVESTIMENTO_BOCCHINO _rivestimentoBocchino;
@@ -77,7 +79,7 @@ namespace NegozioStrumentiMusicali
         #region Proprietà
         public eOTTONI Strumento { get => _strumento; set => _strumento = value; }
         public eTIPO_OTTONE MaterialeCorpo { get => _materialeCorpo; set => _materialeCorpo = value; }
-        public bool Laccatura { get => _laccatura; set => _laccatura = value; }
+        public eTIPO_LACCATURA Laccatura { get => _laccatura; set => _laccatura = value; }
         public eTIPO_PLACCATURA Placcatura { get => _placcatura; set => _placcatura = value; }
         public eMATERIALE_BOCCHINO MaterialeBocchino { get => _materialeBocchino; set => _materialeBocchino = value; }
         public eRIVESTIMENTO_BOCCHINO RivestimentoBocchino { get => _rivestimentoBocchino; set => _rivestimentoBocchino = value; }
@@ -144,7 +146,7 @@ namespace NegozioStrumentiMusicali
 
         }
         //Costruttore ereditato dalla classe madre
-        public ClsOttone(int id) : base(id)
+        public ClsOttone(long id) : base(id)
         {
 
         }

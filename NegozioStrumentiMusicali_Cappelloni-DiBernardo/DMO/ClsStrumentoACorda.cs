@@ -68,7 +68,7 @@ namespace NegozioStrumentiMusicali
         private float _spessoreManicoCM;
         private Program.eLEGNO _materialeManico;
         private Program.eLEGNO _materialeTastiera;
-        private int _tasti;
+        private sbyte _tasti;
 	    private ePICKUP _pickup1;
 	    private ePICKUP _pickup2;
 	    private ePICKUP _pickup3;
@@ -192,9 +192,9 @@ namespace NegozioStrumentiMusicali
         public Program.eLEGNO MaterialeManico { get => _materialeManico; set => _materialeManico = value; }
         public Program.eLEGNO MaterialeTastiera { get => _materialeTastiera; set => _materialeTastiera = value; }
 	    ///<summary>
-	    ///Proprietà NON utilizzata per: Contrabbasso, Viola, Violino, Violoncello. In istanze di questo tipo l'attr. tasti è -1
+	    ///Proprietà NON utilizzata per: Contrabbasso, Viola, Violino, Violoncello. In questi casi l'attributo testi è -1
 	    ///</summary>
-	    public int Tasti
+	    public sbyte Tasti
 	    {
 		    get
 		    {
@@ -207,10 +207,10 @@ namespace NegozioStrumentiMusicali
                     || Strumento == eSTRUMENTI_A_CORDA.violino
                     || Strumento == eSTRUMENTI_A_CORDA.violoncello)
                 {
-                    _tasti = 0;
+                    _tasti = -1;
                 }
-                //Min tasti: 3; Max tasti: 32
-                else if (value >= 3 && value <= 32)
+                //Min tasti: 1; Max tasti: 32
+                else if (value >= 1 && value <= 32)
                 {
                     _tasti = value;
                 }
@@ -251,7 +251,7 @@ namespace NegozioStrumentiMusicali
 	        
 	    }
         //Costruttore ereditato dalla classe madre
-        public ClsStrumentoACorda(int id) : base(id)
+        public ClsStrumentoACorda(long id) : base(id)
         {
 
         }

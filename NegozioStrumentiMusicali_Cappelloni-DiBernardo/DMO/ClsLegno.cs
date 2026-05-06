@@ -153,7 +153,7 @@ namespace NegozioStrumentiMusicali
 
         }
         //Costruttore ereditato dalla classe madre
-        public ClsLegno(int id) : base(id)
+        public ClsLegno(long id) : base(id)
         {
 
         }
