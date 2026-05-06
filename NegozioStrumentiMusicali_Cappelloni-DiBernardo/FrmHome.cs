@@ -17,56 +17,6 @@ namespace NegozioStrumentiMusicali
     /// </summary>
     public partial class FrmHome : Form
     {
-        #region Altri metodi
-        /// <summary>
-        /// Copia gli oggetti di tipo ClsNotaMusicale da una lista1 ad una lista2 in modo che i puntatori alla memoria di ogni oggetto siano differenti
-        /// </summary>
-        /// <param name="lista1"></param>
-        /// <returns></returns>
-        //Da implementare poi nella classe coi metodi (?)
-        public List<ClsNotaMusicale> CopiaListaClsNoteMusicali(List<ClsNotaMusicale> lista1)
-        {
-            List<ClsNotaMusicale> _lista2 = new List<ClsNotaMusicale>();
-
-            for(int i = 0; i < lista1.Count; i++)
-            {
-                _lista2.Add(new ClsNotaMusicale(
-                    lista1[i].NotaBase,
-                    lista1[i].Alterazione,
-                    lista1[i].Ottava));
-            }
-
-            return _lista2;
-        }
-        /// <summary>
-        /// Accoda una lista di oggetti ClsNotaMusicale ad un'altra lista ClsNotaMusicale in modo che il puntatore alla memoria di ogni singolo oggetto sia differente
-        /// </summary>
-        /// <param name="listaMain"></param>
-        /// <param name="listaDaAccodare"></param>
-        /// <returns></returns>
-        //Da implementare poi nella classe coi metodi (?)
-        public List<ClsNotaMusicale> AccodaListaClsNoteMusicali(List<ClsNotaMusicale> listaMain, List<ClsNotaMusicale> listaDaAccodare)
-        {
-            List<ClsNotaMusicale> _nuovaLista = new List<ClsNotaMusicale>();
-            for(int i = 0; i < listaMain.Count; i++)
-            {
-                _nuovaLista.Add(new ClsNotaMusicale(
-                    listaMain[i].NotaBase,
-                    listaMain[i].Alterazione,
-                    listaMain[i].Ottava));
-            }
-            for (int j = 0; j < listaDaAccodare.Count; j++)
-            {
-                _nuovaLista.Add(new ClsNotaMusicale(
-                    listaDaAccodare[j].NotaBase,
-                    listaDaAccodare[j].Alterazione,
-                    listaDaAccodare[j].Ottava));
-            }
-
-            return _nuovaLista;
-        }
-
-        #endregion
 
         #region Variabili globali
         FrmUtente _frmUtente;
@@ -103,19 +53,17 @@ namespace NegozioStrumentiMusicali
         #region Eventi
         private void FrmHome_Load(object sender, EventArgs e)
         {            
-            //string _comunicazione = String.Empty;
-            /*
+            string _comunicazione = String.Empty;
             ClsArchivio.Piatti = ClsPiattoBL.GetAllPiatti(ref Program._connessioneAlDB, out _comunicazione);
             MessageBox.Show(_comunicazione);
-            */
-            /*
             ClsArchivio.Tamburi = ClsTamburoBL.GetAllTamburi(ref Program._connessioneAlDB, out _comunicazione);
             MessageBox.Show(_comunicazione);  
-            */
-            /*
             ClsArchivio.NoteMusicali = ClsNotaMusicaleBL.GetAllNoteMusicali(ref Program._connessioneAlDB, out _comunicazione);
             MessageBox.Show(_comunicazione);
-            */
+            ClsArchivio.StrumentiMusicali = ClsStrumentoMusicaleBL.GetAllStrumentiMusicali(ref Program._connessioneAlDB, out _comunicazione);
+            MessageBox.Show(_comunicazione);
+            ClsArchivio.CaseProduttrici = ClsCasaProduttriceBL.GetAllCaseProduttrici(ref Program._connessioneAlDB, out _comunicazione);
+            MessageBox.Show(_comunicazione);
         }
         private void mioUtenteToolStripMenuItem_Click(object sender, EventArgs e)
         {
