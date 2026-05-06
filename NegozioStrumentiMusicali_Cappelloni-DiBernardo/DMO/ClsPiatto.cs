@@ -50,7 +50,7 @@ namespace NegozioStrumentiMusicali
 
         }
 
-        public ClsPiatto(int id)
+        public ClsPiatto(long id)
         {
             ID = id;
         }

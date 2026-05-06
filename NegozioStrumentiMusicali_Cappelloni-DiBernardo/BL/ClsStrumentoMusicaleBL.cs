@@ -201,7 +201,7 @@ namespace NegozioStrumentiMusicali
         /// </summary>
         /// <param name="dataReader"></param>
         /// <returns></returns>
-        private static ClsStrumentoMusicale CaricaSingoloStrumento(ref MySqlDataReader dataReader)
+        public static ClsStrumentoMusicale CaricaSingoloStrumento(ref MySqlDataReader dataReader)
         {
             ClsStrumentoMusicale _strumentoMusicale = new ClsStrumentoMusicale();
 
@@ -391,6 +391,61 @@ namespace NegozioStrumentiMusicali
             }
 
             return _strumentiMusicali;
+        }
+        /// <summary>
+        /// Prende un record da strumentimusicali in base alla chiave primaria ID
+        /// </summary>
+        /// <param name="connection">Connessione al DB</param>
+        /// <param name="ID"></param>
+        /// <param name="comunicazione">Comunicazione in uscita</param>
+        /// <returns>Il record ottenuto. Se è null la query non è andata a buon fine</returns>
+        public static ClsStrumentoMusicale GetOneStrumentoMusicale(ref MySqlConnection connection, long ID, out string comunicazione)
+        {
+            //VARIABILI
+            comunicazione = String.Empty;
+            ClsStrumentoMusicale _strumentoMusicale = new ClsStrumentoMusicale();
+
+            try
+            {
+                //Apro la connessione
+                connection.Open();
+
+                //Compongo la query
+                string _query = "SELECT * FROM strumentimusicali WHERE ID = @ID";
+
+                //Creo l'oggetto command
+                MySqlCommand _cmd = new MySqlCommand(_query, connection);
+
+                //Inserisco i valori
+                _cmd.Parameters.AddWithValue("@ID", ID);
+
+                //Eseguo il comando creando il DataReader
+                MySqlDataReader _dataReader = _cmd.ExecuteReader();
+
+                if(_dataReader.HasRows) //Controllo se la tabella ha dei record
+                {
+                    while(_dataReader.Read()) //Se ne ha li leggo tutti
+                    {
+                        _strumentoMusicale = CaricaSingoloStrumento(ref _dataReader);
+                    }
+                }
+
+                _dataReader.Close();
+
+                comunicazione = "Strumento musicale caricato correttamente dal DataBase";
+            }
+            catch(Exception ex)
+            {
+                comunicazione = ex.Message;
+                _strumentoMusicale = null;
+            }
+            finally 
+            {
+                //Chiudo la connessione
+                connection.Close();
+            }
+
+            return _strumentoMusicale;
         }
     }
 

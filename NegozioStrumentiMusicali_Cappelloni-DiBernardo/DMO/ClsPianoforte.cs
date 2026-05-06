@@ -147,7 +147,7 @@ namespace NegozioStrumentiMusicali
 
         }
         //Costruttore ereditato dalla classe madre
-        public ClsPianoforte(int id) : base(id)
+        public ClsPianoforte(long id) : base(id)
         {
 
         }
