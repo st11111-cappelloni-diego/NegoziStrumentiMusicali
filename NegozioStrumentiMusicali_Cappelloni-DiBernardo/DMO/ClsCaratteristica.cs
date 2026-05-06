@@ -61,7 +61,7 @@ namespace NegozioStrumentiMusicali
 
         }
 
-        public ClsCaratteristica(int id)
+        public ClsCaratteristica(long id)
         {
             ID = id;
         }
