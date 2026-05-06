@@ -251,7 +251,7 @@ namespace NegozioStrumentiMusicali
 	        
 	    }
         //Costruttore ereditato dalla classe madre
-        public ClsStrumentoACorda(int id) : base(id)
+        public ClsStrumentoACorda(long id) : base(id)
         {
 
         }
