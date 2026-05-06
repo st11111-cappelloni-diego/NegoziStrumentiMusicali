@@ -198,5 +198,91 @@ namespace NegozioStrumentiMusicali
                 connection.Close();
             }
         }
+        /// <summary>
+        /// Caricamento dei dati dal DataReader (che legge record di strumentiacorda) ad un'istanza di ClsStrumentoACorda
+        /// </summary>
+        /// <param name="dataReader"></param>
+        /// <param name="caricaStrumentoMusicaleID"></param>
+        /// <returns></returns>
+        private static ClsStrumentoACorda CaricaSingoloStrumentoACorda(ref MySqlDataReader dataReader, bool caricaStrumentoMusicaleID)
+        {
+            ClsStrumentoACorda _strumentoACorda = new ClsStrumentoACorda();
+
+            if(caricaStrumentoMusicaleID)
+            {
+                _strumentoACorda.ID = Convert.ToInt64(dataReader["strumentomusicaleID"]);
+            }
+
+            _strumentoACorda.LunghezzaCorpoCM = Convert.ToSingle(dataReader["lunghezzacorpocm"]);
+
+            _strumentoACorda.LunghezzaManicoCM = Convert.ToSingle(dataReader["lunghezzamanicocm"]);
+
+            _strumentoACorda.SpessoreCorpoCM = Convert.ToSingle(dataReader["spessorecorpocm"]);
+
+            _strumentoACorda.SpessoreManicoCM = Convert.ToSingle(dataReader["spessoremanicocm"]);
+
+            if(dataReader["tasti"] == DBNull.Value)
+            {
+                _strumentoACorda.Tasti = -1;
+            }
+            else
+            {
+                _strumentoACorda.Tasti = Convert.ToSByte(dataReader["tasti"]);
+            }
+
+            _strumentoACorda.AmpiezzaCorpoCM = Convert.ToSingle(dataReader["ampiezzacorpocm"]);
+
+            _strumentoACorda.AmpiezzaManicoCM = Convert.ToSingle(dataReader["ampiezzamanicocm"]);
+
+            _strumentoACorda.Strumento = (ClsStrumentoACorda.eSTRUMENTI_A_CORDA)Enum.Parse
+            (
+                typeof(ClsStrumentoACorda.eSTRUMENTI_A_CORDA),
+                dataReader["strumento"].ToString()
+            );
+
+            _strumentoACorda.MaterialeCorde = (ClsStrumentoACorda.eMATERIALE_CORDE)Enum.Parse
+            (
+                typeof(ClsStrumentoACorda.eMATERIALE_CORDE),
+                dataReader["materialecorde"].ToString()
+            );
+
+            _strumentoACorda.MaterialeCorpo = (Program.eLEGNO)Enum.Parse
+            (
+                typeof(Program.eLEGNO),
+                dataReader["materialecorpo"].ToString()
+            );
+
+            _strumentoACorda.MaterialeManico = (Program.eLEGNO)Enum.Parse
+            (
+                typeof(Program.eLEGNO),
+                dataReader["materialemanico"].ToString()
+            );
+
+            _strumentoACorda.MaterialeTastiera = (Program.eLEGNO)Enum.Parse
+            (
+                typeof(Program.eLEGNO),
+                dataReader["materialetastiera"].ToString()
+            );
+
+            _strumentoACorda.Pickup1 = (ClsStrumentoACorda.ePICKUP)Enum.Parse
+            (
+                typeof(ClsStrumentoACorda.ePICKUP),
+                dataReader["pickup1"].ToString()
+            );
+
+            _strumentoACorda.Pickup2 = (ClsStrumentoACorda.ePICKUP)Enum.Parse
+            (
+                typeof(ClsStrumentoACorda.ePICKUP),
+                dataReader["pickup2"].ToString()
+            );
+
+            _strumentoACorda.Pickup3 = (ClsStrumentoACorda.ePICKUP)Enum.Parse
+            (
+                typeof(ClsStrumentoACorda.ePICKUP),
+                dataReader["pickup3"].ToString()
+            );
+
+            return _strumentoACorda;
+        }
     }
 }

@@ -279,7 +279,7 @@ namespace NegozioStrumentiMusicali
         /// </summary>
         /// <param name="connection">Connessione al DB</param>
         /// <param name="comunicazione">Comunicazione in uscita</param>
-        /// <returns></returns>
+        /// <returns>La lista con tutti i record. Se è nulla il caricamento non è andato a buon fine</returns>
         public static List<ClsOttone> GetAllOttoni(ref MySqlConnection connection, out string comunicazione)
         {
             //VARIABILI
