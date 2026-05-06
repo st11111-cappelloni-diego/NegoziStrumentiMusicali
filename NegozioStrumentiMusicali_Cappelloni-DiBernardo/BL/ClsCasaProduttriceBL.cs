@@ -115,7 +115,6 @@ namespace NegozioStrumentiMusicali
                 connection.Close();
             }
         }
-
         /// <summary>
         /// Eliminazione di un record da caseproduttrici
         /// </summary>
@@ -157,6 +156,22 @@ namespace NegozioStrumentiMusicali
             }
         }
         /// <summary>
+        /// Caricamento dei dati del DataReader ad un'istanza di ClsCasaProduttrice
+        /// </summary>
+        /// <param name="dataReader"></param>
+        /// <returns></returns>
+        private static ClsCasaProduttrice CaricaSingolaCasaProduttrice(ref MySqlDataReader dataReader)
+        {
+            ClsCasaProduttrice _casaProduttrice = new ClsCasaProduttrice();
+            _casaProduttrice.ID = Convert.ToInt64(dataReader["ID"]);
+            _casaProduttrice.Nome = dataReader["nome"].ToString();
+            _casaProduttrice.Email = dataReader["email"].ToString();
+            _casaProduttrice.PathLogo = dataReader["pathlogo"].ToString();
+            _casaProduttrice.Sito = dataReader["sito"].ToString();
+
+            return _casaProduttrice;
+        }
+        /// <summary>
         /// Caricamento di tutti i record di caseproduttrici
         /// </summary>
         /// <param name="connection">Connessione al DB</param>
@@ -187,14 +202,7 @@ namespace NegozioStrumentiMusicali
                     while (_dataReader.Read()) //Se ce li ha li leggo tutti
                     {
                         //Carico i dati dal DB
-                        ClsCasaProduttrice _casaProduttrice = new ClsCasaProduttrice();
-                        _casaProduttrice.ID = (long)_dataReader["ID"];
-                        _casaProduttrice.Nome = _dataReader["nome"].ToString();
-                        _casaProduttrice.Email = _dataReader["email"].ToString();
-                        _casaProduttrice.PathLogo = _dataReader["pathlogo"].ToString();
-                        _casaProduttrice.Sito = _dataReader["sito"].ToString();
-
-                        _caseProduttrici.Add(_casaProduttrice);
+                        _caseProduttrici.Add(CaricaSingolaCasaProduttrice(ref _dataReader));
                     }
                 }
 
@@ -214,6 +222,56 @@ namespace NegozioStrumentiMusicali
 
             return _caseProduttrici;
         }
+        /// <summary>
+        /// Prende un record da caseproduttrici in base alla chiave primaria ID
+        /// </summary>
+        /// <param name="connection">Connessione al DB</param>
+        /// <param name="ID"></param>
+        /// <param name="comunicazione">Comunicazione in uscita</param>
+        /// <returns></returns>
+        public static ClsCasaProduttrice GetOneCasaProduttrice(ref MySqlConnection connection, long ID ,out string comunicazione)
+        {
+            //VARIABILI GLOBALI
+            comunicazione = String.Empty;
+            ClsCasaProduttrice _casaProduttrice = new ClsCasaProduttrice();
 
+            try
+            {
+                //Apro la connessione
+                connection.Open();
+
+                //Compongo la query
+                string _query = "SELECT * FROM caseproduttrici WHERE ID = @ID";
+
+                //Creo l'oggetto command
+                MySqlCommand _cmd = new MySqlCommand(_query, connection);
+
+                //Eseguo il comando creando il DataReader
+                MySqlDataReader _dataReader = _cmd.ExecuteReader();
+
+                if(_dataReader.HasRows) //Controllo se la tabella ha dei record
+                {
+                    while(_dataReader.Read()) //Se ne ha li leggo tutti
+                    {
+                        _casaProduttrice = CaricaSingolaCasaProduttrice(ref _dataReader);
+                    }
+                }
+
+                _dataReader.Close();
+
+                comunicazione = "Casa produttrice caricata correttamente dal DataBase";
+            }
+            catch(Exception ex)
+            {
+                comunicazione = ex.Message;
+            }
+            finally
+            {
+                //Chiudo la connessione
+                connection.Close();
+            }
+
+            return _casaProduttrice;
+        }
     }
 }
