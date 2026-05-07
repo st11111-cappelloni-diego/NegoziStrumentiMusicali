@@ -164,5 +164,144 @@ namespace NegozioStrumentiMusicali
                 connection.Close();
             }
         }
+        /// <summary>
+        /// Caricamento dei dati dal DataReader (che legge record di legni) ad un'istanza di Clslegno
+        /// </summary>
+        /// <param name="dataReader"></param>
+        /// <param name="caricaStrumentoMusicaleID"></param>
+        /// <returns></returns>
+        private static ClsLegno CaricaSingoloLegno(ref MySqlDataReader dataReader, bool caricaStrumentoMusicaleID)
+        {
+            ClsLegno _legno = new ClsLegno();
+
+            if (caricaStrumentoMusicaleID)
+            {
+                _legno.ID = Convert.ToInt64(dataReader["strumentomusicaleID"]);
+            }
+
+            _legno.Strumento = (ClsLegno.eLEGNI)Enum.Parse
+            (
+                typeof(ClsLegno.eLEGNI),
+                dataReader["strumento"].ToString()
+            );
+
+            _legno.MaterialeCorpo = (ClsLegno.eMATERIALE_CORPO_LEGNI)Enum.Parse
+            (
+                typeof(ClsLegno.eMATERIALE_CORPO_LEGNI),
+                dataReader["materialecorpo"].ToString()
+            );
+
+            _legno.MaterialeChiavi = (ClsLegno.eMATERIALE_CHIAVI)Enum.Parse
+            (
+                typeof(ClsLegno.eMATERIALE_CHIAVI),
+                dataReader["materialechiavi"].ToString()
+            );
+
+            _legno.LunghezzaCM = Convert.ToSingle(dataReader["lunghezzacm"]);
+
+            _legno.LarghezzaCM = Convert.ToSingle(dataReader["larghezzacm"]);
+
+            _legno.AltezzaCM = Convert.ToSingle(dataReader["altezzacm"]);
+
+
+            return _legno;
+        }
+        /// <summary>
+        /// Caricamento dei dati dal DataReader (che legge join o view di strumentimusicali + strumentiacorda) ad un'istanza di ClsOttone
+        /// </summary>
+        /// <param name="dataReader"></param>
+        /// <returns></returns>
+        private static ClsLegno CaricaSingoloStrumentoLegno(ref MySqlDataReader dataReader, bool caricaCasaProduttriceID)
+        {
+            ClsLegno _legno = new ClsLegno();
+            ClsStrumentoMusicale _strumento = new ClsStrumentoMusicale();
+
+            _legno = CaricaSingoloLegno(ref dataReader, caricaCasaProduttriceID);
+            _strumento = ClsStrumentoMusicaleBL.CaricaSingoloStrumento(ref dataReader);
+
+            _legno = MergeStrumentoLegno(_strumento, _legno);
+
+            return _legno;
+        }
+        /// <summary>
+        /// Mette in un istanza di ClsLegno dati di generalizzazione da strumento e dati di specializzazione da legno
+        /// </summary>
+        /// <param name="strumento"></param>
+        /// <param name="legno"></param>
+        /// <returns></returns>
+        private static ClsLegno MergeStrumentoLegno(ClsStrumentoMusicale strumento, ClsLegno legno)
+        {
+            ClsLegno _legnoFinale = legno;
+
+            _legnoFinale.Colori = strumento.Colori;
+            _legnoFinale.CasaProduttriceID = strumento.CasaProduttriceID;
+            _legnoFinale.Immagine = strumento.Immagine;
+            _legnoFinale.PesoKG = strumento.PesoKG;
+            _legnoFinale.NotaMassimaID = strumento.NotaMassimaID;
+            _legnoFinale.NotaMinimaID = strumento.NotaMinimaID;
+            _legnoFinale.Modello = strumento.Modello;
+
+            return _legnoFinale;
+        }
+        /// <summary>
+        /// Prende tutti i record di pianoforti con anche le informazione della generalizzazione da strumentimusicali
+        /// </summary>
+        /// <param name="connection">Connessione al DB</param>
+        /// <param name="comunicazione">Comunicazione in uscita</param>
+        /// <returns>La lista con tutti i record. Se è nulla il caricamento non è andato a buon fine</returns>
+        public static List<ClsLegno> GetAllLegni(ref MySqlConnection connection, out string comunicazione)
+        {
+            //VARIABILI
+            comunicazione = String.Empty;
+            List<ClsLegno> _legni = new List<ClsLegno>();
+
+            try
+            {
+                //Apro la connessione
+                connection.Open();
+
+                //Creo la query con la join tra strumentimusicali e legni
+                //Abbino le righe in base a ID <-> strumentomusicaleID
+                string _query = "SELECT strumentimusicali.*, " +
+                    "legni.strumento, " +
+                    "legni.materialecorpo, " +
+                    "legni.materialechiavi, " +
+                    "legni.lunghezzacm," +
+                    "legni.larghezzacm," +
+                    "legni.altezzacm " +
+                    "FROM strumentimusicali AS S JOIN legni AS L " +
+                    "ON S.ID = L.strumentomusicaleID";
+
+                //Creo il command
+                MySqlCommand _cmd = new MySqlCommand(_query, connection);
+
+                //Eseguo il comando creando il DataReader
+                MySqlDataReader _dataReader = _cmd.ExecuteReader();
+
+                if (_dataReader.HasRows) //Controllo se la view ha dei record
+                {
+                    while (_dataReader.Read()) //Se ne ha li leggo tutti
+                    {
+                        _legni.Add(CaricaSingoloStrumentoLegno(ref _dataReader, false));
+                    }
+                }
+
+                _dataReader.Close();
+
+                comunicazione = "Strumenti della famiglia dei legni caricati correttamente dal DataBase";
+            }
+            catch (Exception ex)
+            {
+                comunicazione = ex.Message;
+                _legni = null;
+            }
+            finally
+            {
+                //Chiudo la connessione
+                connection.Close();
+            }
+
+            return _legni;
+        }
     }
 }

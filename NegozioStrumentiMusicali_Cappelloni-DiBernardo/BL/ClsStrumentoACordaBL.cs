@@ -285,16 +285,16 @@ namespace NegozioStrumentiMusicali
             return _strumentoACorda;
         }        
 	/// <summary>
-        /// Caricamento dei dati dal DataReader (che legge view di strumentimusicali + strumentiacorda) ad un'istanza di ClsOttone
+        /// Caricamento dei dati dal DataReader (che legge join di strumentimusicali + strumentiacorda) ad un'istanza di ClsOttone
         /// </summary>
         /// <param name="dataReader"></param>
         /// <returns></returns>
-        private static ClsOttone CaricaSingoloStrumentoStrumentoACorda(ref MySqlDataReader dataReader)
+        private static ClsStrumentoACorda CaricaSingoloStrumentoStrumentoACorda(ref MySqlDataReader dataReader, bool caricaStrumentoMusicaleID)
         {
             ClsStrumentoACorda _strumentoACorda = new ClsStrumentoACorda();
             ClsStrumentoMusicale _strumento = new ClsStrumentoMusicale();
 
-            _strumentoACorda = CaricaSingoloStrumentoACorda(ref dataReader, false);
+            _strumentoACorda = CaricaSingoloStrumentoACorda(ref dataReader, caricaStrumentoMusicaleID);
             _strumento = ClsStrumentoMusicaleBL.CaricaSingoloStrumento(ref dataReader);
 
             _strumentoACorda = MergeStrumentoStrumentoACorda(_strumento, _strumentoACorda);
@@ -309,7 +309,7 @@ namespace NegozioStrumentiMusicali
         /// <returns></returns>
         private static ClsStrumentoACorda MergeStrumentoStrumentoACorda(ClsStrumentoMusicale strumento, ClsStrumentoACorda strumentoACorda)
         {
-            ClsOttone _strumentoACordaFinale = strumentoACorda;
+            ClsStrumentoACorda _strumentoACordaFinale = strumentoACorda;
 
             _strumentoACordaFinale.Colori = strumento.Colori;
             _strumentoACordaFinale.CasaProduttriceID = strumento.CasaProduttriceID;
@@ -338,56 +338,37 @@ namespace NegozioStrumentiMusicali
                 //Apro la connessione
                 connection.Open();
 
-                //Elimino la vista (se esiste) prima di ricrearla
-                string _ddlDROPVIEW = "DROP VIEW IF EXISTS strumenti_strumentiacorda";
-                MySqlCommand _cmdDROPVIEW = new MySqlCommand(_ddlDROPVIEW, connection);
-                _cmdDROPVIEW.ExecuteNonQuery();
-
-                //Creo la view con i dati strumentimusicali + strumeniacorda (solo se strumento è strumento a corda)
-                string _ddlCREATEVIEW = "CREATE VIEW strumenti_strumentiacorda " +
-                    "(ID, colori, pathimmagine, modello, pesokg, casaproduttriceID, notaminimaID, notamassimaID, " +
-                    "strumento, numerocorde, lunghezzamanicocm, ampiezzamanicocm, spessoremanicocm, " +
-                    "materialemanico, materialetastiera, lunghezzacorpocm, ampiezzacorpocm, spessorecorpocm, materialecorpo," +
-                    "tasti, pickup1, pickup2, pickup3) " +
-                    "AS (SELECT S.*, " +
-                    "C.strumento, " +
-                    "C.numerocorde, " +
-                    "C.lunghezzamanicocm, " +
-                    "C.ampiezzamanicocm, " +
-                    "C.spessoremanicocm, " +
-                    "C.materialemanico, " +
-                    "C.materialetastiera, " +
-                    "C.lunghezzacorpocm, " +
-                    "C.ampiezzacorpocm, " +
-		    "C.spessorecorpocm, " +
-		    "C.materialecorpo, " +
-		    "C.tasti, " +
-	            "C.pickup1, " +
-		    "C.pickup2, " +
-		    "C.pickup3 " +
-                    "FROM strumentimusicali AS S, strumentiacorda as C " +
-                    "WHERE S.ID = C.strumentomusicaleID)";
-
-                //Creo l'oggetto command
-                MySqlCommand _cmdCREATEVIEW = new MySqlCommand(_ddlCREATEVIEW, connection);
-
-                //Eseguo il comando creando
-                _cmdCREATEVIEW.ExecuteNonQuery();
-
-                //Seleziono tutte le righe dalla view
-                string _query = "SELECT * FROM strumenti_strumentiacorda";
+                //Creo la query con la join tra strumentimusicali e strumentiacorda
+                //Abbino le righe in base a ID <-> strumentomusicaleID
+                string _query = "SELECT strumentimusicali.*, " +
+                    "strumentiacorda.strumento, " +
+                    "strumentiacorda.numerocorde, " +
+                    "strumentiacorda.lunghezzamanicocm, " +
+                    "strumentiacorda.ampiezzamanicocm, " +
+                    "strumentiacorda.spessoremanicocm, " +
+                    "strumentiacorda.materialemanico, " +
+                    "strumentiacorda.materialetastiera, " +
+                    "strumentiacorda.lunghezzacorpocm, " +
+                    "strumentiacorda.ampiezzacorpocm, " +
+                    "strumentiacorda.spessorecorpocm, " +
+                    "strumentiacorda.tasti, " +
+                    "strumentiacorda.pickup1, " +
+                    "strumentiacorda.pickup2, " +
+                    "strumentiacorda.pickup3 " +
+                    "FROM strumentimusicali AS S JOIN strumentiacorda AS C " +
+                    "ON S.ID = C.strumentomusicaleID";
 
                 //Creo il command
-                MySqlCommand _cmdSELECT = new MySqlCommand(_query, connection);
+                MySqlCommand _cmd = new MySqlCommand(_query, connection);
 
                 //Eseguo il comando creando il DataReader
-                MySqlDataReader _dataReader = _cmdSELECT.ExecuteReader();
+                MySqlDataReader _dataReader = _cmd.ExecuteReader();
 
-                if(_dataReader.HasRows) //Controllo se la view ha dei record
+                if(_dataReader.HasRows) //Controllo se la join ha dei record
                 {
                     while(_dataReader.Read()) //Se ne ha li leggo tutti
                     {
-                        _strumentiACorda.Add(CaricaSingoloStrumentoStrumentoACorda(ref _dataReader));
+                        _strumentiACorda.Add(CaricaSingoloStrumentoStrumentoACorda(ref _dataReader, false));
                     }
                 }
 

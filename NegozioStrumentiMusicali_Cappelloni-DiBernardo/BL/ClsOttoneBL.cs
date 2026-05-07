@@ -238,16 +238,16 @@ namespace NegozioStrumentiMusicali
             return _ottone;
         }
         /// <summary>
-        /// Caricamento dei dati dal DataReader (che legge view di strumentimusicali + ottoni) ad un'istanza di ClsOttone
+        /// Caricamento dei dati dal DataReader (che legge join di strumentimusicali + ottoni) ad un'istanza di ClsOttone
         /// </summary>
         /// <param name="dataReader"></param>
         /// <returns></returns>
-        private static ClsOttone CaricaSingoloStrumentoOttone(ref MySqlDataReader dataReader)
+        private static ClsOttone CaricaSingoloStrumentoOttone(ref MySqlDataReader dataReader, bool caricaStrumentoMusicaleID)
         {
             ClsOttone _ottone = new ClsOttone();
             ClsStrumentoMusicale _strumento = new ClsStrumentoMusicale();
 
-            _ottone = CaricaSingoloOttone(ref dataReader, false);
+            _ottone = CaricaSingoloOttone(ref dataReader, caricaStrumentoMusicaleID);
             _strumento = ClsStrumentoMusicaleBL.CaricaSingoloStrumento(ref dataReader);
 
             _ottone = MergeStrumentoOttone(_strumento, _ottone);
@@ -291,54 +291,38 @@ namespace NegozioStrumentiMusicali
                 //Apro la connessione
                 connection.Open();
 
-                //Elimino la vista (se esiste) prima di ricrearla
-                string _ddlDROPVIEW = "DROP VIEW IF EXISTS strumenti_ottoni";
-                MySqlCommand _cmdDROPVIEW = new MySqlCommand(_ddlDROPVIEW, connection);
-                _cmdDROPVIEW.ExecuteNonQuery();
-
-                //Creo la view con i dati strumentimusicali + ottoni (solo se strumento è ottone)
-                string _ddlCREATEVIEW = "CREATE VIEW strumenti_ottoni " +
-                    "(ID, colori, pathimmagine, modello, pesokg, casaproduttriceID, notaminimaID, notamassimaID, " +
-                    "strumento, materialecorpo, laccatura, placcatura, materialebocchino, rivestimentobocchino, lunghezzacm, larghezzacm, altezzacm) " +
-                    "AS (SELECT S.*, " +
-                    "O.strumento, " +
-                    "O.materialecorpo, " +
-                    "O.laccatura, " +
-                    "O.placcatura, " +
-                    "O.materialebocchino, " +
-                    "O.rivestimentobocchino, " +
-                    "O.lunghezzacm, " +
-                    "O.larghezzacm, " +
-                    "O.altezzacm " +
-                    "FROM strumentimusicali AS S, ottoni as O " +
-                    "WHERE S.ID = O.strumentomusicaleID)";
-
-                //Creo l'oggetto command
-                MySqlCommand _cmdCREATEVIEW = new MySqlCommand(_ddlCREATEVIEW, connection);
-
-                //Eseguo il comando creando
-                _cmdCREATEVIEW.ExecuteNonQuery();
-
-                //Seleziono tutte le righe dalla view
-                string _query = "SELECT * FROM strumenti_ottoni";
+                //Creo la query con la join tra strumentimusicali e ottoni
+                //Abbino le righe in base a ID <-> strumentomusicaleID
+                string _query = "SELECT strumentimusicali.*, " +
+                    "ottoni.strumento, " +
+                    "ottoni.materialecorpo, " +
+                    "ottoni.laccatura, " +
+                    "ottoni.placcatura, " +
+                    "ottoni.materialebocchino, " +
+                    "ottoni.rivestimentobocchino, " +
+                    "ottoni.lunghezzacm, " +
+                    "ottoni.larghezzacm, " +
+                    "ottoni.altezzacm " +
+                    "FROM strumentimusicali AS S JOIN ottoni AS O " +
+                    "ON S.ID = O.strumentomusicaleID";
 
                 //Creo il command
-                MySqlCommand _cmdSELECT = new MySqlCommand(_query, connection);
+                MySqlCommand _cmd = new MySqlCommand(_query, connection);
 
                 //Eseguo il comando creando il DataReader
-                MySqlDataReader _dataReader = _cmdSELECT.ExecuteReader();
+                MySqlDataReader _dataReader = _cmd.ExecuteReader();
 
                 if(_dataReader.HasRows) //Controllo se la view ha dei record
                 {
                     while(_dataReader.Read()) //Se ne ha li leggo tutti
                     {
-                        _ottoni.Add(CaricaSingoloStrumentoOttone(ref _dataReader));
+                        _ottoni.Add(CaricaSingoloStrumentoOttone(ref _dataReader, false));
                     }
                 }
 
                 _dataReader.Close();
 
-                comunicazione = "Ottoni caricati correttamente dal DataBase";
+                comunicazione = "Strumenti della famiglia degli ottoni caricati correttamente dal DataBase";
             }
             catch(Exception ex)
             {
