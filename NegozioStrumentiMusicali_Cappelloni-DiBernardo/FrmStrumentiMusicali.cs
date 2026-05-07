@@ -66,7 +66,7 @@ namespace NegozioStrumentiMusicali
                 //Tag
                 _lvi.Tag = listaStrumenti[i];
 
-                //Aggiuno l'item alla listview
+                //Aggiungo l'item alla listview
                 listView.Items.Add(_lvi);
             }
         }
