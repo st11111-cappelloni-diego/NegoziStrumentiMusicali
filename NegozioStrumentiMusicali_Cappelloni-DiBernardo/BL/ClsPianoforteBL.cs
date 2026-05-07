@@ -245,16 +245,16 @@ namespace NegozioStrumentiMusicali
             return _pianoforte;
         }        
 	    /// <summary>
-        /// Caricamento dei dati dal DataReader (che legge view di strumentimusicali + strumentiacorda) ad un'istanza di ClsOttone
+        /// Caricamento dei dati dal DataReader (che legge join o view di strumentimusicali + strumentiacorda) ad un'istanza di ClsOttone
         /// </summary>
         /// <param name="dataReader"></param>
         /// <returns></returns>
-        private static ClsOttone CaricaSingoloStrumentoPianoforte(ref MySqlDataReader dataReader)
+        private static ClsPianoforte CaricaSingoloStrumentoPianoforte(ref MySqlDataReader dataReader, bool caricaCasaProduttriceID)
         {
             ClsPianoforte _pianoforte = new ClsPianoforte();
             ClsStrumentoMusicale _strumento = new ClsStrumentoMusicale();
 
-            _pianoforte = CaricaSingoloPianoforte(ref dataReader, false);
+            _pianoforte = CaricaSingoloPianoforte(ref dataReader, caricaCasaProduttriceID);
             _strumento = ClsStrumentoMusicaleBL.CaricaSingoloStrumento(ref dataReader);
 
             _pianoforte = MergeStrumentoPianoforte(_strumento, _pianoforte);
@@ -269,7 +269,7 @@ namespace NegozioStrumentiMusicali
         /// <returns></returns>
         private static ClsPianoforte MergeStrumentoPianoforte(ClsStrumentoMusicale strumento, ClsPianoforte pianoforte)
         {
-            ClsOttone _pianoforteFinale = pianoforte;
+            ClsPianoforte _pianoforteFinale = pianoforte;
 
             _pianoforteFinale.Colori = strumento.Colori;
             _pianoforteFinale.CasaProduttriceID = strumento.CasaProduttriceID;
@@ -298,49 +298,32 @@ namespace NegozioStrumentiMusicali
                 //Apro la connessione
                 connection.Open();
 
-                //Elimino la vista (se esiste) prima di ricrearla
-                string _ddlDROPVIEW = "DROP VIEW IF EXISTS strumenti_pianoforti";
-                MySqlCommand _cmdDROPVIEW = new MySqlCommand(_ddlDROPVIEW, connection);
-                _cmdDROPVIEW.ExecuteNonQuery();
-
-                //Creo la view con i dati strumentimusicali + pianoforti (solo se strumento è pianoforte)
-                string _ddlCREATEVIEW = "CREATE VIEW strumenti_pianoforti " +
-                    "(ID, colori, pathimmagine, modello, pesokg, casaproduttriceID, notaminimaID, notamassimaID, " +
-                    "tipo, numerotasti, materialetastibianchi, materialetastineri, materialecorpopfacustico," +
-                    "altezzacm, lunghezzacm, profonditacm, altezzaginocchiocm) " +
-                    "AS (SELECT S.*, " +
-                    "P.tipo, " +
-                    "P.numerotasti, " +
-                    "P.materialetastibianchi, " +
-                    "P.materialetastineri, " +
-                    "P.materialecorpopfacustico, " +
-                    "P.altezzacm, " +
-                    "P.lunghezzacm, " +
-                    "P.profonditacm, " +
-                    "P.altezzaginocchiocm " +
-                    "FROM strumentimusicali AS S, pianoforti as P " +
-                    "WHERE S.ID = P.strumentomusicaleID)";
-
-                //Creo l'oggetto command
-                MySqlCommand _cmdCREATEVIEW = new MySqlCommand(_ddlCREATEVIEW, connection);
-
-                //Eseguo il comando creando
-                _cmdCREATEVIEW.ExecuteNonQuery();
-
-                //Seleziono tutte le righe dalla view
-                string _query = "SELECT * FROM strumenti_pianoforti";
+                //Creo la query con la join tra strumentimusicali e pianoforti
+                //Abbino le righe in base a ID <-> strumentomusicaleID
+                string _query = "SELECT strumentimusicali.*, " +
+                    "pianoforti.tipo, " +
+                    "pianoforti.numerotasti, " +
+                    "pianoforti.materialetastibianchi, " +
+                    "pianoforti.materialetastineri, " +
+                    "pianoforti.materialecorpopfacustico, " +
+                    "pianoforti.altezzacm, " +
+                    "pianoforti.lunghezzacm, " +
+                    "pianoforti.profonditacm, " +
+                    "pianoforti.altezzaginocchiocm, " +
+                    "FROM strumentimusicali AS S JOIN pianoforti AS P " +
+                    "ON S.ID = P.strumentomusicaleID";
 
                 //Creo il command
-                MySqlCommand _cmdSELECT = new MySqlCommand(_query, connection);
+                MySqlCommand _cmd = new MySqlCommand(_query, connection);
 
                 //Eseguo il comando creando il DataReader
-                MySqlDataReader _dataReader = _cmdSELECT.ExecuteReader();
+                MySqlDataReader _dataReader = _cmd.ExecuteReader();
 
                 if(_dataReader.HasRows) //Controllo se la view ha dei record
                 {
                     while(_dataReader.Read()) //Se ne ha li leggo tutti
                     {
-                        _pianoforti.Add(CaricaSingoloStrumentoPianoforte(ref _dataReader));
+                        _pianoforti.Add(CaricaSingoloStrumentoPianoforte(ref _dataReader, false));
                     }
                 }
 

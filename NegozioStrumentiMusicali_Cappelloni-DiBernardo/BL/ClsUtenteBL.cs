@@ -32,7 +32,8 @@ namespace NegozioStrumentiMusicali
                 string _dml =
                     "INSERT into utenti " +
                     "(username, password, nome, cognome, email, datadinascita, genere, pathimmagine, adminsoftware, adminnegozio, bandito)" +
-                    "VALUES(@username, @password, @nome, @cognome, @email, @datadinascita, @genere, @pathimmagine, @adminsoftware, @adminnegozio, @bandito)";
+                    "VALUES(@username, SHA2(@password, 256), @nome, @cognome, @email, @datadinascita, @genere, @pathimmagine, @adminsoftware, @adminnegozio, @bandito)";
+                //Password criptata con algoritmo SHA2
 
                 //Creo l'oggetto command
                 MySqlCommand _cmd = new MySqlCommand(_dml, connection);
@@ -72,7 +73,7 @@ namespace NegozioStrumentiMusicali
         /// <param name="connection">Connessione al DB</param>
         /// <param name="utente">Dati record da aggiornare</param>
         /// <param name="comunicazione">Comunicazione in uscita</param>
-        public static void UpdateUtente(ref MySqlConnection connection, ClsUtente utente, out string comunicazione)
+        public static void UpdateUtente(ref MySqlConnection connection, ClsUtente utente, bool criptarePassword ,out string comunicazione)
         {
             //VARIABILI
             comunicazione = String.Empty;
@@ -85,7 +86,6 @@ namespace NegozioStrumentiMusicali
                 //Compongo il comando dml
                 string _dml =
                     "UPDATE utenti SET " +
-                    "password = @password, " +
                     "nome = @nome, " +
                     "cognome = @cognome, " +
                     "email = @email, " +
@@ -94,8 +94,18 @@ namespace NegozioStrumentiMusicali
                     "pathImmagine = @pathImmagine, " +
                     "adminSoftware = @adminSoftware, " +
                     "adminNegozio = @adminNegozio, " +
-                    "bandito = @bandito " +
-                    "WHERE username = @username";
+                    "bandito = @bandito, ";
+
+                if(criptarePassword)
+                {
+                    _dml += "password = SHA2(@password, 256) ";
+                }
+                else
+                {
+                    _dml += "password = @password ";
+                }
+
+                _dml += "WHERE username = @username";
 
 
                 //Creo l'oggetto command
