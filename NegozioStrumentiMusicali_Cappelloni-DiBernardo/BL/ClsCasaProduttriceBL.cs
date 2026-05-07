@@ -246,6 +246,9 @@ namespace NegozioStrumentiMusicali
                 //Creo l'oggetto command
                 MySqlCommand _cmd = new MySqlCommand(_query, connection);
 
+                //Inserisco il valore
+                _cmd.Parameters.AddWithValue("@ID", ID);
+
                 //Eseguo il comando creando il DataReader
                 MySqlDataReader _dataReader = _cmd.ExecuteReader();
 
