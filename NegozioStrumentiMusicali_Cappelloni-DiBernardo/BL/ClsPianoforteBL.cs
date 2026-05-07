@@ -151,7 +151,7 @@ namespace NegozioStrumentiMusicali
         /// <param name="connection">Connessione al DB</param>
         /// <param name="pianoforte">Record da eliminare</param>
         /// <param name="comunicazione">Comunicazione in uscita</param>
-        public static void DeleteStrumentoMusicale(ref MySqlConnection connection, ClsPianoforte pianoforte, out string comunicazione)
+        public static void DeletePianoforte(ref MySqlConnection connection, ClsPianoforte pianoforte, out string comunicazione)
         {
             //VARIABILI LOCALI
             comunicazione = String.Empty;
@@ -184,6 +184,182 @@ namespace NegozioStrumentiMusicali
                 //Chiudo la connessione
                 connection.Close();
             }
+        }
+        /// <summary>
+        /// Caricamento dei dati dal DataReader (che legge record di pianoforti) ad un'istanza di ClsPianoforte
+        /// </summary>
+        /// <param name="dataReader"></param>
+        /// <param name="caricaStrumentoMusicaleID"></param>
+        /// <returns></returns>
+        private static ClsPianoforte CaricaSingoloPianoforte(ref MySqlDataReader dataReader, bool caricaStrumentoMusicaleID)
+        {
+            ClsPianoforte _pianoforte = new ClsPianoforte();
+
+            if(caricaStrumentoMusicaleID)
+            {
+                _pianoforte.ID = Convert.ToInt64(dataReader["strumentomusicaleID"]);
+            }
+
+            _pianoforte.Tipo = (ClsPianoforte.eTIPO_PF)Enum.Parse 
+            (
+                typeof(ClsPianoforte.eTIPO_PF),
+                dataReader["tipo"].ToString()
+            );
+
+            if(dataReader["materialecorpopfacustico"] == DBNull.Value)
+            {
+                _pianoforte.MaterialeCorpoPFAcustico = null;
+            }
+            else
+            {
+                _pianoforte.MaterialeCorpoPFAcustico = (Program.eLEGNO)Enum.Parse
+                (
+                    typeof(Program.eLEGNO),
+                    dataReader["materialecorpopfacustico"].ToString()
+                );
+            }
+
+            _pianoforte.MaterialeTastiBianchi = (ClsPianoforte.eMATERIALE_TASTI_PF)Enum.Parse
+            (
+                typeof(Program.eLEGNO),
+                dataReader["materialetastibianchi"].ToString()
+            );
+
+            _pianoforte.MaterialeTastiNeri = (ClsPianoforte.eMATERIALE_TASTI_PF)Enum.Parse
+            (
+                typeof(Program.eLEGNO),
+                dataReader["materialetastineri"].ToString()
+            );
+
+            _pianoforte.NumeroTasti = Convert.ToInt32(dataReader["numerotasti"]);
+
+            _pianoforte.AltezzaCM = Convert.ToSingle(dataReader["altezzacm"]);
+
+            _pianoforte.LunghezzaCM = Convert.ToSingle(dataReader["lunghezzacm"]);
+
+            _pianoforte.ProfonditaCM = Convert.ToSingle(dataReader["profonditacm"]);
+
+            _pianoforte.AltezzaGinocchioCM = Convert.ToSingle(dataReader["altezzaginocchiocm"]);
+ 
+
+            return _pianoforte;
+        }        
+	    /// <summary>
+        /// Caricamento dei dati dal DataReader (che legge view di strumentimusicali + strumentiacorda) ad un'istanza di ClsOttone
+        /// </summary>
+        /// <param name="dataReader"></param>
+        /// <returns></returns>
+        private static ClsOttone CaricaSingoloStrumentoPianoforte(ref MySqlDataReader dataReader)
+        {
+            ClsPianoforte _pianoforte = new ClsPianoforte();
+            ClsStrumentoMusicale _strumento = new ClsStrumentoMusicale();
+
+            _pianoforte = CaricaSingoloPianoforte(ref dataReader, false);
+            _strumento = ClsStrumentoMusicaleBL.CaricaSingoloStrumento(ref dataReader);
+
+            _pianoforte = MergeStrumentoPianoforte(_strumento, _pianoforte);
+        
+            return _pianoforte;
+        }
+        /// <summary>
+        /// Mette in un istanza di ClsPianoforte dati di generalizzazione da strumento e dati di specializzazione da strumento a corda
+        /// </summary>
+        /// <param name="strumento"></param>
+        /// <param name="ottone"></param>
+        /// <returns></returns>
+        private static ClsPianoforte MergeStrumentoPianoforte(ClsStrumentoMusicale strumento, ClsPianoforte pianoforte)
+        {
+            ClsOttone _pianoforteFinale = pianoforte;
+
+            _pianoforteFinale.Colori = strumento.Colori;
+            _pianoforteFinale.CasaProduttriceID = strumento.CasaProduttriceID;
+            _pianoforteFinale.Immagine = strumento.Immagine;
+            _pianoforteFinale.PesoKG = strumento.PesoKG;
+            _pianoforteFinale.NotaMassimaID = strumento.NotaMassimaID;
+            _pianoforteFinale.NotaMinimaID = strumento.NotaMinimaID;
+            _pianoforteFinale.Modello = strumento.Modello;
+
+            return _pianoforteFinale;
+        }
+        /// <summary>
+        /// Prende tutti i record di pianoforti con anche le informazione della generalizzazione da strumentimusicali
+        /// </summary>
+        /// <param name="connection">Connessione al DB</param>
+        /// <param name="comunicazione">Comunicazione in uscita</param>
+        /// <returns>La lista con tutti i record. Se è nulla il caricamento non è andato a buon fine</returns>
+        public static List<ClsPianoforte> GetAllPianoforti(ref MySqlConnection connection, out string comunicazione)
+        {
+            //VARIABILI
+            comunicazione = String.Empty;
+            List<ClsPianoforte> _pianoforti = new List<ClsPianoforte>();
+
+            try
+            {
+                //Apro la connessione
+                connection.Open();
+
+                //Elimino la vista (se esiste) prima di ricrearla
+                string _ddlDROPVIEW = "DROP VIEW IF EXISTS strumenti_pianoforti";
+                MySqlCommand _cmdDROPVIEW = new MySqlCommand(_ddlDROPVIEW, connection);
+                _cmdDROPVIEW.ExecuteNonQuery();
+
+                //Creo la view con i dati strumentimusicali + pianoforti (solo se strumento è pianoforte)
+                string _ddlCREATEVIEW = "CREATE VIEW strumenti_pianoforti " +
+                    "(ID, colori, pathimmagine, modello, pesokg, casaproduttriceID, notaminimaID, notamassimaID, " +
+                    "tipo, numerotasti, materialetastibianchi, materialetastineri, materialecorpopfacustico," +
+                    "altezzacm, lunghezzacm, profonditacm, altezzaginocchiocm) " +
+                    "AS (SELECT S.*, " +
+                    "P.tipo, " +
+                    "P.numerotasti, " +
+                    "P.materialetastibianchi, " +
+                    "P.materialetastineri, " +
+                    "P.materialecorpopfacustico, " +
+                    "P.altezzacm, " +
+                    "P.lunghezzacm, " +
+                    "P.profonditacm, " +
+                    "P.altezzaginocchiocm " +
+                    "FROM strumentimusicali AS S, pianoforti as P " +
+                    "WHERE S.ID = P.strumentomusicaleID)";
+
+                //Creo l'oggetto command
+                MySqlCommand _cmdCREATEVIEW = new MySqlCommand(_ddlCREATEVIEW, connection);
+
+                //Eseguo il comando creando
+                _cmdCREATEVIEW.ExecuteNonQuery();
+
+                //Seleziono tutte le righe dalla view
+                string _query = "SELECT * FROM strumenti_pianoforti";
+
+                //Creo il command
+                MySqlCommand _cmdSELECT = new MySqlCommand(_query, connection);
+
+                //Eseguo il comando creando il DataReader
+                MySqlDataReader _dataReader = _cmdSELECT.ExecuteReader();
+
+                if(_dataReader.HasRows) //Controllo se la view ha dei record
+                {
+                    while(_dataReader.Read()) //Se ne ha li leggo tutti
+                    {
+                        _pianoforti.Add(CaricaSingoloStrumentoPianoforte(ref _dataReader));
+                    }
+                }
+
+                _dataReader.Close();
+
+                comunicazione = "Pianoforti caricati correttamente dal DataBase";
+            }
+            catch(Exception ex)
+            {
+                comunicazione = ex.Message;
+                _pianoforti = null;
+            }
+            finally
+            {
+                //Chiudo la connessione
+                connection.Close();
+            }
+
+            return _pianoforti;
         }
     }
 }
