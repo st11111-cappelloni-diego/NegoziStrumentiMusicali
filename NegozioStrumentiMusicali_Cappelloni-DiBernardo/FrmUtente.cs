@@ -28,5 +28,10 @@ namespace NegozioStrumentiMusicali
         {
 
         }
+
+        private void btnVisualizzaPassword_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

@@ -145,6 +145,12 @@
     <Compile Include="FrmLegno.Designer.cs">
       <DependentUpon>FrmLegno.cs</DependentUpon>
     </Compile>
+    <Compile Include="FrmLogin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmLogin.Designer.cs">
+      <DependentUpon>FrmLogin.cs</DependentUpon>
+    </Compile>
     <Compile Include="FrmNegozio.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -168,6 +174,12 @@
     </Compile>
     <Compile Include="FrmIndirizzo.Designer.cs">
       <DependentUpon>FrmIndirizzo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmRegistrazione.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmRegistrazione.Designer.cs">
+      <DependentUpon>FrmRegistrazione.cs</DependentUpon>
     </Compile>
     <Compile Include="FrmStrumentoACorda.cs">
       <SubType>Form</SubType>
@@ -234,6 +246,9 @@
     <EmbeddedResource Include="FrmLegno.resx">
       <DependentUpon>FrmLegno.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FrmLogin.resx">
+      <DependentUpon>FrmLogin.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FrmNegozio.resx">
       <DependentUpon>FrmNegozio.cs</DependentUpon>
     </EmbeddedResource>
@@ -245,6 +260,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FrmIndirizzo.resx">
       <DependentUpon>FrmIndirizzo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmRegistrazione.resx">
+      <DependentUpon>FrmRegistrazione.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmStrumentoACorda.resx">
       <DependentUpon>FrmStrumentoACorda.cs</DependentUpon>
