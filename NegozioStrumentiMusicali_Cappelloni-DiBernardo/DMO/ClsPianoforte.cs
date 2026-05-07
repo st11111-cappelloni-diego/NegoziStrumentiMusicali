@@ -35,7 +35,7 @@ namespace NegozioStrumentiMusicali
         private int _numeroTasti;
         private eMATERIALE_TASTI_PF _materialeTastiBianchi;
         private eMATERIALE_TASTI_PF _materialeTastiNeri;
-        private Program.eLEGNO _materialeCorpoPFAcustico;
+        private Program.eLEGNO? _materialeCorpoPFAcustico;
         private float _altezzaCM;
         private float _lunghezzaCM;
         private float _profonditaCM;
@@ -65,7 +65,10 @@ namespace NegozioStrumentiMusicali
         }
         public eMATERIALE_TASTI_PF MaterialeTastiBianchi { get => _materialeTastiBianchi; set => _materialeTastiBianchi = value; }
         public eMATERIALE_TASTI_PF MaterialeTastiNeri { get => _materialeTastiNeri; set => _materialeTastiNeri = value; }
-        public Program.eLEGNO MaterialeCorpoPFAcustico { get => _materialeCorpoPFAcustico; set => _materialeCorpoPFAcustico = value; }
+        /// <summary>
+        /// Questa proprietà e suo attributo sono nullable
+        /// </summary>
+        public Program.eLEGNO? MaterialeCorpoPFAcustico { get => _materialeCorpoPFAcustico; set => _materialeCorpoPFAcustico = value; }
         public float AltezzaCM
         {
             get
