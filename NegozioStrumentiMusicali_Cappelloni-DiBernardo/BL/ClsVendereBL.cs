@@ -117,5 +117,98 @@ namespace NegozioStrumentiMusicali
                 connection.Close();
             }
         }
+        /// <summary>
+        /// Carica i dati dal DataReader ad un'istanza di ClsVendere
+        /// </summary>
+        /// <param name="dataReader"></param>
+        /// <returns></returns>
+        private static ClsVendere CaricaSingolaVendere(ref MySqlDataReader dataReader)
+        {
+            ClsVendere _vendere = new ClsVendere();
+
+            _vendere.ID = Convert.ToInt64(dataReader["ID"]);
+            _vendere.NegozioID = Convert.ToInt64(dataReader["negozioID"]);
+            _vendere.StrumentoMusicaleID = Convert.ToInt64(dataReader["strumentomusicaleID"]);
+
+            return _vendere;
+        }
+        /// <summary>
+        /// Caricamento di alcuni record di strumentimusicali in base a negozioID o strumentoMusicaleID.
+        /// Escludi negozioID passando come valore -1, escludi strumentoMusicaleID passando come valore -1
+        /// </summary>
+        /// <param name="connection"></param>
+        /// <param name="negozioID"></param>
+        /// <param name="strumentoMusicaleID"></param>
+        /// <param name="comunicazione"></param>
+        /// <returns></returns>
+        public static List<ClsVendere> GetSomeVendere(ref MySqlConnection connection, long negozioID, long strumentoMusicaleID, out string comunicazione)
+        {
+            //VARIABILI
+            comunicazione = String.Empty;
+            List<ClsVendere> _listaVendere = new List<ClsVendere>();
+
+            try
+            {
+                //Apro la connessione
+                connection.Open();
+
+                //Compongo la query
+                string _query = "SELECT * FROM vendere WHERE ";
+                //Posso cercare per un valore alla volta quindi controllo in questo ordine: negozioID, strumentoMusicaleID
+                if(negozioID > -1)
+                {
+                    //Il campo per cui cercare è negozioID
+                    _query += "negozioID = @negozioID";
+                }
+                else
+                {
+                    //Il campo per cui cercare è strumentoMusicaleID
+                    _query += "strumentomusicaleID = @strumentomusicaleID";
+                }
+
+                //Creo l'oggetto command
+                MySqlCommand _cmd = new MySqlCommand(_query, connection);
+
+                //Inserisco i valori
+                //Posso cercare per un valore alla volta quindi controllo in questo ordine: negozioID, strumentoMusicaleID
+                if (negozioID > -1)
+                {
+                    //Il campo per cui cercare è negozioID                   
+                    _cmd.Parameters.AddWithValue("@negozioID", negozioID);
+                }
+                else
+                {
+                    //Il campo per cui cercare è strumentoMusicaleID
+                    _cmd.Parameters.AddWithValue("@strumentomusicaleID", strumentoMusicaleID);
+                }
+
+                //Eseguo il comando creando il DataReader
+                MySqlDataReader _dataReader = _cmd.ExecuteReader();
+
+                if(_dataReader.HasRows) //Controllo se la tabella ha record
+                {
+                    while(_dataReader.Read()) //Se ne ha li leggo tutti
+                    {
+                        _listaVendere.Add(CaricaSingolaVendere(ref _dataReader));
+                    }
+                }
+
+                _dataReader.Close();
+
+                comunicazione = "Relazioni di tipo vendere caricate correttamente dal DataBase";
+            }
+            catch(Exception ex)
+            {
+                comunicazione = ex.Message;
+                _listaVendere = null;
+            }
+            finally
+            {
+                //Chiudo la connessione
+                connection.Close();
+            }
+
+            return _listaVendere;
+        }
     }
 }
