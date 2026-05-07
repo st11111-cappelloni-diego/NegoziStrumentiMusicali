@@ -129,7 +129,6 @@ namespace NegozioStrumentiMusicali
                 connection.Close();
             }
         }
-
         /// <summary>
         /// Eliminazione di un record da indirizzi
         /// </summary>
