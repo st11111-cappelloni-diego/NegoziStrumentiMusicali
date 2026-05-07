@@ -1,4 +1,4 @@
-ï»¿using System;
+using System;
 using MySqlConnector;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,7 +30,7 @@ namespace NegozioStrumentiMusicali
                 //Inserisco le informazioni generali in strumentimusicali
                 _ID = ClsStrumentoMusicaleBL.InsertStrumentoMusicale(ref connection, strumentoACorda, out comunicazione);
 
-                //Riapro la connessione dopo che si Ã¨ chiusa in InsertStrumentoMusicale
+                //Riapro la connessione dopo che si è chiusa in InsertStrumentoMusicale
                 connection.Open();
 
                 //Creo il comando DML
@@ -97,7 +97,7 @@ namespace NegozioStrumentiMusicali
                 //Aggiorno le info generali in strumentimusicali
                 ClsStrumentoMusicaleBL.UpdateStrumentoMusicale(ref connection, strumentoACorda, out comunicazione);
 
-                //Riapro la connessione dopo che si Ã¨ chiusa in UpdateStrumentoMusicale
+                //Riapro la connessione dopo che si è chiusa in UpdateStrumentoMusicale
                 connection.Open();
 
                 //Compongo il comando dml
@@ -283,6 +283,130 @@ namespace NegozioStrumentiMusicali
             );
 
             return _strumentoACorda;
+        }        
+	/// <summary>
+        /// Caricamento dei dati dal DataReader (che legge view di strumentimusicali + strumentiacorda) ad un'istanza di ClsOttone
+        /// </summary>
+        /// <param name="dataReader"></param>
+        /// <returns></returns>
+        private static ClsOttone CaricaSingoloStrumentoStrumentoACorda(ref MySqlDataReader dataReader)
+        {
+            ClsStrumentoACorda _strumentoACorda = new ClsStrumentoACorda();
+            ClsStrumentoMusicale _strumento = new ClsStrumentoMusicale();
+
+            _strumentoACorda = CaricaSingoloStrumentoACorda(ref dataReader, false);
+            _strumento = ClsStrumentoMusicaleBL.CaricaSingoloStrumento(ref dataReader);
+
+            _strumentoACorda = MergeStrumentoStrumentoACorda(_strumento, _strumentoACorda);
+        
+            return _strumentoACorda;
+        }
+        /// <summary>
+        /// Mette in un istanza di ClsStrumentoACorda dati di generalizzazione da strumento e dati di specializzazione da strumento a corda
+        /// </summary>
+        /// <param name="strumento"></param>
+        /// <param name="ottone"></param>
+        /// <returns></returns>
+        private static ClsStrumentoACorda MergeStrumentoStrumentoACorda(ClsStrumentoMusicale strumento, ClsStrumentoACorda strumentoACorda)
+        {
+            ClsOttone _strumentoACordaFinale = strumentoACorda;
+
+            _strumentoACordaFinale.Colori = strumento.Colori;
+            _strumentoACordaFinale.CasaProduttriceID = strumento.CasaProduttriceID;
+            _strumentoACordaFinale.Immagine = strumento.Immagine;
+            _strumentoACordaFinale.PesoKG = strumento.PesoKG;
+            _strumentoACordaFinale.NotaMassimaID = strumento.NotaMassimaID;
+            _strumentoACordaFinale.NotaMinimaID = strumento.NotaMinimaID;
+            _strumentoACordaFinale.Modello = strumento.Modello;
+
+            return _strumentoACordaFinale;
+        }
+        /// <summary>
+        /// Prende tutti i record di strumentiacorda con anche le informazione della generalizzazione da strumentimusicali
+        /// </summary>
+        /// <param name="connection">Connessione al DB</param>
+        /// <param name="comunicazione">Comunicazione in uscita</param>
+        /// <returns>La lista con tutti i record. Se è nulla il caricamento non è andato a buon fine</returns>
+        public static List<ClsStrumentoACorda> GetAllStrumentiACorda(ref MySqlConnection connection, out string comunicazione)
+        {
+            //VARIABILI
+            comunicazione = String.Empty;
+            List<ClsStrumentoACorda> _strumentiACorda = new List<ClsStrumentoACorda>();
+
+            try
+            {
+                //Apro la connessione
+                connection.Open();
+
+                //Elimino la vista (se esiste) prima di ricrearla
+                string _ddlDROPVIEW = "DROP VIEW IF EXISTS strumenti_strumentiacorda";
+                MySqlCommand _cmdDROPVIEW = new MySqlCommand(_ddlDROPVIEW, connection);
+                _cmdDROPVIEW.ExecuteNonQuery();
+
+                //Creo la view con i dati strumentimusicali + strumeniacorda (solo se strumento è strumento a corda)
+                string _ddlCREATEVIEW = "CREATE VIEW strumenti_strumentiacorda " +
+                    "(ID, colori, pathimmagine, modello, pesokg, casaproduttriceID, notaminimaID, notamassimaID, " +
+                    "strumento, numerocorde, lunghezzamanicocm, ampiezzamanicocm, spessoremanicocm, " +
+                    "materialemanico, materialetastiera, lunghezzacorpocm, ampiezzacorpocm, spessorecorpocm, materialecorpo," +
+                    "tasti, pickup1, pickup2, pickup3) " +
+                    "AS (SELECT S.*, " +
+                    "C.strumento, " +
+                    "C.numerocorde, " +
+                    "C.lunghezzamanicocm, " +
+                    "C.ampiezzamanicocm, " +
+                    "C.spessoremanicocm, " +
+                    "C.materialemanico, " +
+                    "C.materialetastiera, " +
+                    "C.lunghezzacorpocm, " +
+                    "C.ampiezzacorpocm, " +
+		    "C.spessorecorpocm, " +
+		    "C.materialecorpo, " +
+		    "C.tasti, " +
+	            "C.pickup1, " +
+		    "C.pickup2, " +
+		    "C.pickup3 " +
+                    "FROM strumentimusicali AS S, strumentiacorda as C " +
+                    "WHERE S.ID = C.strumentomusicaleID)";
+
+                //Creo l'oggetto command
+                MySqlCommand _cmdCREATEVIEW = new MySqlCommand(_ddlCREATEVIEW, connection);
+
+                //Eseguo il comando creando
+                _cmdCREATEVIEW.ExecuteNonQuery();
+
+                //Seleziono tutte le righe dalla view
+                string _query = "SELECT * FROM strumenti_strumentiacorda";
+
+                //Creo il command
+                MySqlCommand _cmdSELECT = new MySqlCommand(_query, connection);
+
+                //Eseguo il comando creando il DataReader
+                MySqlDataReader _dataReader = _cmdSELECT.ExecuteReader();
+
+                if(_dataReader.HasRows) //Controllo se la view ha dei record
+                {
+                    while(_dataReader.Read()) //Se ne ha li leggo tutti
+                    {
+                        _strumentiACorda.Add(CaricaSingoloStrumentoStrumentoACorda(ref _dataReader));
+                    }
+                }
+
+                _dataReader.Close();
+
+                comunicazione = "Strumenti a corda caricati correttamente dal DataBase";
+            }
+            catch(Exception ex)
+            {
+                comunicazione = ex.Message;
+                _strumentiACorda = null;
+            }
+            finally
+            {
+                //Chiudo la connessione
+                connection.Close();
+            }
+
+            return _strumentiACorda;
         }
     }
 }
