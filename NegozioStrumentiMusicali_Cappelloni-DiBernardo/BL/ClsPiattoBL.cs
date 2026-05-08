@@ -155,8 +155,10 @@ namespace NegozioStrumentiMusicali
         /// Caricamento di tutti i record di piatti
         /// </summary>
         /// <param name="connection">Connessione al DB</param>
-        /// <param name="comunicazione">Comunicaziopiatti</returns>
-        public static List<ClsPiatto> GetAllPiatti(ref MySqlConnection connection, out string comunicazione)
+        /// <param name="comunicazione">Comunicazione in uscita</param>
+        /// <param name="limiteRecord">Numero massimo di record da caricare. Accetta valori da 2 in su</param>
+        /// <returns>Tutti i record di piatti</returns>
+        public static List<ClsPiatto> GetAllPiatti(ref MySqlConnection connection, out string comunicazione, int limiteRecord = 0)
         {
             //VARIABILI
             List<ClsPiatto> _piatti = new List<ClsPiatto>();
@@ -170,8 +172,20 @@ namespace NegozioStrumentiMusicali
                 //Compongo la query
                 string _query = "SELECT * FROM piatti";
 
+                //Aggiungo il limite se richiesto
+                if(limiteRecord >= 2)
+                {
+                    _query += " LIMIT @limite";
+                }
+
                 //Creo l'oggetto command
                 MySqlCommand _cmd = new MySqlCommand(_query, connection);
+
+                //Inserisco il limite se richiesto
+                if (limiteRecord >= 2)
+                {
+                    _cmd.Parameters.AddWithValue("@limite", limiteRecord);
+                }
 
                 //Eseguo il command creando l'oggetto DataReader
                 MySqlDataReader _dataReader = _cmd.ExecuteReader();
