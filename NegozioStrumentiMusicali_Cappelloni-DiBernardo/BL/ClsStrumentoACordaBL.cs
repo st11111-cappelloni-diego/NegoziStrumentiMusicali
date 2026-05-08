@@ -325,9 +325,11 @@ namespace NegozioStrumentiMusicali
         /// Prende tutti i record di strumentiacorda con anche le informazione della generalizzazione da strumentimusicali
         /// </summary>
         /// <param name="connection">Connessione al DB</param>
+        /// <param name="ordinaPerPiuRecente">Se true, ordina per ID in maniera decrescente. Se false ordina per ID in maniera crescente</param>
         /// <param name="comunicazione">Comunicazione in uscita</param>
+        /// <param name="limiteRecord">Numero massimo di record da caricare. Accetta valori da 2 in su</param>
         /// <returns>La lista con tutti i record. Se è nulla il caricamento non è andato a buon fine</returns>
-        public static List<ClsStrumentoACorda> GetAllStrumentiACorda(ref MySqlConnection connection, out string comunicazione)
+        public static List<ClsStrumentoACorda> GetAllStrumentiACorda(ref MySqlConnection connection, bool ordinaPerPiuRecente, out string comunicazione, int limiteRecord = 0)
         {
             //VARIABILI
             comunicazione = String.Empty;
@@ -356,10 +358,32 @@ namespace NegozioStrumentiMusicali
                     "strumentiacorda.pickup2, " +
                     "strumentiacorda.pickup3 " +
                     "FROM strumentimusicali AS S JOIN strumentiacorda AS C " +
-                    "ON S.ID = C.strumentomusicaleID";
+                    "ON S.ID = C.strumentomusicaleID " +
+                    "ORDER BY ID ";
 
-                //Creo il command
+                if (ordinaPerPiuRecente)
+                {
+                    _query += "DESC";
+                }
+                else
+                {
+                    _query += "ASC";
+                }
+
+                //Metto limite se richiesto
+                if (limiteRecord >= 2)
+                {
+                    _query += " LIMIT @limite";
+                }
+
+                //Creo l'oggetto command
                 MySqlCommand _cmd = new MySqlCommand(_query, connection);
+
+                //Inserisco il limite se richiesto
+                if (limiteRecord >= 2)
+                {
+                    _cmd.Parameters.AddWithValue("@limite", limiteRecord);
+                }
 
                 //Eseguo il comando creando il DataReader
                 MySqlDataReader _dataReader = _cmd.ExecuteReader();
