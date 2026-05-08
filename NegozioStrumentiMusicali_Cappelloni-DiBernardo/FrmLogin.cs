@@ -21,8 +21,52 @@ namespace NegozioStrumentiMusicali
             InitializeComponent();
         }
 
-        private void btnAccedi_Click(object sender, EventArgs e)
+
+        private async void CaricaDati(bool ordinaPerPiuRecente, int limiteRecord)
         {
+            string _comunicazione;
+            await Task.WhenAll
+            (
+                //Note musicali: Ordinate sempre dalla più bassa alla più alta. Le carico tutte
+                Task.Run
+                (() => 
+                    ClsArchivio.NoteMusicali = ClsNotaMusicaleBL.GetAllNoteMusicali(ref Program._connessioneAlDB, false, out _comunicazione)
+                ),
+                Task.Run
+                (() => 
+                    ClsArchivio.Tamburi = ClsTamburoBL.GetAllTamburi(ref Program._connessioneAlDB, ordinaPerPiuRecente, out _comunicazione, limiteRecord)
+                ),
+                Task.Run
+                (() => 
+                    ClsArchivio.Piatti = ClsPiattoBL.GetAllPiatti(ref Program._connessioneAlDB, ordinaPerPiuRecente, out _comunicazione, limiteRecord)
+                ),
+                Task.Run
+                (() =>
+                    ClsArchivio.Pianoforti = ClsPianoforteBL.GetAllPianoforti(ref Program._connessioneAlDB, ordinaPerPiuRecente, out _comunicazione, limiteRecord)
+                ),
+                Task.Run
+                (() =>
+                    ClsArchivio.Legni = ClsLegnoBL.GetAllLegni(ref Program._connessioneAlDB, ordinaPerPiuRecente, out _comunicazione, limiteRecord)
+                ),
+                Task.Run
+                (() =>
+                    ClsArchivio.Ottoni = ClsOttoneBL.GetAllOttoni(ref Program._connessioneAlDB, ordinaPerPiuRecente, out _comunicazione, limiteRecord)
+                ),
+                Task.Run
+                (()=>
+                    ClsArchivio.StrumentiACorda = ClsStrumentoACordaBL.GetAllStrumentiACorda(ref Program._connessioneAlDB, ordinaPerPiuRecente, out _comunicazione, limiteRecord)
+                ),
+                //Negozi: Li carico tutti ordinandoli in maniera crescente
+                Task.Run
+                (()=>
+                    ClsArchivio.Negozi = ClsNegozioBL.
+                )
+            );
+        }
+
+
+    private void btnAccedi_Click(object sender, EventArgs e)
+    {
             string _username = tbUsername.Text;
             string _password = tbPassword.Text;
             string _comunicazione = String.Empty;
@@ -32,21 +76,29 @@ namespace NegozioStrumentiMusicali
             if (_credenzialiGiuste)
             {
                 //Criptare la password prima di fare il confronto
-                _password = Criptografia(_password);
+                _password = Crittografia(_password);
 
-                ClsUtente _utente = ClsUtenteBL.GetOneUtente(ref Program._connessioneAlDB, _username, out _comunicazione);
-                if (_utente == null) //L'utente con l'username inserito non esiste o altro problema legato al DB
+                ClsArchivio.UtenteAttuale = ClsUtenteBL.GetOneUtente(ref Program._connessioneAlDB, _username, out _comunicazione);
+                if (ClsArchivio.UtenteAttuale == null) //L'utente con l'username inserito non esiste o altro problema legato al DB
                     MessageBox.Show("Il tuo accesso non è stato consentito:\n" + _comunicazione, "Accesso Negato", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 else
                 {
-                    if(_utente.Password == _password) 
+                    if(ClsArchivio.UtenteAttuale.Password == _password) 
                     {
-                        //Utente esistente e password corretta
-                        MessageBox.Show("Il tuo accesso è stato consentito", "Accesso Consentito", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        FrmHome _frmHome = new FrmHome();
-                        _frmHome.Show();
+                        if(ClsArchivio.UtenteAttuale.Bandito == false)
+                        {
+                            //Utente esistente e password corretta e non è bandito
+                            MessageBox.Show("Il tuo accesso è stato consentito", "Accesso Consentito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            FrmHome _frmHome = new FrmHome();
+                            _frmHome.Show();
 
-                        this.Hide();                        
+                            this.Hide();
+                        }
+                        else
+                        {
+                            MessageBox.Show("Il tuo accesso non è stato consentito:\nSei bandito da questa piattaforma.\nRichiedi la revoca del ban contattando uno degli admin del software",
+                                "Accesso Negato", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        }
                     }
                     else //La password inserita non corrisponde a quella sul DB
                     {
@@ -55,11 +107,9 @@ namespace NegozioStrumentiMusicali
                 }
                    
             }
-
-
         }
 
-        private static string Criptografia(string input)
+        private static string Crittografia(string input)
         {
             // converto la stringa in byte (UTF8)
             byte[] bytes = Encoding.UTF8.GetBytes(input);
@@ -78,7 +128,7 @@ namespace NegozioStrumentiMusicali
             }
         }
 
-            private bool CredenzialiGiuste(string password, string username)
+        private static bool CredenzialiGiuste(string password, string username)
         {
             if (string.IsNullOrWhiteSpace(password))
             {
@@ -103,7 +153,9 @@ namespace NegozioStrumentiMusicali
 
         private void FrmLogin_Load(object sender, EventArgs e)
         {
-
+            //Carico i record che servono a tutti i tipi di utenti su un processo separato mentre si svolge il login
+            //Ogni tabella su un processo separato. Carico i 50 record più recenti per ogni tabella
+            CaricaDati(true, 50);
         }
 
         private void btnVisualizzaPassword_Click(object sender, EventArgs e)
