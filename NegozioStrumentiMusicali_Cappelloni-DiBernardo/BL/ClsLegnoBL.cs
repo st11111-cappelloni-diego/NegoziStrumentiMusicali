@@ -248,8 +248,9 @@ namespace NegozioStrumentiMusicali
         /// </summary>
         /// <param name="connection">Connessione al DB</param>
         /// <param name="comunicazione">Comunicazione in uscita</param>
+        /// <param name="limiteRecord">Numero massimo di record da caricare. Accetta valori da 2 in su</param>
         /// <returns>La lista con tutti i record. Se è nulla il caricamento non è andato a buon fine</returns>
-        public static List<ClsLegno> GetAllLegni(ref MySqlConnection connection, out string comunicazione)
+        public static List<ClsLegno> GetAllLegni(ref MySqlConnection connection, out string comunicazione, int limiteRecord = 0)
         {
             //VARIABILI
             comunicazione = String.Empty;
@@ -272,8 +273,20 @@ namespace NegozioStrumentiMusicali
                     "FROM strumentimusicali AS S JOIN legni AS L " +
                     "ON S.ID = L.strumentomusicaleID";
 
-                //Creo il command
+                //Aggiungo il limite se richiesto
+                if (limiteRecord >= 2)
+                {
+                    _query += " LIMIT @limite";
+                }
+
+                //Creo l'oggetto command
                 MySqlCommand _cmd = new MySqlCommand(_query, connection);
+
+                //Inserisco il limite se richiesto
+                if (limiteRecord >= 2)
+                {
+                    _cmd.Parameters.AddWithValue("@limite", limiteRecord);
+                }
 
                 //Eseguo il comando creando il DataReader
                 MySqlDataReader _dataReader = _cmd.ExecuteReader();
