@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Security.Cryptography;
 using System.Windows.Forms;
 
 namespace NegozioStrumentiMusicali
@@ -31,6 +32,7 @@ namespace NegozioStrumentiMusicali
             if (_credenzialiGiuste)
             {
                 //Criptare la password prima di fare il confronto
+                _password = Criptografia(_password);
 
                 ClsUtente _utente = ClsUtenteBL.GetOneUtente(ref Program._connessioneAlDB, _username, out _comunicazione);
                 if (_utente == null || _utente.Password == _password)
@@ -47,7 +49,26 @@ namespace NegozioStrumentiMusicali
 
         }
 
-        private bool CredenzialiGiuste(string password, string username)
+        private static string Criptografia(string input)
+        {
+            // converto la stringa in byte (UTF8)
+            byte[] bytes = Encoding.UTF8.GetBytes(input);
+
+            // creo l’istanza SHA256
+            using (SHA256 sha = SHA256.Create())
+            {
+                byte[] hashBytes = sha.ComputeHash(bytes);
+
+                // converto i byte in stringa esadecimale
+                StringBuilder sb = new StringBuilder();
+                foreach (byte b in hashBytes)
+                    sb.Append(b.ToString("x2")); // "x2" = due cifre esadecimali
+
+                return sb.ToString();
+            }
+        }
+
+            private bool CredenzialiGiuste(string password, string username)
         {
             if (string.IsNullOrWhiteSpace(password))
             {
@@ -71,6 +92,11 @@ namespace NegozioStrumentiMusicali
         }
 
         private void FrmLogin_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnVisualizzaPassword_Click(object sender, EventArgs e)
         {
 
         }

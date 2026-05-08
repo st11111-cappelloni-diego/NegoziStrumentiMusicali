@@ -94,6 +94,7 @@
             this.btnVisualizzaPassword.Size = new System.Drawing.Size(46, 25);
             this.btnVisualizzaPassword.TabIndex = 59;
             this.btnVisualizzaPassword.UseVisualStyleBackColor = true;
+            this.btnVisualizzaPassword.Click += new System.EventHandler(this.btnVisualizzaPassword_Click);
             // 
             // btnRegistrazione
             // 
@@ -152,7 +153,7 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.tbUsername);
             this.Controls.Add(this.label1);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "FrmLogin";
             this.Text = "FrmLogin";
             this.Load += new System.EventHandler(this.FrmLogin_Load);
