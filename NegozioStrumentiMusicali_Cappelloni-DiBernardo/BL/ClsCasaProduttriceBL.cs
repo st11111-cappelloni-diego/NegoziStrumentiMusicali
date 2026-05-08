@@ -175,9 +175,11 @@ namespace NegozioStrumentiMusicali
         /// Caricamento di tutti i record di caseproduttrici
         /// </summary>
         /// <param name="connection">Connessione al DB</param>
+        /// <param name="ordinaPerPiuRecente">Se true, ordina per ID in maniera decrescente. Se false ordina per ID in maniera crescente</param>
         /// <param name="comunicazione">Comunicazione in uscita</param>
+        /// <param name="limiteRecord">Numero massimo di record da caricare. Accetta valori da 2 in su</param>
         /// <returns>La lista di tutti i record di caseproduttrici</returns>
-        public static List<ClsCasaProduttrice> GetAllCaseProduttrici(ref MySqlConnection connection, out string comunicazione)
+        public static List<ClsCasaProduttrice> GetAllCaseProduttrici(ref MySqlConnection connection, bool ordinaPerPiuRecente, out string comunicazione, int limiteRecord = 0)
         {
             //VARIABILI
             List<ClsCasaProduttrice> _caseProduttrici = new List<ClsCasaProduttrice>();
@@ -189,10 +191,31 @@ namespace NegozioStrumentiMusicali
                 connection.Open();
 
                 //Compongo la query
-                string _query = "SELECT * FROM caseproduttrici";
+                string _query = "SELECT * FROM caseproduttrici ORDER BY ID ";
+
+                if(ordinaPerPiuRecente)
+                {
+                    _query += "DESC";
+                }
+                else
+                {
+                    _query += "ASC";
+                }
+
+                //Metto limite se richiesto
+                if(limiteRecord >= 2)
+                {
+                    _query += " LIMIT @limite";
+                }
 
                 //Creo l'oggetto command
                 MySqlCommand _cmd = new MySqlCommand(_query, connection);
+
+                //Inserisco il limite se richiesto
+                if(limiteRecord >= 2)
+                {
+                    _cmd.Parameters.AddWithValue("@limite", limiteRecord);
+                }
 
                 //Eseguo il comando creando l'oggetto DataReader
                 MySqlDataReader _dataReader = _cmd.ExecuteReader();

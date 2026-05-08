@@ -28,46 +28,72 @@ namespace NegozioStrumentiMusicali
         #endregion
 
         #region Metodi della form
-        void PopolaListView(ListView listView, List<ClsStrumentoMusicale> listaStrumenti, int IDNegozio)
+        /// <summary>
+        /// Crea e popola un ListViewItem in base ad un istanza di ClsStrumentoMusicale
+        /// </summary>
+        /// <param name="strumento"></param>
+        /// <param name="vendereStrumento">Per estrarre informazioni che cambiano in base al negozio</param>
+        /// <returns></returns>
+        private ListViewItem CreaListViewItem(ClsStrumentoMusicale strumento, ClsVendere vendereStrumento)
         {
-            //Rimuovo tutti gli elementi dalla listview
-            listView.Clear();
+            string _temp;
 
-            List<ClsVendere> _vendereNegozio = new List<ClsVendere>();
-            ClsVendere _vendereStrumento = new ClsVendere();
+            ListViewItem _lvi = new ListViewItem(strumento.ID.ToString());
+            //Casa produttrice: Prendo il nome dal DataBase in un processo separato
+            ClsCasaProduttrice _casaProduttrice = new ClsCasaProduttrice();
+            Task.Run
+            (() =>            
+                _casaProduttrice = ClsCasaProduttriceBL.GetOneCasaProduttrice
+                (
+                    ref Program._connessioneAlDB, 
+                    strumento.CasaProduttriceID,
+                    out _temp
+                )
+            );
+            _lvi.SubItems.Add(_casaProduttrice.Nome);
+            _lvi.SubItems.Add(strumento.Modello);
+            _lvi.SubItems.Add(strumento.Colori);
+            //Consulto la vendere per prezzo e quantità           
+            _lvi.SubItems.Add(vendereStrumento.Prezzo.ToString());
+            _lvi.SubItems.Add(vendereStrumento.Quantita.ToString());
 
-            //Scorro tutti gli elementi della lista
-            for (int i = 0; i < listaStrumenti.Count; i++)
+            _lvi.Tag = strumento;
+
+            return _lvi;
+        }
+        /// <summary>
+        /// Popola una listview da una lista di ClsStrumentoACorda di un certo negozio
+        /// </summary>
+        /// <param name="listView"></param>
+        /// <param name="listaStrumentiACorda"></param>
+        /// <param name="negozioID"></param>
+        /// <param name="clearInTesta">True = elimina tutti gli elementi della listview prima di aggiungerne dei nuovi</param>
+        void PopolaListView(ListView listView, List<ClsStrumentoACorda> listaStrumentiACorda, long negozioID, bool clearInTesta)
+        {
+            if(clearInTesta)
             {
-                //Creo il listViewItem
-                ListViewItem _lvi = new ListViewItem(listaStrumenti[i].ID.ToString()); //Prima colonna: ID
-                
-                //Seconda colonna: casa produttrice --> trovo il la casa in base a CasaProduttriceID (cerco su RAM)
-                ClsCasaProduttrice _casaProduttrice = ClsArchivio.CaseProduttrici.FirstOrDefault(cp => cp.ID == listaStrumenti[i].CasaProduttriceID);
-                _lvi.SubItems.Add(_casaProduttrice.Nome); //Aggiungo il nome della casa
-                
-                //Terza colonna: modello
-                _lvi.SubItems.Add(listaStrumenti[i].Modello);
-                
-                //Quarta colonna: colori
-                _lvi.SubItems.Add(listaStrumenti[i].Colori);
-                
-                //Quinta colonna: prezzo --> cerco la relazione vendere con l'ID dello strumento e quello del negozio per ricavare il prezzo (cerco su RAM)
-                //Prima trovo tutte le vendere del negozio
-                _vendereNegozio = ClsArchivio.Vendere.FindAll(v => v.NegozioID == IDNegozio);
-                //Poi trovo la vendere con l'ID dello strumento
-                _vendereStrumento = _vendereNegozio.FirstOrDefault(v => v.StrumentoMusicaleID == listaStrumenti[i].ID);
-                //Infine, aggiungo il prezzo nel lvi
-                _lvi.SubItems.Add(_vendereStrumento.Prezzo.ToString());
+                listView.Items.Clear();
+            }
 
-                //Sesta colonna: quantità. Utilizzo l'oggetto ricavato dalla ricerca fatta sopra
-                _lvi.SubItems.Add(_vendereStrumento.Quantita.ToString());
+            //Trovo tutte le vendere del negozio in un processo separato
+            List<ClsVendere> _vendereNegozio = new List<ClsVendere>();
+            string _temp = String.Empty;
+            Task.Run
+            (() =>
+                _vendereNegozio = ClsVendereBL.GetSomeVendere(ref Program._connessioneAlDB, negozioID, -1, out _temp)
+            );
 
-                //Tag
-                _lvi.Tag = listaStrumenti[i];
+            //Scorro tutta la lista
+            foreach(ClsStrumentoACorda strumentoACorda in listaStrumentiACorda)
+            {
+                //Aggiungo lo strumento alla listview solo se è venduto dal negozio specificato
+                ClsVendere _vendereStrumento = _vendereNegozio.FirstOrDefault(v => v.StrumentoMusicaleID == strumentoACorda.ID);
 
-                //Aggiungo l'item alla listview
-                listView.Items.Add(_lvi);
+                if(_vendereStrumento != null)
+                {
+                    //Se lo strumento è venduto dal negozio lo aggiungo alla listview
+                    listView.Items.Add(CreaListViewItem(strumentoACorda, _vendereStrumento));
+                }
             }
         }
         void PopolaCombobox(ComboBox comboBox, List<ClsNegozio> listaNegozi)
@@ -106,11 +132,7 @@ namespace NegozioStrumentiMusicali
 
             if(cbNegozio.SelectedItem != null)
             {
-                //Popolo la listview
-                //Estraggo l'ID del negozio
-                //Nella popolazione della cbNegozio, come primo carattere ho messo l'ID del negozio
-                int _idNegozio = Convert.ToInt32(cbNegozio.SelectedItem.ToString()[0]);
-                PopolaListView(lvStrumenti, ClsArchivio.StrumentiMusicali, _idNegozio);
+                
             }
         }
 

@@ -247,10 +247,11 @@ namespace NegozioStrumentiMusicali
         /// Prende tutti i record di pianoforti con anche le informazione della generalizzazione da strumentimusicali
         /// </summary>
         /// <param name="connection">Connessione al DB</param>
+        /// <param name="ordinaPerPiuRecente">Se true, ordina per ID in maniera decrescente. Se false ordina per ID in maniera crescente</param>
         /// <param name="comunicazione">Comunicazione in uscita</param>
         /// <param name="limiteRecord">Numero massimo di record da caricare. Accetta valori da 2 in su</param>
         /// <returns>La lista con tutti i record. Se è nulla il caricamento non è andato a buon fine</returns>
-        public static List<ClsLegno> GetAllLegni(ref MySqlConnection connection, out string comunicazione, int limiteRecord = 0)
+        public static List<ClsLegno> GetAllLegni(ref MySqlConnection connection, bool ordinaPerPiuRecente, out string comunicazione, int limiteRecord = 0)
         {
             //VARIABILI
             comunicazione = String.Empty;
@@ -271,9 +272,19 @@ namespace NegozioStrumentiMusicali
                     "legni.larghezzacm," +
                     "legni.altezzacm " +
                     "FROM strumentimusicali AS S JOIN legni AS L " +
-                    "ON S.ID = L.strumentomusicaleID";
+                    "ON S.ID = L.strumentomusicaleID " +
+                    "ORDER BY S.ID ";
 
-                //Aggiungo il limite se richiesto
+                if (ordinaPerPiuRecente)
+                {
+                    _query += "DESC";
+                }
+                else
+                {
+                    _query += "ASC";
+                }
+
+                //Metto limite se richiesto
                 if (limiteRecord >= 2)
                 {
                     _query += " LIMIT @limite";

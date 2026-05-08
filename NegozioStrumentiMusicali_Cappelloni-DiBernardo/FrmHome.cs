@@ -38,7 +38,7 @@ namespace NegozioStrumentiMusicali
         #endregion
 
         #region Metodi della form
-        void MostraFormMDI(Form form)
+        private void MostraFormMDI(Form form)
         {
             form.MaximizeBox = false;
             form.MinimizeBox = false;
@@ -48,11 +48,66 @@ namespace NegozioStrumentiMusicali
             form.WindowState = FormWindowState.Maximized;
         }
 
+        private void MostraBottoniAdminSoftware(bool mostrare)
+        {
+            negoziToolStripMenuItem.Visible = mostrare;
+            caseProduttriciToolStripMenuItem.Visible = mostrare;
+            utentiToolStripMenuItem.Visible = mostrare;
+        }
+
+        private void AbilitaBottoniAdminSoftware(bool abilitare)
+        {
+            negoziToolStripMenuItem.Enabled = abilitare;
+            caseProduttriciToolStripMenuItem.Enabled = abilitare;
+            utentiToolStripMenuItem.Enabled = abilitare;
+        }
+
+        private void MostraBottoniAdminNegozio(bool mostrare)
+        {
+            ordiniToolStripMenuItem.Visible = mostrare;
+        }
+
+        private void AbilitaBottoniAdminNegozio(bool abilitare)
+        {
+            ordiniToolStripMenuItem.Enabled = abilitare;
+        }
+
         #endregion
 
         #region Eventi
         private void FrmHome_Load(object sender, EventArgs e)
         {
+            //Metto il nome utente sull'apposito bottone nel menu
+            mioUtenteToolStripMenuItem.Text = ClsArchivio.UtenteAttuale.Username;
+
+            //Nascondo e disabilito / Mostro e abilito alcuni bottoni del menu in base all'utente che ha fatto il login
+            //Controllo se utente è admin software
+            if (!ClsArchivio.UtenteAttuale.AdminSoftware) 
+            {
+                //Non lo è
+                AbilitaBottoniAdminSoftware(false);
+                MostraBottoniAdminSoftware(false);
+            }
+            else
+            {
+                //Lo è
+                AbilitaBottoniAdminSoftware(true);
+                MostraBottoniAdminSoftware(true);
+            }
+
+            //Controllo se utente è admin negozio
+            if (!ClsArchivio.UtenteAttuale.AdminNegozio)
+            {
+                //Non lo è
+                AbilitaBottoniAdminNegozio(false);
+                MostraBottoniAdminNegozio(false);
+            }
+            else
+            {
+                //Lo è
+                AbilitaBottoniAdminNegozio(true);
+                MostraBottoniAdminNegozio(true);
+            }
 
             //string _comunicazione = String.Empty;
             /*

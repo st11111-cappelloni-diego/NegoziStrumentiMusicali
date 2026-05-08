@@ -125,5 +125,28 @@ namespace NegozioStrumentiMusicali
                 connection.Close();
             }
         }
+
+        public static List<ClsBatteria> GetAllBatterie(ref MySqlConnection connection, bool ordinaPerPiuRecente, out string comunicazione, int limiteRecord = 0)
+        {
+            //VARIABILI
+            comunicazione = String.Empty;
+            List<ClsBatteria> _batterie = new List<ClsBatteria>();
+
+            try
+            {
+                //Apro la connessione
+            }
+            catch(Exception ex)
+            {
+
+            }
+            finally
+            {
+                //Chiudo la connessione
+                connection.Close();
+            }
+
+            return _batterie;
+        }
     }
 }
