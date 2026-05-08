@@ -18,10 +18,11 @@ namespace NegozioStrumentiMusicali
         /// <param name="connection">Connessione al DB</param>
         /// <param name="utente">Record da inserire</param>
         /// <param name="comunicazione">Comunicazione in uscita</param>
-        public static void InsertUtente(ref MySqlConnection connection, ClsUtente utente, out string comunicazione)
+        public static bool InsertUtente(ref MySqlConnection connection, ClsUtente utente, out string comunicazione)
         {
             //VARIABILI
             comunicazione = String.Empty;
+            bool _buonFine = true;
 
             try
             {
@@ -60,12 +61,14 @@ namespace NegozioStrumentiMusicali
             catch (Exception ex)
             {
                 comunicazione = ex.Message;
+                _buonFine = false;
             }
             finally
             {
                 //Chiudo la connessione
                 connection.Close();
             }
+            return _buonFine;
         }
         /// <summary>
         /// Update di record in utenti
@@ -139,6 +142,73 @@ namespace NegozioStrumentiMusicali
                 //Chiudo la connessione
                 connection.Close();
             }
+        }
+
+        public static ClsUtente GetOneUtente(ref MySqlConnection connection, string username, out string comunicazione)
+        {
+            //VARIABILI GLOBALI
+            comunicazione = String.Empty;
+            ClsUtente _utente = new ClsUtente();
+
+            try
+            {
+                //Apro la connessione
+                connection.Open();
+
+                //Compongo la query
+                string _query = "SELECT * FROM utenti WHERE username = @username";
+
+                //Creo l'oggetto command
+                MySqlCommand _cmd = new MySqlCommand(_query, connection);
+
+                //Inserisco il valore
+                _cmd.Parameters.AddWithValue("@username", username);
+
+                //Eseguo il comando creando il DataReader
+                MySqlDataReader _dataReader = _cmd.ExecuteReader();
+
+                if (_dataReader.HasRows) //Controllo se la tabella ha dei record
+                {
+                    while (_dataReader.Read()) //Se ne ha li leggo tutti
+                    {
+                        _utente = CaricaSingoloUtente(ref _dataReader);
+                    }
+                }
+
+                _dataReader.Close();
+
+                comunicazione = "Utemte caricato correttamente dal DataBase";
+            }
+            catch (Exception ex)
+            {
+                comunicazione = ex.Message;
+                _utente = null;
+            }
+            finally
+            {
+                //Chiudo la connessione
+                connection.Close();
+            }
+
+            return _utente;
+        }
+
+        private static ClsUtente CaricaSingoloUtente(ref MySqlDataReader dataReader)
+        {
+            ClsUtente _casaProduttrice = new ClsUtente();
+            _casaProduttrice.Username = dataReader["username"].ToString();
+            _casaProduttrice.Password = dataReader["password"].ToString();
+            _casaProduttrice.Nome = dataReader["nome"].ToString();
+            _casaProduttrice.Cognome = dataReader["cognome"].ToString();
+            _casaProduttrice.Email = dataReader["email"].ToString();
+            _casaProduttrice.DataDiNascita = Convert.ToDateTime(dataReader["datadinascita"]);
+            _casaProduttrice.Genere = (ClsUtente.eGENERE)Enum.Parse(typeof(ClsUtente.eGENERE),dataReader["email"].ToString());
+            _casaProduttrice.PathImmagine = dataReader["pathImmagine"].ToString();
+            _casaProduttrice.AdminNegozio = Convert.ToBoolean(dataReader["adminnegozio"].ToString());
+            _casaProduttrice.AdminSoftware = Convert.ToBoolean(dataReader["adminsoftware"].ToString());
+            _casaProduttrice.Bandito = Convert.ToBoolean(dataReader["bandito"].ToString());
+
+            return _casaProduttrice;
         }
     }
 }
