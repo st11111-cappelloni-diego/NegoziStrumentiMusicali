@@ -153,13 +153,34 @@ namespace NegozioStrumentiMusicali
                 connection.Close();
             }
         }
+        private static ClsTamburo CaricaSingoloTamburo(ref MySqlDataReader dataReader)
+        {
+            ClsTamburo _tamburo = new ClsTamburo();
+
+            _tamburo.ID = Convert.ToInt64(dataReader["ID"]);
+            _tamburo.DiametroIN = Convert.ToByte(dataReader["diametroin"]);
+            _tamburo.Strati = Convert.ToByte(dataReader["strati"]);
+            _tamburo.Materiale = (ClsTamburo.eMATERIALE)Enum.Parse
+            (
+                typeof(ClsTamburo.eMATERIALE),
+                dataReader["materiale"].ToString()
+            );
+            _tamburo.Tipo = (ClsTamburo.eTIPO)Enum.Parse
+            (
+                typeof(ClsTamburo.eTIPO),
+                dataReader["tipo"].ToString()
+            );
+
+            return _tamburo;
+        }
         /// <summary>
         /// Caricamento di tutti i record di tamburi
         /// </summary>
         /// <param name="connection">Connessione al DB</param>
         /// <param name="comunicazione">Comunicazione in uscita</param>
+        /// <param name="limiteRecord">Numero massimo di record da caricare. Accetta valori da 2 in su</param>
         /// <returns>La lista di tutti i record di tamburi</returns>
-        public static List<ClsTamburo> GetAllTamburi(ref MySqlConnection connection, out string comunicazione)
+        public static List<ClsTamburo> GetAllTamburi(ref MySqlConnection connection, out string comunicazione, int limiteRecord = 0)
         {
             //VARIABILI
             List<ClsTamburo> _tamburi = new List<ClsTamburo>();
@@ -173,8 +194,20 @@ namespace NegozioStrumentiMusicali
                 //Compongo la query
                 string _query = "SELECT * from tamburi";
 
+                //Aggiungo il limite se richiesto
+                if(limiteRecord >= 2)
+                {
+                    _query += " LIMIT @limite";
+                }
+
                 //Creo l'oggetto command
                 MySqlCommand _cmd = new MySqlCommand(_query, connection);
+
+                //Inserisco il limite se richiesto
+                if (limiteRecord >= 2)
+                {
+                    _cmd.Parameters.AddWithValue("@limite", limiteRecord);
+                }
 
                 //Eseguo il comando creando il DataReader
                 MySqlDataReader _dataReader = _cmd.ExecuteReader();
@@ -184,23 +217,7 @@ namespace NegozioStrumentiMusicali
                     while(_dataReader.Read()) //Se ne ha li leggo tutti
                     {
                         //Carico i dati sulla lista
-                        ClsTamburo _tamburo = new ClsTamburo();
-
-                        _tamburo.ID = Convert.ToInt64(_dataReader["ID"]);
-                        _tamburo.DiametroIN = Convert.ToByte(_dataReader["diametroin"]);
-                        _tamburo.Strati = Convert.ToByte(_dataReader["strati"]);
-                        _tamburo.Materiale = (ClsTamburo.eMATERIALE)Enum.Parse
-                        (
-                            typeof(ClsTamburo.eMATERIALE),
-                            _dataReader["materiale"].ToString()
-                        );
-                        _tamburo.Tipo = (ClsTamburo.eTIPO)Enum.Parse
-                        (
-                            typeof(ClsTamburo.eTIPO),
-                            _dataReader["tipo"].ToString()
-                        );
-
-                        _tamburi.Add(_tamburo);
+                        _tamburi.Add(CaricaSingoloTamburo(ref _dataReader));
                     }
 
                     _dataReader.Close();
