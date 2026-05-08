@@ -10,6 +10,9 @@ using System.Windows.Forms;
 
 namespace NegozioStrumentiMusicali
 {
+    /// <summary>
+    /// Sviluppata da Leonardo Di Bernardo
+    /// </summary>
     public partial class FrmRegistrazione : Form
     {
         public FrmRegistrazione()
@@ -18,6 +21,11 @@ namespace NegozioStrumentiMusicali
         }
 
         private void btnRegistrazione_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void FrmRegistrazione_Load(object sender, EventArgs e)
         {
 
         }

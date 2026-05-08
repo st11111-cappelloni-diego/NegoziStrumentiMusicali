@@ -125,5 +125,10 @@ namespace NegozioStrumentiMusicali
 
 
         #endregion
+
+        private void FrmHome_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Application.Exit();
+        }
     }
 }

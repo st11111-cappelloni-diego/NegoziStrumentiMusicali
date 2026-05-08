@@ -35,13 +35,23 @@ namespace NegozioStrumentiMusicali
                 _password = Criptografia(_password);
 
                 ClsUtente _utente = ClsUtenteBL.GetOneUtente(ref Program._connessioneAlDB, _username, out _comunicazione);
-                if (_utente == null || _utente.Password == _password)
+                if (_utente == null) //L'utente con l'username inserito non esiste o altro problema legato al DB
                     MessageBox.Show("Il tuo accesso non è stato consentito:\n" + _comunicazione, "Accesso Negato", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 else
                 {
-                    MessageBox.Show("Il tuo accesso è stato consentito", "Accesso Consentito", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                    FrmHome frmHome = new FrmHome();
-                    frmHome.ShowDialog();                    
+                    if(_utente.Password == _password) 
+                    {
+                        //Utente esistente e password corretta
+                        MessageBox.Show("Il tuo accesso è stato consentito", "Accesso Consentito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        FrmHome _frmHome = new FrmHome();
+                        _frmHome.Show();
+
+                        this.Hide();                        
+                    }
+                    else //La password inserita non corrisponde a quella sul DB
+                    {
+                        MessageBox.Show("Il tuo accesso non è stato consentito:\nPassword non corretta", "Accesso Negato", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
                 }
                    
             }

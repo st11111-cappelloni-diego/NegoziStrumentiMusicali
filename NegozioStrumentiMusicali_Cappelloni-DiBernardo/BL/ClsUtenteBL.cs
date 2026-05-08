@@ -202,7 +202,7 @@ namespace NegozioStrumentiMusicali
             _casaProduttrice.Cognome = dataReader["cognome"].ToString();
             _casaProduttrice.Email = dataReader["email"].ToString();
             _casaProduttrice.DataDiNascita = Convert.ToDateTime(dataReader["datadinascita"]);
-            _casaProduttrice.Genere = (ClsUtente.eGENERE)Enum.Parse(typeof(ClsUtente.eGENERE),dataReader["email"].ToString());
+            _casaProduttrice.Genere = (ClsUtente.eGENERE)Enum.Parse(typeof(ClsUtente.eGENERE),dataReader["genere"].ToString());
             _casaProduttrice.PathImmagine = dataReader["pathImmagine"].ToString();
             _casaProduttrice.AdminNegozio = Convert.ToBoolean(dataReader["adminnegozio"].ToString());
             _casaProduttrice.AdminSoftware = Convert.ToBoolean(dataReader["adminsoftware"].ToString());
