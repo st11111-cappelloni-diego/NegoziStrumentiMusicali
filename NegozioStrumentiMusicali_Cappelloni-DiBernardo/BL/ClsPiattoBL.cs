@@ -155,10 +155,11 @@ namespace NegozioStrumentiMusicali
         /// Caricamento di tutti i record di piatti
         /// </summary>
         /// <param name="connection">Connessione al DB</param>
+        /// /// <param name="ordinaPerPiuRecente">Se true, ordina per ID in maniera decrescente. Se false ordina per ID in maniera crescente</param>
         /// <param name="comunicazione">Comunicazione in uscita</param>
         /// <param name="limiteRecord">Numero massimo di record da caricare. Accetta valori da 2 in su</param>
         /// <returns>Tutti i record di piatti</returns>
-        public static List<ClsPiatto> GetAllPiatti(ref MySqlConnection connection, out string comunicazione, int limiteRecord = 0)
+        public static List<ClsPiatto> GetAllPiatti(ref MySqlConnection connection, bool ordinaPerPiuRecente,out string comunicazione, int limiteRecord = 0)
         {
             //VARIABILI
             List<ClsPiatto> _piatti = new List<ClsPiatto>();
@@ -170,10 +171,19 @@ namespace NegozioStrumentiMusicali
                 connection.Open();
 
                 //Compongo la query
-                string _query = "SELECT * FROM piatti";
+                string _query = "SELECT * FROM piatti ORDER BY ID ";
 
-                //Aggiungo il limite se richiesto
-                if(limiteRecord >= 2)
+                if (ordinaPerPiuRecente)
+                {
+                    _query += "DESC";
+                }
+                else
+                {
+                    _query += "ASC";
+                }
+
+                //Metto limite se richiesto
+                if (limiteRecord >= 2)
                 {
                     _query += " LIMIT @limite";
                 }
