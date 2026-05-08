@@ -177,10 +177,11 @@ namespace NegozioStrumentiMusicali
         /// Caricamento di tutti i record di tamburi
         /// </summary>
         /// <param name="connection">Connessione al DB</param>
+        /// <param name="ordinaPerPiuRecente">Se true, ordina per ID in maniera decrescente. Se false ordina per ID in maniera crescente</param>
         /// <param name="comunicazione">Comunicazione in uscita</param>
         /// <param name="limiteRecord">Numero massimo di record da caricare. Accetta valori da 2 in su</param>
         /// <returns>La lista di tutti i record di tamburi</returns>
-        public static List<ClsTamburo> GetAllTamburi(ref MySqlConnection connection, out string comunicazione, int limiteRecord = 0)
+        public static List<ClsTamburo> GetAllTamburi(ref MySqlConnection connection, bool ordinaPerPiuRecente, out string comunicazione, int limiteRecord = 0)
         {
             //VARIABILI
             List<ClsTamburo> _tamburi = new List<ClsTamburo>();
@@ -192,10 +193,19 @@ namespace NegozioStrumentiMusicali
                 connection.Open();
 
                 //Compongo la query
-                string _query = "SELECT * from tamburi";
+                string _query = "SELECT * from tamburi ORDER BY ID ";
 
-                //Aggiungo il limite se richiesto
-                if(limiteRecord >= 2)
+                if (ordinaPerPiuRecente)
+                {
+                    _query += "DESC";
+                }
+                else
+                {
+                    _query += "ASC";
+                }
+
+                //Metto limite se richiesto
+                if (limiteRecord >= 2)
                 {
                     _query += " LIMIT @limite";
                 }

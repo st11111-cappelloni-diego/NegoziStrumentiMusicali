@@ -278,10 +278,11 @@ namespace NegozioStrumentiMusicali
         /// Prende tutti i record di ottoni con anche le informazione della generalizzazione da strumentimusicali
         /// </summary>
         /// <param name="connection">Connessione al DB</param>
+        /// <param name="ordinaPerPiuRecente">Se true, ordina per ID in maniera decrescente. Se false ordina per ID in maniera crescente</param>
         /// <param name="comunicazione">Comunicazione in uscita</param>
         /// <param name="limiteRecord">Numero massimo di record da caricare. Accetta valori da 2 in su</param>
         /// <returns>La lista con tutti i record. Se è nulla il caricamento non è andato a buon fine</returns>
-        public static List<ClsOttone> GetAllOttoni(ref MySqlConnection connection, out string comunicazione, int limiteRecord = 0)
+        public static List<ClsOttone> GetAllOttoni(ref MySqlConnection connection, bool ordinaPerPiuRecente, out string comunicazione, int limiteRecord = 0)
         {
             //VARIABILI
             comunicazione = String.Empty;
@@ -305,9 +306,19 @@ namespace NegozioStrumentiMusicali
                     "ottoni.larghezzacm, " +
                     "ottoni.altezzacm " +
                     "FROM strumentimusicali AS S JOIN ottoni AS O " +
-                    "ON S.ID = O.strumentomusicaleID";
+                    "ON S.ID = O.strumentomusicaleID " +
+                    "ORDER BY S.ID ";
 
-                //Aggiungo il limite se richiesto
+                if (ordinaPerPiuRecente)
+                {
+                    _query += "DESC";
+                }
+                else
+                {
+                    _query += "ASC";
+                }
+
+                //Metto limite se richiesto
                 if (limiteRecord >= 2)
                 {
                     _query += " LIMIT @limite";
