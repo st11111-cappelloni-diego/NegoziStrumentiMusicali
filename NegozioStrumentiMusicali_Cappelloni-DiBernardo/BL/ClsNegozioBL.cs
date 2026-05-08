@@ -126,5 +126,11 @@ namespace NegozioStrumentiMusicali
                 connection.Close();
             }
         }
+        public static List<ClsNegozio> GetAllNegozi(ref MySqlConnection connection, bool ordinaPerPiuRecente, out string comunicazione, int limiteRecord = 0)
+        {
+            //VARIABILI
+            comunicazione = String.Empty;
+            List<ClsNegozio> _negozi = new List<ClsNegozio>();
+        }
     }
 }
