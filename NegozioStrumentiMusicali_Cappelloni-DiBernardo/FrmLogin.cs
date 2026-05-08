@@ -10,6 +10,9 @@ using System.Windows.Forms;
 
 namespace NegozioStrumentiMusicali
 {
+    /// <summary>
+    /// Sviluppata da Leonardo Di Bernardo
+    /// </summary>
     public partial class FrmLogin : Form
     {
         public FrmLogin()
@@ -21,20 +24,22 @@ namespace NegozioStrumentiMusicali
         {
             string _username = tbUsername.Text;
             string _password = tbPassword.Text;
+            string _comunicazione = String.Empty;
 
-            int _controllo = Controllo(_password, _username);
+            bool _credenzialiGiuste = CredenzialiGiuste(_password, _username);
 
-            if (_controllo == 0)
+            if (_credenzialiGiuste)
             {
-                ClsUtente _utente = ClsUtenteBL.GetOneUtente(ref Program._connessioneAlDB, _username, out string cominucazione);
-                if (_utente == null)
-                    MessageBox.Show("Il tuo accesso non è stato consentito", "Accesso Negato", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                else if (_utente.Password == _password)
+                //Criptare la password prima di fare il confronto
+
+                ClsUtente _utente = ClsUtenteBL.GetOneUtente(ref Program._connessioneAlDB, _username, out _comunicazione);
+                if (_utente == null || _utente.Password == _password)
+                    MessageBox.Show("Il tuo accesso non è stato consentito:\n" + _comunicazione, "Accesso Negato", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                else
                 {
                     MessageBox.Show("Il tuo accesso è stato consentito", "Accesso Consentito", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                     FrmHome frmHome = new FrmHome();
-                    frmHome.ShowDialog();
-                    
+                    frmHome.ShowDialog();                    
                 }
                    
             }
@@ -42,20 +47,20 @@ namespace NegozioStrumentiMusicali
 
         }
 
-        private int Controllo(string password, string username)
+        private bool CredenzialiGiuste(string password, string username)
         {
             if (string.IsNullOrWhiteSpace(password))
             {
-                MessageBox.Show("password non inserita o sono presenti spazi", "Password Errata", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return 1;
+                MessageBox.Show("Password non inserita o vuota", "Password Errata", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return false;
             }
-            else if (string.IsNullOrWhiteSpace(password))
+            else if (string.IsNullOrWhiteSpace(username))
             {
-                MessageBox.Show("Nome utente non inserito o sono presenti spazi", "Nome Utente Errato", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return 1;
+                MessageBox.Show("Username non inserito o vuoto", "Username Errato", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return false;
             }
             else
-                return 0;
+                return true;
 
         }
 
@@ -63,6 +68,11 @@ namespace NegozioStrumentiMusicali
         {
             FrmRegistrazione _frmRegistrazione = new FrmRegistrazione();
             _frmRegistrazione.ShowDialog();
+        }
+
+        private void FrmLogin_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
