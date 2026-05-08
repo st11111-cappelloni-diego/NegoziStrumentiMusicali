@@ -59,6 +59,12 @@ namespace NegozioStrumentiMusicali
 
             return _ID;
         }
+        /// <summary>
+        /// Update di un record di batterie + dettagli generali in strumentimusicali
+        /// </summary>
+        /// <param name="connection">Connessione al DB</param>
+        /// <param name="batteria">Dati record da aggiornare</param>
+        /// <param name="comunicazione">Stringa di comunicazione in uscita</param>
         public static void UpdateBatteria(ref MySqlConnection connection, ClsBatteria batteria, out string comunicazione)
         {
             //VARIABILI 
@@ -68,6 +74,46 @@ namespace NegozioStrumentiMusicali
             {
                 //Aggiorno le informazioni generali in strumentimusicali
                 ClsStrumentoMusicaleBL.UpdateStrumentoMusicale(ref connection, batteria, out comunicazione);
+            }
+            catch(Exception ex)
+            {
+                comunicazione = ex.Message;
+            }
+            finally
+            {
+                //Chiudo la connessione
+                connection.Close();
+            }
+        }
+        /// <summary>
+        /// Elimina un record da batterie
+        /// </summary>
+        /// <param name="connection">Connessione al DB</param>
+        /// <param name="batteria">Record da eliminare</param>
+        /// <param name="comunicazione">Comunicazione in uscita</param>
+        public static void DeleteBatteria(ref MySqlConnection connection, ClsBatteria batteria, out string comunicazione)
+        {
+            //VARIABILI
+            comunicazione = String.Empty;
+
+            try
+            {
+                //Apro la connessione
+                connection.Open();
+
+                //Compongo il comando DML
+                string _dml = "DELETE FROM batterie WHERE strumentomusicaleID = @ID";
+
+                //Creo l'oggetto command
+                MySqlCommand _cmd = new MySqlCommand(_dml, connection);
+
+                //Inserisco i valori
+                _cmd.Parameters.AddWithValue("@ID", batteria.ID);
+
+                //Eseguo il comando
+                _cmd.ExecuteNonQuery();
+
+                comunicazione = "Batteria eliminata correttamente dal DataBase";
             }
             catch(Exception ex)
             {

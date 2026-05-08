@@ -68,7 +68,7 @@ namespace NegozioStrumentiMusicali
             return _ID;
         }
         /// <summary>
-        /// Update di un record in legni + dettagli generali in strumentimusicali
+        /// Update di un record di legni + dettagli generali in strumentimusicali
         /// </summary>
         /// <param name="connection">Connessione al DB</param>
         /// <param name="legno">Dati record da aggiornare</param>
