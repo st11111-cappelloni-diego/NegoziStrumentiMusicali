@@ -43,10 +43,10 @@
             this.msHome.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.msHome.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.mioUtenteToolStripMenuItem,
+            this.strumentiToolStripMenuItem,
+            this.ordiniToolStripMenuItem,
             this.utentiToolStripMenuItem,
             this.negoziToolStripMenuItem,
-            this.ordiniToolStripMenuItem,
-            this.strumentiToolStripMenuItem,
             this.caseProduttriciToolStripMenuItem});
             this.msHome.Location = new System.Drawing.Point(0, 0);
             this.msHome.Name = "msHome";
