@@ -29,15 +29,15 @@ namespace NegozioStrumentiMusicali
             (
                 //Note musicali: Ordinate sempre dalla più bassa alla più alta. Le carico tutte
                 Task.Run
-                (() => 
+                (() =>
                     ClsArchivio.NoteMusicali = ClsNotaMusicaleBL.GetAllNoteMusicali(ref Program._connessioneAlDB, false, out _comunicazione)
                 ),
                 Task.Run
-                (() => 
+                (() =>
                     ClsArchivio.Tamburi = ClsTamburoBL.GetAllTamburi(ref Program._connessioneAlDB, ordinaPerPiuRecente, out _comunicazione, limiteRecord)
                 ),
                 Task.Run
-                (() => 
+                (() =>
                     ClsArchivio.Piatti = ClsPiattoBL.GetAllPiatti(ref Program._connessioneAlDB, ordinaPerPiuRecente, out _comunicazione, limiteRecord)
                 ),
                 Task.Run
@@ -53,13 +53,13 @@ namespace NegozioStrumentiMusicali
                     ClsArchivio.Ottoni = ClsOttoneBL.GetAllOttoni(ref Program._connessioneAlDB, ordinaPerPiuRecente, out _comunicazione, limiteRecord)
                 ),
                 Task.Run
-                (()=>
+                (() =>
                     ClsArchivio.StrumentiACorda = ClsStrumentoACordaBL.GetAllStrumentiACorda(ref Program._connessioneAlDB, ordinaPerPiuRecente, out _comunicazione, limiteRecord)
                 ),
                 //Negozi: Li carico tutti ordinandoli in maniera crescente
                 Task.Run
-                (()=>
-                    ClsArchivio.Negozi = ClsNegozioBL.
+                (() =>
+                    ClsArchivio.Negozi = ClsNegozioBL.GetAllNegozi(ref Program._connessioneAlDB, false, out _comunicazione)
                 )
             );
         }
