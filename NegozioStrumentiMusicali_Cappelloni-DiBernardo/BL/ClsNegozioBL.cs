@@ -126,11 +126,119 @@ namespace NegozioStrumentiMusicali
                 connection.Close();
             }
         }
+        /// <summary>
+        /// Carica i dati dal DataReader ad un'istanza di ClsNegozio
+        /// </summary>
+        /// <param name="dataReader"></param>
+        /// <returns></returns>
+        private static ClsNegozio CaricaSingoloNegozio(ref MySqlDataReader dataReader)
+        {
+            ClsNegozio _negozio = new ClsNegozio();
+
+            _negozio.ID = Convert.ToInt64(dataReader["ID"]);
+            _negozio.Nome = dataReader["nome"].ToString();
+            _negozio.IndirizzoID = Convert.ToInt64(dataReader["indirzzoID"]);
+            _negozio.Bandito = Convert.ToBoolean(dataReader["bandito"]);
+            if(dataReader["pathimmagine"] == DBNull.Value)
+            {
+                _negozio.PathImmagine = null;
+            }
+            else
+            {
+                _negozio.PathImmagine = dataReader["pathimmagine"].ToString();
+            }
+            if(dataReader["email"] ==  DBNull.Value)
+            {
+                _negozio.Email = null;
+            }
+            else
+            {
+                _negozio.Email = dataReader["email"].ToString();
+            }
+            if(dataReader["sito"] ==  DBNull.Value)
+            {
+                _negozio.Sito = null; 
+            }
+            else
+            {
+                _negozio.Sito = dataReader["sito"].ToString();
+            }
+
+            return _negozio;
+        }
+        /// <summary>
+        /// Prende tutti i record di negozi
+        /// </summary>
+        /// <param name="connection">Connessione al DB</param>
+        /// <param name="ordinaPerPiuRecente">Se true, ordina per ID in maniera decrescente. Se false ordina per ID in maniera crescente</param>
+        /// <param name="comunicazione">Comunicazione in uscita</param>
+        /// <param name="limiteRecord">Numero massimo di record da caricare. Accetta valori da 2 in su</param>
+        /// <returns>La lista con tutti i record. Se è nulla il caricamento non è andato a buon fine</returns>
         public static List<ClsNegozio> GetAllNegozi(ref MySqlConnection connection, bool ordinaPerPiuRecente, out string comunicazione, int limiteRecord = 0)
         {
             //VARIABILI
             comunicazione = String.Empty;
             List<ClsNegozio> _negozi = new List<ClsNegozio>();
+
+            try
+            {
+                //Apro la connessione
+                connection.Open();
+
+                //Compongo la query
+                string _query = "SELECT * FROM negozio ORDER BY ID ";
+
+                if (ordinaPerPiuRecente)
+                {
+                    _query += "DESC";
+                }
+                else
+                {
+                    _query += "ASC";
+                }
+
+                //Metto limite se richiesto
+                if (limiteRecord >= 2)
+                {
+                    _query += " LIMIT @limite";
+                }
+
+                //Creo l'oggetto command
+                MySqlCommand _cmd = new MySqlCommand(_query, connection);
+
+                //Inserisco il limite se richiesto
+                if (limiteRecord >= 2)
+                {
+                    _cmd.Parameters.AddWithValue("@limite", limiteRecord);
+                }
+
+                //Eseguo il comando creando il DataReader
+                MySqlDataReader _dataReader = _cmd.ExecuteReader();
+
+                if(_dataReader.HasRows) //Controllo se la tabella ha record
+                {
+                    while(_dataReader.Read()) //Se ne ha li leggo tutti
+                    {
+                        _negozi.Add(CaricaSingoloNegozio(ref _dataReader));
+                    }
+                }
+
+                _dataReader.Close();
+
+                comunicazione = "Negozi caricati correttamente dal DataBase";
+            }
+            catch(Exception ex)
+            {
+                comunicazione = ex.Message;
+                _negozi = null;
+            }
+            finally
+            {
+                //Chiudo la connessione
+                connection.Close();
+            }
+
+            return _negozi;
         }
     }
 }

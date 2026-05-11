@@ -207,6 +207,106 @@ namespace NegozioStrumentiMusicali
             return _listaGestire;
         }
 
+        public static List<ClsStrumentoMusicale> GetSomeGestire(ref MySqlConnection connection, out string comunicazione, string username)
+        {
+            //VARIABILI
+            comunicazione = String.Empty;
+            List<ClsGestire> _listGestire = new List<ClsGestire>();
 
+            try
+            {
+                //Apro la connessione
+                connection.Open();
+
+                //Compongo la query
+                string _query = "SELECT * from gestire WHERE usernameutente = @usernameutente";
+                //Posso ricercare per un solo campo alla volta perciò li controllo nell'ordine: casaProduttriceID, modello, colori)
+
+                //Creo l'oggetto command
+                MySqlCommand _cmd = new MySqlCommand(_query, connection);
+
+                //Inserisco i valori
+                _cmd.Parameters.AddWithValue("@usernameutente", username);
+
+                //Eseguo il comando creando il DataReader
+                MySqlDataReader _dataReader = _cmd.ExecuteReader();
+
+                if (_dataReader.HasRows) //Controllo se la tabella ha dei record
+                {
+                    while (_dataReader.Read()) //Se ne ha li leggo tutti
+                    {
+                        //Carico i dati dal DB
+                        _listGestire.Add(CaricaSingoloGestire(ref _dataReader));
+                    }
+                }
+
+                _dataReader.Close();
+
+                comunicazione = "Strumenti musicali caricati correttamente dal DataBase";
+            }
+            catch (Exception ex)
+            {
+                comunicazione = ex.Message;
+            }
+            finally
+            {
+                //Chiudo la connessione
+                connection.Close();
+            }
+
+            return _listGestire;
+        }
+
+        public static ClsStrumentoMusicale CaricaSingoloGestire(ref MySqlDataReader dataReader)
+        {
+            ClsStrumentoMusicale _strumentoMusicale = new ClsStrumentoMusicale();
+
+            _strumentoMusicale.ID = Convert.ToInt64(dataReader["ID"]);
+
+            _strumentoMusicale.CasaProduttriceID = Convert.ToInt64(dataReader["casaproduttriceID"]);
+
+            if (dataReader["colori"] == DBNull.Value)
+            {
+                _strumentoMusicale.Colori = null;
+            }
+            else
+            {
+                _strumentoMusicale.Colori = dataReader["colori"].ToString();
+            }
+
+            if (dataReader["pathimmagine"] == DBNull.Value)
+            {
+                _strumentoMusicale.Immagine = null;
+            }
+            else
+            {
+                _strumentoMusicale.Immagine = dataReader["pathimmagine"].ToString();
+            }
+
+            _strumentoMusicale.Modello = dataReader["modello"].ToString();
+
+            if (dataReader["notamassimaID"] == DBNull.Value)
+            {
+                _strumentoMusicale.NotaMassimaID = -1;
+            }
+            else
+            {
+                _strumentoMusicale.NotaMassimaID = Convert.ToInt64(dataReader["notamassimaID"]);
+            }
+
+            if (dataReader["notaminimaID"] == DBNull.Value)
+            {
+                _strumentoMusicale.NotaMinimaID = -1;
+            }
+            else
+            {
+                _strumentoMusicale.NotaMinimaID = Convert.ToInt64(dataReader["notaminimaID"]);
+            }
+
+            _strumentoMusicale.PesoKG = Convert.ToSingle(dataReader["pesokg"]);
+
+
+            return _strumentoMusicale;
+        }
     }
 }
