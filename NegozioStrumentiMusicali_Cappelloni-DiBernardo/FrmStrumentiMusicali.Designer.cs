@@ -48,6 +48,7 @@
             this.btnElimina = new System.Windows.Forms.Button();
             this.btnModifica = new System.Windows.Forms.Button();
             this.btnNuovo = new System.Windows.Forms.Button();
+            this.btnOrdinaStrumento = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // lvStrumenti
@@ -68,7 +69,7 @@
             this.lvStrumenti.Location = new System.Drawing.Point(14, 99);
             this.lvStrumenti.MultiSelect = false;
             this.lvStrumenti.Name = "lvStrumenti";
-            this.lvStrumenti.Size = new System.Drawing.Size(997, 580);
+            this.lvStrumenti.Size = new System.Drawing.Size(975, 580);
             this.lvStrumenti.TabIndex = 60;
             this.lvStrumenti.UseCompatibleStateImageBehavior = false;
             this.lvStrumenti.View = System.Windows.Forms.View.Details;
@@ -96,12 +97,12 @@
             // chPrezzo
             // 
             this.chPrezzo.Text = "Prezzo";
-            this.chPrezzo.Width = 150;
+            this.chPrezzo.Width = 140;
             // 
             // chQuantità
             // 
             this.chQuantità.Text = "Quantità";
-            this.chQuantità.Width = 115;
+            this.chQuantità.Width = 100;
             // 
             // cbParametriDiOrdinamento
             // 
@@ -129,7 +130,7 @@
             // 
             this.btnFiltriRicerca.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnFiltriRicerca.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnFiltriRicerca.Location = new System.Drawing.Point(927, 63);
+            this.btnFiltriRicerca.Location = new System.Drawing.Point(914, 63);
             this.btnFiltriRicerca.Name = "btnFiltriRicerca";
             this.btnFiltriRicerca.Size = new System.Drawing.Size(75, 30);
             this.btnFiltriRicerca.TabIndex = 77;
@@ -143,7 +144,7 @@
             this.tbRicerca.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbRicerca.Location = new System.Drawing.Point(387, 66);
             this.tbRicerca.Name = "tbRicerca";
-            this.tbRicerca.Size = new System.Drawing.Size(534, 26);
+            this.tbRicerca.Size = new System.Drawing.Size(521, 26);
             this.tbRicerca.TabIndex = 75;
             // 
             // label1
@@ -167,7 +168,7 @@
             this.cbNegozio.FormattingEnabled = true;
             this.cbNegozio.Location = new System.Drawing.Point(121, 9);
             this.cbNegozio.Name = "cbNegozio";
-            this.cbNegozio.Size = new System.Drawing.Size(890, 28);
+            this.cbNegozio.Size = new System.Drawing.Size(868, 28);
             this.cbNegozio.TabIndex = 73;
             this.cbNegozio.SelectedIndexChanged += new System.EventHandler(this.cbNegozio_SelectedIndexChanged);
             // 
@@ -175,7 +176,7 @@
             // 
             this.btnInfoNegozio.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnInfoNegozio.Image = global::NegozioStrumentiMusicali_Cappelloni_DiBernardo.Properties.Resources.iconaInformazioni1_45x45;
-            this.btnInfoNegozio.Location = new System.Drawing.Point(1017, 3);
+            this.btnInfoNegozio.Location = new System.Drawing.Point(995, 3);
             this.btnInfoNegozio.Name = "btnInfoNegozio";
             this.btnInfoNegozio.Size = new System.Drawing.Size(40, 40);
             this.btnInfoNegozio.TabIndex = 82;
@@ -185,7 +186,7 @@
             // 
             this.btnVisualizza.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnVisualizza.Image = global::NegozioStrumentiMusicali_Cappelloni_DiBernardo.Properties.Resources.iconaVisualizza1_30x21;
-            this.btnVisualizza.Location = new System.Drawing.Point(1017, 501);
+            this.btnVisualizza.Location = new System.Drawing.Point(995, 501);
             this.btnVisualizza.Name = "btnVisualizza";
             this.btnVisualizza.Size = new System.Drawing.Size(40, 40);
             this.btnVisualizza.TabIndex = 81;
@@ -195,7 +196,7 @@
             // 
             this.btnOrdina.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnOrdina.Image = global::NegozioStrumentiMusicali_Cappelloni_DiBernardo.Properties.Resources.iconaOrdina1_40x40;
-            this.btnOrdina.Location = new System.Drawing.Point(1017, 89);
+            this.btnOrdina.Location = new System.Drawing.Point(995, 95);
             this.btnOrdina.Name = "btnOrdina";
             this.btnOrdina.Size = new System.Drawing.Size(40, 40);
             this.btnOrdina.TabIndex = 80;
@@ -205,7 +206,7 @@
             // 
             this.btnCerca.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnCerca.Image = global::NegozioStrumentiMusicali_Cappelloni_DiBernardo.Properties.Resources.iconaLenteRicerca1_28x28;
-            this.btnCerca.Location = new System.Drawing.Point(1017, 49);
+            this.btnCerca.Location = new System.Drawing.Point(995, 49);
             this.btnCerca.Name = "btnCerca";
             this.btnCerca.Size = new System.Drawing.Size(40, 40);
             this.btnCerca.TabIndex = 76;
@@ -215,7 +216,7 @@
             // 
             this.btnElimina.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnElimina.Image = global::NegozioStrumentiMusicali_Cappelloni_DiBernardo.Properties.Resources.iconaCestino1_35x35;
-            this.btnElimina.Location = new System.Drawing.Point(1017, 547);
+            this.btnElimina.Location = new System.Drawing.Point(995, 547);
             this.btnElimina.Name = "btnElimina";
             this.btnElimina.Size = new System.Drawing.Size(40, 40);
             this.btnElimina.TabIndex = 59;
@@ -225,7 +226,7 @@
             // 
             this.btnModifica.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnModifica.Image = global::NegozioStrumentiMusicali_Cappelloni_DiBernardo.Properties.Resources.iconaModifica1_30x30;
-            this.btnModifica.Location = new System.Drawing.Point(1017, 593);
+            this.btnModifica.Location = new System.Drawing.Point(995, 593);
             this.btnModifica.Name = "btnModifica";
             this.btnModifica.Size = new System.Drawing.Size(40, 40);
             this.btnModifica.TabIndex = 58;
@@ -235,12 +236,23 @@
             // 
             this.btnNuovo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnNuovo.Image = global::NegozioStrumentiMusicali_Cappelloni_DiBernardo.Properties.Resources.iconaNuovo1_30x30;
-            this.btnNuovo.Location = new System.Drawing.Point(1017, 639);
+            this.btnNuovo.Location = new System.Drawing.Point(995, 639);
             this.btnNuovo.Name = "btnNuovo";
             this.btnNuovo.Size = new System.Drawing.Size(40, 40);
             this.btnNuovo.TabIndex = 57;
             this.btnNuovo.UseVisualStyleBackColor = true;
             this.btnNuovo.Click += new System.EventHandler(this.btnNuovo_Click);
+            // 
+            // btnOrdinaStrumento
+            // 
+            this.btnOrdinaStrumento.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnOrdinaStrumento.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnOrdinaStrumento.Location = new System.Drawing.Point(1041, 639);
+            this.btnOrdinaStrumento.Name = "btnOrdinaStrumento";
+            this.btnOrdinaStrumento.Size = new System.Drawing.Size(102, 40);
+            this.btnOrdinaStrumento.TabIndex = 83;
+            this.btnOrdinaStrumento.Text = "ORDINA";
+            this.btnOrdinaStrumento.UseVisualStyleBackColor = true;
             // 
             // FrmStrumentiMusicali
             // 
@@ -248,6 +260,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlDark;
             this.ClientSize = new System.Drawing.Size(1155, 686);
+            this.Controls.Add(this.btnOrdinaStrumento);
             this.Controls.Add(this.btnInfoNegozio);
             this.Controls.Add(this.btnVisualizza);
             this.Controls.Add(this.btnOrdina);
@@ -291,5 +304,6 @@
         private System.Windows.Forms.ComboBox cbNegozio;
         private System.Windows.Forms.Button btnVisualizza;
         private System.Windows.Forms.Button btnInfoNegozio;
+        private System.Windows.Forms.Button btnOrdinaStrumento;
     }
 }

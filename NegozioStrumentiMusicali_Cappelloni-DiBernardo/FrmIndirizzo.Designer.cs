@@ -37,6 +37,9 @@
             this.cbNazione = new System.Windows.Forms.ComboBox();
             this.btnSalva = new System.Windows.Forms.Button();
             this.tbCodicePostale = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.tbNumeroCivico = new System.Windows.Forms.TextBox();
+            this.tbLetteraCivico = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // label1
@@ -60,7 +63,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tbComune.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbComune.Location = new System.Drawing.Point(16, 43);
-            this.tbComune.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tbComune.Margin = new System.Windows.Forms.Padding(4);
             this.tbComune.Name = "tbComune";
             this.tbComune.Size = new System.Drawing.Size(697, 37);
             this.tbComune.TabIndex = 3;
@@ -72,7 +75,7 @@
             this.label2.BackColor = System.Drawing.Color.Transparent;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.Color.Black;
-            this.label2.Location = new System.Drawing.Point(16, 85);
+            this.label2.Location = new System.Drawing.Point(17, 85);
             this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(699, 28);
@@ -86,7 +89,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tbVia.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbVia.Location = new System.Drawing.Point(16, 117);
-            this.tbVia.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tbVia.Margin = new System.Windows.Forms.Padding(4);
             this.tbVia.Name = "tbVia";
             this.tbVia.Size = new System.Drawing.Size(697, 37);
             this.tbVia.TabIndex = 7;
@@ -98,12 +101,12 @@
             this.label3.BackColor = System.Drawing.Color.Transparent;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.ForeColor = System.Drawing.Color.Black;
-            this.label3.Location = new System.Drawing.Point(16, 159);
+            this.label3.Location = new System.Drawing.Point(17, 158);
             this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(699, 28);
             this.label3.TabIndex = 8;
-            this.label3.Text = "Codice postale";
+            this.label3.Text = "Numero civico e lettera";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label4
@@ -113,7 +116,7 @@
             this.label4.BackColor = System.Drawing.Color.Transparent;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.Color.Black;
-            this.label4.Location = new System.Drawing.Point(16, 233);
+            this.label4.Location = new System.Drawing.Point(16, 304);
             this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(699, 28);
@@ -128,8 +131,8 @@
             this.cbNazione.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbNazione.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cbNazione.FormattingEnabled = true;
-            this.cbNazione.Location = new System.Drawing.Point(16, 265);
-            this.cbNazione.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cbNazione.Location = new System.Drawing.Point(18, 336);
+            this.cbNazione.Margin = new System.Windows.Forms.Padding(4);
             this.cbNazione.Name = "cbNazione";
             this.cbNazione.Size = new System.Drawing.Size(697, 38);
             this.cbNazione.TabIndex = 59;
@@ -139,8 +142,8 @@
             this.btnSalva.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.btnSalva.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSalva.Location = new System.Drawing.Point(455, 313);
-            this.btnSalva.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnSalva.Location = new System.Drawing.Point(456, 382);
+            this.btnSalva.Margin = new System.Windows.Forms.Padding(4);
             this.btnSalva.Name = "btnSalva";
             this.btnSalva.Size = new System.Drawing.Size(260, 54);
             this.btnSalva.TabIndex = 60;
@@ -152,17 +155,57 @@
             this.tbCodicePostale.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tbCodicePostale.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbCodicePostale.Location = new System.Drawing.Point(16, 191);
+            this.tbCodicePostale.Location = new System.Drawing.Point(13, 263);
             this.tbCodicePostale.Margin = new System.Windows.Forms.Padding(4);
             this.tbCodicePostale.Name = "tbCodicePostale";
             this.tbCodicePostale.Size = new System.Drawing.Size(697, 37);
             this.tbCodicePostale.TabIndex = 61;
             // 
+            // label5
+            // 
+            this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label5.BackColor = System.Drawing.Color.Transparent;
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.ForeColor = System.Drawing.Color.Black;
+            this.label5.Location = new System.Drawing.Point(16, 231);
+            this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(699, 28);
+            this.label5.TabIndex = 62;
+            this.label5.Text = "Codice postale";
+            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // tbNumeroCivico
+            // 
+            this.tbNumeroCivico.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tbNumeroCivico.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbNumeroCivico.Location = new System.Drawing.Point(16, 190);
+            this.tbNumeroCivico.Margin = new System.Windows.Forms.Padding(4);
+            this.tbNumeroCivico.Name = "tbNumeroCivico";
+            this.tbNumeroCivico.Size = new System.Drawing.Size(332, 37);
+            this.tbNumeroCivico.TabIndex = 63;
+            // 
+            // tbLetteraCivico
+            // 
+            this.tbLetteraCivico.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tbLetteraCivico.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbLetteraCivico.Location = new System.Drawing.Point(378, 190);
+            this.tbLetteraCivico.Margin = new System.Windows.Forms.Padding(4);
+            this.tbLetteraCivico.Name = "tbLetteraCivico";
+            this.tbLetteraCivico.Size = new System.Drawing.Size(332, 37);
+            this.tbLetteraCivico.TabIndex = 64;
+            // 
             // FrmIndirizzo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(729, 382);
+            this.ClientSize = new System.Drawing.Size(729, 446);
+            this.Controls.Add(this.tbLetteraCivico);
+            this.Controls.Add(this.tbNumeroCivico);
+            this.Controls.Add(this.label5);
             this.Controls.Add(this.tbCodicePostale);
             this.Controls.Add(this.btnSalva);
             this.Controls.Add(this.cbNazione);
@@ -172,7 +215,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.tbComune);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.MaximizeBox = false;
             this.Name = "FrmIndirizzo";
             this.Text = "Indirizzo";
@@ -192,5 +235,8 @@
         private System.Windows.Forms.ComboBox cbNazione;
         private System.Windows.Forms.Button btnSalva;
         private System.Windows.Forms.TextBox tbCodicePostale;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.TextBox tbNumeroCivico;
+        private System.Windows.Forms.TextBox tbLetteraCivico;
     }
 }

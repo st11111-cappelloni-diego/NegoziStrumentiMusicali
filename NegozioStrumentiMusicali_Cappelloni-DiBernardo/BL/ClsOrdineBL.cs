@@ -166,6 +166,115 @@ namespace NegozioStrumentiMusicali
             }
         }
 
-        
+        /// <summary>
+        /// Caricamento di alcuni record di ordini in base a negozioID o strumentoMusicaleID.
+        /// Escludi negozioID passando come valore -1, escludi strumentoMusicaleID passando come valore -1
+        /// </summary>
+        /// <param name="connection"></param>
+        /// <param name="negozioID"></param>
+        /// <param name="strumentoMusicaleID"></param>
+        /// <param name="comunicazione"></param>
+        /// <returns></returns>
+        public static List<ClsOrdine> GetSomeOrdini(ref MySqlConnection connection, long negozioID, long strumentoMusicaleID, out string comunicazione)
+        {
+            //VARIABILI
+            comunicazione = String.Empty;
+            List<ClsOrdine> _listaOrdini = new List<ClsOrdine>();
+
+            try
+            {
+                //Apro la connessione
+                connection.Open();
+
+                //Compongo la query
+                string _query = "SELECT * FROM ordini WHERE ";
+
+                if (negozioID > -1 && strumentoMusicaleID > -1)
+                {
+                    _query += "negozioID = @negozioID AND strumentomusicaleID = @strumentomusicaleID";
+                }
+                else if (negozioID > -1 && strumentoMusicaleID <= -1)
+                {
+                    _query += "negozioID = @negozioID";
+                }
+                else if (negozioID <= -1 && strumentoMusicaleID > -1)
+                {
+                    _query += "strumentomusicaleID = @strumentomusicaleID";
+                }
+                else
+                {
+                    //WHERE 1 prende tutti i record
+                    //Questa casistica simula un GetAll senza limite ed ordinamento
+                    //E' inserita solo per evitare bugs in caso vengono esclusi entrambi i parametri
+                    _query += "1";
+                }
+
+                //Creo l'oggetto command
+                MySqlCommand _cmd = new MySqlCommand(_query, connection);
+
+                //Inserisco i valori
+                if (negozioID > -1 && strumentoMusicaleID > -1)
+                {
+                    _cmd.Parameters.AddWithValue("@negozioID", negozioID);
+                    _cmd.Parameters.AddWithValue("@strumentomusicaleID", strumentoMusicaleID);
+                }
+                else if (negozioID > -1 && strumentoMusicaleID <= -1)
+                {
+                    _cmd.Parameters.AddWithValue("@negozioID", negozioID);
+                }
+                else if (negozioID <= -1 && strumentoMusicaleID > -1)
+                {
+                    _cmd.Parameters.AddWithValue("@strumentomusicaleID", strumentoMusicaleID);
+                }
+
+                //Eseguo il comando creando il DataReader
+                MySqlDataReader _dataReader = _cmd.ExecuteReader();
+
+                if (_dataReader.HasRows) //Controllo se la tabella ha record
+                {
+                    while (_dataReader.Read()) //Se ne ha li leggo tutti
+                    {
+                        _listaOrdini.Add(CaricaSingoloOrdine(ref _dataReader));
+                    }
+                }
+
+                _dataReader.Close();
+
+                comunicazione = "Relazioni di tipo vendere caricate correttamente dal DataBase";
+            }
+            catch (Exception ex)
+            {
+                comunicazione = ex.Message;
+                _listaOrdini = null;
+            }
+            finally
+            {
+                //Chiudo la connessione
+                connection.Close();
+            }
+
+            return _listaOrdini;
+        }
+
+        /// <summary>
+        /// Carica i dati dal DataReader ad un'istanza di ClsOrdine
+        /// </summary>
+        /// <param name="dataReader"></param>
+        /// <returns></returns>
+        private static ClsOrdine CaricaSingoloOrdine(ref MySqlDataReader dataReader)
+        {
+            ClsOrdine _ordine = new ClsOrdine();
+
+            _ordine.ID = Convert.ToInt64(dataReader["ID"]);
+            _ordine.Quantita = Convert.ToInt16(dataReader["quantita"].ToString());
+            _ordine.DataOra = Convert.ToDateTime(dataReader["data"]);
+            _ordine.IndirizzoID = Convert.ToInt64(dataReader["indirizzoID"]);
+            _ordine.NegozioID = Convert.ToInt64(dataReader["negozioID"]);
+            _ordine.StrumentoMusicaleID = Convert.ToInt64(dataReader["strumentomusicaleID"]);
+            _ordine.UsernameCliente = Convert.ToString(dataReader["usernameutente"]);
+            
+            return _ordine;
+        }
+
     }
 }

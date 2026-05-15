@@ -59,10 +59,19 @@ namespace NegozioStrumentiMusicali
                 (() =>
                     ClsArchivio.StrumentiACorda = ClsStrumentoACordaBL.GetAllStrumentiACorda(Program._connectionString, ordinaPerPiuRecente, out _comunicazione, limiteRecord)
                 ),
+                Task.Run
+                (() =>
+                    ClsArchivio.Batterie = ClsBatteriaBL.GetAllBatterie(Program._connectionString, ordinaPerPiuRecente, out _comunicazione, limiteRecord)
+                ),
                 //Negozi: Li carico tutti ordinandoli in maniera crescente
                 Task.Run
                 (() =>
                     ClsArchivio.Negozi = ClsNegozioBL.GetAllNegozi(Program._connectionString, false, out _comunicazione)
+                ),
+                //Case produttrici: Le carico tutte ordinandole in maniera crescente
+                Task.Run
+                (() =>
+                    ClsArchivio.CaseProduttrici = ClsCasaProduttriceBL.GetAllCaseProduttrici(Program._connectionString, false, out _comunicazione)
                 )
             );
         }
@@ -163,7 +172,14 @@ namespace NegozioStrumentiMusicali
 
         private void btnVisualizzaPassword_Click(object sender, EventArgs e)
         {
-
+            if(tbPassword.UseSystemPasswordChar)
+            {
+                tbPassword.UseSystemPasswordChar = false;
+            }
+            else
+            {
+                tbPassword.UseSystemPasswordChar = true;
+            }
         }
     }
 }

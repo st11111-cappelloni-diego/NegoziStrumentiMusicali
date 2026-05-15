@@ -285,7 +285,7 @@ namespace NegozioStrumentiMusicali
             return _strumentoACorda;
         }        
 	    /// <summary>
-        /// Caricamento dei dati dal DataReader (che legge join di strumentimusicali + strumentiacorda) ad un'istanza di ClsOttone
+        /// Caricamento dei dati dal DataReader (che legge join di strumentimusicali + strumentiacorda) ad un'istanza di ClsStrumentoACorda
         /// </summary>
         /// <param name="dataReader"></param>
         /// <returns></returns>
@@ -325,7 +325,7 @@ namespace NegozioStrumentiMusicali
         /// <summary>
         /// Prende tutti i record di strumentiacorda con anche le informazione della generalizzazione da strumentimusicali
         /// </summary>
-        /// <param name="_connection">Connessione al DB</param>
+        /// <param name="stringaDiConnessione">Stringa per la connessione al DB</param>
         /// <param name="ordinaPerPiuRecente">Se true, ordina per ID in maniera decrescente. Se false ordina per ID in maniera crescente</param>
         /// <param name="comunicazione">Comunicazione in uscita</param>
         /// <param name="limiteRecord">Numero massimo di record da caricare. Accetta valori da 2 in su</param>
@@ -334,7 +334,7 @@ namespace NegozioStrumentiMusicali
         {
             //VARIABILI
             comunicazione = String.Empty;
-            List<ClsStrumentoACorda> _strumentiACorda = new List<ClsStrumentoACorda>();
+            List<ClsStrumentoACorda> _strumentiACorda = null;
             MySqlConnection _connection = new MySqlConnection(stringaDiConnessione);
 
             try
@@ -394,6 +394,7 @@ namespace NegozioStrumentiMusicali
 
                 if(_dataReader.HasRows) //Controllo se la join ha dei record
                 {
+                    _strumentiACorda = new List<ClsStrumentoACorda>();
                     while(_dataReader.Read()) //Se ne ha li leggo tutti
                     {
                         _strumentiACorda.Add(CaricaSingoloStrumentoStrumentoACorda(ref _dataReader, false));
