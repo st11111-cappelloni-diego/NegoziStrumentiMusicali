@@ -207,7 +207,7 @@ namespace NegozioStrumentiMusicali
             return _listaGestire;
         }
 
-        public static List<ClsStrumentoMusicale> GetSomeGestire(ref MySqlConnection connection, out string comunicazione, string username)
+        public static List<ClsGestire> GetSomeGestire(ref MySqlConnection connection, out string comunicazione, string username)
         {
             //VARIABILI
             comunicazione = String.Empty;
@@ -257,54 +257,15 @@ namespace NegozioStrumentiMusicali
             return _listGestire;
         }
 
-        public static ClsStrumentoMusicale CaricaSingoloGestire(ref MySqlDataReader dataReader)
+        public static ClsGestire CaricaSingoloGestire(ref MySqlDataReader dataReader)
         {
             ClsGestire _gestire = new ClsGestire();
 
             _gestire.ID = Convert.ToInt64(dataReader["ID"]);
 
-            _gestire.CasaProduttriceID = Convert.ToInt64(dataReader["casaproduttriceID"]);
+            _gestire.NegozioID = Convert.ToInt64(dataReader["negozioID"]);
 
-            if (dataReader["colori"] == DBNull.Value)
-            {
-                _gestire.Colori = null;
-            }
-            else
-            {
-                _gestire.Colori = dataReader["colori"].ToString();
-            }
-
-            if (dataReader["pathimmagine"] == DBNull.Value)
-            {
-                _gestire.Immagine = null;
-            }
-            else
-            {
-                _gestire.Immagine = dataReader["pathimmagine"].ToString();
-            }
-
-            _gestire.Modello = dataReader["modello"].ToString();
-
-            if (dataReader["notamassimaID"] == DBNull.Value)
-            {
-                _gestire.NotaMassimaID = -1;
-            }
-            else
-            {
-                _gestire.NotaMassimaID = Convert.ToInt64(dataReader["notamassimaID"]);
-            }
-
-            if (dataReader["notaminimaID"] == DBNull.Value)
-            {
-                _gestire.NotaMinimaID = -1;
-            }
-            else
-            {
-                _gestire.NotaMinimaID = Convert.ToInt64(dataReader["notaminimaID"]);
-            }
-
-            _gestire.PesoKG = Convert.ToSingle(dataReader["pesokg"]);
-
+            _gestire.UtenteUsername = Convert.ToString(dataReader["utenteusername"]);
 
             return _gestire;
         }
