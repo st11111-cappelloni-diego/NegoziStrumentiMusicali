@@ -233,6 +233,7 @@ namespace NegozioStrumentiMusicali
         {
             ClsLegno _legnoFinale = legno;
 
+            _legnoFinale.ID = strumento.ID;
             _legnoFinale.Colori = strumento.Colori;
             _legnoFinale.CasaProduttriceID = strumento.CasaProduttriceID;
             _legnoFinale.Immagine = strumento.Immagine;
@@ -255,7 +256,7 @@ namespace NegozioStrumentiMusicali
         {
             //VARIABILI
             comunicazione = String.Empty;
-            List<ClsLegno> _legni = new List<ClsLegno>();
+            List<ClsLegno> _legni = null;
             MySqlConnection _connection = new MySqlConnection(stringaDiConnessione);
 
             try
@@ -305,6 +306,7 @@ namespace NegozioStrumentiMusicali
 
                 if (_dataReader.HasRows) //Controllo se la view ha dei record
                 {
+                    _legni = new List<ClsLegno>();
                     while (_dataReader.Read()) //Se ne ha li leggo tutti
                     {
                         _legni.Add(CaricaSingoloStrumentoLegno(ref _dataReader, false));

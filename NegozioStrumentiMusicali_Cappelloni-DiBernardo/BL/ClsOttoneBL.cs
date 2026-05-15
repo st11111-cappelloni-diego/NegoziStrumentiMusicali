@@ -264,6 +264,7 @@ namespace NegozioStrumentiMusicali
         {
             ClsOttone _ottoneFinale = ottone;
 
+            _ottoneFinale.ID = strumento.ID;
             _ottoneFinale.Colori = strumento.Colori;
             _ottoneFinale.CasaProduttriceID = strumento.CasaProduttriceID;
             _ottoneFinale.Immagine = strumento.Immagine;
@@ -286,7 +287,7 @@ namespace NegozioStrumentiMusicali
         {
             //VARIABILI
             comunicazione = String.Empty;
-            List<ClsOttone> _ottoni = new List<ClsOttone>();
+            List<ClsOttone> _ottoni = null;
             MySqlConnection _connection = new MySqlConnection(stringaDiConnessione);
 
             try
@@ -339,6 +340,7 @@ namespace NegozioStrumentiMusicali
 
                 if(_dataReader.HasRows) //Controllo se la view ha dei record
                 {
+                    _ottoni = new List<ClsOttone>();
                     while(_dataReader.Read()) //Se ne ha li leggo tutti
                     {
                         _ottoni.Add(CaricaSingoloStrumentoOttone(ref _dataReader, false));

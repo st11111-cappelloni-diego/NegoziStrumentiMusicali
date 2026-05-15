@@ -271,6 +271,7 @@ namespace NegozioStrumentiMusicali
         {
             ClsPianoforte _pianoforteFinale = pianoforte;
 
+            _pianoforteFinale.ID = strumento.ID;
             _pianoforteFinale.Colori = strumento.Colori;
             _pianoforteFinale.CasaProduttriceID = strumento.CasaProduttriceID;
             _pianoforteFinale.Immagine = strumento.Immagine;
@@ -293,7 +294,7 @@ namespace NegozioStrumentiMusicali
         {
             //VARIABILI
             comunicazione = String.Empty;
-            List<ClsPianoforte> _pianoforti = new List<ClsPianoforte>();
+            List<ClsPianoforte> _pianoforti = null;
             MySqlConnection _connection = new MySqlConnection(stringaDiConnessione);
 
             try
@@ -346,6 +347,7 @@ namespace NegozioStrumentiMusicali
 
                 if(_dataReader.HasRows) //Controllo se la view ha dei record
                 {
+                    _pianoforti = new List<ClsPianoforte>();
                     while(_dataReader.Read()) //Se ne ha li leggo tutti
                     {
                         _pianoforti.Add(CaricaSingoloStrumentoPianoforte(ref _dataReader, false));
