@@ -284,7 +284,7 @@ namespace NegozioStrumentiMusicali
 
             return _strumentoACorda;
         }        
-	/// <summary>
+	    /// <summary>
         /// Caricamento dei dati dal DataReader (che legge join di strumentimusicali + strumentiacorda) ad un'istanza di ClsOttone
         /// </summary>
         /// <param name="dataReader"></param>
@@ -311,6 +311,7 @@ namespace NegozioStrumentiMusicali
         {
             ClsStrumentoACorda _strumentoACordaFinale = strumentoACorda;
 
+            _strumentoACordaFinale.ID = strumento.ID;
             _strumentoACordaFinale.Colori = strumento.Colori;
             _strumentoACordaFinale.CasaProduttriceID = strumento.CasaProduttriceID;
             _strumentoACordaFinale.Immagine = strumento.Immagine;
