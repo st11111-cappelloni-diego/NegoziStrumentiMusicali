@@ -127,6 +127,8 @@ namespace NegozioStrumentiMusicali
             ClsVendere _vendere = new ClsVendere();
 
             _vendere.ID = Convert.ToInt64(dataReader["ID"]);
+            _vendere.Prezzo = Convert.ToDecimal(dataReader["prezzo"]);
+            _vendere.Quantita = Convert.ToInt32(dataReader["quantita"]);
             _vendere.NegozioID = Convert.ToInt64(dataReader["negozioID"]);
             _vendere.StrumentoMusicaleID = Convert.ToInt64(dataReader["strumentomusicaleID"]);
 
@@ -136,49 +138,61 @@ namespace NegozioStrumentiMusicali
         /// Caricamento di alcuni record di strumentimusicali in base a negozioID o strumentoMusicaleID.
         /// Escludi negozioID passando come valore -1, escludi strumentoMusicaleID passando come valore -1
         /// </summary>
-        /// <param name="connection"></param>
+        /// <param name="stringaDiConnessione"></param>
         /// <param name="negozioID"></param>
         /// <param name="strumentoMusicaleID"></param>
         /// <param name="comunicazione"></param>
         /// <returns></returns>
-        public static List<ClsVendere> GetSomeVendere(ref MySqlConnection connection, long negozioID, long strumentoMusicaleID, out string comunicazione)
+        public static List<ClsVendere> GetSomeVendere(string stringaDiConnessione, long negozioID, long strumentoMusicaleID, out string comunicazione)
         {
             //VARIABILI
             comunicazione = String.Empty;
             List<ClsVendere> _listaVendere = new List<ClsVendere>();
+            MySqlConnection _connection = new MySqlConnection(stringaDiConnessione);
 
             try
             {
                 //Apro la connessione
-                connection.Open();
+                _connection.Open();
 
                 //Compongo la query
                 string _query = "SELECT * FROM vendere WHERE ";
-                //Posso cercare per un valore alla volta quindi controllo in questo ordine: negozioID, strumentoMusicaleID
-                if(negozioID > -1)
+                
+                if(negozioID > -1 && strumentoMusicaleID > -1)
                 {
-                    //Il campo per cui cercare è negozioID
+                    _query += "negozioID = @negozioID AND strumentomusicaleID = @strumentomusicaleID";
+                }
+                else if(negozioID > -1 && strumentoMusicaleID <= -1)
+                {
                     _query += "negozioID = @negozioID";
+                }
+                else if(negozioID <= -1 && strumentoMusicaleID > -1)
+                {
+                    _query += "strumentomusicaleID = @strumentomusicaleID";
                 }
                 else
                 {
-                    //Il campo per cui cercare è strumentoMusicaleID
-                    _query += "strumentomusicaleID = @strumentomusicaleID";
+                    //WHERE 1 prende tutti i record
+                    //Questa casistica simula un GetAll senza limite ed ordinamento
+                    //E' inserita solo per evitare bugs in caso vengono esclusi entrambi i parametri
+                    _query += "1";
                 }
 
                 //Creo l'oggetto command
-                MySqlCommand _cmd = new MySqlCommand(_query, connection);
+                MySqlCommand _cmd = new MySqlCommand(_query, _connection);
 
                 //Inserisco i valori
-                //Posso cercare per un valore alla volta quindi controllo in questo ordine: negozioID, strumentoMusicaleID
-                if (negozioID > -1)
+                if (negozioID > -1 && strumentoMusicaleID > -1)
                 {
-                    //Il campo per cui cercare è negozioID                   
+                    _cmd.Parameters.AddWithValue("@negozioID", negozioID);
+                    _cmd.Parameters.AddWithValue("@strumentomusicaleID", strumentoMusicaleID);
+                }
+                else if (negozioID > -1 && strumentoMusicaleID <= -1)
+                {
                     _cmd.Parameters.AddWithValue("@negozioID", negozioID);
                 }
-                else
+                else if (negozioID <= -1 && strumentoMusicaleID > -1)
                 {
-                    //Il campo per cui cercare è strumentoMusicaleID
                     _cmd.Parameters.AddWithValue("@strumentomusicaleID", strumentoMusicaleID);
                 }
 
@@ -205,7 +219,7 @@ namespace NegozioStrumentiMusicali
             finally
             {
                 //Chiudo la connessione
-                connection.Close();
+                _connection.Close();
             }
 
             return _listaVendere;
