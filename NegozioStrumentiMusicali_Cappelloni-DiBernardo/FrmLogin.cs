@@ -24,42 +24,45 @@ namespace NegozioStrumentiMusicali
 
         private async void CaricaDati(bool ordinaPerPiuRecente, int limiteRecord)
         {
-            string _comunicazione;
+            string _comunicazioneNoteMusicali = String.Empty;
+            string _comunicazioneTamburi = String.Empty;
+            string _comunicazionePiatti = String.Empty;
+            string _comunicazione = String.Empty;
             await Task.WhenAll
             (
                 //Note musicali: Ordinate sempre dalla più bassa alla più alta. Le carico tutte
                 Task.Run
                 (() =>
-                    ClsArchivio.NoteMusicali = ClsNotaMusicaleBL.GetAllNoteMusicali(ref Program._connessioneAlDB, false, out _comunicazione)
+                    ClsArchivio.NoteMusicali = ClsNotaMusicaleBL.GetAllNoteMusicali(Program._connectionString, false, out _comunicazioneNoteMusicali)
                 ),
                 Task.Run
                 (() =>
-                    ClsArchivio.Tamburi = ClsTamburoBL.GetAllTamburi(ref Program._connessioneAlDB, ordinaPerPiuRecente, out _comunicazione, limiteRecord)
+                    ClsArchivio.Tamburi = ClsTamburoBL.GetAllTamburi(Program._connectionString, ordinaPerPiuRecente, out _comunicazioneTamburi, limiteRecord)
                 ),
                 Task.Run
                 (() =>
-                    ClsArchivio.Piatti = ClsPiattoBL.GetAllPiatti(ref Program._connessioneAlDB, ordinaPerPiuRecente, out _comunicazione, limiteRecord)
+                    ClsArchivio.Piatti = ClsPiattoBL.GetAllPiatti(Program._connectionString, ordinaPerPiuRecente, out _comunicazionePiatti, limiteRecord)
                 ),
                 Task.Run
                 (() =>
-                    ClsArchivio.Pianoforti = ClsPianoforteBL.GetAllPianoforti(ref Program._connessioneAlDB, ordinaPerPiuRecente, out _comunicazione, limiteRecord)
+                    ClsArchivio.Pianoforti = ClsPianoforteBL.GetAllPianoforti(Program._connectionString, ordinaPerPiuRecente, out _comunicazione, limiteRecord)
                 ),
                 Task.Run
                 (() =>
-                    ClsArchivio.Legni = ClsLegnoBL.GetAllLegni(ref Program._connessioneAlDB, ordinaPerPiuRecente, out _comunicazione, limiteRecord)
+                    ClsArchivio.Legni = ClsLegnoBL.GetAllLegni(Program._connectionString, ordinaPerPiuRecente, out _comunicazione, limiteRecord)
                 ),
                 Task.Run
                 (() =>
-                    ClsArchivio.Ottoni = ClsOttoneBL.GetAllOttoni(ref Program._connessioneAlDB, ordinaPerPiuRecente, out _comunicazione, limiteRecord)
+                    ClsArchivio.Ottoni = ClsOttoneBL.GetAllOttoni(Program._connectionString, ordinaPerPiuRecente, out _comunicazione, limiteRecord)
                 ),
                 Task.Run
                 (() =>
-                    ClsArchivio.StrumentiACorda = ClsStrumentoACordaBL.GetAllStrumentiACorda(ref Program._connessioneAlDB, ordinaPerPiuRecente, out _comunicazione, limiteRecord)
+                    ClsArchivio.StrumentiACorda = ClsStrumentoACordaBL.GetAllStrumentiACorda(Program._connectionString, ordinaPerPiuRecente, out _comunicazione, limiteRecord)
                 ),
                 //Negozi: Li carico tutti ordinandoli in maniera crescente
                 Task.Run
                 (() =>
-                    ClsArchivio.Negozi = ClsNegozioBL.GetAllNegozi(ref Program._connessioneAlDB, false, out _comunicazione)
+                    ClsArchivio.Negozi = ClsNegozioBL.GetAllNegozi(Program._connectionString, false, out _comunicazione)
                 )
             );
         }
