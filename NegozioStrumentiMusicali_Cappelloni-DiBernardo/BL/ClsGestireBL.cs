@@ -259,54 +259,54 @@ namespace NegozioStrumentiMusicali
 
         public static ClsStrumentoMusicale CaricaSingoloGestire(ref MySqlDataReader dataReader)
         {
-            ClsStrumentoMusicale _strumentoMusicale = new ClsStrumentoMusicale();
+            ClsGestire _gestire = new ClsGestire();
 
-            _strumentoMusicale.ID = Convert.ToInt64(dataReader["ID"]);
+            _gestire.ID = Convert.ToInt64(dataReader["ID"]);
 
-            _strumentoMusicale.CasaProduttriceID = Convert.ToInt64(dataReader["casaproduttriceID"]);
+            _gestire.CasaProduttriceID = Convert.ToInt64(dataReader["casaproduttriceID"]);
 
             if (dataReader["colori"] == DBNull.Value)
             {
-                _strumentoMusicale.Colori = null;
+                _gestire.Colori = null;
             }
             else
             {
-                _strumentoMusicale.Colori = dataReader["colori"].ToString();
+                _gestire.Colori = dataReader["colori"].ToString();
             }
 
             if (dataReader["pathimmagine"] == DBNull.Value)
             {
-                _strumentoMusicale.Immagine = null;
+                _gestire.Immagine = null;
             }
             else
             {
-                _strumentoMusicale.Immagine = dataReader["pathimmagine"].ToString();
+                _gestire.Immagine = dataReader["pathimmagine"].ToString();
             }
 
-            _strumentoMusicale.Modello = dataReader["modello"].ToString();
+            _gestire.Modello = dataReader["modello"].ToString();
 
             if (dataReader["notamassimaID"] == DBNull.Value)
             {
-                _strumentoMusicale.NotaMassimaID = -1;
+                _gestire.NotaMassimaID = -1;
             }
             else
             {
-                _strumentoMusicale.NotaMassimaID = Convert.ToInt64(dataReader["notamassimaID"]);
+                _gestire.NotaMassimaID = Convert.ToInt64(dataReader["notamassimaID"]);
             }
 
             if (dataReader["notaminimaID"] == DBNull.Value)
             {
-                _strumentoMusicale.NotaMinimaID = -1;
+                _gestire.NotaMinimaID = -1;
             }
             else
             {
-                _strumentoMusicale.NotaMinimaID = Convert.ToInt64(dataReader["notaminimaID"]);
+                _gestire.NotaMinimaID = Convert.ToInt64(dataReader["notaminimaID"]);
             }
 
-            _strumentoMusicale.PesoKG = Convert.ToSingle(dataReader["pesokg"]);
+            _gestire.PesoKG = Convert.ToSingle(dataReader["pesokg"]);
 
 
-            return _strumentoMusicale;
+            return _gestire;
         }
     }
 }
