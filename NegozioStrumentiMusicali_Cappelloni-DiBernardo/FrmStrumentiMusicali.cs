@@ -310,7 +310,7 @@ namespace NegozioStrumentiMusicali
             {
                 _listaVendereNegozioSelezionato =
                     ClsVendereBL.GetSomeVendere(
-                        ref Program._connessioneAlDB,
+                        Program._connectionString,
                         _idNegozio,
                         -1,
                         out _temp
