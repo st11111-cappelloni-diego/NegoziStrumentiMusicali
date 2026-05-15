@@ -43,7 +43,6 @@ namespace NegozioStrumentiMusicali
             PopolaCombobox(cbNegozio, _negozi);
 
             List<ClsOrdine> _listOrdini = new List<ClsOrdine>();
-            _listOrdini = ClsOrdineBL.
         }
 
         void PopolaCombobox(ComboBox comboBox, List<ClsNegozio> listaNegozi)
