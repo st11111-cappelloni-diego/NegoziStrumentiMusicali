@@ -265,13 +265,13 @@ namespace NegozioStrumentiMusicali
 
                 //Creo la query con la join tra strumentimusicali e legni
                 //Abbino le righe in base a ID <-> strumentomusicaleID
-                string _query = "SELECT strumentimusicali.*, " +
-                    "legni.strumento, " +
-                    "legni.materialecorpo, " +
-                    "legni.materialechiavi, " +
-                    "legni.lunghezzacm," +
-                    "legni.larghezzacm," +
-                    "legni.altezzacm " +
+                string _query = "SELECT S.*, " +
+                    "L.strumento, " +
+                    "L.materialecorpo, " +
+                    "L.materialechiavi, " +
+                    "L.lunghezzacm," +
+                    "L.larghezzacm," +
+                    "L.altezzacm " +
                     "FROM strumentimusicali AS S JOIN legni AS L " +
                     "ON S.ID = L.strumentomusicaleID " +
                     "ORDER BY S.ID ";

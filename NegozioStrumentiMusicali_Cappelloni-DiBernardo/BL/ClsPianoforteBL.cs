@@ -303,16 +303,16 @@ namespace NegozioStrumentiMusicali
 
                 //Creo la query con la join tra strumentimusicali e pianoforti
                 //Abbino le righe in base a ID <-> strumentomusicaleID
-                string _query = "SELECT strumentimusicali.*, " +
-                    "pianoforti.tipo, " +
-                    "pianoforti.numerotasti, " +
-                    "pianoforti.materialetastibianchi, " +
-                    "pianoforti.materialetastineri, " +
-                    "pianoforti.materialecorpopfacustico, " +
-                    "pianoforti.altezzacm, " +
-                    "pianoforti.lunghezzacm, " +
-                    "pianoforti.profonditacm, " +
-                    "pianoforti.altezzaginocchiocm " +
+                string _query = "SELECT S.*, " +
+                    "P.tipo, " +
+                    "P.numerotasti, " +
+                    "P.materialetastibianchi, " +
+                    "P.materialetastineri, " +
+                    "P.materialecorpopfacustico, " +
+                    "P.altezzacm, " +
+                    "P.lunghezzacm, " +
+                    "pP.profonditacm, " +
+                    "P.altezzaginocchiocm " +
                     "FROM strumentimusicali AS S JOIN pianoforti AS P " +
                     "ON S.ID = P.strumentomusicaleID " +
                     "ORDER BY ID ";
