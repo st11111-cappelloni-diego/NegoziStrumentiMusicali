@@ -78,10 +78,8 @@ namespace NegozioStrumentiMusicali
             //Trovo tutte le vendere del negozio in un processo separato
             List<ClsVendere> _vendereNegozio = new List<ClsVendere>();
             string _temp = String.Empty;
-            Task.Run
-            (() =>
-                _vendereNegozio = ClsVendereBL.GetSomeVendere(ref Program._connessioneAlDB, negozioID, -1, out _temp)
-            );
+            _vendereNegozio = ClsVendereBL.GetSomeVendere(ref Program._connessioneAlDB, negozioID, -1, out _temp);
+
 
             //Scorro tutta la lista non è nulla
             if(listaStrumentiACorda != null)
@@ -160,7 +158,7 @@ namespace NegozioStrumentiMusicali
             );
 
             //Scorro tutta la lista se non è nulla
-            if(listaLegni.Count != null)
+            if(listaLegni != null)
             {
                 foreach (ClsLegno legno in listaLegni)
                 {
@@ -241,9 +239,10 @@ namespace NegozioStrumentiMusicali
 
             //Popolo la listview accodando le varie liste
             PopolaListView(lvStrumenti, ClsArchivio.StrumentiACorda, ClsArchivio.Negozi[cbNegozio.SelectedIndex].ID, true);
+            /*
             PopolaListView(lvStrumenti, ClsArchivio.Pianoforti, ClsArchivio.Negozi[cbNegozio.SelectedIndex].ID, false);
             PopolaListView(lvStrumenti, ClsArchivio.Ottoni, ClsArchivio.Negozi[cbNegozio.SelectedIndex].ID, false);
-            PopolaListView(lvStrumenti, ClsArchivio.Legni, ClsArchivio.Negozi[cbNegozio.SelectedIndex].ID, false);
+            PopolaListView(lvStrumenti, ClsArchivio.Legni, ClsArchivio.Negozi[cbNegozio.SelectedIndex].ID, false);*/
         }
 
         #endregion
