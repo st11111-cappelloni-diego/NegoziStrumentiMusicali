@@ -176,21 +176,22 @@ namespace NegozioStrumentiMusicali
         /// <summary>
         /// Caricamento di tutti i record di tamburi
         /// </summary>
-        /// <param name="connection">Connessione al DB</param>
+        /// <param name="stringaDiConnessione">Stringa per la connessione al DB</param>
         /// <param name="ordinaPerPiuRecente">Se true, ordina per ID in maniera decrescente. Se false ordina per ID in maniera crescente</param>
         /// <param name="comunicazione">Comunicazione in uscita</param>
         /// <param name="limiteRecord">Numero massimo di record da caricare. Accetta valori da 2 in su</param>
         /// <returns>La lista di tutti i record di tamburi</returns>
-        public static List<ClsTamburo> GetAllTamburi(ref MySqlConnection connection, bool ordinaPerPiuRecente, out string comunicazione, int limiteRecord = 0)
+        public static List<ClsTamburo> GetAllTamburi(string stringaDiConnessione, bool ordinaPerPiuRecente, out string comunicazione, int limiteRecord = 0)
         {
             //VARIABILI
             List<ClsTamburo> _tamburi = new List<ClsTamburo>();
             comunicazione = String.Empty;
+            MySqlConnection _connection = new MySqlConnection(stringaDiConnessione);
 
             try
             {
-                //Apro la connessione
-                connection.Open();
+                //Apro la connessione                
+                _connection.Open();
 
                 //Compongo la query
                 string _query = "SELECT * from tamburi ORDER BY ID ";
@@ -211,7 +212,7 @@ namespace NegozioStrumentiMusicali
                 }
 
                 //Creo l'oggetto command
-                MySqlCommand _cmd = new MySqlCommand(_query, connection);
+                MySqlCommand _cmd = new MySqlCommand(_query, _connection);
 
                 //Inserisco il limite se richiesto
                 if (limiteRecord >= 2)
@@ -242,7 +243,7 @@ namespace NegozioStrumentiMusicali
             finally
             {
                 //Chiudo la connessione
-                connection.Close();
+                _connection.Close();
             }
 
             return _tamburi;
