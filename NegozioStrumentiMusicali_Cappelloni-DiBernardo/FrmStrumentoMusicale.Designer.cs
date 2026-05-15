@@ -33,7 +33,7 @@
             this.label15 = new System.Windows.Forms.Label();
             this.nudID = new System.Windows.Forms.NumericUpDown();
             this.label2 = new System.Windows.Forms.Label();
-            this.nudQuantità = new System.Windows.Forms.NumericUpDown();
+            this.nudQuantita = new System.Windows.Forms.NumericUpDown();
             this.label3 = new System.Windows.Forms.Label();
             this.tbColori = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
@@ -49,15 +49,18 @@
             this.label9 = new System.Windows.Forms.Label();
             this.nudPeso = new System.Windows.Forms.NumericUpDown();
             this.label10 = new System.Windows.Forms.Label();
-            this.lbAltreCaratteristiche = new System.Windows.Forms.ListBox();
             this.btnSalva = new System.Windows.Forms.Button();
             this.btnInfoSpecifiche = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.btnEliminaCaratteristica = new System.Windows.Forms.Button();
             this.btnModificaCaratteristica = new System.Windows.Forms.Button();
             this.btnNuovaCaratteristica = new System.Windows.Forms.Button();
+            this.lvAltreCaratteristiche = new System.Windows.Forms.ListView();
+            this.chTitolo = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.chTesto = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.btnVisualizzaCaratteristica = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.nudID)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudQuantità)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudQuantita)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudPrezzo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudPeso)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -118,16 +121,16 @@
             // 
             // nudQuantità
             // 
-            this.nudQuantità.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.nudQuantità.Location = new System.Drawing.Point(12, 147);
-            this.nudQuantità.Maximum = new decimal(new int[] {
+            this.nudQuantita.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.nudQuantita.Location = new System.Drawing.Point(12, 147);
+            this.nudQuantita.Maximum = new decimal(new int[] {
             1000,
             0,
             0,
             0});
-            this.nudQuantità.Name = "nudQuantità";
-            this.nudQuantità.Size = new System.Drawing.Size(258, 26);
-            this.nudQuantità.TabIndex = 12;
+            this.nudQuantita.Name = "nudQuantità";
+            this.nudQuantita.Size = new System.Drawing.Size(258, 26);
+            this.nudQuantita.TabIndex = 12;
             // 
             // label3
             // 
@@ -283,14 +286,6 @@
             this.label10.Text = "Altre caratteristiche";
             this.label10.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // lbAltreCaratteristiche
-            // 
-            this.lbAltreCaratteristiche.FormattingEnabled = true;
-            this.lbAltreCaratteristiche.Location = new System.Drawing.Point(276, 259);
-            this.lbAltreCaratteristiche.Name = "lbAltreCaratteristiche";
-            this.lbAltreCaratteristiche.Size = new System.Drawing.Size(512, 121);
-            this.lbAltreCaratteristiche.TabIndex = 28;
-            // 
             // btnSalva
             // 
             this.btnSalva.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -349,18 +344,53 @@
             this.btnNuovaCaratteristica.TabIndex = 52;
             this.btnNuovaCaratteristica.UseVisualStyleBackColor = true;
             // 
+            // lvAltreCaratteristiche
+            // 
+            this.lvAltreCaratteristiche.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.chTitolo,
+            this.chTesto});
+            this.lvAltreCaratteristiche.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lvAltreCaratteristiche.HideSelection = false;
+            this.lvAltreCaratteristiche.Location = new System.Drawing.Point(276, 259);
+            this.lvAltreCaratteristiche.Name = "lvAltreCaratteristiche";
+            this.lvAltreCaratteristiche.Size = new System.Drawing.Size(512, 121);
+            this.lvAltreCaratteristiche.TabIndex = 55;
+            this.lvAltreCaratteristiche.UseCompatibleStateImageBehavior = false;
+            this.lvAltreCaratteristiche.View = System.Windows.Forms.View.Details;
+            // 
+            // chTitolo
+            // 
+            this.chTitolo.Text = "Titolo";
+            this.chTitolo.Width = 150;
+            // 
+            // chTesto
+            // 
+            this.chTesto.Text = "Testo";
+            this.chTesto.Width = 350;
+            // 
+            // btnVisualizzaCaratteristica
+            // 
+            this.btnVisualizzaCaratteristica.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnVisualizzaCaratteristica.Image = global::NegozioStrumentiMusicali_Cappelloni_DiBernardo.Properties.Resources.iconaVisualizza1_30x21;
+            this.btnVisualizzaCaratteristica.Location = new System.Drawing.Point(414, 386);
+            this.btnVisualizzaCaratteristica.Name = "btnVisualizzaCaratteristica";
+            this.btnVisualizzaCaratteristica.Size = new System.Drawing.Size(40, 40);
+            this.btnVisualizzaCaratteristica.TabIndex = 82;
+            this.btnVisualizzaCaratteristica.UseVisualStyleBackColor = true;
+            // 
             // FrmStrumentoMusicale
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.btnVisualizzaCaratteristica);
+            this.Controls.Add(this.lvAltreCaratteristiche);
             this.Controls.Add(this.btnEliminaCaratteristica);
             this.Controls.Add(this.btnModificaCaratteristica);
             this.Controls.Add(this.btnNuovaCaratteristica);
             this.Controls.Add(this.btnInfoSpecifiche);
             this.Controls.Add(this.btnSalva);
             this.Controls.Add(this.pictureBox1);
-            this.Controls.Add(this.lbAltreCaratteristiche);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.nudPeso);
@@ -377,7 +407,7 @@
             this.Controls.Add(this.tbColori);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.nudQuantità);
+            this.Controls.Add(this.nudQuantita);
             this.Controls.Add(this.label15);
             this.Controls.Add(this.nudID);
             this.Controls.Add(this.label1);
@@ -387,7 +417,7 @@
             this.Text = "FrmStrumentoMusicale";
             this.Load += new System.EventHandler(this.FrmStrumentoMusicale_Load);
             ((System.ComponentModel.ISupportInitialize)(this.nudID)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudQuantità)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudQuantita)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudPrezzo)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudPeso)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
@@ -403,7 +433,7 @@
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.NumericUpDown nudID;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.NumericUpDown nudQuantità;
+        private System.Windows.Forms.NumericUpDown nudQuantita;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox tbColori;
         private System.Windows.Forms.Label label6;
@@ -419,12 +449,15 @@
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.NumericUpDown nudPeso;
         private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.ListBox lbAltreCaratteristiche;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Button btnSalva;
         private System.Windows.Forms.Button btnInfoSpecifiche;
         private System.Windows.Forms.Button btnEliminaCaratteristica;
         private System.Windows.Forms.Button btnModificaCaratteristica;
         private System.Windows.Forms.Button btnNuovaCaratteristica;
+        private System.Windows.Forms.ListView lvAltreCaratteristiche;
+        private System.Windows.Forms.ColumnHeader chTitolo;
+        private System.Windows.Forms.ColumnHeader chTesto;
+        private System.Windows.Forms.Button btnVisualizzaCaratteristica;
     }
 }
