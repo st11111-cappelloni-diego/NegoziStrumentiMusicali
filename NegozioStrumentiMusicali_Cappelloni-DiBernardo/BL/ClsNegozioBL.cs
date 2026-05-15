@@ -137,7 +137,7 @@ namespace NegozioStrumentiMusicali
 
             _negozio.ID = Convert.ToInt64(dataReader["ID"]);
             _negozio.Nome = dataReader["nome"].ToString();
-            _negozio.IndirizzoID = Convert.ToInt64(dataReader["indirzzoID"]);
+            _negozio.IndirizzoID = Convert.ToInt64(dataReader["indirizzoID"]);
             _negozio.Bandito = Convert.ToBoolean(dataReader["bandito"]);
             if(dataReader["pathimmagine"] == DBNull.Value)
             {
@@ -187,7 +187,7 @@ namespace NegozioStrumentiMusicali
                 _connection.Open();
 
                 //Compongo la query
-                string _query = "SELECT * FROM negozio ORDER BY ID ";
+                string _query = "SELECT * FROM negozi ORDER BY ID ";
 
                 if (ordinaPerPiuRecente)
                 {
