@@ -121,6 +121,51 @@ namespace NegozioStrumentiMusicali
                 //Chiudo la connessione
                 connection.Close();
             }
+
+        }
+        
+        /// <summary>
+        /// Eliminazione di un record da strumentimusicali
+        /// </summary>
+        /// <param name="connection">Connessione al DB</param>
+        /// <param name="ordine">Record da eliminare</param>
+        /// <param name="comunicazione">Comunicazione in uscita</param>
+        
+        public static void DeleteOrdine(ref MySqlConnection connection, ClsOrdine ordine, out string comunicazione)
+        {
+            //VARIABILI LOCALI
+            comunicazione = String.Empty;
+
+            try
+            {
+                //Apro la connessione
+                connection.Open();
+
+                //Compongo il comando DML
+                string _dml = "DELETE FROM ordini WHERE ID = @ID";
+
+                //Creo l'oggetto command
+                MySqlCommand _cmd = new MySqlCommand(_dml, connection);
+
+                //Inserisco i valori
+                _cmd.Parameters.AddWithValue("@ID", ordine.ID);
+
+                //Eseguo il comando
+                _cmd.ExecuteNonQuery();
+
+                comunicazione = "Ordine eliminato correttamente dal DataBase";
+            }
+            catch (Exception ex)
+            {
+                comunicazione = ex.Message;
+            }
+            finally
+            {
+                //Chiudo la connessione
+                connection.Close();
+            }
+        }
+
         }
     }
 }

@@ -241,5 +241,54 @@ namespace NegozioStrumentiMusicali
 
             return _negozi;
         }
+
+        public static ClsNegozio GetOneNegozio(ref MySqlConnection connection, long ID, out string comunicazione)
+        {
+            //VARIABILI
+            comunicazione = String.Empty;
+            ClsNegozio _negozio = new ClsNegozio();
+
+            try
+            {
+                //Apro la connessione
+                connection.Open();
+
+                //Compongo la query
+                string _query = "SELECT * FROM negozi WHERE ID = @ID";
+
+                //Creo l'oggetto command
+                MySqlCommand _cmd = new MySqlCommand(_query, connection);
+
+                //Inserisco i valori
+                _cmd.Parameters.AddWithValue("@ID", ID);
+
+                //Eseguo il comando creando il DataReader
+                MySqlDataReader _dataReader = _cmd.ExecuteReader();
+
+                if (_dataReader.HasRows) //Controllo se la tabella ha dei record
+                {
+                    while (_dataReader.Read()) //Se ne ha li leggo tutti
+                    {
+                        _negozio = CaricaSingoloNegozio(ref _dataReader);
+                    }
+                }
+
+                _dataReader.Close();
+
+                comunicazione = "Strumento musicale caricato correttamente dal DataBase";
+            }
+            catch (Exception ex)
+            {
+                comunicazione = ex.Message;
+                _negozio = null;
+            }
+            finally
+            {
+                //Chiudo la connessione
+                connection.Close();
+            }
+
+            return _negozio;
+        }
     }
 }
