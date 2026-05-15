@@ -296,16 +296,16 @@ namespace NegozioStrumentiMusicali
 
                 //Creo la query con la join tra strumentimusicali e ottoni
                 //Abbino le righe in base a ID <-> strumentomusicaleID
-                string _query = "SELECT strumentimusicali.*, " +
-                    "ottoni.strumento, " +
-                    "ottoni.materialecorpo, " +
-                    "ottoni.laccatura, " +
-                    "ottoni.placcatura, " +
-                    "ottoni.materialebocchino, " +
-                    "ottoni.rivestimentobocchino, " +
-                    "ottoni.lunghezzacm, " +
-                    "ottoni.larghezzacm, " +
-                    "ottoni.altezzacm " +
+                string _query = "SELECT S.*, " +
+                    "O.strumento, " +
+                    "O.materialecorpo, " +
+                    "O.laccatura, " +
+                    "O.placcatura, " +
+                    "O.materialebocchino, " +
+                    "O.rivestimentobocchino, " +
+                    "O.lunghezzacm, " +
+                    "O.larghezzacm, " +
+                    "O.altezzacm " +
                     "FROM strumentimusicali AS S JOIN ottoni AS O " +
                     "ON S.ID = O.strumentomusicaleID " +
                     "ORDER BY S.ID ";
