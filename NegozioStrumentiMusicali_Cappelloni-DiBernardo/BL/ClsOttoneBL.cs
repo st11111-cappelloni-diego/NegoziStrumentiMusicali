@@ -277,21 +277,22 @@ namespace NegozioStrumentiMusicali
         /// <summary>
         /// Prende tutti i record di ottoni con anche le informazione della generalizzazione da strumentimusicali
         /// </summary>
-        /// <param name="connection">Connessione al DB</param>
+        /// <param name="stringaDiConnessione">Stringa per la connessione al DB</param>
         /// <param name="ordinaPerPiuRecente">Se true, ordina per ID in maniera decrescente. Se false ordina per ID in maniera crescente</param>
         /// <param name="comunicazione">Comunicazione in uscita</param>
         /// <param name="limiteRecord">Numero massimo di record da caricare. Accetta valori da 2 in su</param>
         /// <returns>La lista con tutti i record. Se è nulla il caricamento non è andato a buon fine</returns>
-        public static List<ClsOttone> GetAllOttoni(ref MySqlConnection connection, bool ordinaPerPiuRecente, out string comunicazione, int limiteRecord = 0)
+        public static List<ClsOttone> GetAllOttoni(string stringaDiConnessione, bool ordinaPerPiuRecente, out string comunicazione, int limiteRecord = 0)
         {
             //VARIABILI
             comunicazione = String.Empty;
             List<ClsOttone> _ottoni = new List<ClsOttone>();
+            MySqlConnection _connection = new MySqlConnection(stringaDiConnessione);
 
             try
             {
                 //Apro la connessione
-                connection.Open();
+                _connection.Open();
 
                 //Creo la query con la join tra strumentimusicali e ottoni
                 //Abbino le righe in base a ID <-> strumentomusicaleID
@@ -325,7 +326,7 @@ namespace NegozioStrumentiMusicali
                 }
 
                 //Creo l'oggetto command
-                MySqlCommand _cmd = new MySqlCommand(_query, connection);
+                MySqlCommand _cmd = new MySqlCommand(_query, _connection);
 
                 //Inserisco il limite se richiesto
                 if (limiteRecord >= 2)
@@ -356,7 +357,7 @@ namespace NegozioStrumentiMusicali
             finally
             {
                 //Chiudo la connessione
-                connection.Close();
+                _connection.Close();
             }
 
             return _ottoni;
