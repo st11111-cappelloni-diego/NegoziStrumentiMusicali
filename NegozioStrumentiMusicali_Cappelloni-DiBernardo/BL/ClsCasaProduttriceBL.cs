@@ -179,16 +179,17 @@ namespace NegozioStrumentiMusicali
         /// <param name="comunicazione">Comunicazione in uscita</param>
         /// <param name="limiteRecord">Numero massimo di record da caricare. Accetta valori da 2 in su</param>
         /// <returns>La lista di tutti i record di caseproduttrici</returns>
-        public static List<ClsCasaProduttrice> GetAllCaseProduttrici(ref MySqlConnection connection, bool ordinaPerPiuRecente, out string comunicazione, int limiteRecord = 0)
+        public static List<ClsCasaProduttrice> GetAllCaseProduttrici(string stringaDiConnessione, bool ordinaPerPiuRecente, out string comunicazione, int limiteRecord = 0)
         {
             //VARIABILI
             List<ClsCasaProduttrice> _caseProduttrici = new List<ClsCasaProduttrice>();
             comunicazione = String.Empty;
+            MySqlConnection _connection = new MySqlConnection(stringaDiConnessione);
 
             try
             {
                 //Apro la connessione
-                connection.Open();
+                _connection.Open();
 
                 //Compongo la query
                 string _query = "SELECT * FROM caseproduttrici ORDER BY ID ";
@@ -209,7 +210,7 @@ namespace NegozioStrumentiMusicali
                 }
 
                 //Creo l'oggetto command
-                MySqlCommand _cmd = new MySqlCommand(_query, connection);
+                MySqlCommand _cmd = new MySqlCommand(_query, _connection);
 
                 //Inserisco il limite se richiesto
                 if(limiteRecord >= 2)
@@ -240,7 +241,7 @@ namespace NegozioStrumentiMusicali
             finally
             {
                 //Chiudo la connessione
-                connection.Close();
+                _connection.Close();
             }
 
             return _caseProduttrici;
@@ -248,26 +249,27 @@ namespace NegozioStrumentiMusicali
         /// <summary>
         /// Prende un record da caseproduttrici in base alla chiave primaria ID
         /// </summary>
-        /// <param name="connection">Connessione al DB</param>
+        /// <param name="stringaDiConnessione">Stringa per la connessione al DB</param>
         /// <param name="ID"></param>
         /// <param name="comunicazione">Comunicazione in uscita</param>
         /// <returns></returns>
-        public static ClsCasaProduttrice GetOneCasaProduttrice(ref MySqlConnection connection, long ID ,out string comunicazione)
+        public static ClsCasaProduttrice GetOneCasaProduttrice(string stringaDiConnessione, long ID ,out string comunicazione)
         {
             //VARIABILI GLOBALI
             comunicazione = String.Empty;
             ClsCasaProduttrice _casaProduttrice = new ClsCasaProduttrice();
+            MySqlConnection _connection = new MySqlConnection(stringaDiConnessione);
 
             try
             {
                 //Apro la connessione
-                connection.Open();
+                _connection.Open();
 
                 //Compongo la query
                 string _query = "SELECT * FROM caseproduttrici WHERE ID = @ID";
 
                 //Creo l'oggetto command
-                MySqlCommand _cmd = new MySqlCommand(_query, connection);
+                MySqlCommand _cmd = new MySqlCommand(_query, _connection);
 
                 //Inserisco il valore
                 _cmd.Parameters.AddWithValue("@ID", ID);
@@ -294,7 +296,7 @@ namespace NegozioStrumentiMusicali
             finally
             {
                 //Chiudo la connessione
-                connection.Close();
+                _connection.Close();
             }
 
             return _casaProduttrice;
