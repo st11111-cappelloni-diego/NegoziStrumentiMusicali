@@ -27,7 +27,7 @@ namespace NegozioStrumentiMusicali
         
         List<ClsNegozio> _negozi = new List<ClsNegozio>();  //creo la lista di negozio dove verranno inseriti tutti quelli correlati al username dell'utente che ha fatto l'accesso
         List<ClsOrdine> _listOrdini = new List<ClsOrdine>();
-        long _ID = cbNegozio.SelectedIndex;
+        long _ID = 0;
 
         public FrmOrdini()
         {
