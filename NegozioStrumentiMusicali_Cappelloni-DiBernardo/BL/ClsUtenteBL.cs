@@ -148,7 +148,7 @@ namespace NegozioStrumentiMusicali
         {
             //VARIABILI GLOBALI
             comunicazione = String.Empty;
-            ClsUtente _utente = new ClsUtente();
+            ClsUtente _utente = null;
 
             try
             {
@@ -169,6 +169,7 @@ namespace NegozioStrumentiMusicali
 
                 if (_dataReader.HasRows) //Controllo se la tabella ha dei record
                 {
+                    _utente = new ClsUtente();
                     while (_dataReader.Read()) //Se ne ha li leggo tutti
                     {
                         _utente = CaricaSingoloUtente(ref _dataReader);
