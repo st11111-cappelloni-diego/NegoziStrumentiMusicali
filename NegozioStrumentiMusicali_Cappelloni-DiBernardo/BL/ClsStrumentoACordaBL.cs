@@ -343,21 +343,23 @@ namespace NegozioStrumentiMusicali
 
                 //Creo la query con la join tra strumentimusicali e strumentiacorda
                 //Abbino le righe in base a ID <-> strumentomusicaleID
-                string _query = "SELECT strumentimusicali.*, " +
-                    "strumentiacorda.strumento, " +
-                    "strumentiacorda.numerocorde, " +
-                    "strumentiacorda.lunghezzamanicocm, " +
-                    "strumentiacorda.ampiezzamanicocm, " +
-                    "strumentiacorda.spessoremanicocm, " +
-                    "strumentiacorda.materialemanico, " +
-                    "strumentiacorda.materialetastiera, " +
-                    "strumentiacorda.lunghezzacorpocm, " +
-                    "strumentiacorda.ampiezzacorpocm, " +
-                    "strumentiacorda.spessorecorpocm, " +
-                    "strumentiacorda.tasti, " +
-                    "strumentiacorda.pickup1, " +
-                    "strumentiacorda.pickup2, " +
-                    "strumentiacorda.pickup3 " +
+                string _query = "SELECT S.*, " +
+                    "C.strumento, " +
+                    "C.numerocorde, " +
+                    "C.materialecorde, " +
+                    "C.lunghezzamanicocm, " +
+                    "C.ampiezzamanicocm, " +
+                    "C.spessoremanicocm, " +
+                    "C.materialemanico, " +
+                    "C.materialetastiera, " +
+                    "C.lunghezzacorpocm, " +
+                    "C.ampiezzacorpocm, " +
+                    "C.spessorecorpocm, " +
+                    "C.materialecorpo, " +
+                    "C.tasti, " +
+                    "C.pickup1, " +
+                    "C.pickup2, " +
+                    "C.pickup3 " +
                     "FROM strumentimusicali AS S JOIN strumentiacorda AS C " +
                     "ON S.ID = C.strumentomusicaleID " +
                     "ORDER BY ID ";
