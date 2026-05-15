@@ -73,7 +73,7 @@
             this.pnlDetail.Controls.Add(this.tbUsernameCliente);
             this.pnlDetail.Controls.Add(this.label4);
             this.pnlDetail.Location = new System.Drawing.Point(867, 0);
-            this.pnlDetail.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pnlDetail.Margin = new System.Windows.Forms.Padding(4);
             this.pnlDetail.Name = "pnlDetail";
             this.pnlDetail.Size = new System.Drawing.Size(711, 844);
             this.pnlDetail.TabIndex = 46;
@@ -83,7 +83,7 @@
             this.nudIDArticolo.Enabled = false;
             this.nudIDArticolo.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.nudIDArticolo.Location = new System.Drawing.Point(7, 430);
-            this.nudIDArticolo.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.nudIDArticolo.Margin = new System.Windows.Forms.Padding(4);
             this.nudIDArticolo.Maximum = new decimal(new int[] {
             2147483647,
             0,
@@ -111,7 +111,7 @@
             this.nudIDOrdine.Enabled = false;
             this.nudIDOrdine.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.nudIDOrdine.Location = new System.Drawing.Point(7, 357);
-            this.nudIDOrdine.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.nudIDOrdine.Margin = new System.Windows.Forms.Padding(4);
             this.nudIDOrdine.Maximum = new decimal(new int[] {
             2147483647,
             0,
@@ -139,7 +139,7 @@
             this.dtpDataOrdine.Enabled = false;
             this.dtpDataOrdine.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dtpDataOrdine.Location = new System.Drawing.Point(7, 283);
-            this.dtpDataOrdine.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dtpDataOrdine.Margin = new System.Windows.Forms.Padding(4);
             this.dtpDataOrdine.MinDate = new System.DateTime(1900, 1, 1, 0, 0, 0, 0);
             this.dtpDataOrdine.Name = "dtpDataOrdine";
             this.dtpDataOrdine.Size = new System.Drawing.Size(691, 37);
@@ -161,7 +161,7 @@
             // 
             this.tbUsernameCliente.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbUsernameCliente.Location = new System.Drawing.Point(8, 210);
-            this.tbUsernameCliente.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tbUsernameCliente.Margin = new System.Windows.Forms.Padding(4);
             this.tbUsernameCliente.Name = "tbUsernameCliente";
             this.tbUsernameCliente.ReadOnly = true;
             this.tbUsernameCliente.Size = new System.Drawing.Size(691, 37);
@@ -196,7 +196,7 @@
             this.pnlMaster.Controls.Add(this.lvOrdini);
             this.pnlMaster.Controls.Add(this.btnElimina);
             this.pnlMaster.Location = new System.Drawing.Point(3, 0);
-            this.pnlMaster.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pnlMaster.Margin = new System.Windows.Forms.Padding(4);
             this.pnlMaster.Name = "pnlMaster";
             this.pnlMaster.Size = new System.Drawing.Size(856, 844);
             this.pnlMaster.TabIndex = 45;
@@ -206,7 +206,7 @@
             this.btnOrdina.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnOrdina.Image = global::NegozioStrumentiMusicali_Cappelloni_DiBernardo.Properties.Resources.iconaOrdina1_40x40;
             this.btnOrdina.Location = new System.Drawing.Point(793, 110);
-            this.btnOrdina.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnOrdina.Margin = new System.Windows.Forms.Padding(4);
             this.btnOrdina.Name = "btnOrdina";
             this.btnOrdina.Size = new System.Drawing.Size(53, 49);
             this.btnOrdina.TabIndex = 72;
@@ -218,7 +218,7 @@
             this.cbParametriDiOrdinamento.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cbParametriDiOrdinamento.FormattingEnabled = true;
             this.cbParametriDiOrdinamento.Location = new System.Drawing.Point(143, 78);
-            this.cbParametriDiOrdinamento.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cbParametriDiOrdinamento.Margin = new System.Windows.Forms.Padding(4);
             this.cbParametriDiOrdinamento.Name = "cbParametriDiOrdinamento";
             this.cbParametriDiOrdinamento.Size = new System.Drawing.Size(233, 33);
             this.cbParametriDiOrdinamento.TabIndex = 71;
@@ -241,7 +241,7 @@
             this.btnFiltriRicerca.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnFiltriRicerca.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnFiltriRicerca.Location = new System.Drawing.Point(685, 75);
-            this.btnFiltriRicerca.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnFiltriRicerca.Margin = new System.Windows.Forms.Padding(4);
             this.btnFiltriRicerca.Name = "btnFiltriRicerca";
             this.btnFiltriRicerca.Size = new System.Drawing.Size(100, 37);
             this.btnFiltriRicerca.TabIndex = 69;
@@ -253,7 +253,7 @@
             this.btnCerca.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnCerca.Image = global::NegozioStrumentiMusicali_Cappelloni_DiBernardo.Properties.Resources.iconaLenteRicerca1_28x28;
             this.btnCerca.Location = new System.Drawing.Point(793, 53);
-            this.btnCerca.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnCerca.Margin = new System.Windows.Forms.Padding(4);
             this.btnCerca.Name = "btnCerca";
             this.btnCerca.Size = new System.Drawing.Size(53, 49);
             this.btnCerca.TabIndex = 68;
@@ -266,7 +266,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tbRicerca.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbRicerca.Location = new System.Drawing.Point(385, 78);
-            this.tbRicerca.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tbRicerca.Margin = new System.Windows.Forms.Padding(4);
             this.tbRicerca.Name = "tbRicerca";
             this.tbRicerca.Size = new System.Drawing.Size(291, 30);
             this.tbRicerca.TabIndex = 67;
@@ -292,7 +292,7 @@
             this.cbNegozio.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cbNegozio.FormattingEnabled = true;
             this.cbNegozio.Location = new System.Drawing.Point(143, 11);
-            this.cbNegozio.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cbNegozio.Margin = new System.Windows.Forms.Padding(4);
             this.cbNegozio.Name = "cbNegozio";
             this.cbNegozio.Size = new System.Drawing.Size(703, 33);
             this.cbNegozio.TabIndex = 65;
@@ -313,13 +313,14 @@
             this.lvOrdini.FullRowSelect = true;
             this.lvOrdini.HideSelection = false;
             this.lvOrdini.Location = new System.Drawing.Point(11, 117);
-            this.lvOrdini.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.lvOrdini.Margin = new System.Windows.Forms.Padding(4);
             this.lvOrdini.MultiSelect = false;
             this.lvOrdini.Name = "lvOrdini";
             this.lvOrdini.Size = new System.Drawing.Size(773, 718);
             this.lvOrdini.TabIndex = 52;
             this.lvOrdini.UseCompatibleStateImageBehavior = false;
             this.lvOrdini.View = System.Windows.Forms.View.Details;
+            this.lvOrdini.ItemSelectionChanged += new System.Windows.Forms.ListViewItemSelectionChangedEventHandler(this.lvOrdini_ItemSelectionChanged);
             // 
             // chUsernameCliente
             // 
@@ -351,7 +352,7 @@
             this.btnElimina.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnElimina.Image = global::NegozioStrumentiMusicali_Cappelloni_DiBernardo.Properties.Resources.iconaCestino1_35x35;
             this.btnElimina.Location = new System.Drawing.Point(793, 786);
-            this.btnElimina.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnElimina.Margin = new System.Windows.Forms.Padding(4);
             this.btnElimina.Name = "btnElimina";
             this.btnElimina.Size = new System.Drawing.Size(53, 49);
             this.btnElimina.TabIndex = 51;
@@ -365,7 +366,7 @@
             this.ClientSize = new System.Drawing.Size(1579, 844);
             this.Controls.Add(this.pnlDetail);
             this.Controls.Add(this.pnlMaster);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "FrmOrdini";
             this.Text = "Ordini";
             this.Load += new System.EventHandler(this.FrmOrdini_Load);

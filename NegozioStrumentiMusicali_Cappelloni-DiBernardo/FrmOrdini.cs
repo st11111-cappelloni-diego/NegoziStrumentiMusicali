@@ -117,9 +117,10 @@ namespace NegozioStrumentiMusicali
 
         private void btnCerca_Click(object sender, EventArgs e)
         {
-            if (lvOrdini.SelectedItems.Count == 0)
-                return;
+        }
 
+        private void lvOrdini_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
+        {
             var item = lvOrdini.SelectedItems[0];
 
             // Recupero l’oggetto dal Tag
@@ -133,6 +134,7 @@ namespace NegozioStrumentiMusicali
             nudIDArticolo.Value = _ordine.StrumentoMusicaleID;
 
             pnlDetail.Enabled = true;
+
         }
     }
 }
