@@ -27,6 +27,16 @@ namespace NegozioStrumentiMusicali
             salice
         }
 
+        /// <summary>
+        /// Serve solo per il funzionamento del software. Non presente nel DB
+        /// </summary>
+        public enum eMODALITA_ENTRATA_DETAIL
+        {
+            Inserimento,
+            Modifica,
+            Visualizzazione
+        }
+
         //VARIABILI GLOBALI
         public static string _connectionString = "server=localhost;user=root;database=negozistrumentimusicali;port=3306;password=root;SslMode=None";
         public static MySqlConnection _connessioneAlDB = new MySqlConnection(_connectionString);
