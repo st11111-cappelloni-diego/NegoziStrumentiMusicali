@@ -11,6 +11,15 @@ namespace NegozioStrumentiMusicali
     /// </summary>
     public class ClsOrdine
     {
+        #region Enumeratori
+        enum eSTATO
+        {
+            non_visualizzato,
+            visualizzato,
+            spedito
+        }
+        #endregion
+
         #region Attributi
         long _id;
         int _quantita;
@@ -19,7 +28,7 @@ namespace NegozioStrumentiMusicali
         private long _negozioID;
         private long _indirizzoID;
         private string _usernameCliente;
-
+        private eSTATO stato;
         #endregion
 
         #region Proprietà
@@ -65,6 +74,7 @@ namespace NegozioStrumentiMusicali
         public long NegozioID { get => _negozioID; set => _negozioID = value; }
         public long IndirizzoID { get => _indirizzoID; set => _indirizzoID = value; }
         public string UsernameCliente { get => _usernameCliente; set => _usernameCliente = value; }
+        private eSTATO Stato { get => stato; set => stato = value; }
 
         #endregion
 

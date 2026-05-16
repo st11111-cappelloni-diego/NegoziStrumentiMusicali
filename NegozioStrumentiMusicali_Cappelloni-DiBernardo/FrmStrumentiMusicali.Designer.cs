@@ -231,6 +231,7 @@
             this.btnModifica.Size = new System.Drawing.Size(40, 40);
             this.btnModifica.TabIndex = 58;
             this.btnModifica.UseVisualStyleBackColor = true;
+            this.btnModifica.Click += new System.EventHandler(this.btnModifica_Click);
             // 
             // btnNuovo
             // 

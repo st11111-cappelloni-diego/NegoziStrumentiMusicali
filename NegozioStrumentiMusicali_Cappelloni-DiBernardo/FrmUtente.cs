@@ -27,7 +27,6 @@ namespace NegozioStrumentiMusicali
         private void FrmUtente_Load(object sender, EventArgs e)
         {
             tbNome.Text = ClsArchivio.UtenteAttuale.Nome;
-            tbPassword.Text = ClsArchivio.UtenteAttuale.Nome;
             tbUsername.Text = ClsArchivio.UtenteAttuale.Username;
             tbEmail.Text = ClsArchivio.UtenteAttuale.Email;
             tbNome.Text = ClsArchivio.UtenteAttuale.Nome;
