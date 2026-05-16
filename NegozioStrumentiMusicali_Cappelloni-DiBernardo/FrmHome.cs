@@ -80,6 +80,18 @@ namespace NegozioStrumentiMusicali
             //Metto il nome utente sull'apposito bottone nel menu
             mioUtenteToolStripMenuItem.Text = ClsArchivio.UtenteAttuale.Username;
 
+            string _temp = String.Empty;
+            //Carico le gestire dell'utente attuale
+            Task.Run
+                (() =>
+                    ClsArchivio.ListaGestireUtenteAttuale =
+                    ClsGestireBL.GetSomeGestire
+                    (Program._connectionString,
+                    out _temp,
+                    ClsArchivio.UtenteAttuale.Username
+                    )
+                );
+
             //Nascondo e disabilito / Mostro e abilito alcuni bottoni del menu in base all'utente che ha fatto il login
             //Controllo se utente è admin software
             if (!ClsArchivio.UtenteAttuale.AdminSoftware) 
@@ -109,19 +121,7 @@ namespace NegozioStrumentiMusicali
                 MostraBottoniAdminNegozio(true);
             }
 
-            //string _comunicazione = String.Empty;
-            /*
-            ClsArchivio.Piatti = ClsPiattoBL.GetAllPiatti(ref Program._connessioneAlDB, out _comunicazione);
-            MessageBox.Show(_comunicazione);
-            ClsArchivio.Tamburi = ClsTamburoBL.GetAllTamburi(ref Program._connessioneAlDB, out _comunicazione);
-            MessageBox.Show(_comunicazione);  
-            ClsArchivio.NoteMusicali = ClsNotaMusicaleBL.GetAllNoteMusicali(ref Program._connessioneAlDB, out _comunicazione);
-            MessageBox.Show(_comunicazione);
-            ClsArchivio.CaseProduttrici = ClsCasaProduttriceBL.GetAllCaseProduttrici(ref Program._connessioneAlDB, out _comunicazione);
-            MessageBox.Show(_comunicazione);
-            List<ClsOttone> _ottoni = ClsOttoneBL.GetAllOttoni(ref Program._connessioneAlDB, out _comunicazione);
-            MessageBox.Show(_comunicazione);
-            */
+            
         }
         private void mioUtenteToolStripMenuItem_Click(object sender, EventArgs e)
         {

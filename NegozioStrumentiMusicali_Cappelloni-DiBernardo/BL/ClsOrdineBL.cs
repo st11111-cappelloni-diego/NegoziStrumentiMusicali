@@ -170,16 +170,17 @@ namespace NegozioStrumentiMusicali
         /// Caricamento di alcuni record di ordini in base a negozioID o strumentoMusicaleID.
         /// Escludi negozioID passando come valore -1, escludi strumentoMusicaleID passando come valore -1
         /// </summary>
-        /// <param name="connection"></param>
+        /// <param name="stringDiConnessione"></param>
         /// <param name="negozioID"></param>
         /// <param name="strumentoMusicaleID"></param>
         /// <param name="comunicazione"></param>
         /// <returns></returns>
-        public static List<ClsOrdine> GetSomeOrdini(ref MySqlConnection connection, long negozioID, long strumentoMusicaleID, out string comunicazione)
+        public static List<ClsOrdine> GetSomeOrdini(string stringDiConnessione, long negozioID, long strumentoMusicaleID, out string comunicazione)
         {
             //VARIABILI
             comunicazione = String.Empty;
             List<ClsOrdine> _listaOrdini = new List<ClsOrdine>();
+            MySqlConnection connection = new MySqlConnection(stringDiConnessione);
 
             try
             {

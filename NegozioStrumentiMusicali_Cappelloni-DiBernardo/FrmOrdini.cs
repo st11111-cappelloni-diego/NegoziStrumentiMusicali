@@ -34,7 +34,7 @@ namespace NegozioStrumentiMusicali
             InitializeComponent();
             List<ClsGestire> _listGestire = new List<ClsGestire>(); //creo una lista di gestire dove metto tutti i gestire presi in base al userneme di chi ha fatto l'accesso
             string _comunicazione;
-            _listGestire = ClsGestireBL.GetSomeGestire(ref Program._connessioneAlDB, out _comunicazione, ClsArchivio.UtenteAttuale.Username); //carico la lista di fgestire tramite il get sokme di gestire 
+            _listGestire = ClsGestireBL.GetSomeGestire(Program._connectionString, out _comunicazione, ClsArchivio.UtenteAttuale.Username); //carico la lista di fgestire tramite il get sokme di gestire 
             string _comunicazioneNegozi;
             foreach (ClsGestire gestire in _listGestire)   //foreach per inseire con un get one i negozi chi dell'utente che ha fatto l'accesso 
             {
@@ -109,8 +109,8 @@ namespace NegozioStrumentiMusicali
             
 
             string _comunicazioneOrdine;
-            _listOrdini = ClsOrdineBL.GetSomeOrdini(ref Program._connessioneAlDB, _negozioID, -1, out _comunicazioneOrdine);
-
+            _listOrdini = ClsOrdineBL.GetSomeOrdini(Program._connectionString, _negozioID, -1, out _comunicazioneOrdine);
+            PopolaListView(lvOrdini, _listOrdini, _negozioID);
 
             cbParametriDiOrdinamento.DataSource = Enum.GetNames(typeof(ePARAMETRI_DI_ORDINAMENTO));
             pnlDetail.Enabled = false;
@@ -118,8 +118,8 @@ namespace NegozioStrumentiMusicali
 
         private void cbNegozio_SelectedIndexChanged(object sender, EventArgs e)
         {
-            PopolaListView(lvOrdini, _listOrdini, _negozioID);
             _negozioID = _negozi[cbNegozio.SelectedIndex].ID;
+            PopolaListView(lvOrdini, _listOrdini, _negozioID);
         }
 
         private void btnCerca_Click(object sender, EventArgs e)
