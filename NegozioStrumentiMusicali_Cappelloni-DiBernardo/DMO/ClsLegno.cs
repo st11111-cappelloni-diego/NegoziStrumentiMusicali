@@ -35,6 +35,7 @@ namespace NegozioStrumentiMusicali
             bosso,
             cocobolo,
             grenadilla,
+            nickel_argentato,
             oro,
             ottone,
             ottone_argentato,
