@@ -16,7 +16,15 @@ namespace NegozioStrumentiMusicali
     public partial class FrmStrumentiMusicali : Form
     {
         #region Variabili globali
-        List<ClsVendere> _listaVendereNegozioSelezionato = new List<ClsVendere>();
+        private List<ClsVendere> _listaVendereNegozioSelezionato = new List<ClsVendere>();
+        private List<ClsGestire> _listaGestireNegozioSelezionato = new List<ClsGestire>();
+
+
+
+        #endregion
+        #region Proprietà
+        public List<ClsVendere> ListaVendereNegozioSelezionato { get => _listaVendereNegozioSelezionato; set => _listaVendereNegozioSelezionato = value; }
+        public List<ClsGestire> ListaGestireNegozioSelezionato { get => _listaGestireNegozioSelezionato; set => _listaGestireNegozioSelezionato = value; }
 
         #endregion
         #region Enumeratori
@@ -218,35 +226,35 @@ namespace NegozioStrumentiMusicali
                     _lviListStrumentiACorda =
                     CreaListViewItems(
                         ClsArchivio.StrumentiACorda,
-                        _listaVendereNegozioSelezionato
+                        ListaVendereNegozioSelezionato
                     )
                 ),
                 Task.Run(()=>
                     _lviListPianoforti =
                     CreaListViewItems(
                         ClsArchivio.Pianoforti,
-                        _listaVendereNegozioSelezionato
+                        ListaVendereNegozioSelezionato
                     )
                 ),
                 Task.Run(()=>
                     _lviListOttoni =
                     CreaListViewItems(
                         ClsArchivio.Ottoni,
-                        _listaVendereNegozioSelezionato
+                        ListaVendereNegozioSelezionato
                     )
                 ),
                 Task.Run(() =>
                     _lviListLegni = 
                     CreaListViewItems(
                         ClsArchivio.Legni,
-                        _listaVendereNegozioSelezionato
+                        ListaVendereNegozioSelezionato
                     )
                 ),
                 Task.Run(() =>
                     _lviListBatterie =
                     CreaListViewItems(
                         ClsArchivio.Batterie,
-                        _listaVendereNegozioSelezionato
+                        ListaVendereNegozioSelezionato
                     )
                 )
             );
@@ -295,7 +303,23 @@ namespace NegozioStrumentiMusicali
 
         private void btnNuovo_Click(object sender, EventArgs e)
         {
+            //Creo l'istanza di FrmStrumentoMusicale
+            FrmStrumentoMusicale _frmStrumentoMusicale = new FrmStrumentoMusicale();
 
+            //Cambio il testo della form
+            _frmStrumentoMusicale.Text = "Inserisci uno strumento musicale";
+
+            //Metto la modalità d'entrata ad inserimento
+            _frmStrumentoMusicale.ModalitaEntrata = Program.eMODALITA_ENTRATA_DETAIL.Inserimento;
+
+            //Inizializzo lo strumento musicale e la sua vendere
+            _frmStrumentoMusicale.StrumentoMusicale = new ClsStrumentoMusicale();
+            _frmStrumentoMusicale.VendereStrumentoMusicale = new ClsVendere();
+            _frmStrumentoMusicale.VendereStrumentoMusicale.NegozioID =
+                ClsArchivio.Negozi[cbNegozio.SelectedIndex].ID;
+
+            //Apro la form
+            _frmStrumentoMusicale.ShowDialog(this);
         }
 
         #endregion
@@ -303,12 +327,19 @@ namespace NegozioStrumentiMusicali
         private async void cbNegozio_SelectedIndexChanged(object sender, EventArgs e)
         {
             long _idNegozio = ClsArchivio.Negozi[cbNegozio.SelectedIndex].ID;
-
-            //Trovo le vendere del negozio selezionato
             string _temp = String.Empty;
+
+            //Controllo se l'utente gestisce questo negozio cercando le gestire del negozio e controllando se contiene l'utente
+            //Se no, rendo invisibili i bottoni crea, modifica, elimina
             await Task.Run(() =>
             {
-                _listaVendereNegozioSelezionato =
+
+            });
+
+            //Trovo le vendere del negozio selezionato
+            await Task.Run(() =>
+            {
+                ListaVendereNegozioSelezionato =
                     ClsVendereBL.GetSomeVendere(
                         Program._connectionString,
                         _idNegozio,
@@ -319,6 +350,45 @@ namespace NegozioStrumentiMusicali
 
             //Popolo la listview degli strumenti
             PopolaListView(lvStrumenti);
+        }
+
+        private void btnModifica_Click(object sender, EventArgs e)
+        {
+            //Controllo se si è selezionato un solo elemento nella listView
+            if(lvStrumenti.SelectedItems.Count == 1)
+            {
+                //Se si è selezionato:
+
+                //Istanzio la form detail
+                FrmStrumentoMusicale _frmStrumentoMusicale = new FrmStrumentoMusicale();
+
+                //Cambio il testo della form
+                _frmStrumentoMusicale.Text = "Modifica strumento musicale";
+
+                //Gli passo lo strumento da modificare
+                ClsStrumentoMusicale _strumentoDaModificare = (ClsStrumentoMusicale)lvStrumenti.SelectedItems[0].Tag;
+                _frmStrumentoMusicale.StrumentoMusicale = _strumentoDaModificare;
+
+                //Trovo la vendere dello strumento e la passo alla form
+                ClsVendere _vendereStrumentoDaModificare =
+                    ListaVendereNegozioSelezionato.FirstOrDefault(v => v.StrumentoMusicaleID == _strumentoDaModificare.ID);
+                _frmStrumentoMusicale.VendereStrumentoMusicale = _vendereStrumentoDaModificare;
+
+                //Metto come modalità di entrata modifica
+                _frmStrumentoMusicale.ModalitaEntrata = Program.eMODALITA_ENTRATA_DETAIL.Modifica;
+
+                //Apro la form
+                _frmStrumentoMusicale.ShowDialog(this);
+            }
+            else if(lvStrumenti.SelectedItems.Count > 1)
+            {
+                MessageBox.Show("Selezionare un solo elemento", "MODIFICA", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
+            else
+            {
+                MessageBox.Show("Selezionare un elemento", "MODIFICA", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
+
         }
     }
 }
