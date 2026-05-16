@@ -211,5 +211,58 @@ namespace NegozioStrumentiMusicali
 
             return _casaProduttrice;
         }
+    /// <summary>
+    /// Caricamento di tutti i record di utenti
+    /// </summary>
+    /// <param name="connection">Connessione al DB</param>
+    /// <param name="comunicazione">Comunicazione in uscita</param>
+    /// <returns>La lista di tutti i record di strumentimusicali</returns>
+    public static List<ClsUtente> GetAllUtenti(string stringaDiConnessione, out string comunicazione)
+    {
+        //VARIABILI
+        List<ClsUtente> _listUtenti = new List<ClsUtente>();
+            comunicazione = String.Empty;
+            MySqlConnection _connection = new MySqlConnection(stringaDiConnessione);
+
+        try
+        {
+            //Apro la connessione
+            _connection.Open();
+
+            //Compongo la query
+            string _query = "SELECT * FROM utenti";
+
+            //Creo l'oggetto command
+            MySqlCommand _cmd = new MySqlCommand(_query, _connection);
+
+            //Eseguo il comando creando l'oggetto DataReader
+            MySqlDataReader _dataReader = _cmd.ExecuteReader();
+
+            if (_dataReader.HasRows) //Controllo se la tabella contiene dei record
+            {
+                while (_dataReader.Read()) //Se ce li ha li leggo tutti
+                {
+                    //Carico i dati dal DB
+                    //_strumentiMusicali.Add(CaricaSingoloStrumento(ref _dataReader));
+                }
+            }
+
+            _dataReader.Close();
+
+            comunicazione = "Utenti caricati correttamente dal DataBase";
+        }
+        catch (Exception ex)
+        {
+            comunicazione = ex.Message;
+        }
+        finally
+        {
+            //Chiudo la connessione
+            _connection.Close();
+        }
+
+        return _listUtenti;
     }
+
+}
 }
