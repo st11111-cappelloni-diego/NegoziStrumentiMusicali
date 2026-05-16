@@ -12,6 +12,7 @@ namespace NegozioStrumentiMusicali
 {
     /// <summary>
     /// GUI: Diego Cappelloni
+    /// Sviluppo: Di Bernardo Leonardo
     /// </summary>
     public partial class FrmOrdini : Form
     {
@@ -33,12 +34,10 @@ namespace NegozioStrumentiMusicali
         {
             InitializeComponent();
             List<ClsGestire> _listGestire = new List<ClsGestire>(); //creo una lista di gestire dove metto tutti i gestire presi in base al userneme di chi ha fatto l'accesso
-            string _comunicazione;
-            _listGestire = ClsGestireBL.GetSomeGestire(Program._connectionString, out _comunicazione, ClsArchivio.UtenteAttuale.Username); //carico la lista di fgestire tramite il get sokme di gestire 
+            _listGestire = ClsArchivio.ListaGestireUtenteAttuale; //carico la lista di gestire dell'utente attuale che si trova su clsArchivio
             string _comunicazioneNegozi;
             foreach (ClsGestire gestire in _listGestire)   //foreach per inseire con un get one i negozi chi dell'utente che ha fatto l'accesso 
-            {
-                
+            {   
                 _negozi.Add(ClsNegozioBL.GetOneNegozio(ref Program._connessioneAlDB, gestire.NegozioID, out _comunicazioneNegozi));
             }
 
@@ -72,11 +71,13 @@ namespace NegozioStrumentiMusicali
         /// <param name="listView"></param>
         /// <param name="listaOrdini"></param>
         /// <param name="negozioID"></param>
-        void PopolaListView(ListView listView, List<ClsOrdine> listOrdini, long negozioID)
+        void PopolaListView(ListView listView, List<ClsOrdine> lista, long negozioID)
         {
-            if (listOrdini != null)
+            listView.Items.Clear();  //svuoto la listView
+
+            if (lista != null)
             {
-                foreach (ClsOrdine _ordine in listOrdini)
+                foreach (ClsOrdine _ordine in lista)
                 {
                     //Se l'ordine è presente nel negozio negozio lo aggiungo alla listview
                     listView.Items.Add(CreaListViewItem(_ordine));
@@ -91,7 +92,7 @@ namespace NegozioStrumentiMusicali
         /// <returns></returns>
         private ListViewItem CreaListViewItem(ClsOrdine ordine)
         {
-            ListViewItem _lvi = new ListViewItem();
+            ListViewItem _lvi = new ListViewItem(ordine.UsernameCliente);
             
             _lvi.SubItems.Add(ordine.UsernameCliente);
             _lvi.SubItems.Add(ordine.DataOra.ToString());
@@ -106,8 +107,6 @@ namespace NegozioStrumentiMusicali
 
         private void FrmOrdini_Load(object sender, EventArgs e)
         {
-            
-
             string _comunicazioneOrdine;
             _listOrdini = ClsOrdineBL.GetSomeOrdini(Program._connectionString, _negozioID, -1, out _comunicazioneOrdine);
             PopolaListView(lvOrdini, _listOrdini, _negozioID);
@@ -118,8 +117,18 @@ namespace NegozioStrumentiMusicali
 
         private void cbNegozio_SelectedIndexChanged(object sender, EventArgs e)
         {
-            _negozioID = _negozi[cbNegozio.SelectedIndex].ID;
-            PopolaListView(lvOrdini, _listOrdini, _negozioID);
+
+            if (cbNegozio.SelectedIndex >= 0 && cbNegozio.SelectedIndex < _negozi.Count)
+            {
+                _negozioID = _negozi[cbNegozio.SelectedIndex].ID;
+
+                // Recupera dal database solo gli ordini del negozio attualmente selezionato
+                string _comunicazioneOrdine;
+                _listOrdini = ClsOrdineBL.GetSomeOrdini(Program._connectionString, _negozioID, -1, out _comunicazioneOrdine);
+
+                // Aggiorna la ListView con i nuovi dati
+                PopolaListView(lvOrdini, _listOrdini, _negozioID);
+            }
         }
 
         private void btnCerca_Click(object sender, EventArgs e)
