@@ -36,7 +36,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.tbNome = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.ù = new System.Windows.Forms.TextBox();
+            this.tbCognome = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.btnEsci = new System.Windows.Forms.Button();
             this.btnCambiaUtente = new System.Windows.Forms.Button();
@@ -70,7 +70,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tbUsername.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbUsername.Location = new System.Drawing.Point(16, 43);
-            this.tbUsername.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tbUsername.Margin = new System.Windows.Forms.Padding(4);
             this.tbUsername.Name = "tbUsername";
             this.tbUsername.Size = new System.Drawing.Size(663, 37);
             this.tbUsername.TabIndex = 1;
@@ -81,7 +81,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tbEmail.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbEmail.Location = new System.Drawing.Point(16, 117);
-            this.tbEmail.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tbEmail.Margin = new System.Windows.Forms.Padding(4);
             this.tbEmail.Name = "tbEmail";
             this.tbEmail.Size = new System.Drawing.Size(663, 37);
             this.tbEmail.TabIndex = 3;
@@ -106,7 +106,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tbPassword.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbPassword.Location = new System.Drawing.Point(16, 191);
-            this.tbPassword.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tbPassword.Margin = new System.Windows.Forms.Padding(4);
             this.tbPassword.Name = "tbPassword";
             this.tbPassword.Size = new System.Drawing.Size(663, 37);
             this.tbPassword.TabIndex = 5;
@@ -132,7 +132,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tbNome.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbNome.Location = new System.Drawing.Point(16, 265);
-            this.tbNome.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tbNome.Margin = new System.Windows.Forms.Padding(4);
             this.tbNome.Name = "tbNome";
             this.tbNome.Size = new System.Drawing.Size(663, 37);
             this.tbNome.TabIndex = 7;
@@ -151,16 +151,16 @@
             this.label4.Text = "Nome";
             this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // ù
+            // tbCognome
             // 
-            this.ù.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.tbCognome.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.ù.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ù.Location = new System.Drawing.Point(16, 338);
-            this.ù.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.ù.Name = "ù";
-            this.ù.Size = new System.Drawing.Size(663, 37);
-            this.ù.TabIndex = 9;
+            this.tbCognome.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbCognome.Location = new System.Drawing.Point(16, 338);
+            this.tbCognome.Margin = new System.Windows.Forms.Padding(4);
+            this.tbCognome.Name = "tbCognome";
+            this.tbCognome.Size = new System.Drawing.Size(663, 37);
+            this.tbCognome.TabIndex = 9;
             // 
             // label5
             // 
@@ -182,7 +182,7 @@
             this.btnEsci.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnEsci.ForeColor = System.Drawing.Color.Black;
             this.btnEsci.Location = new System.Drawing.Point(1396, 770);
-            this.btnEsci.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnEsci.Margin = new System.Windows.Forms.Padding(4);
             this.btnEsci.Name = "btnEsci";
             this.btnEsci.Size = new System.Drawing.Size(167, 59);
             this.btnEsci.TabIndex = 11;
@@ -195,7 +195,7 @@
             this.btnCambiaUtente.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCambiaUtente.ForeColor = System.Drawing.Color.Black;
             this.btnCambiaUtente.Location = new System.Drawing.Point(1221, 770);
-            this.btnCambiaUtente.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnCambiaUtente.Margin = new System.Windows.Forms.Padding(4);
             this.btnCambiaUtente.Name = "btnCambiaUtente";
             this.btnCambiaUtente.Size = new System.Drawing.Size(167, 59);
             this.btnCambiaUtente.TabIndex = 12;
@@ -208,7 +208,7 @@
             this.btnCancellaUtente.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCancellaUtente.ForeColor = System.Drawing.Color.Black;
             this.btnCancellaUtente.Location = new System.Drawing.Point(1027, 770);
-            this.btnCancellaUtente.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnCancellaUtente.Margin = new System.Windows.Forms.Padding(4);
             this.btnCancellaUtente.Name = "btnCancellaUtente";
             this.btnCancellaUtente.Size = new System.Drawing.Size(187, 59);
             this.btnCancellaUtente.TabIndex = 13;
@@ -235,7 +235,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dtpDataDiNascita.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dtpDataDiNascita.Location = new System.Drawing.Point(16, 412);
-            this.dtpDataDiNascita.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dtpDataDiNascita.Margin = new System.Windows.Forms.Padding(4);
             this.dtpDataDiNascita.MinDate = new System.DateTime(1900, 1, 1, 0, 0, 0, 0);
             this.dtpDataDiNascita.Name = "dtpDataDiNascita";
             this.dtpDataDiNascita.Size = new System.Drawing.Size(663, 37);
@@ -263,7 +263,7 @@
             this.cbGenere.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cbGenere.FormattingEnabled = true;
             this.cbGenere.Location = new System.Drawing.Point(16, 486);
-            this.cbGenere.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cbGenere.Margin = new System.Windows.Forms.Padding(4);
             this.cbGenere.Name = "cbGenere";
             this.cbGenere.Size = new System.Drawing.Size(663, 38);
             this.cbGenere.TabIndex = 17;
@@ -307,7 +307,7 @@
             this.Controls.Add(this.btnCambiaUtente);
             this.Controls.Add(this.btnEsci);
             this.Controls.Add(this.pbFotoProfilo);
-            this.Controls.Add(this.ù);
+            this.Controls.Add(this.tbCognome);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.tbNome);
             this.Controls.Add(this.label4);
@@ -318,7 +318,7 @@
             this.Controls.Add(this.tbUsername);
             this.Controls.Add(this.label1);
             this.ForeColor = System.Drawing.Color.Black;
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.MaximizeBox = false;
             this.Name = "FrmUtente";
             this.Text = "MioUtente";
@@ -339,7 +339,7 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox tbNome;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox ù;
+        private System.Windows.Forms.TextBox tbCognome;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.PictureBox pbFotoProfilo;
         private System.Windows.Forms.Button btnEsci;
