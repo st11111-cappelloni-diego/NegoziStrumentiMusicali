@@ -207,26 +207,27 @@ namespace NegozioStrumentiMusicali
             return _listaGestire;
         }
 
-        public static List<ClsGestire> GetSomeGestire(ref MySqlConnection connection, out string comunicazione, string username)
+        public static List<ClsGestire> GetSomeGestire(string stringaDiConnessione, out string comunicazione, string username)
         {
             //VARIABILI
             comunicazione = String.Empty;
             List<ClsGestire> _listGestire = new List<ClsGestire>();
+            MySqlConnection _connection = new MySqlConnection(stringaDiConnessione);
 
             try
             {
                 //Apro la connessione
-                connection.Open();
+                _connection.Open();
 
                 //Compongo la query
-                string _query = "SELECT * from gestire WHERE usernameutente = @usernameutente";
+                string _query = "SELECT * from gestire WHERE utenteusername = @utenteusername";
                 //Posso ricercare per un solo campo alla volta perciò li controllo nell'ordine: casaProduttriceID, modello, colori)
 
                 //Creo l'oggetto command
-                MySqlCommand _cmd = new MySqlCommand(_query, connection);
+                MySqlCommand _cmd = new MySqlCommand(_query, _connection);
 
                 //Inserisco i valori
-                _cmd.Parameters.AddWithValue("@usernameutente", username);
+                _cmd.Parameters.AddWithValue("@utenteusername", username);
 
                 //Eseguo il comando creando il DataReader
                 MySqlDataReader _dataReader = _cmd.ExecuteReader();
@@ -242,7 +243,7 @@ namespace NegozioStrumentiMusicali
 
                 _dataReader.Close();
 
-                comunicazione = "Strumenti musicali caricati correttamente dal DataBase";
+                comunicazione = "Relazioni di tipo gestire caricate correttamente dal DataBase";
             }
             catch (Exception ex)
             {
@@ -251,7 +252,7 @@ namespace NegozioStrumentiMusicali
             finally
             {
                 //Chiudo la connessione
-                connection.Close();
+                _connection.Close();
             }
 
             return _listGestire;
