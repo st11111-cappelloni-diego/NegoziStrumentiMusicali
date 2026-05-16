@@ -27,7 +27,7 @@ namespace NegozioStrumentiMusicali
         
         List<ClsNegozio> _negozi = new List<ClsNegozio>();  //creo la lista di negozio dove verranno inseriti tutti quelli correlati al username dell'utente che ha fatto l'accesso
         List<ClsOrdine> _listOrdini = new List<ClsOrdine>();
-        long _ID = 0;
+        long _negozioID = 0;
 
         public FrmOrdini()
         {
@@ -45,10 +45,10 @@ namespace NegozioStrumentiMusicali
             PopolaCombobox(cbNegozio, _negozi);
 
             
-            string _comunicazioneOrdine;
-            _listOrdini = ClsOrdineBL.GetSomeOrdini(ref Program._connessioneAlDB, _ID, -1, out _comunicazioneOrdine);
 
-           
+
+
+
         }
 
         void PopolaCombobox(ComboBox comboBox, List<ClsNegozio> listaNegozi)
@@ -61,7 +61,7 @@ namespace NegozioStrumentiMusicali
                 for (int i = 0; i < listaNegozi.Count; i++)
                 {
                     comboBox.Items.Add(listaNegozi[i].Nome);
-                    comboBox.SelectedIndex = Convert.ToInt32(listaNegozi[i].ID);
+                    comboBox.SelectedIndex = i;
                 }
             }
         }
@@ -106,13 +106,20 @@ namespace NegozioStrumentiMusicali
 
         private void FrmOrdini_Load(object sender, EventArgs e)
         {
+            
+
+            string _comunicazioneOrdine;
+            _listOrdini = ClsOrdineBL.GetSomeOrdini(ref Program._connessioneAlDB, _negozioID, -1, out _comunicazioneOrdine);
+
+
             cbParametriDiOrdinamento.DataSource = Enum.GetNames(typeof(ePARAMETRI_DI_ORDINAMENTO));
             pnlDetail.Enabled = false;
         }
 
         private void cbNegozio_SelectedIndexChanged(object sender, EventArgs e)
         {
-            PopolaListView(lvOrdini, _listOrdini, _ID);
+            PopolaListView(lvOrdini, _listOrdini, _negozioID);
+            _negozioID = _negozi[cbNegozio.SelectedIndex].ID;
         }
 
         private void btnCerca_Click(object sender, EventArgs e)
