@@ -13,9 +13,17 @@ namespace NegozioStrumentiMusicali
     public partial class FrmStrumentoMusicale : Form
     {
         #region Variabili
-        ClsStrumentoMusicale _strumentoMusicale = new ClsStrumentoMusicale();
-        ClsVendere _vendereStrumentoMusicale = new ClsVendere();
-        Program.eMODALITA_ENTRATA_DETAIL _modalitaEntrata = Program.eMODALITA_ENTRATA_DETAIL.Visualizzazione;
+        private ClsStrumentoMusicale strumentoMusicale = new ClsStrumentoMusicale();
+        private ClsVendere vendereStrumentoMusicale = new ClsVendere();
+        private Program.eMODALITA_ENTRATA_DETAIL modalitaEntrata = Program.eMODALITA_ENTRATA_DETAIL.Visualizzazione;
+
+
+
+        #endregion
+        #region Proprietà
+        public ClsStrumentoMusicale StrumentoMusicale { get => strumentoMusicale; set => strumentoMusicale = value; }
+        public ClsVendere VendereStrumentoMusicale { get => vendereStrumentoMusicale; set => vendereStrumentoMusicale = value; }
+        public Program.eMODALITA_ENTRATA_DETAIL ModalitaEntrata { get => modalitaEntrata; set => modalitaEntrata = value; }
 
         #endregion
         #region Enumeratori
@@ -55,6 +63,8 @@ namespace NegozioStrumentiMusicali
                 }
                 _testoDaAggiungere += notaMusicale.Ottava.ToString();
                 comboBox.Items.Add(_testoDaAggiungere);
+
+                _testoDaAggiungere = String.Empty;
             }
 
             comboBox.SelectedIndex = 0;
@@ -162,13 +172,18 @@ namespace NegozioStrumentiMusicali
             //Popolo le combobox
             cbStrumento.DataSource = Enum.GetNames(typeof(eTIPO_STRUMENTO));
             PopolaComboBox(cbNotaMassima, ClsArchivio.NoteMusicali);
-            PopolaComboBox(cbNotaMassima, ClsArchivio.NoteMusicali);
+            PopolaComboBox(cbNotaMinima, ClsArchivio.NoteMusicali);
             PopolaComboBox(cbCasaProduttrice, ClsArchivio.CaseProduttrici);
         }
 
         private void FrmStrumentoMusicale_Load(object sender, EventArgs e)
         {
-
+            //Se la modalità è modifica o visualizzazione, carico i dati dello strumento
+            if(ModalitaEntrata == Program.eMODALITA_ENTRATA_DETAIL.Modifica ||
+                ModalitaEntrata == Program.eMODALITA_ENTRATA_DETAIL.Visualizzazione)
+            {
+                CaricaDati(StrumentoMusicale, VendereStrumentoMusicale);
+            }
         }
     }
 }
