@@ -241,7 +241,7 @@ namespace NegozioStrumentiMusicali
 
                 _dataReader.Close();
 
-                comunicazione = "Relazioni di tipo vendere caricate correttamente dal DataBase";
+                comunicazione = "Ordini caricati correttamente dal DataBase";
             }
             catch (Exception ex)
             {
