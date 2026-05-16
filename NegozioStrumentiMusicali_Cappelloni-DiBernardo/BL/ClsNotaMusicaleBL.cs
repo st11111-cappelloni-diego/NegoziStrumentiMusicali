@@ -169,7 +169,7 @@ namespace NegozioStrumentiMusicali
                 _connection.Open();
 
                 //Compongo la query
-                string _query = "SELECT * FROM notemusicali ORDER BY notabase, alterazione, ottava ";
+                string _query = "SELECT * FROM notemusicali ORDER BY ottava, notabase, alterazione ";
 
                 if (ordinaPerPiuRecente)
                 {
