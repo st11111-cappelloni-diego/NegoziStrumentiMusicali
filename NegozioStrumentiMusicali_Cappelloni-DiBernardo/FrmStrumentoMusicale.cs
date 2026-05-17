@@ -174,6 +174,13 @@ namespace NegozioStrumentiMusicali
             PopolaComboBox(cbNotaMassima, ClsArchivio.NoteMusicali);
             PopolaComboBox(cbNotaMinima, ClsArchivio.NoteMusicali);
             PopolaComboBox(cbCasaProduttrice, ClsArchivio.CaseProduttrici);
+
+            nudPrezzo.Maximum = 9999999999.00m;
+            nudPrezzo.Minimum = 0.01m;
+            nudPeso.Minimum = 0.01m;
+            nudPeso.Maximum = 9999.0m;
+            nudQuantita.Minimum = 0;
+            nudQuantita.Maximum = 9999999999;
         }
 
         private void FrmStrumentoMusicale_Load(object sender, EventArgs e)
