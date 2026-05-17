@@ -33,21 +33,14 @@ namespace NegozioStrumentiMusicali
         public FrmOrdini()
         {
             InitializeComponent();
-            List<ClsGestire> _listGestire = new List<ClsGestire>(); //creo una lista di gestire dove metto tutti i gestire presi in base al userneme di chi ha fatto l'accesso
-            _listGestire = ClsArchivio.ListaGestireUtenteAttuale; //carico la lista di gestire dell'utente attuale che si trova su clsArchivio
+                      
             string _comunicazioneNegozi;
-            foreach (ClsGestire gestire in _listGestire)   //foreach per inseire con un get one i negozi chi dell'utente che ha fatto l'accesso 
+            foreach (ClsGestire gestire in ClsArchivio.ListaGestireUtenteAttuale)   //foreach per inseire con un get one i negozi chi dell'utente che ha fatto l'accesso 
             {   
                 _negozi.Add(ClsNegozioBL.GetOneNegozio(ref Program._connessioneAlDB, gestire.NegozioID, out _comunicazioneNegozi));
             }
 
-            PopolaCombobox(cbNegozio, _negozi);
-
-            
-
-
-
-
+            PopolaCombobox(cbNegozio, _negozi);           
         }
 
         void PopolaCombobox(ComboBox comboBox, List<ClsNegozio> listaNegozi)
@@ -56,12 +49,13 @@ namespace NegozioStrumentiMusicali
             comboBox.Items.Clear();
 
             //Scorro tutti gli elementi della lista
+            for (int i = 0; i < listaNegozi.Count; i++)
             {
-                for (int i = 0; i < listaNegozi.Count; i++)
-                {
-                    comboBox.Items.Add(listaNegozi[i].Nome);
-                    comboBox.SelectedIndex = i;
-                }
+                comboBox.Items.Add(listaNegozi[i].Nome);
+            }
+            if(comboBox.Items.Count > 0)
+            {
+                comboBox.SelectedIndex = 0;
             }
         }
 
@@ -94,7 +88,6 @@ namespace NegozioStrumentiMusicali
         {
             ListViewItem _lvi = new ListViewItem(ordine.UsernameCliente);
             
-            _lvi.SubItems.Add(ordine.UsernameCliente);
             _lvi.SubItems.Add(ordine.DataOra.ToString());
             _lvi.SubItems.Add(ordine.ID.ToString());        
             _lvi.SubItems.Add(ordine.StrumentoMusicaleID.ToString());
@@ -137,19 +130,18 @@ namespace NegozioStrumentiMusicali
 
         private void lvOrdini_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
         {
-            var item = lvOrdini.SelectedItems[0];
+            if(lvOrdini.SelectedItems.Count > 0)
+            {
+                //Recupero l’oggetto dal Tag e carico i dati della detail se è stato selezionato qualcosa
+                ClsOrdine _ordine = (ClsOrdine)lvOrdini.SelectedItems[0].Tag;
 
-            // Recupero l’oggetto dal Tag
-            ClsOrdine _ordine = (ClsOrdine)item.Tag;
+                pnlDetail.Enabled = false;
 
-            pnlDetail.Enabled = false;
-
-            tbUsernameCliente.Text = _ordine.UsernameCliente;
-            dtpDataOrdine.Value = _ordine.DataOra;
-            nudIDOrdine.Value = _ordine.ID;
-            nudIDArticolo.Value = _ordine.StrumentoMusicaleID;
-
-            pnlDetail.Enabled = true;
+                tbUsernameCliente.Text = _ordine.UsernameCliente;
+                dtpDataOrdine.Value = _ordine.DataOra;
+                nudIDOrdine.Value = _ordine.ID;
+                nudIDArticolo.Value = _ordine.StrumentoMusicaleID;
+            }
 
         }
     }

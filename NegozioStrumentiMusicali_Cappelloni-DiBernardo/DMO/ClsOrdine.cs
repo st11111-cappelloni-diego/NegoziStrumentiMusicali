@@ -59,14 +59,7 @@ namespace NegozioStrumentiMusicali
             }
             set
             {
-                if (_quantita <= 0)
-                {
-                    throw new Exception("Quantità minore uguale a 0");
-                }
-                else
-                {
-                    _quantita = value;
-                }
+                _quantita = value;
             }
         }
         public DateTime DataOra { get => _dataOra; set => _dataOra = value; }
