@@ -267,12 +267,12 @@ namespace NegozioStrumentiMusicali
             ClsOrdine _ordine = new ClsOrdine();
 
             _ordine.ID = Convert.ToInt64(dataReader["ID"]);
-            _ordine.Quantita = Convert.ToInt16(dataReader["quantita"].ToString());
+            _ordine.Quantita = Convert.ToInt32(dataReader["quantita"]);
             _ordine.DataOra = Convert.ToDateTime(dataReader["data"]);
             _ordine.IndirizzoID = Convert.ToInt64(dataReader["indirizzoID"]);
             _ordine.NegozioID = Convert.ToInt64(dataReader["negozioID"]);
             _ordine.StrumentoMusicaleID = Convert.ToInt64(dataReader["strumentomusicaleID"]);
-            _ordine.UsernameCliente = Convert.ToString(dataReader["usernameutente"]);
+            _ordine.UsernameCliente = Convert.ToString(dataReader["utenteusername"]);
             
             return _ordine;
         }
