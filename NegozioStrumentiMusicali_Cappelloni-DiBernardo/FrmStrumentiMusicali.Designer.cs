@@ -38,7 +38,6 @@
             this.cbParametriDiOrdinamento = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
             this.btnFiltriRicerca = new System.Windows.Forms.Button();
-            this.tbRicerca = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.cbNegozio = new System.Windows.Forms.ComboBox();
             this.btnInfoNegozio = new System.Windows.Forms.Button();
@@ -49,6 +48,7 @@
             this.btnModifica = new System.Windows.Forms.Button();
             this.btnNuovo = new System.Windows.Forms.Button();
             this.btnOrdinaStrumento = new System.Windows.Forms.Button();
+            this.chTipo = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.SuspendLayout();
             // 
             // lvStrumenti
@@ -57,6 +57,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lvStrumenti.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.chTipo,
             this.chID,
             this.chCasaProduttrice,
             this.Modello,
@@ -77,17 +78,17 @@
             // chID
             // 
             this.chID.Text = "ID";
-            this.chID.Width = 125;
+            this.chID.Width = 90;
             // 
             // chCasaProduttrice
             // 
             this.chCasaProduttrice.Text = "Casa produttrice";
-            this.chCasaProduttrice.Width = 225;
+            this.chCasaProduttrice.Width = 200;
             // 
             // Modello
             // 
             this.Modello.Text = "Modello";
-            this.Modello.Width = 225;
+            this.Modello.Width = 200;
             // 
             // chColori
             // 
@@ -97,12 +98,12 @@
             // chPrezzo
             // 
             this.chPrezzo.Text = "Prezzo";
-            this.chPrezzo.Width = 140;
+            this.chPrezzo.Width = 100;
             // 
             // chQuantità
             // 
             this.chQuantità.Text = "Quantità";
-            this.chQuantità.Width = 100;
+            this.chQuantità.Width = 110;
             // 
             // cbParametriDiOrdinamento
             // 
@@ -111,7 +112,7 @@
             this.cbParametriDiOrdinamento.FormattingEnabled = true;
             this.cbParametriDiOrdinamento.Location = new System.Drawing.Point(121, 64);
             this.cbParametriDiOrdinamento.Name = "cbParametriDiOrdinamento";
-            this.cbParametriDiOrdinamento.Size = new System.Drawing.Size(260, 28);
+            this.cbParametriDiOrdinamento.Size = new System.Drawing.Size(411, 28);
             this.cbParametriDiOrdinamento.TabIndex = 79;
             // 
             // label2
@@ -130,22 +131,12 @@
             // 
             this.btnFiltriRicerca.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnFiltriRicerca.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnFiltriRicerca.Location = new System.Drawing.Point(914, 63);
+            this.btnFiltriRicerca.Location = new System.Drawing.Point(538, 62);
             this.btnFiltriRicerca.Name = "btnFiltriRicerca";
-            this.btnFiltriRicerca.Size = new System.Drawing.Size(75, 30);
+            this.btnFiltriRicerca.Size = new System.Drawing.Size(451, 30);
             this.btnFiltriRicerca.TabIndex = 77;
-            this.btnFiltriRicerca.Text = "Filtri...";
+            this.btnFiltriRicerca.Text = "Filtri di ricerca...";
             this.btnFiltriRicerca.UseVisualStyleBackColor = true;
-            // 
-            // tbRicerca
-            // 
-            this.tbRicerca.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.tbRicerca.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbRicerca.Location = new System.Drawing.Point(387, 66);
-            this.tbRicerca.Name = "tbRicerca";
-            this.tbRicerca.Size = new System.Drawing.Size(521, 26);
-            this.tbRicerca.TabIndex = 75;
             // 
             // label1
             // 
@@ -255,6 +246,11 @@
             this.btnOrdinaStrumento.Text = "ORDINA";
             this.btnOrdinaStrumento.UseVisualStyleBackColor = true;
             // 
+            // chTipo
+            // 
+            this.chTipo.Text = "Tipo";
+            this.chTipo.Width = 120;
+            // 
             // FrmStrumentiMusicali
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -269,7 +265,6 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.btnFiltriRicerca);
             this.Controls.Add(this.btnCerca);
-            this.Controls.Add(this.tbRicerca);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.cbNegozio);
             this.Controls.Add(this.lvStrumenti);
@@ -280,7 +275,6 @@
             this.Text = "Strumenti";
             this.Load += new System.EventHandler(this.FrmStrumentiMusicali_Load);
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -300,11 +294,11 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button btnFiltriRicerca;
         private System.Windows.Forms.Button btnCerca;
-        private System.Windows.Forms.TextBox tbRicerca;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox cbNegozio;
         private System.Windows.Forms.Button btnVisualizza;
         private System.Windows.Forms.Button btnInfoNegozio;
         private System.Windows.Forms.Button btnOrdinaStrumento;
+        private System.Windows.Forms.ColumnHeader chTipo;
     }
 }
