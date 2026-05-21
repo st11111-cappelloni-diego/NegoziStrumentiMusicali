@@ -18,13 +18,14 @@ namespace NegozioStrumentiMusicali
         #region Variabili globali
         private List<ClsVendere> _listaVendereNegozioSelezionato = new List<ClsVendere>();
         private List<ClsGestire> _listaGestireNegozioSelezionato = new List<ClsGestire>();
-
+        private bool _utenteGestisceNegozioSelezionato = false;
 
 
         #endregion
         #region Proprietà
         public List<ClsVendere> ListaVendereNegozioSelezionato { get => _listaVendereNegozioSelezionato; set => _listaVendereNegozioSelezionato = value; }
         public List<ClsGestire> ListaGestireNegozioSelezionato { get => _listaGestireNegozioSelezionato; set => _listaGestireNegozioSelezionato = value; }
+        public bool UtenteGestisceNegozioSelezionato { get => _utenteGestisceNegozioSelezionato; set => _utenteGestisceNegozioSelezionato = value; }
 
         #endregion
         #region Enumeratori
@@ -50,7 +51,33 @@ namespace NegozioStrumentiMusicali
         {
             string _temp;
 
-            ListViewItem _lvi = new ListViewItem(strumento.ID.ToString());
+            //Tipo dello strumento
+            string _tipoStrumento = String.Empty;
+            switch(strumento)
+            {
+                case ClsBatteria b:
+                    _tipoStrumento = "Batteria";
+                    break;
+                case ClsLegno l:
+                    _tipoStrumento = "Legno";
+                    break;
+                case ClsOttone o:
+                    _tipoStrumento = "Ottone";
+                    break;
+                case ClsPianoforte p:
+                    _tipoStrumento = "Pianoforte";
+                    break;
+                case ClsStrumentoACorda c:
+                    _tipoStrumento = "Strumento a corda";
+                    break;
+                default:
+                    _tipoStrumento = "Strumento musicale";
+                    break;
+            }
+            ListViewItem _lvi = new ListViewItem(_tipoStrumento);
+
+            _lvi.SubItems.Add(strumento.ID.ToString());
+
             //Casa produttrice: Prendo il nome dal DataBase in un processo separato
             ClsCasaProduttrice _casaProduttrice = new ClsCasaProduttrice();
             _casaProduttrice = ClsCasaProduttriceBL.GetOneCasaProduttrice
@@ -207,10 +234,11 @@ namespace NegozioStrumentiMusicali
             return _lviList;
         }
         /// <summary>
-        /// Popola la lvStrumenti ogni lista in un processo separato
+        /// Popola una listview con le liste degli strumenti, ogni lista in un processo separato
         /// </summary>
         /// <param name="listView"></param>
-        async void PopolaListView(ListView listView)
+        async void PopolaListView(ListView listView, List<ClsStrumentoACorda> listaStrumentiACorda,
+            List<ClsPianoforte> listaPianoforti, List<ClsOttone> listaOttoni, List<ClsLegno> listaLegni, List<ClsBatteria> listaBatterie)
         {
             listView.Items.Clear();
             List<ListViewItem> _lviListStrumentiACorda = new List<ListViewItem>();
@@ -225,35 +253,35 @@ namespace NegozioStrumentiMusicali
                 Task.Run(() =>
                     _lviListStrumentiACorda =
                     CreaListViewItems(
-                        ClsArchivio.StrumentiACorda,
+                        listaStrumentiACorda,
                         ListaVendereNegozioSelezionato
                     )
                 ),
                 Task.Run(()=>
                     _lviListPianoforti =
                     CreaListViewItems(
-                        ClsArchivio.Pianoforti,
+                        listaPianoforti,
                         ListaVendereNegozioSelezionato
                     )
                 ),
                 Task.Run(()=>
                     _lviListOttoni =
                     CreaListViewItems(
-                        ClsArchivio.Ottoni,
+                        listaOttoni,
                         ListaVendereNegozioSelezionato
                     )
                 ),
                 Task.Run(() =>
                     _lviListLegni = 
                     CreaListViewItems(
-                        ClsArchivio.Legni,
+                        listaLegni,
                         ListaVendereNegozioSelezionato
                     )
                 ),
                 Task.Run(() =>
                     _lviListBatterie =
                     CreaListViewItems(
-                        ClsArchivio.Batterie,
+                        listaBatterie,
                         ListaVendereNegozioSelezionato
                     )
                 )
@@ -303,23 +331,17 @@ namespace NegozioStrumentiMusicali
 
         private void btnNuovo_Click(object sender, EventArgs e)
         {
-            //Creo l'istanza di FrmStrumentoMusicale
-            FrmStrumentoMusicale _frmStrumentoMusicale = new FrmStrumentoMusicale();
+            //Creo l'istanza della form di scelta
+            FrmSceltaInserimentoStrumentoMusicale _frmSceltaInserimentoStrumentoMusicale = new FrmSceltaInserimentoStrumentoMusicale();
 
-            //Cambio il testo della form
-            _frmStrumentoMusicale.Text = "Inserisci uno strumento musicale";
-
-            //Metto la modalità d'entrata ad inserimento
-            _frmStrumentoMusicale.ModalitaEntrata = Program.eMODALITA_ENTRATA_DETAIL.Inserimento;
-
-            //Inizializzo lo strumento musicale e la sua vendere
-            _frmStrumentoMusicale.StrumentoMusicale = new ClsStrumentoMusicale();
-            _frmStrumentoMusicale.VendereStrumentoMusicale = new ClsVendere();
-            _frmStrumentoMusicale.VendereStrumentoMusicale.NegozioID =
+            //Gli passo l'ID del negozio selezionato
+            _frmSceltaInserimentoStrumentoMusicale.IDNegozioSelezionato =
                 ClsArchivio.Negozi[cbNegozio.SelectedIndex].ID;
 
-            //Apro la form
-            _frmStrumentoMusicale.ShowDialog(this);
+            _frmSceltaInserimentoStrumentoMusicale.UtenteGestisceNegozio = UtenteGestisceNegozioSelezionato;
+
+            //La apro
+            _frmSceltaInserimentoStrumentoMusicale.ShowDialog(this);
         }
 
         #endregion
@@ -329,12 +351,28 @@ namespace NegozioStrumentiMusicali
             long _idNegozio = ClsArchivio.Negozi[cbNegozio.SelectedIndex].ID;
             string _temp = String.Empty;
 
-            //Controllo se l'utente gestisce questo negozio cercando le gestire del negozio e controllando se contiene l'utente
-            //Se no, rendo invisibili i bottoni crea, modifica, elimina
-            await Task.Run(() =>
+            UtenteGestisceNegozioSelezionato = false;
+            if (ClsArchivio.ListaGestireUtenteAttuale != null)
             {
+                UtenteGestisceNegozioSelezionato = ClsArchivio.ListaGestireUtenteAttuale.Any(g => 
+                g.NegozioID == ClsArchivio.Negozi[cbNegozio.SelectedIndex].ID);
+            }
 
-            });
+            if (UtenteGestisceNegozioSelezionato == false && 
+                ClsArchivio.UtenteAttuale.AdminSoftware == false)
+            {
+                btnNuovo.Enabled = false;
+                btnModifica.Enabled = false;
+                btnElimina.Enabled = false;
+            }
+            else
+            {
+                btnNuovo.Enabled = true;
+                btnModifica.Enabled = true;
+                btnElimina.Enabled = true;
+            }
+
+
 
             //Trovo le vendere del negozio selezionato
             await Task.Run(() =>
@@ -349,7 +387,8 @@ namespace NegozioStrumentiMusicali
             });
 
             //Popolo la listview degli strumenti
-            PopolaListView(lvStrumenti);
+            PopolaListView(lvStrumenti, ClsArchivio.StrumentiACorda,
+                ClsArchivio.Pianoforti, ClsArchivio.Ottoni, ClsArchivio.Legni, ClsArchivio.Batterie);
         }
 
         private void btnModifica_Click(object sender, EventArgs e)

@@ -10,30 +10,44 @@ using System.Windows.Forms;
 
 namespace NegozioStrumentiMusicali
 {
+    /// <summary>
+    /// GUI e Sviluppo: Diego Cappelloni
+    /// </summary>
     public partial class FrmStrumentoMusicale : Form
     {
         #region Variabili
-        private ClsStrumentoMusicale strumentoMusicale = new ClsStrumentoMusicale();
-        private ClsVendere vendereStrumentoMusicale = new ClsVendere();
-        private Program.eMODALITA_ENTRATA_DETAIL modalitaEntrata = Program.eMODALITA_ENTRATA_DETAIL.Visualizzazione;
-
-
+        private ClsStrumentoMusicale _strumentoMusicale = new ClsStrumentoMusicale();
+        private ClsVendere _vendereStrumentoMusicale = new ClsVendere();
+        private Program.eMODALITA_ENTRATA_DETAIL _modalitaEntrata = Program.eMODALITA_ENTRATA_DETAIL.Visualizzazione;
+        private List<ClsCaratteristica> _altreCaratteristicheStrumento = new List<ClsCaratteristica>();
 
         #endregion
         #region Proprietà
-        public ClsStrumentoMusicale StrumentoMusicale { get => strumentoMusicale; set => strumentoMusicale = value; }
-        public ClsVendere VendereStrumentoMusicale { get => vendereStrumentoMusicale; set => vendereStrumentoMusicale = value; }
-        public Program.eMODALITA_ENTRATA_DETAIL ModalitaEntrata { get => modalitaEntrata; set => modalitaEntrata = value; }
-
-        #endregion
-        #region Enumeratori
-        public enum eTIPO_STRUMENTO
+        public ClsStrumentoMusicale StrumentoMusicale { get => _strumentoMusicale; set => _strumentoMusicale = value; }
+        public ClsVendere VendereStrumentoMusicale { get => _vendereStrumentoMusicale; set => _vendereStrumentoMusicale = value; }
+        public Program.eMODALITA_ENTRATA_DETAIL ModalitaEntrata { get => _modalitaEntrata; set => _modalitaEntrata = value; }
+        public List<ClsCaratteristica> AltreCaratteristicheStrumento { get => _altreCaratteristicheStrumento; set => _altreCaratteristicheStrumento = value; }
+        public NumericUpDown NudQuantita
         {
-            Batteria = 0,
-            Legno = 1,
-            Ottone = 2,
-            Pianoforte = 3,
-            Strumento_a_corda = 4
+            get
+            {
+                return nudQuantita;
+            }
+            set
+            {
+                value = nudQuantita;
+            }
+        }
+        public NumericUpDown NudPrezzo
+        {
+            get
+            {
+                return nudPrezzo;
+            }
+            set
+            {
+                value = nudPrezzo;
+            }
         }
 
         #endregion
@@ -43,7 +57,7 @@ namespace NegozioStrumentiMusicali
         /// </summary>
         /// <param name="comboBox"></param>
         /// <param name="listaNoteMusicali"></param>
-        void PopolaComboBox(ComboBox comboBox, List<ClsNotaMusicale> listaNoteMusicali)
+        private void PopolaComboBox(ComboBox comboBox, List<ClsNotaMusicale> listaNoteMusicali)
         {
             //Rimuovo tutti gli elementi della combobox
             comboBox.Items.Clear();
@@ -74,7 +88,7 @@ namespace NegozioStrumentiMusicali
         /// </summary>
         /// <param name="comboBox"></param>
         /// <param name="listaCaseProduttrici"></param>
-        void PopolaComboBox(ComboBox comboBox, List<ClsCasaProduttrice> listaCaseProduttrici)
+        private void PopolaComboBox(ComboBox comboBox, List<ClsCasaProduttrice> listaCaseProduttrici)
         {
             //Rimuovo tutti gli elementi della combobox
             comboBox.Items.Clear();
@@ -87,7 +101,7 @@ namespace NegozioStrumentiMusicali
 
             comboBox.SelectedIndex = 0;
         }
-        void CaricaDati(ClsStrumentoMusicale strumentoMusicale, ClsVendere vendereStrumento)
+        private void CaricaDati(ClsStrumentoMusicale strumentoMusicale, ClsVendere vendereStrumento)
         {
             tbColori.Text = strumentoMusicale.Colori;
 
@@ -100,6 +114,8 @@ namespace NegozioStrumentiMusicali
             //Trovo la posizione nella lista su RAM della nota minima e massima dello strumento se non è batteria
             if(!(strumentoMusicale is ClsBatteria))
             {
+                cbNotaMassima.Enabled = true;
+                cbNotaMinima.Enabled = true;
                 //Se le note sono nulle (ID <= -1) seleziono il primo indice, sennò trovo l'indice da selezionare
                 if(strumentoMusicale.NotaMassimaID <= -1)
                 {
@@ -130,7 +146,9 @@ namespace NegozioStrumentiMusicali
                 cbNotaMinima.Enabled = false;
             }
 
+            nudID.Enabled = true;
             nudID.Value = strumentoMusicale.ID;
+            nudID.Enabled = false; //L'ID non è modificabile ne inseribile
 
             nudPeso.Value = Convert.ToDecimal(strumentoMusicale.PesoKG);
 
@@ -141,39 +159,56 @@ namespace NegozioStrumentiMusicali
             //cbStrumento: Carico la famiglia di strumenti in base a come è il tipo di strumento
             if(strumentoMusicale is ClsBatteria)
             {
-                cbStrumento.SelectedIndex = Convert.ToInt32(eTIPO_STRUMENTO.Batteria);
+                cbStrumento.SelectedIndex = Convert.ToInt32(Program.eTIPO_STRUMENTO.Batteria);                
             }
             else if(strumentoMusicale is ClsLegno)
             {
-                cbStrumento.SelectedIndex = Convert.ToInt32(eTIPO_STRUMENTO.Legno);
+                cbStrumento.SelectedIndex = Convert.ToInt32(Program.eTIPO_STRUMENTO.Legno);
             }
             else if(strumentoMusicale is ClsOttone)
             {
-                cbStrumento.SelectedIndex = Convert.ToInt32(eTIPO_STRUMENTO.Ottone);
+                cbStrumento.SelectedIndex = Convert.ToInt32(Program.eTIPO_STRUMENTO.Ottone);
             }
             else if(strumentoMusicale is ClsPianoforte)
             {
-                cbStrumento.SelectedIndex = Convert.ToInt32(eTIPO_STRUMENTO.Pianoforte);
+                cbStrumento.SelectedIndex = Convert.ToInt32(Program.eTIPO_STRUMENTO.Pianoforte);
             }
             else if(strumentoMusicale is ClsStrumentoACorda)
             {
-                cbStrumento.SelectedIndex = Convert.ToInt32(eTIPO_STRUMENTO.Strumento_a_corda);
+                cbStrumento.SelectedIndex = Convert.ToInt32(Program.eTIPO_STRUMENTO.Strumento_a_corda);
             }
             else
             {
                 cbStrumento.SelectedIndex = 0;
             }
         }
-
+        private void AbilitaControlliGraficiInput(bool controlliAbilitati)
+        {
+            tbColori.Enabled = controlliAbilitati;
+            tbModello.Enabled = controlliAbilitati;
+            cbCasaProduttrice.Enabled = controlliAbilitati;
+            cbNotaMassima.Enabled = controlliAbilitati;
+            cbNotaMinima.Enabled = controlliAbilitati;
+            cbStrumento.Enabled = controlliAbilitati;
+            nudPeso.Enabled = controlliAbilitati;
+            nudPrezzo.Enabled = controlliAbilitati;
+            nudQuantita.Enabled = controlliAbilitati;
+            btnEliminaCaratteristica.Enabled = controlliAbilitati;
+            btnModificaCaratteristica.Enabled = controlliAbilitati;
+            btnNuovaCaratteristica.Enabled = controlliAbilitati;
+            btnSalva.Enabled = controlliAbilitati;
+        }
         #endregion
         public FrmStrumentoMusicale()
         {
             InitializeComponent();
             //Popolo le combobox
-            cbStrumento.DataSource = Enum.GetNames(typeof(eTIPO_STRUMENTO));
+            cbStrumento.DataSource = Enum.GetNames(typeof(Program.eTIPO_STRUMENTO));
             PopolaComboBox(cbNotaMassima, ClsArchivio.NoteMusicali);
             PopolaComboBox(cbNotaMinima, ClsArchivio.NoteMusicali);
             PopolaComboBox(cbCasaProduttrice, ClsArchivio.CaseProduttrici);
+
+            nudID.Enabled = false;
 
             nudPrezzo.Maximum = 9999999999.00m;
             nudPrezzo.Minimum = 0.01m;
@@ -190,6 +225,42 @@ namespace NegozioStrumentiMusicali
                 ModalitaEntrata == Program.eMODALITA_ENTRATA_DETAIL.Visualizzazione)
             {
                 CaricaDati(StrumentoMusicale, VendereStrumentoMusicale);
+            }
+
+            //Se sono in modalità visualizzazione disabilito tutti i controlli di input
+            //Altrimenti li abilito
+            if(ModalitaEntrata == Program.eMODALITA_ENTRATA_DETAIL.Visualizzazione)
+            {
+                AbilitaControlliGraficiInput(false);
+            }
+            else
+            {
+                //Modalità modifica o inserimento
+            }
+
+            if (cbStrumento.SelectedIndex == Convert.ToInt32(Program.eTIPO_STRUMENTO.Batteria))
+            {
+                cbNotaMassima.Enabled = true;
+                cbNotaMinima.Enabled = true;
+                cbNotaMassima.SelectedIndex = 0;
+                cbNotaMinima.SelectedIndex = 0;
+                cbNotaMassima.Enabled = false;
+                cbNotaMinima.Enabled = false;
+            }
+
+
+        }
+
+        private void cbStrumento_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            cbNotaMassima.Enabled = true;
+            cbNotaMinima.Enabled = true;
+            if (cbStrumento.SelectedIndex == Convert.ToInt32(Program.eTIPO_STRUMENTO.Batteria))
+            {
+                cbNotaMassima.SelectedIndex = 0;
+                cbNotaMinima.SelectedIndex = 0;
+                cbNotaMassima.Enabled = false;
+                cbNotaMinima.Enabled = false;
             }
         }
     }
