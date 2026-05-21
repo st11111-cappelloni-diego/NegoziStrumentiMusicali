@@ -26,6 +26,17 @@ namespace NegozioStrumentiMusicali
             pioppo,
             salice
         }
+        /// <summary>
+        /// Serve solo per il funzionamento del software ed indica il tipo di specializzazione di ClsStrumentoMusicale. Non presente nel DB
+        /// </summary>
+        public enum eTIPO_STRUMENTO
+        {
+            Batteria = 0,
+            Legno = 1,
+            Ottone = 2,
+            Pianoforte = 3,
+            Strumento_a_corda = 4
+        }
 
         /// <summary>
         /// Serve solo per il funzionamento del software. Non presente nel DB
