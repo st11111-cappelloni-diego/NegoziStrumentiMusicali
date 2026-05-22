@@ -57,7 +57,9 @@ namespace NegozioStrumentiMusicali
                 }
             }
         }
-
+        /// <summary>
+        /// Può essere null
+        /// </summary>
         public string Email
         {
             get
@@ -66,14 +68,7 @@ namespace NegozioStrumentiMusicali
             }
             set
             {
-                if (String.IsNullOrWhiteSpace(value))
-                {
-                    throw new Exception("Email non inserita");
-                }
-                else
-                {
-                    _email = value;
-                }
+                _email = value;
             }
         }
         public string PathLogo
