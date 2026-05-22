@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.lvStrumenti = new System.Windows.Forms.ListView();
+            this.chTipo = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.chID = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.chCasaProduttrice = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Modello = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -48,7 +49,6 @@
             this.btnModifica = new System.Windows.Forms.Button();
             this.btnNuovo = new System.Windows.Forms.Button();
             this.btnOrdinaStrumento = new System.Windows.Forms.Button();
-            this.chTipo = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.SuspendLayout();
             // 
             // lvStrumenti
@@ -74,6 +74,11 @@
             this.lvStrumenti.TabIndex = 60;
             this.lvStrumenti.UseCompatibleStateImageBehavior = false;
             this.lvStrumenti.View = System.Windows.Forms.View.Details;
+            // 
+            // chTipo
+            // 
+            this.chTipo.Text = "Tipo";
+            this.chTipo.Width = 120;
             // 
             // chID
             // 
@@ -129,7 +134,8 @@
             // 
             // btnFiltriRicerca
             // 
-            this.btnFiltriRicerca.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnFiltriRicerca.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.btnFiltriRicerca.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnFiltriRicerca.Location = new System.Drawing.Point(538, 62);
             this.btnFiltriRicerca.Name = "btnFiltriRicerca";
@@ -182,6 +188,7 @@
             this.btnVisualizza.Size = new System.Drawing.Size(40, 40);
             this.btnVisualizza.TabIndex = 81;
             this.btnVisualizza.UseVisualStyleBackColor = true;
+            this.btnVisualizza.Click += new System.EventHandler(this.btnVisualizza_Click);
             // 
             // btnOrdina
             // 
@@ -245,11 +252,6 @@
             this.btnOrdinaStrumento.TabIndex = 83;
             this.btnOrdinaStrumento.Text = "ORDINA";
             this.btnOrdinaStrumento.UseVisualStyleBackColor = true;
-            // 
-            // chTipo
-            // 
-            this.chTipo.Text = "Tipo";
-            this.chTipo.Width = 120;
             // 
             // FrmStrumentiMusicali
             // 
