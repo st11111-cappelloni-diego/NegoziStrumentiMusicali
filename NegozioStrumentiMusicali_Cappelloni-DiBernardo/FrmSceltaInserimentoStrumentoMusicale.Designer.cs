@@ -40,11 +40,12 @@
             this.btnFiltriRicerca = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.lvStrumentiMusicali = new System.Windows.Forms.ListView();
+            this.chTipo = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.chID = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.chCasaProduttrice = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.chModello = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.chColori = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.chTipo = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.btnVisualizza = new System.Windows.Forms.Button();
             this.pnlAggiungiStrumentoEsistente.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudPrezzo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudQuantita)).BeginInit();
@@ -73,6 +74,7 @@
             // 
             // pnlAggiungiStrumentoEsistente
             // 
+            this.pnlAggiungiStrumentoEsistente.Controls.Add(this.btnVisualizza);
             this.pnlAggiungiStrumentoEsistente.Controls.Add(this.label6);
             this.pnlAggiungiStrumentoEsistente.Controls.Add(this.nudPrezzo);
             this.pnlAggiungiStrumentoEsistente.Controls.Add(this.label2);
@@ -182,13 +184,20 @@
             this.chModello,
             this.chColori});
             this.lvStrumentiMusicali.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lvStrumentiMusicali.FullRowSelect = true;
             this.lvStrumentiMusicali.HideSelection = false;
             this.lvStrumentiMusicali.Location = new System.Drawing.Point(0, 71);
+            this.lvStrumentiMusicali.MultiSelect = false;
             this.lvStrumentiMusicali.Name = "lvStrumentiMusicali";
             this.lvStrumentiMusicali.Size = new System.Drawing.Size(591, 373);
             this.lvStrumentiMusicali.TabIndex = 85;
             this.lvStrumentiMusicali.UseCompatibleStateImageBehavior = false;
             this.lvStrumentiMusicali.View = System.Windows.Forms.View.Details;
+            // 
+            // chTipo
+            // 
+            this.chTipo.Text = "Tipo";
+            this.chTipo.Width = 100;
             // 
             // chID
             // 
@@ -209,10 +218,16 @@
             this.chColori.Text = "Colori";
             this.chColori.Width = 130;
             // 
-            // chTipo
+            // btnVisualizza
             // 
-            this.chTipo.Text = "Tipo";
-            this.chTipo.Width = 100;
+            this.btnVisualizza.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnVisualizza.Image = global::NegozioStrumentiMusicali_Cappelloni_DiBernardo.Properties.Resources.iconaVisualizza1_30x21;
+            this.btnVisualizza.Location = new System.Drawing.Point(551, 447);
+            this.btnVisualizza.Name = "btnVisualizza";
+            this.btnVisualizza.Size = new System.Drawing.Size(40, 40);
+            this.btnVisualizza.TabIndex = 94;
+            this.btnVisualizza.UseVisualStyleBackColor = true;
+            this.btnVisualizza.Click += new System.EventHandler(this.btnVisualizza_Click);
             // 
             // FrmSceltaInserimentoStrumentoMusicale
             // 
@@ -252,5 +267,6 @@
         private System.Windows.Forms.ColumnHeader chModello;
         private System.Windows.Forms.ColumnHeader chColori;
         private System.Windows.Forms.ColumnHeader chTipo;
+        private System.Windows.Forms.Button btnVisualizza;
     }
 }

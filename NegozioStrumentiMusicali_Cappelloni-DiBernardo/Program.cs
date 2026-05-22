@@ -12,7 +12,7 @@ namespace NegozioStrumentiMusicali
         //ENUMERATORI
         public enum eLEGNO
         {
-            abete,
+            abete = 0,
             acero,
             cedro,
             cipresso,
@@ -43,7 +43,7 @@ namespace NegozioStrumentiMusicali
         /// </summary>
         public enum eMODALITA_ENTRATA_DETAIL
         {
-            Inserimento,
+            Inserimento = 0,
             Modifica,
             Visualizzazione
         }

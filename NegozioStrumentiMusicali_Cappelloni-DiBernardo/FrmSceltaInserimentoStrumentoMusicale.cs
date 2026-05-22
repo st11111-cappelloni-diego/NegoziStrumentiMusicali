@@ -289,21 +289,45 @@ namespace NegozioStrumentiMusicali
             VendereStrumentoMusicale.NegozioID = IDNegozioSelezionato;
             _frmStrumentoMusicale.VendereStrumentoMusicale = VendereStrumentoMusicale;
 
-            //Disabilito prezzo e quantità se l'utente non gestisce il negozio selezionato
-            if(UtenteGestisceNegozio == false)
-            {
-                _frmStrumentoMusicale.NudPrezzo.Enabled = false;
-                _frmStrumentoMusicale.NudQuantita.Enabled = false;
-            }
-            else
-            {
-                _frmStrumentoMusicale.NudPrezzo.Enabled = true;
-                _frmStrumentoMusicale.NudQuantita.Enabled = true;
-            }
+            _frmStrumentoMusicale.UtenteGestisceNegozioAttuale = UtenteGestisceNegozio;
 
             //Apro la form in modalità inserimento
             _frmStrumentoMusicale.ModalitaEntrata = Program.eMODALITA_ENTRATA_DETAIL.Inserimento;
             _frmStrumentoMusicale.ShowDialog(this);
+        }
+
+        private void btnVisualizza_Click(object sender, EventArgs e)
+        {
+            //Controllo se si è selezionato un solo elemento nella listView
+            if (lvStrumentiMusicali.SelectedItems.Count == 1)
+            {
+                //Se si è selezionato:
+                //Istanzio la form detail
+                FrmStrumentoMusicale _frmStrumentoMusicale = new FrmStrumentoMusicale();
+
+                //Gli passo lo strumento da visualizzare
+                ClsStrumentoMusicale _strumentoDaVisualizzare = (ClsStrumentoMusicale)lvStrumentiMusicali.SelectedItems[0].Tag;
+                _frmStrumentoMusicale.StrumentoMusicale = _strumentoDaVisualizzare;
+
+                //Cambio il testo della form
+                _frmStrumentoMusicale.Text = "Visualizza strumento musicale";
+
+                _frmStrumentoMusicale.VendereStrumentoMusicale = null;
+
+                //Metto come modalità di entrata 'visualizzazione'
+                _frmStrumentoMusicale.ModalitaEntrata = Program.eMODALITA_ENTRATA_DETAIL.Visualizzazione;
+
+                //Apro la form
+                _frmStrumentoMusicale.ShowDialog(this);
+            }
+            else if (lvStrumentiMusicali.SelectedItems.Count > 1)
+            {
+                MessageBox.Show("Selezionare un solo elemento", "VISUALIZZA", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
+            else
+            {
+                MessageBox.Show("Selezionare un elemento", "VISUALIZZA", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
         }
     }
 }
