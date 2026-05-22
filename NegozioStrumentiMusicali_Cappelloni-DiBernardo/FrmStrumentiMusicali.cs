@@ -413,6 +413,8 @@ namespace NegozioStrumentiMusicali
                     ListaVendereNegozioSelezionato.FirstOrDefault(v => v.StrumentoMusicaleID == _strumentoDaModificare.ID);
                 _frmStrumentoMusicale.VendereStrumentoMusicale = _vendereStrumentoDaModificare;
 
+                _frmStrumentoMusicale.UtenteGestisceNegozioAttuale = UtenteGestisceNegozioSelezionato;
+
                 //Metto come modalità di entrata modifica
                 _frmStrumentoMusicale.ModalitaEntrata = Program.eMODALITA_ENTRATA_DETAIL.Modifica;
 
@@ -428,6 +430,43 @@ namespace NegozioStrumentiMusicali
                 MessageBox.Show("Selezionare un elemento", "MODIFICA", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
 
+        }
+
+        private void btnVisualizza_Click(object sender, EventArgs e)
+        {
+            //Controllo se si è selezionato un solo elemento nella listView
+            if (lvStrumenti.SelectedItems.Count == 1)
+            {
+                //Se si è selezionato:
+                //Istanzio la form detail
+                FrmStrumentoMusicale _frmStrumentoMusicale = new FrmStrumentoMusicale();
+
+                //Gli passo lo strumento da visualizzare
+                ClsStrumentoMusicale _strumentoDaVisualizzare = (ClsStrumentoMusicale)lvStrumenti.SelectedItems[0].Tag;
+                _frmStrumentoMusicale.StrumentoMusicale = _strumentoDaVisualizzare;
+
+                //Trovo la vendere dello strumento e la passo alla form
+                ClsVendere _vendereStrumentoDaVisualizzare =
+                    ListaVendereNegozioSelezionato.FirstOrDefault(v => v.StrumentoMusicaleID == _strumentoDaVisualizzare.ID);
+                _frmStrumentoMusicale.VendereStrumentoMusicale = _vendereStrumentoDaVisualizzare;
+
+                //Cambio il testo della form
+                _frmStrumentoMusicale.Text = "Visualizza strumento musicale";
+
+                //Metto come modalità di entrata 'visualizzazione'
+                _frmStrumentoMusicale.ModalitaEntrata = Program.eMODALITA_ENTRATA_DETAIL.Visualizzazione;
+
+                //Apro la form
+                _frmStrumentoMusicale.ShowDialog(this);
+            }
+            else if (lvStrumenti.SelectedItems.Count > 1)
+            {
+                MessageBox.Show("Selezionare un solo elemento", "VISUALIZZA", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
+            else
+            {
+                MessageBox.Show("Selezionare un elemento", "VISUALIZZA", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
         }
     }
 }

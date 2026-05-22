@@ -17,7 +17,7 @@ namespace NegozioStrumentiMusicali
         /// </summary>
         public enum eSTRUMENTI_A_CORDA
         {
-            balalaika,
+            balalaika = 0,
             banjo,
             basso_acustico,
             basso_elettrico,
@@ -36,7 +36,7 @@ namespace NegozioStrumentiMusicali
 
         public enum eMATERIALE_CORDE
         {
-            acciaio,
+            acciaio = 0,
             budello,
             dacron,
             dyneema,
@@ -47,7 +47,7 @@ namespace NegozioStrumentiMusicali
         }
         public enum ePICKUP
 	    {
-            no,
+            no = 0,
             humbucker,
             p90,
             single_coil

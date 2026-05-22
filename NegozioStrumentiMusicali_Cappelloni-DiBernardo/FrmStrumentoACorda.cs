@@ -15,6 +15,43 @@ namespace NegozioStrumentiMusicali
     /// </summary>
     public partial class FrmStrumentoACorda : Form
     {
+        #region Variabili
+        private ClsStrumentoACorda _strumentoACorda = new ClsStrumentoACorda();
+        private Program.eMODALITA_ENTRATA_DETAIL _modalitaEntrata;
+
+        #endregion
+        #region Proprietà
+        public ClsStrumentoACorda StrumentoACorda { get => _strumentoACorda; set => _strumentoACorda = value; }
+        public Program.eMODALITA_ENTRATA_DETAIL ModalitaEntrata { get => _modalitaEntrata; set => _modalitaEntrata = value; }
+
+        #endregion
+        #region Metodi della form
+        void CaricaDati(ClsStrumentoACorda strumentoACorda)
+        {
+            nudAmpiezzaCorpo.Value = Convert.ToDecimal(strumentoACorda.AmpiezzaCorpoCM);
+            nudAmpiezzaManico.Value = Convert.ToDecimal(strumentoACorda.AmpiezzaManicoCM);
+            nudLunghezzaCorpo.Value = Convert.ToDecimal(strumentoACorda.LunghezzaCorpoCM);
+            nudLunghezzaManico.Value = Convert.ToDecimal(strumentoACorda.LunghezzaManicoCM);
+            nudSpessoreCorpo.Value = Convert.ToDecimal(strumentoACorda.SpessoreCorpoCM);
+            nudSpessoreManico.Value = Convert.ToDecimal(strumentoACorda.SpessoreManicoCM);
+            if(strumentoACorda.Tasti <= -1)
+            {
+                nudTasti.Value = nudTasti.Minimum;
+                nudTasti.Enabled = false;
+            }
+            cbMaterialeCorde.SelectedIndex = Convert.ToInt32(strumentoACorda.MaterialeCorde);
+            cbMaterialeCorpo.SelectedIndex = Convert.ToInt32(strumentoACorda.MaterialeCorpo);
+            cbMaterialeManico.SelectedIndex = Convert.ToInt32(strumentoACorda.MaterialeManico);
+            cbMaterialeTastiera.SelectedIndex = Convert.ToInt32(strumentoACorda.MaterialeTastiera);
+            nudCorde.Value = Convert.ToDecimal(strumentoACorda.NumeroCorde);
+            cbPickup1.SelectedIndex = Convert.ToInt32(strumentoACorda.Pickup1);
+            cbPickup2.SelectedIndex = Convert.ToInt32(strumentoACorda.Pickup2);
+            cbPickup3.SelectedIndex = Convert.ToInt32(strumentoACorda.Pickup3);
+
+            cbStrumento.SelectedIndex = Convert.ToInt32(strumentoACorda.Strumento);
+        }
+
+        #endregion
         public FrmStrumentoACorda()
         {
             InitializeComponent();
@@ -50,9 +87,9 @@ namespace NegozioStrumentiMusicali
                 -Chitarra semiacustica
                 Allora ha tutti gli attributi di tipo ePICKUP a 'No'
                 */
-                cbPickup1.SelectedIndex = (int)ClsStrumentoACorda.ePICKUP.no;
-                cbPickup2.SelectedIndex = (int)ClsStrumentoACorda.ePICKUP.no;
-                cbPickup3.SelectedIndex = (int)ClsStrumentoACorda.ePICKUP.no;
+                cbPickup1.SelectedIndex = Convert.ToInt32(ClsStrumentoACorda.ePICKUP.no);
+                cbPickup2.SelectedIndex = Convert.ToInt32(ClsStrumentoACorda.ePICKUP.no);
+                cbPickup3.SelectedIndex = Convert.ToInt32(ClsStrumentoACorda.ePICKUP.no);
                 pnlPickup.Enabled = false;
             }
             else
@@ -69,7 +106,7 @@ namespace NegozioStrumentiMusicali
                 || cbStrumento.SelectedIndex == (int)ClsStrumentoACorda.eSTRUMENTI_A_CORDA.violoncello)
             {
                 //In questi strumenti l'attributo tasti non è previsto
-                nudTasti.Value = 0;
+                nudTasti.Value = nudTasti.Minimum;
                 nudTasti.Enabled = false;
             }
             else
