@@ -31,7 +31,6 @@
             this.cbStrumento = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.cbNumeroCorde = new System.Windows.Forms.ComboBox();
             this.cbMaterialeCorde = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
             this.pnlCorde = new System.Windows.Forms.Panel();
@@ -73,6 +72,7 @@
             this.label21 = new System.Windows.Forms.Label();
             this.tbLunghezzaTotale = new System.Windows.Forms.TextBox();
             this.btnSalva = new System.Windows.Forms.Button();
+            this.nudCorde = new System.Windows.Forms.NumericUpDown();
             this.pnlCorde.SuspendLayout();
             this.pnlManico.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudSpessoreManico)).BeginInit();
@@ -85,6 +85,7 @@
             this.pnlTastiera.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudTasti)).BeginInit();
             this.pnlPickup.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudCorde)).BeginInit();
             this.SuspendLayout();
             // 
             // cbStrumento
@@ -118,16 +119,6 @@
             this.label2.Text = "Quantità";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // cbNumeroCorde
-            // 
-            this.cbNumeroCorde.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbNumeroCorde.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cbNumeroCorde.FormattingEnabled = true;
-            this.cbNumeroCorde.Location = new System.Drawing.Point(3, 68);
-            this.cbNumeroCorde.Name = "cbNumeroCorde";
-            this.cbNumeroCorde.Size = new System.Drawing.Size(258, 28);
-            this.cbNumeroCorde.TabIndex = 3;
-            // 
             // cbMaterialeCorde
             // 
             this.cbMaterialeCorde.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -150,10 +141,10 @@
             // 
             // pnlCorde
             // 
+            this.pnlCorde.Controls.Add(this.nudCorde);
             this.pnlCorde.Controls.Add(this.label4);
             this.pnlCorde.Controls.Add(this.label2);
             this.pnlCorde.Controls.Add(this.cbMaterialeCorde);
-            this.pnlCorde.Controls.Add(this.cbNumeroCorde);
             this.pnlCorde.Controls.Add(this.label3);
             this.pnlCorde.Location = new System.Drawing.Point(12, 40);
             this.pnlCorde.Name = "pnlCorde";
@@ -584,6 +575,19 @@
             this.btnSalva.Text = "Salva";
             this.btnSalva.UseVisualStyleBackColor = true;
             // 
+            // nudCorde
+            // 
+            this.nudCorde.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.nudCorde.Location = new System.Drawing.Point(3, 70);
+            this.nudCorde.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.nudCorde.Name = "nudCorde";
+            this.nudCorde.Size = new System.Drawing.Size(258, 26);
+            this.nudCorde.TabIndex = 13;
+            // 
             // FrmStrumentoACorda
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -616,6 +620,7 @@
             this.pnlTastiera.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.nudTasti)).EndInit();
             this.pnlPickup.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.nudCorde)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -626,7 +631,6 @@
         private System.Windows.Forms.ComboBox cbStrumento;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.ComboBox cbNumeroCorde;
         private System.Windows.Forms.ComboBox cbMaterialeCorde;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Panel pnlCorde;
@@ -668,5 +672,6 @@
         private System.Windows.Forms.Label label21;
         private System.Windows.Forms.TextBox tbLunghezzaTotale;
         private System.Windows.Forms.Button btnSalva;
+        private System.Windows.Forms.NumericUpDown nudCorde;
     }
 }

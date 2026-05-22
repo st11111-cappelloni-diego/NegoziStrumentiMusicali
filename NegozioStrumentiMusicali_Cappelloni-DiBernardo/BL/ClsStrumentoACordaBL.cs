@@ -213,6 +213,12 @@ namespace NegozioStrumentiMusicali
                 _strumentoACorda.ID = Convert.ToInt64(dataReader["strumentomusicaleID"]);
             }
 
+            _strumentoACorda.Strumento = (ClsStrumentoACorda.eSTRUMENTI_A_CORDA)Enum.Parse
+            (
+                typeof(ClsStrumentoACorda.eSTRUMENTI_A_CORDA),
+                dataReader["strumento"].ToString()
+            );
+
             _strumentoACorda.LunghezzaCorpoCM = Convert.ToSingle(dataReader["lunghezzacorpocm"]);
 
             _strumentoACorda.LunghezzaManicoCM = Convert.ToSingle(dataReader["lunghezzamanicocm"]);
@@ -233,12 +239,6 @@ namespace NegozioStrumentiMusicali
             _strumentoACorda.AmpiezzaCorpoCM = Convert.ToSingle(dataReader["ampiezzacorpocm"]);
 
             _strumentoACorda.AmpiezzaManicoCM = Convert.ToSingle(dataReader["ampiezzamanicocm"]);
-
-            _strumentoACorda.Strumento = (ClsStrumentoACorda.eSTRUMENTI_A_CORDA)Enum.Parse
-            (
-                typeof(ClsStrumentoACorda.eSTRUMENTI_A_CORDA),
-                dataReader["strumento"].ToString()
-            );
 
             _strumentoACorda.MaterialeCorde = (ClsStrumentoACorda.eMATERIALE_CORDE)Enum.Parse
             (

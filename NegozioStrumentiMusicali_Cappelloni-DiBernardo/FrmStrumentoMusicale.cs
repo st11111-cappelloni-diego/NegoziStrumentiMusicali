@@ -20,6 +20,7 @@ namespace NegozioStrumentiMusicali
         private ClsVendere _vendereStrumentoMusicale = new ClsVendere();
         private Program.eMODALITA_ENTRATA_DETAIL _modalitaEntrata = Program.eMODALITA_ENTRATA_DETAIL.Visualizzazione;
         private List<ClsCaratteristica> _altreCaratteristicheStrumento = new List<ClsCaratteristica>();
+        private bool _utenteGestisceNegozioAttuale;
 
         #endregion
         #region Proprietà
@@ -27,28 +28,10 @@ namespace NegozioStrumentiMusicali
         public ClsVendere VendereStrumentoMusicale { get => _vendereStrumentoMusicale; set => _vendereStrumentoMusicale = value; }
         public Program.eMODALITA_ENTRATA_DETAIL ModalitaEntrata { get => _modalitaEntrata; set => _modalitaEntrata = value; }
         public List<ClsCaratteristica> AltreCaratteristicheStrumento { get => _altreCaratteristicheStrumento; set => _altreCaratteristicheStrumento = value; }
-        public NumericUpDown NudQuantita
-        {
-            get
-            {
-                return nudQuantita;
-            }
-            set
-            {
-                value = nudQuantita;
-            }
-        }
-        public NumericUpDown NudPrezzo
-        {
-            get
-            {
-                return nudPrezzo;
-            }
-            set
-            {
-                value = nudPrezzo;
-            }
-        }
+        /// <summary>
+        /// Per l'ID del negozio vedi sulla vendere
+        /// </summary>
+        public bool UtenteGestisceNegozioAttuale { get => _utenteGestisceNegozioAttuale; set => _utenteGestisceNegozioAttuale = value; }        
 
         #endregion
         #region Metodi della form
@@ -152,9 +135,16 @@ namespace NegozioStrumentiMusicali
 
             nudPeso.Value = Convert.ToDecimal(strumentoMusicale.PesoKG);
 
-            nudPrezzo.Value = vendereStrumento.Prezzo;
-
-            nudQuantita.Value = Convert.ToDecimal(vendereStrumento.Quantita);
+            if(vendereStrumento != null)
+            {
+                nudPrezzo.Value = vendereStrumento.Prezzo;
+                nudQuantita.Value = Convert.ToDecimal(vendereStrumento.Quantita);
+            }
+            else
+            {
+                nudPrezzo.Value = nudPrezzo.Minimum;
+                nudQuantita.Value = nudQuantita.Minimum;
+            }
 
             //cbStrumento: Carico la famiglia di strumenti in base a come è il tipo di strumento
             if(strumentoMusicale is ClsBatteria)
@@ -235,7 +225,38 @@ namespace NegozioStrumentiMusicali
             }
             else
             {
-                //Modalità modifica o inserimento
+                //Modalità modifica o inserimento                
+                if(UtenteGestisceNegozioAttuale && ClsArchivio.UtenteAttuale.AdminSoftware == false)
+                {
+                    //L'utente gestisce il negozio ma non è admin software: abilito solo nudPrezzo e nudQuantità
+                    AbilitaControlliGraficiInput(false);
+                    nudPrezzo.Enabled = true;
+                    nudQuantita.Enabled = true;
+                }
+                else if(UtenteGestisceNegozioAttuale == false && ClsArchivio.UtenteAttuale.AdminSoftware)
+                {
+                    //L'utente non gestisce il negozio ma è admin software: abilito tutti i controlli apparte nudPrezzo e nudQuantita
+                    AbilitaControlliGraficiInput(true);
+                    nudPrezzo.Enabled = false;
+                    nudQuantita.Enabled = false;
+                }
+                else if(UtenteGestisceNegozioAttuale && ClsArchivio.UtenteAttuale.AdminSoftware)
+                {
+                    //L'utente è sia admin software sia gestore del negozio: abilito tutti i controlli grafici di input
+                    AbilitaControlliGraficiInput(true);
+                }
+                else
+                {
+                    //L'utente non è ne gestore ne admin software: disabilito tutti i controlli grafici di input
+                    AbilitaControlliGraficiInput(false);
+                }
+            }
+
+            //Se sono in modalità modifica disabilito la combobox per la scelta del tipo di strumento
+            //Una volta inserito lo strumento con quella specializzazione, non si può cambiare
+            if(ModalitaEntrata == Program.eMODALITA_ENTRATA_DETAIL.Modifica)
+            {
+                cbStrumento.Enabled = false;
             }
 
             if (cbStrumento.SelectedIndex == Convert.ToInt32(Program.eTIPO_STRUMENTO.Batteria))
