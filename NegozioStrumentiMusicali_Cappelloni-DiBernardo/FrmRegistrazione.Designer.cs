@@ -236,6 +236,7 @@
             this.btnVisualizzaPassword.Size = new System.Drawing.Size(83, 31);
             this.btnVisualizzaPassword.TabIndex = 74;
             this.btnVisualizzaPassword.UseVisualStyleBackColor = true;
+            this.btnVisualizzaPassword.Click += new System.EventHandler(this.btnVisualizzaPassword_Click);
             // 
             // btnRegistrazione
             // 

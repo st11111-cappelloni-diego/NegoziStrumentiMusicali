@@ -53,6 +53,14 @@
             this.chIDArticolo = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.chQuantità = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.btnElimina = new System.Windows.Forms.Button();
+            this.btnVisualizzaUtente = new System.Windows.Forms.Button();
+            this.btnVisualizzaArticolo = new System.Windows.Forms.Button();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
             this.pnlDetail.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudIDArticolo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudIDOrdine)).BeginInit();
@@ -64,6 +72,14 @@
             this.pnlDetail.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.pnlDetail.BackColor = System.Drawing.Color.Transparent;
+            this.pnlDetail.Controls.Add(this.label10);
+            this.pnlDetail.Controls.Add(this.label9);
+            this.pnlDetail.Controls.Add(this.button2);
+            this.pnlDetail.Controls.Add(this.button1);
+            this.pnlDetail.Controls.Add(this.label8);
+            this.pnlDetail.Controls.Add(this.label3);
+            this.pnlDetail.Controls.Add(this.btnVisualizzaArticolo);
+            this.pnlDetail.Controls.Add(this.btnVisualizzaUtente);
             this.pnlDetail.Controls.Add(this.nudIDArticolo);
             this.pnlDetail.Controls.Add(this.label7);
             this.pnlDetail.Controls.Add(this.nudIDOrdine);
@@ -82,7 +98,7 @@
             // 
             this.nudIDArticolo.Enabled = false;
             this.nudIDArticolo.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.nudIDArticolo.Location = new System.Drawing.Point(7, 430);
+            this.nudIDArticolo.Location = new System.Drawing.Point(7, 269);
             this.nudIDArticolo.Margin = new System.Windows.Forms.Padding(4);
             this.nudIDArticolo.Maximum = new decimal(new int[] {
             2147483647,
@@ -91,14 +107,14 @@
             0});
             this.nudIDArticolo.Name = "nudIDArticolo";
             this.nudIDArticolo.ReadOnly = true;
-            this.nudIDArticolo.Size = new System.Drawing.Size(692, 37);
+            this.nudIDArticolo.Size = new System.Drawing.Size(623, 37);
             this.nudIDArticolo.TabIndex = 44;
             // 
             // label7
             // 
             this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label7.ForeColor = System.Drawing.Color.Black;
-            this.label7.Location = new System.Drawing.Point(7, 398);
+            this.label7.Location = new System.Drawing.Point(7, 237);
             this.label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(692, 28);
@@ -110,7 +126,7 @@
             // 
             this.nudIDOrdine.Enabled = false;
             this.nudIDOrdine.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.nudIDOrdine.Location = new System.Drawing.Point(7, 357);
+            this.nudIDOrdine.Location = new System.Drawing.Point(7, 196);
             this.nudIDOrdine.Margin = new System.Windows.Forms.Padding(4);
             this.nudIDOrdine.Maximum = new decimal(new int[] {
             2147483647,
@@ -126,7 +142,7 @@
             // 
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.ForeColor = System.Drawing.Color.Black;
-            this.label5.Location = new System.Drawing.Point(7, 325);
+            this.label5.Location = new System.Drawing.Point(7, 164);
             this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(692, 28);
@@ -138,7 +154,7 @@
             // 
             this.dtpDataOrdine.Enabled = false;
             this.dtpDataOrdine.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dtpDataOrdine.Location = new System.Drawing.Point(7, 283);
+            this.dtpDataOrdine.Location = new System.Drawing.Point(7, 122);
             this.dtpDataOrdine.Margin = new System.Windows.Forms.Padding(4);
             this.dtpDataOrdine.MinDate = new System.DateTime(1900, 1, 1, 0, 0, 0, 0);
             this.dtpDataOrdine.Name = "dtpDataOrdine";
@@ -149,7 +165,7 @@
             // 
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label6.ForeColor = System.Drawing.Color.Black;
-            this.label6.Location = new System.Drawing.Point(7, 251);
+            this.label6.Location = new System.Drawing.Point(7, 90);
             this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(692, 28);
@@ -160,18 +176,18 @@
             // tbUsernameCliente
             // 
             this.tbUsernameCliente.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbUsernameCliente.Location = new System.Drawing.Point(8, 210);
+            this.tbUsernameCliente.Location = new System.Drawing.Point(8, 49);
             this.tbUsernameCliente.Margin = new System.Windows.Forms.Padding(4);
             this.tbUsernameCliente.Name = "tbUsernameCliente";
             this.tbUsernameCliente.ReadOnly = true;
-            this.tbUsernameCliente.Size = new System.Drawing.Size(691, 37);
+            this.tbUsernameCliente.Size = new System.Drawing.Size(622, 37);
             this.tbUsernameCliente.TabIndex = 32;
             // 
             // label4
             // 
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.Color.Black;
-            this.label4.Location = new System.Drawing.Point(8, 178);
+            this.label4.Location = new System.Drawing.Point(8, 17);
             this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(692, 28);
@@ -358,6 +374,100 @@
             this.btnElimina.TabIndex = 51;
             this.btnElimina.UseVisualStyleBackColor = true;
             // 
+            // btnVisualizzaUtente
+            // 
+            this.btnVisualizzaUtente.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnVisualizzaUtente.Image = global::NegozioStrumentiMusicali_Cappelloni_DiBernardo.Properties.Resources.iconaVisualizza1_23x16;
+            this.btnVisualizzaUtente.Location = new System.Drawing.Point(638, 49);
+            this.btnVisualizzaUtente.Margin = new System.Windows.Forms.Padding(4);
+            this.btnVisualizzaUtente.Name = "btnVisualizzaUtente";
+            this.btnVisualizzaUtente.Size = new System.Drawing.Size(62, 39);
+            this.btnVisualizzaUtente.TabIndex = 75;
+            this.btnVisualizzaUtente.UseVisualStyleBackColor = true;
+            // 
+            // btnVisualizzaArticolo
+            // 
+            this.btnVisualizzaArticolo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnVisualizzaArticolo.Image = global::NegozioStrumentiMusicali_Cappelloni_DiBernardo.Properties.Resources.iconaVisualizza1_23x16;
+            this.btnVisualizzaArticolo.Location = new System.Drawing.Point(636, 267);
+            this.btnVisualizzaArticolo.Margin = new System.Windows.Forms.Padding(4);
+            this.btnVisualizzaArticolo.Name = "btnVisualizzaArticolo";
+            this.btnVisualizzaArticolo.Size = new System.Drawing.Size(62, 39);
+            this.btnVisualizzaArticolo.TabIndex = 76;
+            this.btnVisualizzaArticolo.UseVisualStyleBackColor = true;
+            // 
+            // label3
+            // 
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.ForeColor = System.Drawing.Color.Black;
+            this.label3.Location = new System.Drawing.Point(8, 310);
+            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(692, 34);
+            this.label3.TabIndex = 77;
+            this.label3.Text = "Dettagli Negozio";
+            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label8
+            // 
+            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label8.ForeColor = System.Drawing.Color.Black;
+            this.label8.Location = new System.Drawing.Point(8, 358);
+            this.label8.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(692, 34);
+            this.label8.TabIndex = 78;
+            this.label8.Text = "Dettagli Indirizzo";
+            this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // button1
+            // 
+            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.button1.Image = global::NegozioStrumentiMusicali_Cappelloni_DiBernardo.Properties.Resources.iconaVisualizza1_23x16;
+            this.button1.Location = new System.Drawing.Point(458, 313);
+            this.button1.Margin = new System.Windows.Forms.Padding(4);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(62, 39);
+            this.button1.TabIndex = 79;
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // button2
+            // 
+            this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.button2.Image = global::NegozioStrumentiMusicali_Cappelloni_DiBernardo.Properties.Resources.iconaVisualizza1_23x16;
+            this.button2.Location = new System.Drawing.Point(458, 360);
+            this.button2.Margin = new System.Windows.Forms.Padding(4);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(62, 39);
+            this.button2.TabIndex = 80;
+            this.button2.UseVisualStyleBackColor = true;
+            // 
+            // label9
+            // 
+            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label9.ForeColor = System.Drawing.Color.Black;
+            this.label9.Location = new System.Drawing.Point(592, 236);
+            this.label9.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(121, 28);
+            this.label9.TabIndex = 81;
+            this.label9.Text = "visualizza dettagli";
+            this.label9.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label9.Click += new System.EventHandler(this.label9_Click);
+            // 
+            // label10
+            // 
+            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label10.ForeColor = System.Drawing.Color.Black;
+            this.label10.Location = new System.Drawing.Point(592, 15);
+            this.label10.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(121, 28);
+            this.label10.TabIndex = 82;
+            this.label10.Text = "visualizza dettagli";
+            this.label10.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // FrmOrdini
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -407,5 +517,13 @@
         private System.Windows.Forms.NumericUpDown nudIDArticolo;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.NumericUpDown nudIDOrdine;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Button btnVisualizzaArticolo;
+        private System.Windows.Forms.Button btnVisualizzaUtente;
+        private System.Windows.Forms.Label label10;
     }
 }

@@ -99,5 +99,17 @@ namespace NegozioStrumentiMusicali
         {
             this.Close();
         }
+
+        private void btnVisualizzaPassword_Click(object sender, EventArgs e)
+        {
+            if (tbpassword.UseSystemPasswordChar)
+            {
+                tbpassword.UseSystemPasswordChar = false;
+            }
+            else
+            {
+                tbpassword.UseSystemPasswordChar = true;
+            }
+        }
     }
 }

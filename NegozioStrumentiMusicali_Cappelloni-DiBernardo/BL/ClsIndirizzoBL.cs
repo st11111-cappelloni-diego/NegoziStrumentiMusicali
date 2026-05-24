@@ -232,5 +232,87 @@ namespace NegozioStrumentiMusicali
             return _indirizzi;
         }
 
+        /// <summary>
+        /// Prende un record da indirizzi in base alla chiave primaria ID
+        /// </summary>
+        /// <param name="connection">Connessione al DB</param>
+        /// <param name="ID"></param>
+        /// <param name="comunicazione">Comunicazione in uscita</param>
+        /// <returns>Il record ottenuto. Se è null la query non è andata a buon fine</returns>
+        public static ClsIndirizzo GetOneIndirizzo(ref MySqlConnection connection, long ID, out string comunicazione)
+        {
+            //VARIABILI
+            comunicazione = String.Empty;
+            ClsIndirizzo _indirizzo = new ClsIndirizzo();
+
+            try
+            {
+                //Apro la connessione
+                connection.Open();
+
+                //Compongo la query
+                string _query = "SELECT * FROM indirizzi WHERE ID = @ID";
+
+                //Creo l'oggetto command
+                MySqlCommand _cmd = new MySqlCommand(_query, connection);
+
+                //Inserisco i valori
+                _cmd.Parameters.AddWithValue("@ID", ID);
+
+                //Eseguo il comando creando il DataReader
+                MySqlDataReader _dataReader = _cmd.ExecuteReader();
+
+                if (_dataReader.HasRows) //Controllo se la tabella ha dei record
+                {
+                    while (_dataReader.Read()) //Se ne ha li leggo tutti
+                    {
+                        _indirizzo = CaricaSingoloIndirizzo(ref _dataReader);
+                    }
+                }
+
+                _dataReader.Close();
+
+                comunicazione = "Strumento musicale caricato correttamente dal DataBase";
+            }
+            catch (Exception ex)
+            {
+                comunicazione = ex.Message;
+                _indirizzo = null;
+            }
+            finally
+            {
+                //Chiudo la connessione
+                connection.Close();
+            }
+
+            return _indirizzo;
+        }
+
+        public static ClsIndirizzo CaricaSingoloIndirizzo(ref MySqlDataReader dataReader)
+        {
+            ClsIndirizzo _indirizzo = new ClsIndirizzo();
+
+            _indirizzo.ID = Convert.ToInt64(dataReader["ID"]);
+
+            _indirizzo.CodicePostale = dataReader["codicepostale"].ToString();
+
+            _indirizzo.Comune = dataReader["comune"].ToString();
+
+            _indirizzo.Via = dataReader["via"].ToString();
+
+            _indirizzo.NumeroCivico = Convert.ToUInt16(dataReader["numerocivico"]);
+
+            _indirizzo.LetteraCivico = Convert.ToChar(dataReader["letteracivico"]);
+
+            _indirizzo.Nazione = dataReader["nazione"].ToString();
+
+            _indirizzo.EssereSede = Convert.ToBoolean(dataReader["esseresede"]);
+
+            _indirizzo.CasaProduttriceID = Convert.ToInt64(dataReader["casaproduttriceID"]);
+
+            return _indirizzo;
+        }
+
+
     }
 }
