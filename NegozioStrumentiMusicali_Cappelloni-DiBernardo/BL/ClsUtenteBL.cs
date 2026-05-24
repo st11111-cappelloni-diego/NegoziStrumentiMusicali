@@ -46,7 +46,7 @@ namespace NegozioStrumentiMusicali
                 _cmd.Parameters.AddWithValue("@cognome", utente.Cognome);
                 _cmd.Parameters.AddWithValue("@email", utente.Email);
                 _cmd.Parameters.AddWithValue("@datadinascita", utente.DataDiNascita);
-                _cmd.Parameters.AddWithValue("@genere", utente.Genere.ToString().ToLower());
+                _cmd.Parameters.AddWithValue("@genere", utente.Genere.ToString());
                 _cmd.Parameters.AddWithValue("@pathimmagine", utente.PathImmagine);
                 _cmd.Parameters.AddWithValue("@adminsoftware", utente.AdminSoftware);
                 _cmd.Parameters.AddWithValue("@adminnegozio", utente.AdminNegozio);
