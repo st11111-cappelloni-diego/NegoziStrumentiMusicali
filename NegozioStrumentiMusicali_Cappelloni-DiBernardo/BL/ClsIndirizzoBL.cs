@@ -302,13 +302,13 @@ namespace NegozioStrumentiMusicali
 
             _indirizzo.NumeroCivico = Convert.ToUInt16(dataReader["numerocivico"]);
 
-            _indirizzo.LetteraCivico = Convert.ToChar(dataReader["letteracivico"]);
+            //_indirizzo.LetteraCivico = Convert.ToChar(dataReader["letteracivico"]);
 
             _indirizzo.Nazione = dataReader["nazione"].ToString();
 
-            _indirizzo.EssereSede = Convert.ToBoolean(dataReader["esseresede"]);
+            //_indirizzo.EssereSede = Convert.ToBoolean(dataReader["esseresede"]);
 
-            _indirizzo.CasaProduttriceID = Convert.ToInt64(dataReader["casaproduttriceID"]);
+            //_indirizzo.CasaProduttriceID = Convert.ToInt64(dataReader["casaproduttriceID"]);
 
             return _indirizzo;
         }
