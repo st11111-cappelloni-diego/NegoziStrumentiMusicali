@@ -105,7 +105,7 @@ namespace NegozioStrumentiMusicali
             PopolaListView(lvOrdini, _listOrdini, _negozioID);
 
             cbParametriDiOrdinamento.DataSource = Enum.GetNames(typeof(ePARAMETRI_DI_ORDINAMENTO));
-            pnlDetail.Enabled = false;
+            
         }
 
         private void cbNegozio_SelectedIndexChanged(object sender, EventArgs e)
@@ -135,7 +135,11 @@ namespace NegozioStrumentiMusicali
                 //Recupero l’oggetto dal Tag e carico i dati della detail se è stato selezionato qualcosa
                 ClsOrdine _ordine = (ClsOrdine)lvOrdini.SelectedItems[0].Tag;
 
-                pnlDetail.Enabled = false;
+                pnlDetail.Visible = true;
+                tbUsernameCliente.Enabled = false;
+                dtpDataOrdine.Enabled = false;
+                nudIDArticolo.Enabled = false;
+                nudIDOrdine.Enabled = false;
 
                 tbUsernameCliente.Text = _ordine.UsernameCliente;
                 dtpDataOrdine.Value = _ordine.DataOra;
@@ -143,6 +147,18 @@ namespace NegozioStrumentiMusicali
                 nudIDArticolo.Value = _ordine.StrumentoMusicaleID;
             }
 
+        }
+
+        private void label9_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            string _comunicazione;
+            FrmNegozio _negozio = new FrmNegozio(ClsNegozioBL.GetOneNegozio(ref Program._connessioneAlDB, _negozioID, out _comunicazione));
+            _negozio.ShowDialog();
         }
     }
 }
