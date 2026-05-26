@@ -77,7 +77,21 @@ namespace NegozioStrumentiMusicali
 
         #region Proprietà
         public eSTRUMENTI_A_CORDA Strumento { get => _strumento; set => _strumento = value; }
-        public ushort NumeroCorde { get => _numeroCorde; set => _numeroCorde = value; }
+        public ushort NumeroCorde
+        {
+            get => _numeroCorde;
+            set
+            {
+                if(value <= 0)
+                {
+                    throw new Exception("Quantità delle corde minore o uguale a 0");
+                }
+                else
+                {
+                    _numeroCorde = value;
+                }
+            }            
+        }
         public eMATERIALE_CORDE MaterialeCorde { get => _materialeCorde; set => _materialeCorde = value; }
         public float LunghezzaCorpoCM
         {
@@ -93,7 +107,7 @@ namespace NegozioStrumentiMusicali
                 }
                 else
                 {
-                    value = _lunghezzaCorpoCM;
+                    _lunghezzaCorpoCM = value;
                 }
             }
         }
@@ -111,7 +125,7 @@ namespace NegozioStrumentiMusicali
                 }
                 else
                 {
-                    value = _ampiezzaCorpoCM;
+                    _ampiezzaCorpoCM = value;
                 }
             }
         }
@@ -129,7 +143,7 @@ namespace NegozioStrumentiMusicali
                 }
                 else
                 {
-                    value = _spessoreCorpoCM;
+                    _spessoreCorpoCM = value;
                 }
             }
         }
