@@ -284,5 +284,69 @@ namespace NegozioStrumentiMusicali
                 cbNotaMinima.Enabled = false;
             }
         }
+
+        private void btnInfoSpecifiche_Click(object sender, EventArgs e)
+        {
+            Form _formDaAprire = new Form();
+
+            //Modalità inserimento:
+            if (ModalitaEntrata == Program.eMODALITA_ENTRATA_DETAIL.Inserimento)
+            {
+                //Controllo di che famiglia di strumenti deve essere lo strumento
+                if(cbStrumento.SelectedIndex ==
+                    Convert.ToInt32(Program.eTIPO_STRUMENTO.Batteria))
+                {
+                    
+                }
+                else if(cbStrumento.SelectedIndex ==
+                    Convert.ToInt32(Program.eTIPO_STRUMENTO.Legno))
+                {
+
+                }
+                else if(cbStrumento.SelectedIndex ==
+                    Convert.ToInt32(Program.eTIPO_STRUMENTO.Ottone))
+                {
+
+                }
+                else if(cbStrumento.SelectedIndex ==
+                    Convert.ToInt32(Program.eTIPO_STRUMENTO.Pianoforte))
+                {
+
+                }
+                else if(cbStrumento.SelectedIndex ==
+                    Convert.ToInt32(Program.eTIPO_STRUMENTO.Strumento_a_corda))
+                {
+                    StrumentoMusicale = new ClsStrumentoACorda();
+                    _formDaAprire = new FrmStrumentoACorda(ModalitaEntrata, (ClsStrumentoACorda)StrumentoMusicale);                   
+                }
+            }
+            else if(ModalitaEntrata == Program.eMODALITA_ENTRATA_DETAIL.Modifica
+                || ModalitaEntrata == Program.eMODALITA_ENTRATA_DETAIL.Visualizzazione)
+            {
+                //Controllo di che tipo è lo strumento passato a questa form
+                if(StrumentoMusicale is ClsBatteria)
+                {
+
+                }
+                else if(StrumentoMusicale is ClsLegno)
+                {
+
+                }
+                else if(StrumentoMusicale is ClsOttone)
+                {
+
+                }
+                else if(StrumentoMusicale is ClsPianoforte)
+                {
+
+                }
+                else if(StrumentoMusicale is ClsStrumentoACorda)
+                {
+                    _formDaAprire = new FrmStrumentoACorda(ModalitaEntrata, (ClsStrumentoACorda)StrumentoMusicale);
+                }
+            }
+
+            _formDaAprire.ShowDialog(this);
+        }
     }
 }
