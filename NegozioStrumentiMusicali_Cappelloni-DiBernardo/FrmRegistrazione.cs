@@ -44,7 +44,13 @@ namespace NegozioStrumentiMusicali
                 string _comunicazione;
                 ClsUtenteBL.InsertUtente(ref Program._connessioneAlDB, _utente, out _comunicazione);
 
+                MessageBox.Show("Il tuo utente è stato registrato con successo", "Successo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
                 this.Close();
+            }
+            else
+            {
+                MessageBox.Show("Il tuo utente non è stato registrato", "Errore", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
