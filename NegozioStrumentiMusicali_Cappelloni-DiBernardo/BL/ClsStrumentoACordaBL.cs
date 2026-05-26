@@ -246,6 +246,8 @@ namespace NegozioStrumentiMusicali
                 dataReader["materialecorde"].ToString()
             );
 
+            _strumentoACorda.NumeroCorde = Convert.ToUInt16(dataReader["numerocorde"]);
+
             _strumentoACorda.MaterialeCorpo = (Program.eLEGNO)Enum.Parse
             (
                 typeof(Program.eLEGNO),
