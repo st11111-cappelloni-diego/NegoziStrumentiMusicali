@@ -34,6 +34,7 @@
             this.cbMaterialeCorde = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
             this.pnlCorde = new System.Windows.Forms.Panel();
+            this.nudCorde = new System.Windows.Forms.NumericUpDown();
             this.label4 = new System.Windows.Forms.Label();
             this.pnlManico = new System.Windows.Forms.Panel();
             this.label9 = new System.Windows.Forms.Label();
@@ -72,8 +73,8 @@
             this.label21 = new System.Windows.Forms.Label();
             this.tbLunghezzaTotale = new System.Windows.Forms.TextBox();
             this.btnSalva = new System.Windows.Forms.Button();
-            this.nudCorde = new System.Windows.Forms.NumericUpDown();
             this.pnlCorde.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudCorde)).BeginInit();
             this.pnlManico.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudSpessoreManico)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudAmpiezzaManico)).BeginInit();
@@ -85,7 +86,6 @@
             this.pnlTastiera.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudTasti)).BeginInit();
             this.pnlPickup.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nudCorde)).BeginInit();
             this.SuspendLayout();
             // 
             // cbStrumento
@@ -101,7 +101,7 @@
             // 
             // label1
             // 
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(-1, 8);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(100, 23);
@@ -111,7 +111,7 @@
             // 
             // label2
             // 
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.Location = new System.Drawing.Point(3, 45);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(258, 20);
@@ -131,7 +131,7 @@
             // 
             // label3
             // 
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.Location = new System.Drawing.Point(3, 99);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(258, 20);
@@ -150,6 +150,19 @@
             this.pnlCorde.Name = "pnlCorde";
             this.pnlCorde.Size = new System.Drawing.Size(266, 176);
             this.pnlCorde.TabIndex = 6;
+            // 
+            // nudCorde
+            // 
+            this.nudCorde.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.nudCorde.Location = new System.Drawing.Point(3, 70);
+            this.nudCorde.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.nudCorde.Name = "nudCorde";
+            this.nudCorde.Size = new System.Drawing.Size(258, 26);
+            this.nudCorde.TabIndex = 13;
             // 
             // label4
             // 
@@ -179,7 +192,7 @@
             // 
             // label9
             // 
-            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label9.Location = new System.Drawing.Point(3, 185);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(258, 20);
@@ -199,7 +212,7 @@
             // 
             // label8
             // 
-            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label8.Location = new System.Drawing.Point(3, 133);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(258, 20);
@@ -223,7 +236,7 @@
             // 
             // label7
             // 
-            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label7.Location = new System.Drawing.Point(3, 81);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(258, 20);
@@ -247,7 +260,7 @@
             // 
             // label6
             // 
-            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label6.Location = new System.Drawing.Point(3, 29);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(258, 20);
@@ -281,7 +294,7 @@
             // 
             // label10
             // 
-            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label10.Location = new System.Drawing.Point(3, 33);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(258, 20);
@@ -317,7 +330,7 @@
             // 
             // label12
             // 
-            this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label12.Location = new System.Drawing.Point(3, 208);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(258, 20);
@@ -337,7 +350,7 @@
             // 
             // label13
             // 
-            this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label13.Location = new System.Drawing.Point(3, 156);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(258, 20);
@@ -361,7 +374,7 @@
             // 
             // label14
             // 
-            this.label14.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label14.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label14.Location = new System.Drawing.Point(3, 99);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(258, 20);
@@ -385,7 +398,7 @@
             // 
             // label15
             // 
-            this.label15.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label15.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label15.Location = new System.Drawing.Point(3, 45);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(258, 20);
@@ -548,7 +561,7 @@
             // 
             // label21
             // 
-            this.label21.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label21.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label21.Location = new System.Drawing.Point(559, 248);
             this.label21.Name = "label21";
             this.label21.Size = new System.Drawing.Size(258, 20);
@@ -575,19 +588,6 @@
             this.btnSalva.Text = "Salva";
             this.btnSalva.UseVisualStyleBackColor = true;
             // 
-            // nudCorde
-            // 
-            this.nudCorde.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.nudCorde.Location = new System.Drawing.Point(3, 70);
-            this.nudCorde.Maximum = new decimal(new int[] {
-            1000,
-            0,
-            0,
-            0});
-            this.nudCorde.Name = "nudCorde";
-            this.nudCorde.Size = new System.Drawing.Size(258, 26);
-            this.nudCorde.TabIndex = 13;
-            // 
             // FrmStrumentoACorda
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -606,9 +606,10 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.Name = "FrmStrumentoACorda";
-            this.Text = "FrmStrumentoACorda";
+            this.Text = "Strumento a corda";
             this.Load += new System.EventHandler(this.FrmStrumentoACorda_Load);
             this.pnlCorde.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.nudCorde)).EndInit();
             this.pnlManico.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.nudSpessoreManico)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudAmpiezzaManico)).EndInit();
@@ -620,7 +621,6 @@
             this.pnlTastiera.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.nudTasti)).EndInit();
             this.pnlPickup.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.nudCorde)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
