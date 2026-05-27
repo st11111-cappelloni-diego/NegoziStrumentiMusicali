@@ -21,6 +21,14 @@ namespace NegozioStrumentiMusicali
         private Program.eMODALITA_ENTRATA_DETAIL _modalitaEntrata = Program.eMODALITA_ENTRATA_DETAIL.Visualizzazione;
         private List<ClsCaratteristica> _altreCaratteristicheStrumento = new List<ClsCaratteristica>();
         private bool _utenteGestisceNegozioAttuale;
+        /// <summary>
+        /// Variabile di backup di cbNotaMinima in caso di cambio di tipo strumento
+        /// </summary>
+        private int _indiceNotaMinima;
+        /// <summary>
+        /// Variabile di backup di cbNotaMassima in caso di cambio di tipo strumento
+        /// </summary>
+        private int _indiceNotaMassima;
 
         #endregion
         #region Proprietà
@@ -200,10 +208,10 @@ namespace NegozioStrumentiMusicali
 
             nudID.Enabled = false;
 
-            nudPrezzo.Maximum = 9999999999.00m;
+            nudPrezzo.Maximum = 9999999999.99m;
             nudPrezzo.Minimum = 0.01m;
             nudPeso.Minimum = 0.01m;
-            nudPeso.Maximum = 9999.0m;
+            nudPeso.Maximum = 9999.99m;
             nudQuantita.Minimum = 0;
             nudQuantita.Maximum = 9999999999;
         }
@@ -261,8 +269,6 @@ namespace NegozioStrumentiMusicali
 
             if (cbStrumento.SelectedIndex == Convert.ToInt32(Program.eTIPO_STRUMENTO.Batteria))
             {
-                cbNotaMassima.Enabled = true;
-                cbNotaMinima.Enabled = true;
                 cbNotaMassima.SelectedIndex = 0;
                 cbNotaMinima.SelectedIndex = 0;
                 cbNotaMassima.Enabled = false;
@@ -274,14 +280,22 @@ namespace NegozioStrumentiMusicali
 
         private void cbStrumento_SelectedIndexChanged(object sender, EventArgs e)
         {
-            cbNotaMassima.Enabled = true;
-            cbNotaMinima.Enabled = true;
+            //Nota minima e nota massima non sono previste nelle batterie
             if (cbStrumento.SelectedIndex == Convert.ToInt32(Program.eTIPO_STRUMENTO.Batteria))
             {
+                _indiceNotaMinima = cbNotaMinima.SelectedIndex; //Backup
+                _indiceNotaMassima = cbNotaMassima.SelectedIndex;
                 cbNotaMassima.SelectedIndex = 0;
                 cbNotaMinima.SelectedIndex = 0;
                 cbNotaMassima.Enabled = false;
                 cbNotaMinima.Enabled = false;
+            }
+            else
+            {
+                cbNotaMinima.SelectedIndex = _indiceNotaMinima; //Ripristino backup
+                cbNotaMassima.SelectedIndex = _indiceNotaMassima;
+                cbNotaMassima.Enabled = true;
+                cbNotaMinima.Enabled = true;
             }
         }
 
@@ -306,18 +320,20 @@ namespace NegozioStrumentiMusicali
                 else if(cbStrumento.SelectedIndex ==
                     Convert.ToInt32(Program.eTIPO_STRUMENTO.Ottone))
                 {
-
+                    StrumentoMusicale = new ClsOttone();
+                    _formDaAprire = new FrmOttone(ModalitaEntrata, (ClsOttone)StrumentoMusicale);
                 }
                 else if(cbStrumento.SelectedIndex ==
                     Convert.ToInt32(Program.eTIPO_STRUMENTO.Pianoforte))
                 {
-
+                    StrumentoMusicale = new ClsPianoforte();
+                    _formDaAprire = new FrmPianoforte(ModalitaEntrata, (ClsPianoforte)StrumentoMusicale);
                 }
                 else if(cbStrumento.SelectedIndex ==
                     Convert.ToInt32(Program.eTIPO_STRUMENTO.Strumento_a_corda))
                 {
                     StrumentoMusicale = new ClsStrumentoACorda();
-                    _formDaAprire = new FrmStrumentoACorda(ModalitaEntrata, (ClsStrumentoACorda)StrumentoMusicale);                   
+                    _formDaAprire = new FrmStrumentoACorda(ModalitaEntrata, (ClsStrumentoACorda)StrumentoMusicale);
                 }
             }
             else if(ModalitaEntrata == Program.eMODALITA_ENTRATA_DETAIL.Modifica
@@ -334,11 +350,11 @@ namespace NegozioStrumentiMusicali
                 }
                 else if(StrumentoMusicale is ClsOttone)
                 {
-
+                    _formDaAprire = new FrmOttone(ModalitaEntrata, (ClsOttone)StrumentoMusicale);
                 }
                 else if(StrumentoMusicale is ClsPianoforte)
                 {
-
+                    _formDaAprire = new FrmPianoforte(ModalitaEntrata, (ClsPianoforte)StrumentoMusicale);
                 }
                 else if(StrumentoMusicale is ClsStrumentoACorda)
                 {

@@ -60,7 +60,7 @@ namespace NegozioStrumentiMusicali
                 _cmd.Parameters.AddWithValue("@materialetastibianchi", pianoforte.MaterialeTastiBianchi.ToString().ToLower());
                 _cmd.Parameters.AddWithValue("@materialetastineri", pianoforte.MaterialeTastiNeri.ToString().ToLower());
                 _cmd.Parameters.AddWithValue("@altezzacm", pianoforte.AltezzaCM);
-                _cmd.Parameters.AddWithValue("@lunghezzacm", pianoforte.LunghezzaCM);
+                _cmd.Parameters.AddWithValue("@lunghezzacm", pianoforte.LarghezzaCM);
                 _cmd.Parameters.AddWithValue("@profonditacm", pianoforte.ProfonditaCM);
                 _cmd.Parameters.AddWithValue("@altezzaginocchiocm", pianoforte.AltezzaGinocchioCM);
 
@@ -125,7 +125,7 @@ namespace NegozioStrumentiMusicali
                 _cmd.Parameters.AddWithValue("@materialetastineri", pianoforte.MaterialeTastiNeri.ToString().ToLower());
                 _cmd.Parameters.AddWithValue("@materialecorpopfacustico", pianoforte.MaterialeCorpoPFAcustico.ToString().ToLower());
                 _cmd.Parameters.AddWithValue("@altezzacm", pianoforte.AltezzaCM);
-                _cmd.Parameters.AddWithValue("@lunghezzacm", pianoforte.LunghezzaCM);
+                _cmd.Parameters.AddWithValue("@lunghezzacm", pianoforte.LarghezzaCM);
                 _cmd.Parameters.AddWithValue("@profonditacm", pianoforte.ProfonditaCM);
                 _cmd.Parameters.AddWithValue("@altezzaginocchiocm", pianoforte.AltezzaGinocchioCM);
                 _cmd.Parameters.AddWithValue("@ID", pianoforte.ID);
@@ -221,25 +221,33 @@ namespace NegozioStrumentiMusicali
 
             _pianoforte.MaterialeTastiBianchi = (ClsPianoforte.eMATERIALE_TASTI_PF)Enum.Parse
             (
-                typeof(Program.eLEGNO),
+                typeof(ClsPianoforte.eMATERIALE_TASTI_PF),
                 dataReader["materialetastibianchi"].ToString()
             );
 
             _pianoforte.MaterialeTastiNeri = (ClsPianoforte.eMATERIALE_TASTI_PF)Enum.Parse
             (
-                typeof(Program.eLEGNO),
+                typeof(ClsPianoforte.eMATERIALE_TASTI_PF),
                 dataReader["materialetastineri"].ToString()
             );
 
-            _pianoforte.NumeroTasti = Convert.ToInt32(dataReader["numerotasti"]);
+            _pianoforte.NumeroTasti = 12; //Per evitare eccezioni generate dalla proprietà
+            _pianoforte.NumeroTasti = Convert.ToByte(dataReader["numerotasti"]);
 
             _pianoforte.AltezzaCM = Convert.ToSingle(dataReader["altezzacm"]);
 
-            _pianoforte.LunghezzaCM = Convert.ToSingle(dataReader["lunghezzacm"]);
+            _pianoforte.LarghezzaCM = Convert.ToSingle(dataReader["larghezzacm"]);
 
             _pianoforte.ProfonditaCM = Convert.ToSingle(dataReader["profonditacm"]);
 
-            _pianoforte.AltezzaGinocchioCM = Convert.ToSingle(dataReader["altezzaginocchiocm"]);
+            if(dataReader["altezzaginocchiocm"] == DBNull.Value)
+            {
+                _pianoforte.AltezzaGinocchioCM = -1;
+            }
+            else
+            {
+                _pianoforte.AltezzaGinocchioCM = Convert.ToSingle(dataReader["altezzaginocchiocm"]);
+            }
  
 
             return _pianoforte;
@@ -311,8 +319,8 @@ namespace NegozioStrumentiMusicali
                     "P.materialetastineri, " +
                     "P.materialecorpopfacustico, " +
                     "P.altezzacm, " +
-                    "P.lunghezzacm, " +
-                    "pP.profonditacm, " +
+                    "P.larghezzacm, " +
+                    "P.profonditacm, " +
                     "P.altezzaginocchiocm " +
                     "FROM strumentimusicali AS S JOIN pianoforti AS P " +
                     "ON S.ID = P.strumentomusicaleID " +

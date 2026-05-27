@@ -51,14 +51,7 @@ namespace NegozioStrumentiMusicali
             }
             set
             {
-                if(String.IsNullOrWhiteSpace(value))
-                {
-                    throw new Exception("Colori non inseriti");
-                }
-                else
-                {
-                    _colori = value;
-                }
+                _colori = value;
             }
         }
         public string Modello
