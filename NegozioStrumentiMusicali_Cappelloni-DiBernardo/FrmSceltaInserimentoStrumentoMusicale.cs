@@ -243,7 +243,7 @@ namespace NegozioStrumentiMusicali
             this.MaximizeBox = false;
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
 
-            nudPrezzo.Maximum = 9999999999.00m;
+            nudPrezzo.Maximum = 9999999999.99m;
             nudPrezzo.Minimum = 0.01m;
             nudQuantita.Minimum = 0;
             nudQuantita.Maximum = 9999999999;
@@ -290,6 +290,8 @@ namespace NegozioStrumentiMusicali
             _frmStrumentoMusicale.VendereStrumentoMusicale = VendereStrumentoMusicale;
 
             _frmStrumentoMusicale.UtenteGestisceNegozioAttuale = UtenteGestisceNegozio;
+
+            _frmStrumentoMusicale.Text = "Creazione di un nuovo strumento musicale";
 
             //Apro la form in modalità inserimento
             _frmStrumentoMusicale.ModalitaEntrata = Program.eMODALITA_ENTRATA_DETAIL.Inserimento;

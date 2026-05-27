@@ -20,7 +20,9 @@ namespace NegozioStrumentiMusicali
 
         public enum eMATERIALE_TASTI_PF
         {
+            acrilico,
             avorio,
+            fenolo,
             galatite,
             ivorite,
             legno,
@@ -32,12 +34,12 @@ namespace NegozioStrumentiMusicali
 
         #region Attributi
         private eTIPO_PF _tipo;
-        private int _numeroTasti;
+        private byte _numeroTasti;
         private eMATERIALE_TASTI_PF _materialeTastiBianchi;
         private eMATERIALE_TASTI_PF _materialeTastiNeri;
         private Program.eLEGNO? _materialeCorpoPFAcustico;
         private float _altezzaCM;
-        private float _lunghezzaCM;
+        private float _larghezzaCM;
         private float _profonditaCM;
         private float _altezzaGinocchioCM;
 
@@ -45,7 +47,7 @@ namespace NegozioStrumentiMusicali
 
         #region Proprietà
         public eTIPO_PF Tipo { get => _tipo; set => _tipo = value; }
-        public int NumeroTasti
+        public byte NumeroTasti
         {
             get
             {
@@ -53,7 +55,7 @@ namespace NegozioStrumentiMusicali
             }
             set
             {
-                if(_numeroTasti <= 12 || _numeroTasti >= 121)
+                if(value < 12 || value > 121)
                 {
                     throw new Exception("Il numero di tasti per un pianoforte o tastiera può andare da 12 ai 121");
                 }
@@ -87,21 +89,21 @@ namespace NegozioStrumentiMusicali
                 }
             }
         }
-        public float LunghezzaCM
+        public float LarghezzaCM
         {
             get
             {
-                return _lunghezzaCM;
+                return _larghezzaCM;
             }
             set
             {
                 if (value <= 0)
                 {
-                    throw new Exception("Lunghezza minore o uguale a 0");
+                    throw new Exception("Larghezza minore o uguale a 0");
                 }
                 else
                 {
-                    _lunghezzaCM = value;
+                    _larghezzaCM = value;
                 }
             }
         }
@@ -123,6 +125,9 @@ namespace NegozioStrumentiMusicali
                 }
             }
         }
+        /// <summary>
+        /// Se è minore o uguale a -1, equivale a DBNull
+        /// </summary>
         public float AltezzaGinocchioCM
         {
             get
@@ -131,7 +136,7 @@ namespace NegozioStrumentiMusicali
             }
             set
             {
-                if (value <= 0)
+                if (value <= 0 && Tipo == eTIPO_PF.acustico)
                 {
                     throw new Exception("Altezza ginocchio minore o uguale a 0");
                 }
