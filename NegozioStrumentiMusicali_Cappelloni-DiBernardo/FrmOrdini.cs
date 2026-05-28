@@ -157,7 +157,7 @@ namespace NegozioStrumentiMusicali
         private void button1_Click(object sender, EventArgs e)
         {
             string _comunicazione;
-            FrmNegozio _negozio = new FrmNegozio(ClsNegozioBL.GetOneNegozio(ref Program._connessioneAlDB, _negozioID, out _comunicazione));
+            FrmNegozio _negozio = new FrmNegozio(ClsNegozioBL.GetOneNegozio(ref Program._connessioneAlDB, _negozioID, out _comunicazione), Program.eMODALITA_ENTRATA_DETAIL.Visualizzazione);
             _negozio.ShowDialog();
         }
     }
