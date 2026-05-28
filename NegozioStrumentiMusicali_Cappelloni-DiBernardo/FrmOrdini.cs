@@ -29,6 +29,7 @@ namespace NegozioStrumentiMusicali
         List<ClsNegozio> _negozi = new List<ClsNegozio>();  //creo la lista di negozio dove verranno inseriti tutti quelli correlati al username dell'utente che ha fatto l'accesso
         List<ClsOrdine> _listOrdini = new List<ClsOrdine>();
         long _negozioID = 0;
+        long _indirizzoID = 0;
 
         public FrmOrdini()
         {
@@ -145,6 +146,7 @@ namespace NegozioStrumentiMusicali
                 dtpDataOrdine.Value = _ordine.DataOra;
                 nudIDOrdine.Value = _ordine.ID;
                 nudIDArticolo.Value = _ordine.StrumentoMusicaleID;
+                _indirizzoID = _ordine.IndirizzoID;
             }
 
         }
@@ -157,8 +159,15 @@ namespace NegozioStrumentiMusicali
         private void button1_Click(object sender, EventArgs e)
         {
             string _comunicazione;
-            FrmNegozio _negozio = new FrmNegozio(ClsNegozioBL.GetOneNegozio(ref Program._connessioneAlDB, _negozioID, out _comunicazione));
+            FrmNegozio _negozio = new FrmNegozio(ClsNegozioBL.GetOneNegozio(ref Program._connessioneAlDB, _negozioID, out _comunicazione), Program.eMODALITA_ENTRATA_DETAIL.Visualizzazione);
             _negozio.ShowDialog();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            string _comunicazione;
+            FrmIndirizzo _indirizzo = new FrmIndirizzo(ClsIndirizzoBL.GetOneIndirizzo(ref Program._connessioneAlDB, _indirizzoID, out _comunicazione), Program.eMODALITA_ENTRATA_DETAIL.Visualizzazione);
+            _indirizzo.ShowDialog();
         }
     }
 }
