@@ -302,9 +302,9 @@ namespace NegozioStrumentiMusicali
 
             _indirizzo.NumeroCivico = Convert.ToUInt16(dataReader["numerocivico"]);
 
-            //_indirizzo.LetteraCivico = Convert.ToChar(dataReader["letteracivico"]);
-
             _indirizzo.Nazione = dataReader["nazione"].ToString();
+
+            //_indirizzo.LetteraCivico = Convert.ToChar(dataReader["letteracivico"]);
 
             //_indirizzo.EssereSede = Convert.ToBoolean(dataReader["esseresede"]);
 
