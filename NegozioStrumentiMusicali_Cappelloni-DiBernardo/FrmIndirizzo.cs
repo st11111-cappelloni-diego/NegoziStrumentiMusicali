@@ -12,9 +12,36 @@ namespace NegozioStrumentiMusicali
 {
     public partial class FrmIndirizzo : Form
     {
-        public FrmIndirizzo()
+        Program.eMODALITA_ENTRATA_DETAIL _visualizzazione;
+        public FrmIndirizzo(ClsIndirizzo indirizzo, Program.eMODALITA_ENTRATA_DETAIL modalitaVisualizzazione)
         {
             InitializeComponent();
+            _visualizzazione = modalitaVisualizzazione;
+            if(_visualizzazione == Program.eMODALITA_ENTRATA_DETAIL.Visualizzazione)
+            {
+                pnlIndirizzo.Enabled = false;
+                btnSalva.Text = "ESCI";
+
+                tbCodicePostale.Text = indirizzo.CodicePostale;
+                tbComune.Text = indirizzo.Comune;
+                tbVia.Text = indirizzo.Via;
+                
+            }
+            
+        }
+
+        private void FrmIndirizzo_Load(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void btnSalva_Click(object sender, EventArgs e)
+        {
+            if (_visualizzazione == Program.eMODALITA_ENTRATA_DETAIL.Visualizzazione)
+            {
+                
+                this.Close();
+            }
         }
     }
 }

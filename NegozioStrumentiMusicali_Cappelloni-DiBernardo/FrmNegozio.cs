@@ -12,24 +12,43 @@ namespace NegozioStrumentiMusicali
 {
     public partial class FrmNegozio : Form
     {
-        public FrmNegozio(ClsNegozio negozio)
+        Program.eMODALITA_ENTRATA_DETAIL _visualizzazione;
+        public FrmNegozio(ClsNegozio negozio, Program.eMODALITA_ENTRATA_DETAIL entrataVisualizzazione)
         {
+            _visualizzazione = entrataVisualizzazione;
             InitializeComponent();
-            //prendo l'indirizzo tramite l'ID del negozio
-            string _comunicazione;
-            ClsIndirizzo _indirizzoNegozio = ClsIndirizzoBL.GetOneIndirizzo(ref Program._connessioneAlDB, negozio.IndirizzoID, out _comunicazione);
+            if (_visualizzazione == Program.eMODALITA_ENTRATA_DETAIL.Visualizzazione)
+            {
+                //prendo l'indirizzo tramite l'ID del negozio
+                string _comunicazione;
+                ClsIndirizzo _indirizzoNegozio = ClsIndirizzoBL.GetOneIndirizzo(ref Program._connessioneAlDB, negozio.IndirizzoID, out _comunicazione);
 
 
-            tbNome.Text = negozio.Nome;
-            nudID.Value = negozio.ID;
-            tbComune.Text = _indirizzoNegozio.Comune;
-            tbVia.Text = _indirizzoNegozio.Via;
-            nudCap.Value = Convert.ToDecimal(_indirizzoNegozio.CodicePostale);
+                tbNome.Text = negozio.Nome;
+                nudID.Value = negozio.ID;
+                tbComune.Text = _indirizzoNegozio.Comune;
+                tbVia.Text = _indirizzoNegozio.Via;
+                tbCap.Text = _indirizzoNegozio.CodicePostale.ToString();
+                if (negozio.Bandito == true)
+                {
+                    ckbBandito.Checked = true;
+                }
+                btnSalva.Text = "ESCI";
+                pnlDetail.Enabled = false;
+            }
         }
 
         private void FrmNegozio_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void btnSalva_Click(object sender, EventArgs e)
+        {
+            if (_visualizzazione == Program.eMODALITA_ENTRATA_DETAIL.Visualizzazione)
+            {
+                this.Close();
+            }
         }
     }
 }
