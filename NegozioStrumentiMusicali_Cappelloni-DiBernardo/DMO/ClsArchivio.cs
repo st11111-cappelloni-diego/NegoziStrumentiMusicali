@@ -20,8 +20,6 @@ namespace NegozioStrumentiMusicali
         static private List<ClsBatteria> _batterie = new List<ClsBatteria>();
         static private List<ClsUtente> _utenti = new List<ClsUtente>();
         static private ClsUtente _utenteAttuale = new ClsUtente();
-        static private List<ClsPiatto> _piatti = new List<ClsPiatto>();
-        static private List<ClsTamburo> _tamburi = new List<ClsTamburo>();
         static private List<ClsIndirizzo> _indirizzi = new List<ClsIndirizzo>();
 
 
@@ -40,8 +38,6 @@ namespace NegozioStrumentiMusicali
         public static List<ClsCasaProduttrice> CaseProduttrici { get => _caseProduttrici; set => _caseProduttrici = value; }   
         public static List<ClsUtente> Utenti { get => _utenti; set => _utenti = value; }
         public static ClsUtente UtenteAttuale { get => _utenteAttuale; set => _utenteAttuale = value; }
-        public static List<ClsPiatto> Piatti { get => _piatti; set => _piatti = value; }
-        public static List<ClsTamburo> Tamburi { get => _tamburi; set => _tamburi = value; }
         public static List<ClsIndirizzo> Indirizzi { get => _indirizzi; set => _indirizzi = value; }
         public static List<ClsPianoforte> Pianoforti { get => _pianoforti; set => _pianoforti = value; }
         public static List<ClsOttone> Ottoni { get => _ottoni; set => _ottoni = value; }
