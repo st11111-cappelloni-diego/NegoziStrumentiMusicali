@@ -32,9 +32,9 @@ namespace NegozioStrumentiMusicali
         #region Attributi
         private long _id;
         private eTIPO _tipo;
-        private int _diametroIN;
+        private byte _diametroIN;
         private eMATERIALE _materiale;
-        private int _strati;
+        private byte _strati;
 
         #endregion
 
@@ -44,9 +44,37 @@ namespace NegozioStrumentiMusicali
         /// <summary>
         /// IN sta per inches (ovvero pollici)
         /// </summary>
-        public int DiametroIN { get => _diametroIN; set => _diametroIN = value; }
+        public byte DiametroIN
+        {
+            get => _diametroIN;
+            set
+            {
+                if(value <= 0)
+                {
+                    throw new Exception("Diametro del tamburo minore o uguale a 0");
+                }
+                else
+                {
+                    _diametroIN = value;
+                }
+            }
+        }
         public eMATERIALE Materiale { get => _materiale; set => _materiale = value; }
-        public int Strati { get => _strati; set => _strati = value; }
+        public byte Strati
+        {
+            get => _strati;
+            set
+            {
+                if(value <= 0)
+                {
+                    throw new Exception("Numeri di strati del tamburo minore o uguale a 0");
+                }
+                else
+                {
+                    _strati = value;
+                }
+            }
+        }
 
         #endregion
 
