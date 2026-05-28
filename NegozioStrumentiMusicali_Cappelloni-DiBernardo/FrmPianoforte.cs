@@ -23,10 +23,6 @@ namespace NegozioStrumentiMusicali
         /// Variabile di backup del valore di cbMaterialeCorpoPFAcustico in caso di cambio del tipo di pianoforte
         /// </summary>
         private Program.eLEGNO _materialeCorpoPFAcustico;
-        /// <summary>
-        /// Variabile di backup del valore di nudAltezzaGinocchio in caso di cambio del tipo di pianoforte
-        /// </summary>
-        private float _altezzaGinocchio;
 
         #endregion
         #region Proprietà
@@ -78,6 +74,7 @@ namespace NegozioStrumentiMusicali
             nudLarghezza.Enabled = controlliAbilitati;
             nudProfondita.Enabled = controlliAbilitati;
             nudAltezzaGinocchio.Enabled = controlliAbilitati;
+            nudNumeroTasti.Enabled = controlliAbilitati;
 
             ckbAltezzaGinocchio.Enabled = controlliAbilitati;
 
@@ -145,13 +142,35 @@ namespace NegozioStrumentiMusicali
                 _materialeCorpoPFAcustico = (Program.eLEGNO)cbMaterialeCorpoPFAcustico.SelectedIndex; //Backup
                 cbMaterialeCorpoPFAcustico.SelectedIndex = 0;
                 cbMaterialeCorpoPFAcustico.Enabled = false;
+                cbMaterialeCorpoPFAcustico.Visible = false;
+                lblMaterialeCorpo.Visible = false;
             }
             else
             {
                 cbMaterialeCorpoPFAcustico.Enabled = true;
+                cbMaterialeCorpoPFAcustico.Visible = true;
+                lblMaterialeCorpo.Visible = true;
                 cbMaterialeCorpoPFAcustico.SelectedIndex = Convert.ToInt32(_materialeCorpoPFAcustico); //Ripristino backup
                 ckbAltezzaGinocchio.Checked = true;
                 nudAltezzaGinocchio.Enabled = true;
+            }
+
+            if (ClsArchivio.UtenteAttuale.AdminSoftware &&
+            (ModalitaEntrata == Program.eMODALITA_ENTRATA_DETAIL.Inserimento
+            || ModalitaEntrata == Program.eMODALITA_ENTRATA_DETAIL.Modifica))
+            {
+                if (ckbAltezzaGinocchio.Checked == false && cbTipo.SelectedIndex == Convert.ToInt32(ClsPianoforte.eTIPO_PF.elettrico))
+                {
+                    nudAltezzaGinocchio.Enabled = false;
+                }
+                else
+                {
+                    nudAltezzaGinocchio.Enabled = true;
+                }
+            }
+            else
+            {
+                nudAltezzaGinocchio.Enabled = false;
             }
         }
 

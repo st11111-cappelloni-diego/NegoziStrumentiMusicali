@@ -59,6 +59,7 @@
             this.chTitolo = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.chTesto = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.btnVisualizzaCaratteristica = new System.Windows.Forms.Button();
+            this.btnAnnulla = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.nudID)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudQuantita)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudPrezzo)).BeginInit();
@@ -289,8 +290,9 @@
             // 
             // btnSalva
             // 
+            this.btnSalva.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.btnSalva.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSalva.Location = new System.Drawing.Point(683, 409);
+            this.btnSalva.Location = new System.Drawing.Point(683, 477);
             this.btnSalva.Name = "btnSalva";
             this.btnSalva.Size = new System.Drawing.Size(105, 29);
             this.btnSalva.TabIndex = 30;
@@ -300,7 +302,7 @@
             // btnInfoSpecifiche
             // 
             this.btnInfoSpecifiche.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnInfoSpecifiche.Location = new System.Drawing.Point(466, 409);
+            this.btnInfoSpecifiche.Location = new System.Drawing.Point(353, 477);
             this.btnInfoSpecifiche.Name = "btnInfoSpecifiche";
             this.btnInfoSpecifiche.Size = new System.Drawing.Size(211, 29);
             this.btnInfoSpecifiche.TabIndex = 31;
@@ -380,11 +382,23 @@
             this.btnVisualizzaCaratteristica.TabIndex = 82;
             this.btnVisualizzaCaratteristica.UseVisualStyleBackColor = true;
             // 
+            // btnAnnulla
+            // 
+            this.btnAnnulla.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.btnAnnulla.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAnnulla.Location = new System.Drawing.Point(570, 477);
+            this.btnAnnulla.Name = "btnAnnulla";
+            this.btnAnnulla.Size = new System.Drawing.Size(107, 29);
+            this.btnAnnulla.TabIndex = 83;
+            this.btnAnnulla.Text = "Annulla";
+            this.btnAnnulla.UseVisualStyleBackColor = true;
+            // 
             // FrmStrumentoMusicale
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(800, 518);
+            this.Controls.Add(this.btnAnnulla);
             this.Controls.Add(this.btnVisualizzaCaratteristica);
             this.Controls.Add(this.lvAltreCaratteristiche);
             this.Controls.Add(this.btnEliminaCaratteristica);
@@ -417,6 +431,7 @@
             this.MaximizeBox = false;
             this.Name = "FrmStrumentoMusicale";
             this.Text = "FrmStrumentoMusicale";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FrmStrumentoMusicale_FormClosing);
             this.Load += new System.EventHandler(this.FrmStrumentoMusicale_Load);
             ((System.ComponentModel.ISupportInitialize)(this.nudID)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudQuantita)).EndInit();
@@ -461,5 +476,6 @@
         private System.Windows.Forms.ColumnHeader chTitolo;
         private System.Windows.Forms.ColumnHeader chTesto;
         private System.Windows.Forms.Button btnVisualizzaCaratteristica;
+        private System.Windows.Forms.Button btnAnnulla;
     }
 }

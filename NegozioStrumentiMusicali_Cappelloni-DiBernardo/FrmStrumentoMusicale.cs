@@ -16,8 +16,28 @@ namespace NegozioStrumentiMusicali
     public partial class FrmStrumentoMusicale : Form
     {
         #region Variabili
-        private ClsStrumentoMusicale _strumentoMusicale = new ClsStrumentoMusicale();
-        private ClsVendere _vendereStrumentoMusicale = new ClsVendere();
+        public ClsStrumentoMusicale _strumentoMusicale;
+        public ClsVendere _vendereStrumentoMusicale;
+        /// <summary>
+        /// Serve in modalià inserimento
+        /// </summary>
+        private ClsBatteria _dettagliBatteria = new ClsBatteria();
+        /// <summary>
+        /// Serve in modalià inserimento
+        /// </summary>
+        private ClsLegno _dettagliLegno = new ClsLegno();
+        /// <summary>
+        /// Serve in modalià inserimento
+        /// </summary>
+        private ClsOttone _dettagliOttone = new ClsOttone();
+        /// <summary>
+        /// Serve in modalià inserimento
+        /// </summary>
+        private ClsPianoforte _dettagliPianoforte = new ClsPianoforte();
+        /// <summary>
+        /// Serve in modalià inserimento
+        /// </summary>
+        private ClsStrumentoACorda _dettagliStrumentoACorda = new ClsStrumentoACorda();
         private Program.eMODALITA_ENTRATA_DETAIL _modalitaEntrata = Program.eMODALITA_ENTRATA_DETAIL.Visualizzazione;
         private List<ClsCaratteristica> _altreCaratteristicheStrumento = new List<ClsCaratteristica>();
         private bool _utenteGestisceNegozioAttuale;
@@ -32,8 +52,6 @@ namespace NegozioStrumentiMusicali
 
         #endregion
         #region Proprietà
-        public ClsStrumentoMusicale StrumentoMusicale { get => _strumentoMusicale; set => _strumentoMusicale = value; }
-        public ClsVendere VendereStrumentoMusicale { get => _vendereStrumentoMusicale; set => _vendereStrumentoMusicale = value; }
         public Program.eMODALITA_ENTRATA_DETAIL ModalitaEntrata { get => _modalitaEntrata; set => _modalitaEntrata = value; }
         public List<ClsCaratteristica> AltreCaratteristicheStrumento { get => _altreCaratteristicheStrumento; set => _altreCaratteristicheStrumento = value; }
         /// <summary>
@@ -223,7 +241,7 @@ namespace NegozioStrumentiMusicali
             if(ModalitaEntrata == Program.eMODALITA_ENTRATA_DETAIL.Modifica ||
                 ModalitaEntrata == Program.eMODALITA_ENTRATA_DETAIL.Visualizzazione)
             {
-                CaricaDati(StrumentoMusicale, VendereStrumentoMusicale);
+                CaricaDati(_strumentoMusicale, _vendereStrumentoMusicale);
             }
 
             //Se sono in modalità visualizzazione disabilito tutti i controlli di input
@@ -233,7 +251,7 @@ namespace NegozioStrumentiMusicali
                 AbilitaControlliGraficiInput(false);
 
                 //Se la vendere è null rendo invisibili prezzo e quantità
-                if(VendereStrumentoMusicale == null)
+                if(_vendereStrumentoMusicale == null)
                 {
                     nudPrezzo.Visible = false;
                     lblPrezzo.Visible = false;
@@ -352,60 +370,62 @@ namespace NegozioStrumentiMusicali
                 if(cbStrumento.SelectedIndex ==
                     Convert.ToInt32(Program.eTIPO_STRUMENTO.Batteria))
                 {
-                    StrumentoMusicale = new ClsBatteria();
-                    _formDaAprire = new FrmBatteria(ModalitaEntrata, (ClsBatteria)StrumentoMusicale);
+                    //Gli passo la variabile di dettagli per evitare che quando si riapre la form delle info specifiche perdo i dati
+                    _formDaAprire = new FrmBatteria(ModalitaEntrata, _dettagliBatteria);
                 }
                 else if(cbStrumento.SelectedIndex ==
                     Convert.ToInt32(Program.eTIPO_STRUMENTO.Legno))
                 {
-
+                    _formDaAprire = new FrmLegno(ModalitaEntrata, _dettagliLegno);
                 }
                 else if(cbStrumento.SelectedIndex ==
                     Convert.ToInt32(Program.eTIPO_STRUMENTO.Ottone))
                 {
-                    StrumentoMusicale = new ClsOttone();
-                    _formDaAprire = new FrmOttone(ModalitaEntrata, (ClsOttone)StrumentoMusicale);
+                    _formDaAprire = new FrmOttone(ModalitaEntrata, _dettagliOttone);
                 }
                 else if(cbStrumento.SelectedIndex ==
                     Convert.ToInt32(Program.eTIPO_STRUMENTO.Pianoforte))
                 {
-                    StrumentoMusicale = new ClsPianoforte();
-                    _formDaAprire = new FrmPianoforte(ModalitaEntrata, (ClsPianoforte)StrumentoMusicale);
+                    _formDaAprire = new FrmPianoforte(ModalitaEntrata, _dettagliPianoforte);
                 }
                 else if(cbStrumento.SelectedIndex ==
                     Convert.ToInt32(Program.eTIPO_STRUMENTO.Strumento_a_corda))
                 {
-                    StrumentoMusicale = new ClsStrumentoACorda();
-                    _formDaAprire = new FrmStrumentoACorda(ModalitaEntrata, (ClsStrumentoACorda)StrumentoMusicale);
+                    _formDaAprire = new FrmStrumentoACorda(ModalitaEntrata, _dettagliStrumentoACorda);
                 }
             }
             else if(ModalitaEntrata == Program.eMODALITA_ENTRATA_DETAIL.Modifica
                 || ModalitaEntrata == Program.eMODALITA_ENTRATA_DETAIL.Visualizzazione)
             {
                 //Controllo di che tipo è lo strumento passato a questa form
-                if(StrumentoMusicale is ClsBatteria)
+                if(_strumentoMusicale is ClsBatteria)
                 {
-                    _formDaAprire = new FrmBatteria(ModalitaEntrata, (ClsBatteria)StrumentoMusicale);
+                    _formDaAprire = new FrmBatteria(ModalitaEntrata, (ClsBatteria)_strumentoMusicale);
                 }
-                else if(StrumentoMusicale is ClsLegno)
+                else if(_strumentoMusicale is ClsLegno)
                 {
-
+                    _formDaAprire = new FrmLegno(ModalitaEntrata, (ClsLegno)_strumentoMusicale);
                 }
-                else if(StrumentoMusicale is ClsOttone)
+                else if(_strumentoMusicale is ClsOttone)
                 {
-                    _formDaAprire = new FrmOttone(ModalitaEntrata, (ClsOttone)StrumentoMusicale);
+                    _formDaAprire = new FrmOttone(ModalitaEntrata, (ClsOttone)_strumentoMusicale);
                 }
-                else if(StrumentoMusicale is ClsPianoforte)
+                else if(_strumentoMusicale is ClsPianoforte)
                 {
-                    _formDaAprire = new FrmPianoforte(ModalitaEntrata, (ClsPianoforte)StrumentoMusicale);
+                    _formDaAprire = new FrmPianoforte(ModalitaEntrata, (ClsPianoforte)_strumentoMusicale);
                 }
-                else if(StrumentoMusicale is ClsStrumentoACorda)
+                else if(_strumentoMusicale is ClsStrumentoACorda)
                 {
-                    _formDaAprire = new FrmStrumentoACorda(ModalitaEntrata, (ClsStrumentoACorda)StrumentoMusicale);
+                    _formDaAprire = new FrmStrumentoACorda(ModalitaEntrata, (ClsStrumentoACorda)_strumentoMusicale);
                 }
             }
 
             _formDaAprire.ShowDialog(this);
+        }
+
+        private void FrmStrumentoMusicale_FormClosing(object sender, FormClosingEventArgs e)
+        {
+
         }
     }
 }

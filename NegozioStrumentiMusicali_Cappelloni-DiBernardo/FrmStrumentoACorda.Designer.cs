@@ -73,6 +73,7 @@
             this.label21 = new System.Windows.Forms.Label();
             this.tbLunghezzaTotale = new System.Windows.Forms.TextBox();
             this.btnSalva = new System.Windows.Forms.Button();
+            this.btnAnnulla = new System.Windows.Forms.Button();
             this.pnlCorde.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudCorde)).BeginInit();
             this.pnlManico.SuspendLayout();
@@ -587,12 +588,24 @@
             this.btnSalva.TabIndex = 18;
             this.btnSalva.Text = "Salva";
             this.btnSalva.UseVisualStyleBackColor = true;
+            this.btnSalva.Click += new System.EventHandler(this.btnSalva_Click);
+            // 
+            // btnAnnulla
+            // 
+            this.btnAnnulla.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAnnulla.Location = new System.Drawing.Point(606, 451);
+            this.btnAnnulla.Name = "btnAnnulla";
+            this.btnAnnulla.Size = new System.Drawing.Size(105, 29);
+            this.btnAnnulla.TabIndex = 19;
+            this.btnAnnulla.Text = "Annulla";
+            this.btnAnnulla.UseVisualStyleBackColor = true;
             // 
             // FrmStrumentoACorda
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(834, 487);
+            this.Controls.Add(this.btnAnnulla);
             this.Controls.Add(this.btnSalva);
             this.Controls.Add(this.tbLunghezzaTotale);
             this.Controls.Add(this.label21);
@@ -673,5 +686,6 @@
         private System.Windows.Forms.TextBox tbLunghezzaTotale;
         private System.Windows.Forms.Button btnSalva;
         private System.Windows.Forms.NumericUpDown nudCorde;
+        private System.Windows.Forms.Button btnAnnulla;
     }
 }
