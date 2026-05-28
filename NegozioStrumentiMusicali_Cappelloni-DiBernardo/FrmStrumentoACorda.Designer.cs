@@ -59,7 +59,7 @@
             this.nudLunghezzaCorpo = new System.Windows.Forms.NumericUpDown();
             this.label16 = new System.Windows.Forms.Label();
             this.pnlTastiera = new System.Windows.Forms.Panel();
-            this.label17 = new System.Windows.Forms.Label();
+            this.lblTasti = new System.Windows.Forms.Label();
             this.nudTasti = new System.Windows.Forms.NumericUpDown();
             this.label11 = new System.Windows.Forms.Label();
             this.pnlPickup = new System.Windows.Forms.Panel();
@@ -432,7 +432,7 @@
             // 
             // pnlTastiera
             // 
-            this.pnlTastiera.Controls.Add(this.label17);
+            this.pnlTastiera.Controls.Add(this.lblTasti);
             this.pnlTastiera.Controls.Add(this.nudTasti);
             this.pnlTastiera.Controls.Add(this.label11);
             this.pnlTastiera.Controls.Add(this.label10);
@@ -442,15 +442,15 @@
             this.pnlTastiera.Size = new System.Drawing.Size(266, 158);
             this.pnlTastiera.TabIndex = 16;
             // 
-            // label17
+            // lblTasti
             // 
-            this.label17.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label17.Location = new System.Drawing.Point(3, 87);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(258, 20);
-            this.label17.TabIndex = 15;
-            this.label17.Text = "Tasti";
-            this.label17.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblTasti.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTasti.Location = new System.Drawing.Point(3, 87);
+            this.lblTasti.Name = "lblTasti";
+            this.lblTasti.Size = new System.Drawing.Size(258, 20);
+            this.lblTasti.TabIndex = 15;
+            this.lblTasti.Text = "Tasti";
+            this.lblTasti.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // nudTasti
             // 
@@ -659,7 +659,7 @@
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.Panel pnlTastiera;
         private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.Label lblTasti;
         private System.Windows.Forms.NumericUpDown nudTasti;
         private System.Windows.Forms.Panel pnlPickup;
         private System.Windows.Forms.Label label18;

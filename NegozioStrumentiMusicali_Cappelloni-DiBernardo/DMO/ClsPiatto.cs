@@ -39,7 +39,21 @@ namespace NegozioStrumentiMusicali
         /// <summary>
         /// IN sta per inches (ovvero pollici)
         /// </summary>
-        public byte DiametroIN { get => _diametroIN; set => _diametroIN = value; }
+        public byte DiametroIN
+        {
+            get => _diametroIN;
+            set
+            {
+                if(value <= 0)
+                {
+                    throw new Exception("Diametro del piatto minore o uguale a 0");
+                }
+                else
+                {
+                    _diametroIN = value;
+                }
+            }
+        }
         public eMATERIALE Materiale { get => _materiale; set => _materiale = value; }
 
         #endregion

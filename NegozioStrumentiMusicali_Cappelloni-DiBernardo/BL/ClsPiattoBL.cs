@@ -151,6 +151,25 @@ namespace NegozioStrumentiMusicali
                 connection.Close();
             }
         }
+        private static  ClsPiatto CaricaSingoloPiatto(ref MySqlDataReader dataReader)
+        {
+            ClsPiatto _piatto = new ClsPiatto();
+
+            _piatto.Tipo = (ClsPiatto.eTIPO)Enum.Parse
+            (
+                typeof(ClsPiatto.eTIPO),
+                dataReader["tipo"].ToString()
+            );
+            _piatto.ID = Convert.ToInt64(dataReader["ID"]);
+            _piatto.Materiale = (ClsPiatto.eMATERIALE)Enum.Parse
+            (
+                typeof(ClsPiatto.eMATERIALE),
+                dataReader["materiale"].ToString()
+            );
+            _piatto.DiametroIN = Convert.ToByte(dataReader["diametroin"]);
+
+            return _piatto;
+        }
         /// <summary>
         /// Caricamento di tutti i record di piatti
         /// </summary>
@@ -205,21 +224,7 @@ namespace NegozioStrumentiMusicali
                 {
                     while(_dataReader.Read()) //Se ce li ha li leggo tutti
                     {
-                        ClsPiatto _piatto = new ClsPiatto();
-                        _piatto.ID = Convert.ToInt64(_dataReader["ID"]);
-                        _piatto.Materiale = (ClsPiatto.eMATERIALE)Enum.Parse
-                        (
-                            typeof(ClsPiatto.eMATERIALE), 
-                            _dataReader["materiale"].ToString()
-                        );
-                        _piatto.Tipo = (ClsPiatto.eTIPO)Enum.Parse
-                        (
-                            typeof(ClsPiatto.eTIPO),
-                            _dataReader["tipo"].ToString()
-                        );
-                        _piatto.DiametroIN = Convert.ToByte(_dataReader["diametroin"]);
-
-                        _piatti.Add(_piatto);
+                        _piatti.Add(CaricaSingoloPiatto(ref _dataReader));
                     }
                 }
 
@@ -238,6 +243,55 @@ namespace NegozioStrumentiMusicali
             }
 
             return _piatti;
+        }
+        public static ClsPiatto GetOnePiatto(string stringaDiConnessione, long ID, out string comunicazione)
+        {
+            //VARIABILI
+            comunicazione = String.Empty;
+            ClsPiatto _piatto = new ClsPiatto();
+            MySqlConnection _connection = new MySqlConnection(stringaDiConnessione);
+
+            try
+            {
+                //Apro la connessione
+                _connection.Open();
+
+                //Compongo la query
+                string _query = "SELECT * FROM piatti WHERE ID = @ID";
+
+                //Creo il comando
+                MySqlCommand _cmd = new MySqlCommand(_query, _connection);
+
+                //Imposto i parametri del comando
+                _cmd.Parameters.AddWithValue("@ID", ID);
+
+                //Eseguo il comando creando il DataReader
+                MySqlDataReader _dataReader = _cmd.ExecuteReader();
+
+                if(_dataReader.HasRows) //Controllo se la query ha restituito dei record
+                {
+                    while(_dataReader.Read()) //Se ne ha, li carico tutti
+                    {
+                        _piatto = CaricaSingoloPiatto(ref _dataReader);
+                    }
+                }
+
+                _dataReader.Close();
+
+                comunicazione = "Piatto caricato correttamente dal DataBase";
+            }
+            catch(Exception ex)
+            {
+                comunicazione = ex.Message;
+                _piatto = null;
+            }
+            finally
+            {
+                //Chiudo la connessione
+                _connection.Close();
+            }
+
+            return _piatto;
         }
     }
 }

@@ -248,5 +248,54 @@ namespace NegozioStrumentiMusicali
 
             return _tamburi;
         }
+        public static ClsTamburo GetOneTamburo(string stringaDiConnessione, long ID, out string comunicazione)
+        {
+            //VARIABILI
+            comunicazione = String.Empty;
+            ClsTamburo _tamburo = new ClsTamburo();
+            MySqlConnection _connection = new MySqlConnection(stringaDiConnessione);
+
+            try
+            {
+                //Apro la connessione
+                _connection.Open();
+
+                //Compongo la query
+                string _query = "SELECT * FROM tamburi WHERE ID = @ID";
+
+                //Creo il comando
+                MySqlCommand _cmd = new MySqlCommand(_query, _connection);
+
+                //Imposto i parametri del comando
+                _cmd.Parameters.AddWithValue("@ID", ID);
+
+                //Eseguo il comando creando il DataReader
+                MySqlDataReader _dataReader = _cmd.ExecuteReader();
+
+                if(_dataReader.HasRows) //Controllo se la query ha restituito dei record
+                {
+                    while(_dataReader.Read()) //Se ne ha restiuiti, li leggo tutti
+                    {
+                        _tamburo = CaricaSingoloTamburo(ref _dataReader);
+                    }
+                }
+
+                _dataReader.Close();
+
+                comunicazione = "Tamburo caricato correttamente dal DataBase";
+            }
+            catch(Exception ex)
+            {
+                comunicazione = ex.Message;
+                _tamburo = null;
+            }
+            finally
+            {
+                //Chiudo la connessione
+                _connection.Close();
+            }
+
+            return _tamburo;
+        }
     }
 }
