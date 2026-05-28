@@ -16,7 +16,7 @@ namespace NegozioStrumentiMusicali
     public partial class FrmStrumentoACorda : Form
     {
         #region Variabili
-        private ClsStrumentoACorda _strumentoACorda = new ClsStrumentoACorda();
+        public ClsStrumentoACorda _strumentoACorda;
         private Program.eMODALITA_ENTRATA_DETAIL _modalitaEntrata;
         /// <summary>
         /// Backup del dato di cbPickup1 in caso di cambio strumento
@@ -37,7 +37,6 @@ namespace NegozioStrumentiMusicali
 
         #endregion
         #region Proprietà
-        public ClsStrumentoACorda StrumentoACorda { get => _strumentoACorda; set => _strumentoACorda = value; }
         public Program.eMODALITA_ENTRATA_DETAIL ModalitaEntrata { get => _modalitaEntrata; set => _modalitaEntrata = value; }
 
         #endregion
@@ -107,7 +106,7 @@ namespace NegozioStrumentiMusicali
             InitializeComponent();
 
             ModalitaEntrata = modalitaEntrata;
-            StrumentoACorda = strumentoACorda;
+            _strumentoACorda = strumentoACorda;
 
             //Popolo le varie combobox
             cbMaterialeCorde.DataSource = Enum.GetNames(typeof(ClsStrumentoACorda.eMATERIALE_CORDE));
@@ -138,12 +137,7 @@ namespace NegozioStrumentiMusicali
                 AbilitaControlliGraficiInput(false);
             }
 
-            //Carico i dati dello strumento a corda se sono in modalità visualizzazione o modifica
-            if(ModalitaEntrata == Program.eMODALITA_ENTRATA_DETAIL.Modifica
-                || ModalitaEntrata == Program.eMODALITA_ENTRATA_DETAIL.Visualizzazione)
-            {
-                CaricaDati(StrumentoACorda);
-            }
+            CaricaDati(_strumentoACorda);
         }
 
         private void cbStrumento_SelectedIndexChanged(object sender, EventArgs e)
@@ -219,6 +213,68 @@ namespace NegozioStrumentiMusicali
                     lblTasti.Visible = false;
                 }
                 nudTasti.Value = Convert.ToDecimal(_tasti);
+            }
+        }
+
+        private void btnSalva_Click(object sender, EventArgs e)
+        {
+            if(ClsArchivio.UtenteAttuale.AdminSoftware)
+            {
+                DialogResult _dr =
+                    MessageBox.Show("Sei sicur* di voler salvare ed uscire?", "SALVA", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+
+                if(_dr == DialogResult.Yes)
+                {
+                    //Salvo i dati se l'utente è admin software
+                    try
+                    {
+                        _strumentoACorda.Strumento =
+                            (ClsStrumentoACorda.eSTRUMENTI_A_CORDA)cbStrumento.SelectedIndex;
+                        _strumentoACorda.AmpiezzaCorpoCM = Convert.ToSingle(nudAmpiezzaCorpo.Value);
+                        _strumentoACorda.AmpiezzaManicoCM = Convert.ToSingle(nudAmpiezzaManico.Value);
+                        _strumentoACorda.LunghezzaCorpoCM = Convert.ToSingle(nudLunghezzaCorpo.Value);
+                        _strumentoACorda.LunghezzaManicoCM = Convert.ToSingle(nudLunghezzaManico.Value);
+                        _strumentoACorda.MaterialeCorde =
+                            (ClsStrumentoACorda.eMATERIALE_CORDE)cbMaterialeCorde.SelectedIndex;
+                        _strumentoACorda.MaterialeCorpo =
+                            (Program.eLEGNO)cbMaterialeCorpo.SelectedIndex;
+                        _strumentoACorda.MaterialeManico =
+                            (Program.eLEGNO)cbMaterialeManico.SelectedIndex;
+                        _strumentoACorda.MaterialeTastiera =
+                            (Program.eLEGNO)cbMaterialeTastiera.SelectedIndex;
+                        _strumentoACorda.NumeroCorde = Convert.ToUInt16(nudCorde.Value);
+                        _strumentoACorda.Pickup1 =
+                            (ClsStrumentoACorda.ePICKUP)cbPickup1.SelectedIndex;
+                        _strumentoACorda.Pickup2 =
+                            (ClsStrumentoACorda.ePICKUP)cbPickup2.SelectedIndex;
+                        _strumentoACorda.Pickup3 =
+                            (ClsStrumentoACorda.ePICKUP)cbPickup3.SelectedIndex;
+                        _strumentoACorda.SpessoreCorpoCM = Convert.ToSingle(nudSpessoreCorpo.Value);
+                        _strumentoACorda.SpessoreManicoCM = Convert.ToSingle(nudSpessoreManico.Value);
+                        if (nudTasti.Enabled == false)
+                        {
+                            //Tasti null
+                            _strumentoACorda.Tasti = -1;
+                        }
+                        else
+                        {
+                            _strumentoACorda.Tasti = Convert.ToSByte(nudTasti.Value);
+                        }
+
+                        MessageBox.Show("Dati salvati con successo", "SALVA", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                        this.Close();
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Errore nel salvataggio dei dati:\r\n" + ex, "SALVA", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("Solo gli amministratori del software possono modificare le specifiche degli strumenti musicali",
+                    "SALVA", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
         }
     }

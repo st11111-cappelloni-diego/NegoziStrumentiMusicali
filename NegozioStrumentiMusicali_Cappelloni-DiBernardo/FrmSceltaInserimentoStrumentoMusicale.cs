@@ -284,10 +284,10 @@ namespace NegozioStrumentiMusicali
 
             //Istanzio ClsStrumentoMusicale e ClsVendere nelle form
             StrumentoMusicale = new ClsStrumentoMusicale();
-            _frmStrumentoMusicale.StrumentoMusicale = StrumentoMusicale;
+            _frmStrumentoMusicale._strumentoMusicale = StrumentoMusicale;
             VendereStrumentoMusicale = new ClsVendere();
             VendereStrumentoMusicale.NegozioID = IDNegozioSelezionato;
-            _frmStrumentoMusicale.VendereStrumentoMusicale = VendereStrumentoMusicale;
+            _frmStrumentoMusicale._vendereStrumentoMusicale = VendereStrumentoMusicale;
 
             _frmStrumentoMusicale.UtenteGestisceNegozioAttuale = UtenteGestisceNegozio;
 
@@ -309,12 +309,12 @@ namespace NegozioStrumentiMusicali
 
                 //Gli passo lo strumento da visualizzare
                 ClsStrumentoMusicale _strumentoDaVisualizzare = (ClsStrumentoMusicale)lvStrumentiMusicali.SelectedItems[0].Tag;
-                _frmStrumentoMusicale.StrumentoMusicale = _strumentoDaVisualizzare;
+                _frmStrumentoMusicale._strumentoMusicale = _strumentoDaVisualizzare;
 
                 //Cambio il testo della form
                 _frmStrumentoMusicale.Text = "Visualizza strumento musicale";
 
-                _frmStrumentoMusicale.VendereStrumentoMusicale = null;
+                _frmStrumentoMusicale._vendereStrumentoMusicale = null;
 
                 //Metto come modalità di entrata 'visualizzazione'
                 _frmStrumentoMusicale.ModalitaEntrata = Program.eMODALITA_ENTRATA_DETAIL.Visualizzazione;

@@ -406,12 +406,12 @@ namespace NegozioStrumentiMusicali
 
                 //Gli passo lo strumento da modificare
                 ClsStrumentoMusicale _strumentoDaModificare = (ClsStrumentoMusicale)lvStrumenti.SelectedItems[0].Tag;
-                _frmStrumentoMusicale.StrumentoMusicale = _strumentoDaModificare;
+                _frmStrumentoMusicale._strumentoMusicale = _strumentoDaModificare;
 
                 //Trovo la vendere dello strumento e la passo alla form
                 ClsVendere _vendereStrumentoDaModificare =
                     ListaVendereNegozioSelezionato.FirstOrDefault(v => v.StrumentoMusicaleID == _strumentoDaModificare.ID);
-                _frmStrumentoMusicale.VendereStrumentoMusicale = _vendereStrumentoDaModificare;
+                _frmStrumentoMusicale._vendereStrumentoMusicale = _vendereStrumentoDaModificare;
 
                 _frmStrumentoMusicale.UtenteGestisceNegozioAttuale = UtenteGestisceNegozioSelezionato;
 
@@ -443,12 +443,12 @@ namespace NegozioStrumentiMusicali
 
                 //Gli passo lo strumento da visualizzare
                 ClsStrumentoMusicale _strumentoDaVisualizzare = (ClsStrumentoMusicale)lvStrumenti.SelectedItems[0].Tag;
-                _frmStrumentoMusicale.StrumentoMusicale = _strumentoDaVisualizzare;
+                _frmStrumentoMusicale._strumentoMusicale = _strumentoDaVisualizzare;
 
                 //Trovo la vendere dello strumento e la passo alla form
                 ClsVendere _vendereStrumentoDaVisualizzare =
                     ListaVendereNegozioSelezionato.FirstOrDefault(v => v.StrumentoMusicaleID == _strumentoDaVisualizzare.ID);
-                _frmStrumentoMusicale.VendereStrumentoMusicale = _vendereStrumentoDaVisualizzare;
+                _frmStrumentoMusicale._vendereStrumentoMusicale = _vendereStrumentoDaVisualizzare;
 
                 //Cambio il testo della form
                 _frmStrumentoMusicale.Text = "Visualizza strumento musicale";
