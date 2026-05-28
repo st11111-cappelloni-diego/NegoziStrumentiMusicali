@@ -25,8 +25,6 @@ namespace NegozioStrumentiMusicali
         private async void CaricaDati(bool ordinaPerPiuRecente, int limiteRecord)
         {
             string _comunicazioneNoteMusicali = String.Empty;
-            string _comunicazioneTamburi = String.Empty;
-            string _comunicazionePiatti = String.Empty;
             string _comunicazione = String.Empty;
             await Task.WhenAll
             (
@@ -34,14 +32,6 @@ namespace NegozioStrumentiMusicali
                 Task.Run
                 (() =>
                     ClsArchivio.NoteMusicali = ClsNotaMusicaleBL.GetAllNoteMusicali(Program._connectionString, false, out _comunicazioneNoteMusicali)
-                ),
-                Task.Run
-                (() =>
-                    ClsArchivio.Tamburi = ClsTamburoBL.GetAllTamburi(Program._connectionString, ordinaPerPiuRecente, out _comunicazioneTamburi, limiteRecord)
-                ),
-                Task.Run
-                (() =>
-                    ClsArchivio.Piatti = ClsPiattoBL.GetAllPiatti(Program._connectionString, ordinaPerPiuRecente, out _comunicazionePiatti, limiteRecord)
                 ),
                 Task.Run
                 (() =>
