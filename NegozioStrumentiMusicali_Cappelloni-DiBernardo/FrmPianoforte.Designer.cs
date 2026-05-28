@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.label5 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
+            this.lblMaterialeCorpo = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.nudNumeroTasti = new System.Windows.Forms.NumericUpDown();
             this.label2 = new System.Windows.Forms.Label();
@@ -67,17 +67,17 @@
             this.label5.Text = "Altezza (cm)";
             this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // label4
+            // lblMaterialeCorpo
             // 
-            this.label4.BackColor = System.Drawing.Color.Transparent;
-            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.ForeColor = System.Drawing.Color.Black;
-            this.label4.Location = new System.Drawing.Point(416, 9);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(341, 23);
-            this.label4.TabIndex = 19;
-            this.label4.Text = "Materiale Corpo PF Acustico\r\n";
-            this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblMaterialeCorpo.BackColor = System.Drawing.Color.Transparent;
+            this.lblMaterialeCorpo.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblMaterialeCorpo.ForeColor = System.Drawing.Color.Black;
+            this.lblMaterialeCorpo.Location = new System.Drawing.Point(416, 9);
+            this.lblMaterialeCorpo.Name = "lblMaterialeCorpo";
+            this.lblMaterialeCorpo.Size = new System.Drawing.Size(341, 23);
+            this.lblMaterialeCorpo.TabIndex = 19;
+            this.lblMaterialeCorpo.Text = "Materiale Corpo PF Acustico\r\n";
+            this.lblMaterialeCorpo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label3
             // 
@@ -310,7 +310,7 @@
             this.Controls.Add(this.label7);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
-            this.Controls.Add(this.label4);
+            this.Controls.Add(this.lblMaterialeCorpo);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.nudNumeroTasti);
             this.Controls.Add(this.label2);
@@ -331,7 +331,7 @@
 
         #endregion
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label lblMaterialeCorpo;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.NumericUpDown nudNumeroTasti;
         private System.Windows.Forms.Label label2;
