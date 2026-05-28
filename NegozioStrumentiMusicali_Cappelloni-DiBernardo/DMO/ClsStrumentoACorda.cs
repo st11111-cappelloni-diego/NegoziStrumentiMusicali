@@ -206,7 +206,7 @@ namespace NegozioStrumentiMusicali
         public Program.eLEGNO MaterialeManico { get => _materialeManico; set => _materialeManico = value; }
         public Program.eLEGNO MaterialeTastiera { get => _materialeTastiera; set => _materialeTastiera = value; }
 	    ///<summary>
-	    ///Proprietà NON utilizzata per: Contrabbasso, Viola, Violino, Violoncello. In questi casi l'attributo testi è -1
+	    ///Proprietà NON utilizzata per: Contrabbasso, Viola, Violino, Violoncello. In questi casi l'attributo tasti è -1
 	    ///</summary>
 	    public sbyte Tasti
 	    {

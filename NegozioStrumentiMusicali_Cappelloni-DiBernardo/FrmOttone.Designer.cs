@@ -71,7 +71,6 @@
             this.cbStrumento.Name = "cbStrumento";
             this.cbStrumento.Size = new System.Drawing.Size(418, 28);
             this.cbStrumento.TabIndex = 2;
-            this.cbStrumento.SelectedIndexChanged += new System.EventHandler(this.cbStrumento_SelectedIndexChanged);
             // 
             // label2
             // 
@@ -162,6 +161,7 @@
             this.btnSalva.TabIndex = 19;
             this.btnSalva.Text = "Salva";
             this.btnSalva.UseVisualStyleBackColor = true;
+            this.btnSalva.Click += new System.EventHandler(this.btnSalva_Click);
             // 
             // label6
             // 

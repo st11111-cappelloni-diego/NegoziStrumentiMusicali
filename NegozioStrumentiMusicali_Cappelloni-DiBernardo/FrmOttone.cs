@@ -16,12 +16,11 @@ namespace NegozioStrumentiMusicali
     public partial class FrmOttone : Form
     {
         #region Variabili
-        private ClsOttone _ottone = new ClsOttone();
+        private ClsOttone _ottone;
         private Program.eMODALITA_ENTRATA_DETAIL _modalitaEntrata;
 
         #endregion
         #region Proprietà
-        public ClsOttone Ottone { get => _ottone; set => _ottone = value; }
         public Program.eMODALITA_ENTRATA_DETAIL ModalitaEntrata { get => _modalitaEntrata; set => _modalitaEntrata = value; }
 
         #endregion
@@ -30,9 +29,30 @@ namespace NegozioStrumentiMusicali
         {
             cbStrumento.SelectedIndex = Convert.ToInt32(ottone.Strumento);
 
-            nudAltezza.Value = Convert.ToDecimal(ottone.AltezzaCM);
-            nudLarghezza.Value = Convert.ToDecimal(ottone.LarghezzaCM);
-            nudLunghezza.Value = Convert.ToDecimal(ottone.LunghezzaCM);
+            if(ottone.AltezzaCM <= 0)
+            {
+                nudAltezza.Value = nudAltezza.Minimum;
+            }
+            else
+            {
+                nudAltezza.Value = Convert.ToDecimal(ottone.AltezzaCM);
+            }
+            if (ottone.LarghezzaCM <= 0)
+            {
+                nudLarghezza.Value = nudLarghezza.Minimum;
+            }
+            else
+            {
+                nudLarghezza.Value = Convert.ToDecimal(ottone.LarghezzaCM);
+            }
+            if (ottone.LarghezzaCM <= 0)
+            {
+                nudLunghezza.Value = nudLunghezza.Minimum;
+            }
+            else
+            {
+                nudLunghezza.Value = Convert.ToDecimal(ottone.LunghezzaCM);
+            }
 
             cbLaccatura.SelectedIndex = Convert.ToInt32(ottone.Laccatura);
             cbMaterialeBocchino.SelectedIndex = Convert.ToInt32(ottone.MaterialeBocchino);
@@ -78,7 +98,7 @@ namespace NegozioStrumentiMusicali
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
 
-            Ottone = ottone;
+            _ottone = ottone;
             ModalitaEntrata = modalitaEntrata;
         }
 
@@ -96,17 +116,53 @@ namespace NegozioStrumentiMusicali
                 AbilitaControlliGraficiDiInput(false);
             }
 
-            //Carico i dati se sono in modalità modifica o visualizzazione
-            if(ModalitaEntrata == Program.eMODALITA_ENTRATA_DETAIL.Modifica
-                || ModalitaEntrata == Program.eMODALITA_ENTRATA_DETAIL.Visualizzazione)
-            {
-                CaricaDati(Ottone);
-            }
+            CaricaDati(_ottone);
+ 
         }
 
-        private void cbStrumento_SelectedIndexChanged(object sender, EventArgs e)
+        private void btnSalva_Click(object sender, EventArgs e)
         {
-            
+            if (ClsArchivio.UtenteAttuale.AdminSoftware)
+            {
+                DialogResult _dr =
+                    MessageBox.Show("Sei sicur* di voler salvare ed uscire?", "SALVA", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+
+                if (_dr == DialogResult.Yes)
+                {
+                    //Salvo i dati se l'utente è admin software
+                    try
+                    {
+                        _ottone.Strumento =
+                            (ClsOttone.eOTTONI)cbStrumento.SelectedIndex;
+                        _ottone.AltezzaCM = Convert.ToSingle(nudAltezza.Value);
+                        _ottone.LarghezzaCM = Convert.ToSingle(nudLarghezza.Value);
+                        _ottone.LunghezzaCM = Convert.ToSingle(nudLunghezza.Value);
+                        _ottone.Laccatura =
+                            (ClsOttone.eTIPO_LACCATURA)cbLaccatura.SelectedIndex;
+                        _ottone.MaterialeCorpo =
+                            (ClsOttone.eTIPO_OTTONE)cbMaterialeCorpo.SelectedIndex;
+                        _ottone.MaterialeBocchino =
+                            (ClsOttone.eMATERIALE_BOCCHINO)cbMaterialeBocchino.SelectedIndex;
+                        _ottone.Placcatura =
+                            (ClsOttone.eTIPO_PLACCATURA)cbPlaccatura.SelectedIndex;
+                        _ottone.RivestimentoBocchino =
+                            (ClsOttone.eRIVESTIMENTO_BOCCHINO)cbRivestimentoBocchino.SelectedIndex;
+
+                        MessageBox.Show("Dati salvati con successo", "SALVA", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                        this.Close();
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Errore nel salvataggio dei dati:\r\n" + ex, "SALVA", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("Solo gli amministratori del software possono modificare le specifiche degli strumenti musicali",
+                    "SALVA", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
         }
     }
 }

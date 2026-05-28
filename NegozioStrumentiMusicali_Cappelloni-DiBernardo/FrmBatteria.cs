@@ -297,12 +297,7 @@ namespace NegozioStrumentiMusicali
 
         private void FrmBatteria_Load(object sender, EventArgs e)
         {
-            //Carico i dati se la modalità della form è visualizzazione o modifica
-            if(ModalitaEntrata == Program.eMODALITA_ENTRATA_DETAIL.Visualizzazione
-                || ModalitaEntrata == Program.eMODALITA_ENTRATA_DETAIL.Modifica)
-            {
-                CaricaDati(Batteria);
-            }
+            CaricaDati(Batteria);
 
             //Se l'utente attuale è admin software e sono in modalità modifica o inserimento
             //Abilito i controlli grafici di input
