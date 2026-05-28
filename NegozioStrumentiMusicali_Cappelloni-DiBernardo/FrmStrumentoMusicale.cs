@@ -94,6 +94,32 @@ namespace NegozioStrumentiMusicali
         }
         private void CaricaDati(ClsStrumentoMusicale strumentoMusicale, ClsVendere vendereStrumento)
         {
+            //cbStrumento: Carico la famiglia di strumenti in base a come è il tipo di strumento
+            if (strumentoMusicale is ClsBatteria)
+            {
+                cbStrumento.SelectedIndex = Convert.ToInt32(Program.eTIPO_STRUMENTO.Batteria);
+            }
+            else if (strumentoMusicale is ClsLegno)
+            {
+                cbStrumento.SelectedIndex = Convert.ToInt32(Program.eTIPO_STRUMENTO.Legno);
+            }
+            else if (strumentoMusicale is ClsOttone)
+            {
+                cbStrumento.SelectedIndex = Convert.ToInt32(Program.eTIPO_STRUMENTO.Ottone);
+            }
+            else if (strumentoMusicale is ClsPianoforte)
+            {
+                cbStrumento.SelectedIndex = Convert.ToInt32(Program.eTIPO_STRUMENTO.Pianoforte);
+            }
+            else if (strumentoMusicale is ClsStrumentoACorda)
+            {
+                cbStrumento.SelectedIndex = Convert.ToInt32(Program.eTIPO_STRUMENTO.Strumento_a_corda);
+            }
+            else
+            {
+                cbStrumento.SelectedIndex = 0;
+            }
+
             tbColori.Text = strumentoMusicale.Colori;
 
             tbModello.Text = strumentoMusicale.Modello;
@@ -137,7 +163,6 @@ namespace NegozioStrumentiMusicali
                 cbNotaMinima.Enabled = false;
             }
 
-            nudID.Enabled = true;
             nudID.Value = strumentoMusicale.ID;
             nudID.Enabled = false; //L'ID non è modificabile ne inseribile
 
@@ -152,32 +177,6 @@ namespace NegozioStrumentiMusicali
             {
                 nudPrezzo.Value = nudPrezzo.Minimum;
                 nudQuantita.Value = nudQuantita.Minimum;
-            }
-
-            //cbStrumento: Carico la famiglia di strumenti in base a come è il tipo di strumento
-            if(strumentoMusicale is ClsBatteria)
-            {
-                cbStrumento.SelectedIndex = Convert.ToInt32(Program.eTIPO_STRUMENTO.Batteria);                
-            }
-            else if(strumentoMusicale is ClsLegno)
-            {
-                cbStrumento.SelectedIndex = Convert.ToInt32(Program.eTIPO_STRUMENTO.Legno);
-            }
-            else if(strumentoMusicale is ClsOttone)
-            {
-                cbStrumento.SelectedIndex = Convert.ToInt32(Program.eTIPO_STRUMENTO.Ottone);
-            }
-            else if(strumentoMusicale is ClsPianoforte)
-            {
-                cbStrumento.SelectedIndex = Convert.ToInt32(Program.eTIPO_STRUMENTO.Pianoforte);
-            }
-            else if(strumentoMusicale is ClsStrumentoACorda)
-            {
-                cbStrumento.SelectedIndex = Convert.ToInt32(Program.eTIPO_STRUMENTO.Strumento_a_corda);
-            }
-            else
-            {
-                cbStrumento.SelectedIndex = 0;
             }
         }
         private void AbilitaControlliGraficiInput(bool controlliAbilitati)
@@ -207,6 +206,8 @@ namespace NegozioStrumentiMusicali
             PopolaComboBox(cbCasaProduttrice, ClsArchivio.CaseProduttrici);
 
             nudID.Enabled = false;
+            nudID.Minimum = 0;
+            nudID.Maximum = Convert.ToDecimal(long.MaxValue);
 
             nudPrezzo.Maximum = 9999999999.99m;
             nudPrezzo.Minimum = 0.01m;
@@ -230,6 +231,22 @@ namespace NegozioStrumentiMusicali
             if(ModalitaEntrata == Program.eMODALITA_ENTRATA_DETAIL.Visualizzazione)
             {
                 AbilitaControlliGraficiInput(false);
+
+                //Se la vendere è null rendo invisibili prezzo e quantità
+                if(VendereStrumentoMusicale == null)
+                {
+                    nudPrezzo.Visible = false;
+                    lblPrezzo.Visible = false;
+                    nudQuantita.Visible = false;
+                    lblQuantita.Visible = false;
+                }
+                else
+                {
+                    nudPrezzo.Visible = true;
+                    lblPrezzo.Visible = true;
+                    nudQuantita.Visible = true;
+                    lblQuantita.Visible = true;
+                }
             }
             else
             {
@@ -272,10 +289,12 @@ namespace NegozioStrumentiMusicali
                 cbNotaMassima.SelectedIndex = 0;
                 cbNotaMinima.SelectedIndex = 0;
                 cbNotaMassima.Enabled = false;
+                cbNotaMassima.Visible = false;
+                lblNotaMassima.Visible = false;
                 cbNotaMinima.Enabled = false;
+                cbNotaMinima.Visible = false;
+                lblNotaMinima.Visible = false;
             }
-
-
         }
 
         private void cbStrumento_SelectedIndexChanged(object sender, EventArgs e)
@@ -288,14 +307,37 @@ namespace NegozioStrumentiMusicali
                 cbNotaMassima.SelectedIndex = 0;
                 cbNotaMinima.SelectedIndex = 0;
                 cbNotaMassima.Enabled = false;
+                cbNotaMassima.Visible = false;
+                lblNotaMassima.Visible = false;
                 cbNotaMinima.Enabled = false;
+                cbNotaMinima.Visible = false;
+                lblNotaMinima.Visible = false;
             }
             else
             {
-                cbNotaMinima.SelectedIndex = _indiceNotaMinima; //Ripristino backup
-                cbNotaMassima.SelectedIndex = _indiceNotaMassima;
+                //Ripristino backup
+                if (_indiceNotaMinima >= 0)
+                {
+                    cbNotaMinima.SelectedIndex = _indiceNotaMinima; 
+                }
+                else
+                {
+                    cbNotaMinima.SelectedIndex = 0;
+                }
+                if (_indiceNotaMassima >= 0)
+                {
+                    cbNotaMassima.SelectedIndex = _indiceNotaMassima;
+                }
+                else
+                {
+                    cbNotaMassima.SelectedIndex = 0;
+                }
                 cbNotaMassima.Enabled = true;
+                cbNotaMassima.Visible = true;
+                lblNotaMassima.Visible = true;
                 cbNotaMinima.Enabled = true;
+                cbNotaMinima.Visible = true;
+                lblNotaMinima.Visible = true;
             }
         }
 
@@ -310,7 +352,8 @@ namespace NegozioStrumentiMusicali
                 if(cbStrumento.SelectedIndex ==
                     Convert.ToInt32(Program.eTIPO_STRUMENTO.Batteria))
                 {
-                    
+                    StrumentoMusicale = new ClsBatteria();
+                    _formDaAprire = new FrmBatteria(ModalitaEntrata, (ClsBatteria)StrumentoMusicale);
                 }
                 else if(cbStrumento.SelectedIndex ==
                     Convert.ToInt32(Program.eTIPO_STRUMENTO.Legno))
@@ -342,7 +385,7 @@ namespace NegozioStrumentiMusicali
                 //Controllo di che tipo è lo strumento passato a questa form
                 if(StrumentoMusicale is ClsBatteria)
                 {
-
+                    _formDaAprire = new FrmBatteria(ModalitaEntrata, (ClsBatteria)StrumentoMusicale);
                 }
                 else if(StrumentoMusicale is ClsLegno)
                 {

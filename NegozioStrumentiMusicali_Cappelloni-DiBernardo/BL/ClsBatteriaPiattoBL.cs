@@ -217,21 +217,22 @@ namespace NegozioStrumentiMusicali
         /// Caricamento di alcuni record di batteriapiatto in base a batteriaID o piattoID.
         /// Escludi batteriaID passando come valore -1, escludi piattoID passando come valore -1
         /// </summary>
-        /// <param name="connection"></param>
+        /// <param name="stringaDiConnessione"></param>
         /// <param name="comunicazione"></param>
         /// <param name="batteriaID"></param>
         /// <param name="piattoID"></param>
         /// <returns></returns>
-        public static List<ClsBatteriaPiatto> GetSomeBatteriaPiatto(ref MySqlConnection connection, out string comunicazione, long batteriaID = -1, long piattoID = -1)
+        public static List<ClsBatteriaPiatto> GetSomeBatteriaPiatto(string stringaDiConnessione, out string comunicazione, long batteriaID = -1, long piattoID = -1)
         {
             //VARIABILI
             comunicazione = String.Empty;
             List<ClsBatteriaPiatto> _listaBatteriaPiatto = new List<ClsBatteriaPiatto>();
+            MySqlConnection _connection = new MySqlConnection(stringaDiConnessione);
 
             try
             {
                 //Apro la connessione
-                connection.Open();
+                _connection.Open();
 
                 //Compongo la query
                 string _query = "SELECT * FROM batteriapiatto WHERE ";
@@ -249,7 +250,7 @@ namespace NegozioStrumentiMusicali
                 }
 
                 //Creo l'oggetto command
-                MySqlCommand _cmd = new MySqlCommand(_query, connection);
+                MySqlCommand _cmd = new MySqlCommand(_query, _connection);
 
                 //Inserisco i valori
                 //Posso cercare per solo un campo alla volta perciò controllo in questo ordine: batteriaID, piattoID
@@ -288,7 +289,7 @@ namespace NegozioStrumentiMusicali
             finally
             {
                 //Chiudo la connessione
-                connection.Close();
+                _connection.Close();
             }
 
             return _listaBatteriaPiatto;

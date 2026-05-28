@@ -44,6 +44,7 @@ namespace NegozioStrumentiMusicali
         #region Metodi della form
         void CaricaDati(ClsStrumentoACorda strumentoACorda)
         {
+            cbStrumento.SelectedIndex = Convert.ToInt32(strumentoACorda.Strumento);
             nudAmpiezzaCorpo.Value = Convert.ToDecimal(strumentoACorda.AmpiezzaCorpoCM);
             nudAmpiezzaManico.Value = Convert.ToDecimal(strumentoACorda.AmpiezzaManicoCM);
             nudLunghezzaCorpo.Value = Convert.ToDecimal(strumentoACorda.LunghezzaCorpoCM);
@@ -54,10 +55,14 @@ namespace NegozioStrumentiMusicali
             {
                 nudTasti.Value = nudTasti.Minimum;
                 nudTasti.Enabled = false;
+                nudTasti.Visible = false;
+                lblTasti.Visible = false;
             }
             else
             {
                 nudTasti.Value = Convert.ToDecimal(strumentoACorda.Tasti);
+                nudTasti.Visible = true;
+                lblTasti.Visible = true;
             }
             cbMaterialeCorde.SelectedIndex = Convert.ToInt32(strumentoACorda.MaterialeCorde);
             cbMaterialeCorpo.SelectedIndex = Convert.ToInt32(strumentoACorda.MaterialeCorpo);
@@ -71,8 +76,6 @@ namespace NegozioStrumentiMusicali
             _pickup2 = (ClsStrumentoACorda.ePICKUP)cbPickup2.SelectedIndex;
             _pickup3 = (ClsStrumentoACorda.ePICKUP)cbPickup3.SelectedIndex;
             _tasti = Convert.ToSByte(nudTasti.Value);
-
-            cbStrumento.SelectedIndex = Convert.ToInt32(strumentoACorda.Strumento);
         }
 
         void AbilitaControlliGraficiInput(bool controlliAbilitati)
@@ -196,6 +199,8 @@ namespace NegozioStrumentiMusicali
                 //In questi strumenti l'attributo tasti non è previsto
                 nudTasti.Value = nudTasti.Minimum;
                 nudTasti.Enabled = false;
+                nudTasti.Visible = false;
+                lblTasti.Visible = false;
             }
             else
             {
@@ -204,10 +209,14 @@ namespace NegozioStrumentiMusicali
                 || ModalitaEntrata == Program.eMODALITA_ENTRATA_DETAIL.Modifica))
                 {
                     nudTasti.Enabled = true;
+                    nudTasti.Visible = true;
+                    lblTasti.Visible = true;
                 }
                 else
                 {
                     nudTasti.Enabled = false;
+                    nudTasti.Visible = false;
+                    lblTasti.Visible = false;
                 }
                 nudTasti.Value = Convert.ToDecimal(_tasti);
             }

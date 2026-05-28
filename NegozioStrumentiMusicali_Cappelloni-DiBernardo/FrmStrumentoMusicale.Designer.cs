@@ -32,20 +32,20 @@
             this.cbStrumento = new System.Windows.Forms.ComboBox();
             this.label15 = new System.Windows.Forms.Label();
             this.nudID = new System.Windows.Forms.NumericUpDown();
-            this.label2 = new System.Windows.Forms.Label();
+            this.lblQuantita = new System.Windows.Forms.Label();
             this.nudQuantita = new System.Windows.Forms.NumericUpDown();
             this.label3 = new System.Windows.Forms.Label();
             this.tbColori = new System.Windows.Forms.TextBox();
-            this.label6 = new System.Windows.Forms.Label();
+            this.lblPrezzo = new System.Windows.Forms.Label();
             this.nudPrezzo = new System.Windows.Forms.NumericUpDown();
             this.tbModello = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.cbCasaProduttrice = new System.Windows.Forms.ComboBox();
-            this.label7 = new System.Windows.Forms.Label();
+            this.lblNotaMinima = new System.Windows.Forms.Label();
             this.cbNotaMinima = new System.Windows.Forms.ComboBox();
             this.cbNotaMassima = new System.Windows.Forms.ComboBox();
-            this.label8 = new System.Windows.Forms.Label();
+            this.lblNotaMassima = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.nudPeso = new System.Windows.Forms.NumericUpDown();
             this.label10 = new System.Windows.Forms.Label();
@@ -110,15 +110,15 @@
             this.nudID.Size = new System.Drawing.Size(258, 26);
             this.nudID.TabIndex = 10;
             // 
-            // label2
+            // lblQuantita
             // 
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(12, 122);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(258, 20);
-            this.label2.TabIndex = 11;
-            this.label2.Text = "Quantità";
-            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblQuantita.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblQuantita.Location = new System.Drawing.Point(12, 122);
+            this.lblQuantita.Name = "lblQuantita";
+            this.lblQuantita.Size = new System.Drawing.Size(258, 20);
+            this.lblQuantita.TabIndex = 11;
+            this.lblQuantita.Text = "Quantità";
+            this.lblQuantita.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // nudQuantita
             // 
@@ -151,15 +151,15 @@
             this.tbColori.Size = new System.Drawing.Size(258, 26);
             this.tbColori.TabIndex = 14;
             // 
-            // label6
+            // lblPrezzo
             // 
-            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(12, 176);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(258, 20);
-            this.label6.TabIndex = 15;
-            this.label6.Text = "Prezzo [euro]";
-            this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblPrezzo.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPrezzo.Location = new System.Drawing.Point(12, 176);
+            this.lblPrezzo.Name = "lblPrezzo";
+            this.lblPrezzo.Size = new System.Drawing.Size(258, 20);
+            this.lblPrezzo.TabIndex = 15;
+            this.lblPrezzo.Text = "Prezzo [euro]";
+            this.lblPrezzo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // nudPrezzo
             // 
@@ -213,15 +213,15 @@
             this.cbCasaProduttrice.Size = new System.Drawing.Size(258, 28);
             this.cbCasaProduttrice.TabIndex = 20;
             // 
-            // label7
+            // lblNotaMinima
             // 
-            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(276, 70);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(258, 20);
-            this.label7.TabIndex = 21;
-            this.label7.Text = "Nota minima";
-            this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblNotaMinima.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblNotaMinima.Location = new System.Drawing.Point(276, 70);
+            this.lblNotaMinima.Name = "lblNotaMinima";
+            this.lblNotaMinima.Size = new System.Drawing.Size(258, 20);
+            this.lblNotaMinima.TabIndex = 21;
+            this.lblNotaMinima.Text = "Nota minima";
+            this.lblNotaMinima.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // cbNotaMinima
             // 
@@ -243,15 +243,15 @@
             this.cbNotaMassima.Size = new System.Drawing.Size(258, 28);
             this.cbNotaMassima.TabIndex = 24;
             // 
-            // label8
+            // lblNotaMassima
             // 
-            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(276, 122);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(258, 20);
-            this.label8.TabIndex = 23;
-            this.label8.Text = "Nota massima";
-            this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblNotaMassima.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblNotaMassima.Location = new System.Drawing.Point(276, 122);
+            this.lblNotaMassima.Name = "lblNotaMassima";
+            this.lblNotaMassima.Size = new System.Drawing.Size(258, 20);
+            this.lblNotaMassima.TabIndex = 23;
+            this.lblNotaMassima.Text = "Nota massima";
+            this.lblNotaMassima.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label9
             // 
@@ -397,18 +397,18 @@
             this.Controls.Add(this.label9);
             this.Controls.Add(this.nudPeso);
             this.Controls.Add(this.cbNotaMassima);
-            this.Controls.Add(this.label8);
+            this.Controls.Add(this.lblNotaMassima);
             this.Controls.Add(this.cbNotaMinima);
-            this.Controls.Add(this.label7);
+            this.Controls.Add(this.lblNotaMinima);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.cbCasaProduttrice);
             this.Controls.Add(this.tbModello);
             this.Controls.Add(this.label4);
-            this.Controls.Add(this.label6);
+            this.Controls.Add(this.lblPrezzo);
             this.Controls.Add(this.nudPrezzo);
             this.Controls.Add(this.tbColori);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.label2);
+            this.Controls.Add(this.lblQuantita);
             this.Controls.Add(this.nudQuantita);
             this.Controls.Add(this.label15);
             this.Controls.Add(this.nudID);
@@ -434,20 +434,20 @@
         private System.Windows.Forms.ComboBox cbStrumento;
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.NumericUpDown nudID;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label lblQuantita;
         private System.Windows.Forms.NumericUpDown nudQuantita;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox tbColori;
-        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label lblPrezzo;
         private System.Windows.Forms.NumericUpDown nudPrezzo;
         private System.Windows.Forms.TextBox tbModello;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.ComboBox cbCasaProduttrice;
-        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label lblNotaMinima;
         private System.Windows.Forms.ComboBox cbNotaMinima;
         private System.Windows.Forms.ComboBox cbNotaMassima;
-        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label lblNotaMassima;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.NumericUpDown nudPeso;
         private System.Windows.Forms.Label label10;
