@@ -33,14 +33,15 @@ namespace NegozioStrumentiMusicali
                 //Creo il comando DML
                 string _dml =
                     "INSERT into ordini " +
-                    "(quantita, dataora, indirizzoID, negozioID, strumentoMusicaleID, utenteUsername)" +
-                    "VALUES(@quantita, @dataora, @indirizzoID, @negozioID, @strumentoMusicaleID, @utenteUsername)";
+                    "(quantita, dataora, indirizzoID, negozioID, strumentoMusicaleID, utenteUsername, stato)" +
+                    "VALUES(@quantita, @dataora, @indirizzoID, @negozioID, @strumentoMusicaleID, @utenteUsername, @stato)";
 
                 //Creo l'oggetto command
                 MySqlCommand _cmd = new MySqlCommand(_dml, connection);
 
                 //Inserisco i valori
                 _cmd.Parameters.AddWithValue("@quantita", ordine.Quantita);
+                _cmd.Parameters.AddWithValue("@stato", ordine.Stato);
                 _cmd.Parameters.AddWithValue("@dataora", ordine.DataOra);
                 _cmd.Parameters.AddWithValue("@indirizzoID", ordine.IndirizzoID);
                 _cmd.Parameters.AddWithValue("@negozioID", ordine.NegozioID);
@@ -70,18 +71,19 @@ namespace NegozioStrumentiMusicali
         /// <summary>
         /// Update di record di ordini
         /// </summary>
-        /// <param name="connection">Connessione al DB</param>
+        /// <param name="stringaDiConnessione"></param>
         /// <param name="ordine">Dati record da aggiornare</param>
         /// <param name="comunicazione">Comunicazione in uscita</param>
-        public static void UpdateOrdine(ref MySqlConnection connection, ClsOrdine ordine, out string comunicazione)
+        public static void UpdateOrdine(string stringaDiConnessione, ClsOrdine ordine, out string comunicazione)
         {
             //VARIABILI
             comunicazione = String.Empty;
+            MySqlConnection _connection = new MySqlConnection(stringaDiConnessione);
 
             try
             {
                 //Apro la connessione
-                connection.Open();
+                _connection.Open();
 
                 //Compongo il comando dml
                 string _dml =
@@ -91,15 +93,17 @@ namespace NegozioStrumentiMusicali
                     "indirizzoID = @indirizzoID, " +
                     "negozioID = @negozioID, " +
                     "strumentoMusicaleID = @strumentoMusicaleID, " +
-                    "utenteUsername = @utenteUsername " +
+                    "utenteUsername = @utenteUsername, " +
+                    "stato = @stato " +
                     "WHERE ID = @ID";
 
 
                 //Creo l'oggetto command
-                MySqlCommand _cmd = new MySqlCommand(_dml, connection);
+                MySqlCommand _cmd = new MySqlCommand(_dml, _connection);
 
                 //Inserisco i valori
                 _cmd.Parameters.AddWithValue("@quantita", ordine.Quantita);
+                _cmd.Parameters.AddWithValue("@stato", ordine.Stato.ToString());
                 _cmd.Parameters.AddWithValue("@dataora", ordine.DataOra);
                 _cmd.Parameters.AddWithValue("@indirizzoID", ordine.IndirizzoID);
                 _cmd.Parameters.AddWithValue("@negozioID", ordine.NegozioID);
@@ -119,7 +123,7 @@ namespace NegozioStrumentiMusicali
             finally
             {
                 //Chiudo la connessione
-                connection.Close();
+                _connection.Close();
             }
 
         }
@@ -267,8 +271,14 @@ namespace NegozioStrumentiMusicali
             ClsOrdine _ordine = new ClsOrdine();
 
             _ordine.ID = Convert.ToInt64(dataReader["ID"]);
+            _ordine.Stato =
+                (ClsOrdine.eSTATO)Enum.Parse
+                (
+                    typeof(ClsOrdine.eSTATO),
+                    dataReader["stato"].ToString()
+                );
             _ordine.Quantita = Convert.ToInt32(dataReader["quantita"]);
-            _ordine.DataOra = Convert.ToDateTime(dataReader["data"]);
+            _ordine.DataOra = Convert.ToDateTime(dataReader["dataora"]);
             _ordine.IndirizzoID = Convert.ToInt64(dataReader["indirizzoID"]);
             _ordine.NegozioID = Convert.ToInt64(dataReader["negozioID"]);
             _ordine.StrumentoMusicaleID = Convert.ToInt64(dataReader["strumentomusicaleID"]);

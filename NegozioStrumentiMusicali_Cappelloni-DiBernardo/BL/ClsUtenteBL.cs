@@ -185,22 +185,23 @@ namespace NegozioStrumentiMusicali
             }
         }
 
-        public static ClsUtente GetOneUtente(ref MySqlConnection connection, string username, out string comunicazione)
+        public static ClsUtente GetOneUtente(string stringaDiConnessione, string username, out string comunicazione)
         {
             //VARIABILI GLOBALI
             comunicazione = String.Empty;
             ClsUtente _utente = null;
+            MySqlConnection _connection = new MySqlConnection(stringaDiConnessione);
 
             try
             {
                 //Apro la connessione
-                connection.Open();
+                _connection.Open();
 
                 //Compongo la query
                 string _query = "SELECT * FROM utenti WHERE username = @username";
 
                 //Creo l'oggetto command
-                MySqlCommand _cmd = new MySqlCommand(_query, connection);
+                MySqlCommand _cmd = new MySqlCommand(_query, _connection);
 
                 //Inserisco il valore
                 _cmd.Parameters.AddWithValue("@username", username);
@@ -219,7 +220,7 @@ namespace NegozioStrumentiMusicali
 
                 _dataReader.Close();
 
-                comunicazione = "Utemte caricato correttamente dal DataBase";
+                comunicazione = "Utente caricato correttamente dal DataBase";
             }
             catch (Exception ex)
             {
@@ -229,7 +230,7 @@ namespace NegozioStrumentiMusicali
             finally
             {
                 //Chiudo la connessione
-                connection.Close();
+                _connection.Close();
             }
 
             return _utente;

@@ -41,10 +41,14 @@ namespace NegozioStrumentiMusicali
         private void btnSalva_Click(object sender, EventArgs e)
         {
             if (_visualizzazione == Program.eMODALITA_ENTRATA_DETAIL.Visualizzazione)
-            {
-                
+            {                
                 this.Close();
             }
+        }
+
+        private void cbNazione_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
