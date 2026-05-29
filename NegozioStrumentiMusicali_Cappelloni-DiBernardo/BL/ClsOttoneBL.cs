@@ -271,6 +271,27 @@ namespace NegozioStrumentiMusicali
             return _ottoneFinale;
         }
         /// <summary>
+        /// Copia i dati da un legno1 ad un legno2, compresi dati di specializzazione, senza mantenere i riferimenti in memoria
+        /// </summary>
+        /// <param name="ottone1"></param>
+        /// <param name="ottone2"></param>
+        public static void Clona(ClsOttone ottone1, ref ClsOttone ottone2, bool includiDatiDiGeneralizzazione)
+        {
+            if (includiDatiDiGeneralizzazione)
+            {
+                ClsStrumentoMusicaleBL.Clona(ottone1, ref ottone2); //Copia dei dati di generalizzazione
+            }
+            ottone2.Strumento = ottone1.Strumento;
+            ottone2.AltezzaCM = ottone1.AltezzaCM;
+            ottone2.Laccatura = ottone1.Laccatura;
+            ottone2.LarghezzaCM = ottone1.LarghezzaCM;
+            ottone2.LunghezzaCM = ottone1.LunghezzaCM;
+            ottone2.MaterialeBocchino = ottone1.MaterialeBocchino;
+            ottone2.MaterialeCorpo = ottone1.MaterialeCorpo;
+            ottone2.Placcatura = ottone1.Placcatura;
+            ottone2.RivestimentoBocchino = ottone1.RivestimentoBocchino;
+        }
+        /// <summary>
         /// Prende tutti i record di ottoni con anche le informazione della generalizzazione da strumentimusicali
         /// </summary>
         /// <param name="stringaDiConnessione">Stringa per la connessione al DB</param>
@@ -359,26 +380,70 @@ namespace NegozioStrumentiMusicali
 
             return _ottoni;
         }
-        /// <summary>
-        /// Copia i dati da un legno1 ad un legno2, compresi dati di specializzazione, senza mantenere i riferimenti in memoria
-        /// </summary>
-        /// <param name="ottone1"></param>
-        /// <param name="ottone2"></param>
-        public static void Clona(ClsOttone ottone1, ref ClsOttone ottone2, bool includiDatiDiGeneralizzazione)
+        public static ClsOttone GetOneOttone(string stringaDiConnessione, long ID, out string comunicazione)
         {
-            if(includiDatiDiGeneralizzazione)
+            //VARIABILI
+            comunicazione = String.Empty;
+            ClsOttone _ottone = null;
+            MySqlConnection _connection = new MySqlConnection(stringaDiConnessione);
+
+            try
             {
-                ClsStrumentoMusicaleBL.Clona(ottone1, ref ottone2); //Copia dei dati di generalizzazione
+                //Apro la connessione
+                _connection.Open();
+
+                //Creo la query con la join tra strumentimusicali e ottoni
+                //Abbino le righe in base a ID <-> strumentomusicaleID
+                //E filtro per ID
+                string _query = "SELECT S.*, " +
+                    "O.strumento, " +
+                    "O.materialecorpo, " +
+                    "O.laccatura, " +
+                    "O.placcatura, " +
+                    "O.materialebocchino, " +
+                    "O.rivestimentobocchino, " +
+                    "O.lunghezzacm, " +
+                    "O.larghezzacm, " +
+                    "O.altezzacm " +
+                    "FROM strumentimusicali AS S JOIN ottoni AS O " +
+                    "ON S.ID = O.strumentomusicaleID " +
+                    "WHERE S.ID = @ID";
+
+                //Creo il comando
+                MySqlCommand _cmd = new MySqlCommand(_query, _connection);
+
+                //Imposto i parametri del comando
+                _cmd.Parameters.AddWithValue("@ID", ID);
+
+                //Creo il DataReader e lo popolo eseguendo il comando
+                MySqlDataReader _dataReader = _cmd.ExecuteReader();
+
+                //Carico i dati dal DataReader
+                if(_dataReader.HasRows) //Controllo se la query ha restituito dei record
+                {
+                    _ottone = new ClsOttone();
+                    while(_dataReader.Read()) //Se ne ha restituiti li leggo tutti
+                    {
+                        _ottone = CaricaSingoloStrumentoOttone(ref _dataReader, false);
+                    }
+                }
+
+                _dataReader.Close();
+
+                comunicazione = "Strumento della famiglia degli ottoni caricato correttamente dal DataBase";
             }
-            ottone2.Strumento = ottone1.Strumento;
-            ottone2.AltezzaCM = ottone1.AltezzaCM;
-            ottone2.Laccatura = ottone1.Laccatura;
-            ottone2.LarghezzaCM = ottone1.LarghezzaCM;
-            ottone2.LunghezzaCM = ottone1.LunghezzaCM;
-            ottone2.MaterialeBocchino = ottone1.MaterialeBocchino;
-            ottone2.MaterialeCorpo = ottone1.MaterialeCorpo;
-            ottone2.Placcatura = ottone1.Placcatura;
-            ottone2.RivestimentoBocchino = ottone1.RivestimentoBocchino;
+            catch(Exception ex)
+            {
+                comunicazione = ex.Message;
+                _ottone = null;
+            }
+            finally
+            {
+                //Chiudo la connessione
+                _connection.Close();
+            }
+
+            return _ottone;
         }
     }
 }

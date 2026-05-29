@@ -300,6 +300,26 @@ namespace NegozioStrumentiMusicali
             return _pianoforteFinale;
         }
         /// <summary>
+        /// Copia i dati da un pianoforte1 ad una pianforte2, compresi dati di specializzazione, senza mantenere i riferimenti in memoria
+        /// </summary>
+        /// <param name="pianoforte1"
+        /// <param name="pianoforte2"
+        public static void Clona(ClsPianoforte pianoforte1, ref ClsPianoforte pianoforte2, bool includiDatiDiGeneralizzazione)
+        {
+            if (includiDatiDiGeneralizzazione)
+            {
+                ClsStrumentoMusicaleBL.Clona(pianoforte1, ref pianoforte2); //Copia dei dati di generalizzazione
+            }
+            pianoforte2.Tipo = pianoforte1.Tipo;
+            pianoforte2.AltezzaCM = pianoforte1.AltezzaCM;
+            pianoforte2.AltezzaGinocchioCM = pianoforte1.AltezzaGinocchioCM;
+            pianoforte2.LarghezzaCM = pianoforte1.LarghezzaCM;
+            pianoforte2.MaterialeCorpoPFAcustico = pianoforte1.MaterialeCorpoPFAcustico;
+            pianoforte2.MaterialeTastiBianchi = pianoforte1.MaterialeTastiBianchi;
+            pianoforte2.MaterialeTastiNeri = pianoforte1.MaterialeTastiNeri;
+            pianoforte2.NumeroTasti = pianoforte1.NumeroTasti;
+        }
+        /// <summary>
         /// Prende tutti i record di pianoforti con anche le informazione della generalizzazione da strumentimusicali
         /// </summary>
         /// <param name="stringaDiConnessione">Stringa per la connessione al DB</param>
@@ -388,25 +408,70 @@ namespace NegozioStrumentiMusicali
 
             return _pianoforti;
         }
-        /// <summary>
-        /// Copia i dati da un pianoforte1 ad una pianforte2, compresi dati di specializzazione, senza mantenere i riferimenti in memoria
-        /// </summary>
-        /// <param name="pianoforte1"
-        /// <param name="pianoforte2"
-        public static void Clona(ClsPianoforte pianoforte1, ref ClsPianoforte pianoforte2, bool includiDatiDiGeneralizzazione)
+        public static ClsPianoforte GetOnePianoforte(string stringaDiConnessione, long ID, out string comunicazione)
         {
-            if(includiDatiDiGeneralizzazione)
+            //VARIABILI
+            comunicazione = String.Empty;
+            ClsPianoforte _pianoforte = null;
+            MySqlConnection _connection = new MySqlConnection(stringaDiConnessione);
+
+            try
             {
-                ClsStrumentoMusicaleBL.Clona(pianoforte1, ref pianoforte2); //Copia dei dati di generalizzazione
+                //Apro la connessione
+                _connection.Open();
+
+                //Creo la query con la join tra strumentimusicali e pianoforti
+                //Abbino le righe in base a ID <-> strumentomusicaleID
+                //E filtro per ID
+                string _query = "SELECT S.*, " +
+                    "P.tipo, " +
+                    "P.numerotasti, " +
+                    "P.materialetastibianchi, " +
+                    "P.materialetastineri, " +
+                    "P.materialecorpopfacustico, " +
+                    "P.altezzacm, " +
+                    "P.larghezzacm, " +
+                    "P.profonditacm, " +
+                    "P.altezzaginocchiocm " +
+                    "FROM strumentimusicali AS S JOIN pianoforti AS P " +
+                    "ON S.ID = P.strumentomusicaleID " +
+                    "WHERE S.ID = @ID";
+
+                //Creo il comando
+                MySqlCommand _cmd = new MySqlCommand(_query, _connection);
+
+                //Imposto i parametri del comando
+                _cmd.Parameters.AddWithValue("@ID", ID);
+
+                //Creo il DataReader e lo popolo eseguendo il comando
+                MySqlDataReader _dataReader = _cmd.ExecuteReader();
+
+                //Carico i dati dal DataReader
+                if (_dataReader.HasRows) //Controllo se la query ha restituito dei record
+                {
+                    _pianoforte = new ClsPianoforte();
+                    while (_dataReader.Read()) //Se ne ha restituiti li leggo tutti
+                    {
+                        _pianoforte = CaricaSingoloStrumentoPianoforte(ref _dataReader, false);
+                    }
+                }
+
+                _dataReader.Close();
+
+                comunicazione = "Pianoforte caricato correttamente dal DataBase";
             }
-            pianoforte2.Tipo = pianoforte1.Tipo;
-            pianoforte2.AltezzaCM = pianoforte1.AltezzaCM;
-            pianoforte2.AltezzaGinocchioCM = pianoforte1.AltezzaGinocchioCM;
-            pianoforte2.LarghezzaCM = pianoforte1.LarghezzaCM;
-            pianoforte2.MaterialeCorpoPFAcustico = pianoforte1.MaterialeCorpoPFAcustico;
-            pianoforte2.MaterialeTastiBianchi = pianoforte1.MaterialeTastiBianchi;
-            pianoforte2.MaterialeTastiNeri = pianoforte1.MaterialeTastiNeri;
-            pianoforte2.NumeroTasti = pianoforte1.NumeroTasti;
+            catch (Exception ex)
+            {
+                comunicazione = ex.Message;
+                _pianoforte = null;
+            }
+            finally
+            {
+                //Chiudo la connessione
+                _connection.Close();
+            }
+
+            return _pianoforte;
         }
     }
 

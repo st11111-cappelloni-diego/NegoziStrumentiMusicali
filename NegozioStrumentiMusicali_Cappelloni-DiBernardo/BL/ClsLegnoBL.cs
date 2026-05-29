@@ -240,6 +240,24 @@ namespace NegozioStrumentiMusicali
             return _legnoFinale;
         }
         /// <summary>
+        /// Copia i dati da un legno1 ad un legno2, compresi dati di specializzazione, senza mantenere i riferimenti in memoria
+        /// </summary>
+        /// <param name="legno1"></param>
+        /// <param name="legno2"></param>
+        public static void Clona(ClsLegno legno1, ref ClsLegno legno2, bool includiDatiDiGeneralizzazione)
+        {
+            if (includiDatiDiGeneralizzazione)
+            {
+                ClsStrumentoMusicaleBL.Clona(legno1, ref legno2); //Copia dei dati di generalizzazione
+            }
+            legno2.Strumento = legno1.Strumento;
+            legno2.AltezzaCM = legno1.AltezzaCM;
+            legno2.LarghezzaCM = legno1.LarghezzaCM;
+            legno2.LunghezzaCM = legno1.LunghezzaCM;
+            legno2.MaterialeChiavi = legno1.MaterialeChiavi;
+            legno2.MaterialeCorpo = legno1.MaterialeCorpo;
+        }
+        /// <summary>
         /// Prende tutti i record di legni con anche le informazione della generalizzazione da strumentimusicali
         /// </summary>
         /// <param name="stringaDiConnessione">Stringa per la connessione al DB</param>
@@ -325,23 +343,67 @@ namespace NegozioStrumentiMusicali
 
             return _legni;
         }
-        /// <summary>
-        /// Copia i dati da un legno1 ad un legno2, compresi dati di specializzazione, senza mantenere i riferimenti in memoria
-        /// </summary>
-        /// <param name="legno1"></param>
-        /// <param name="legno2"></param>
-        public static void Clona(ClsLegno legno1, ref ClsLegno legno2, bool includiDatiDiGeneralizzazione)
+        public static ClsLegno GetOneLegno(string stringaDiConnessione, long ID, out string comunicazione)
         {
-            if(includiDatiDiGeneralizzazione)
+            //VARIABILI
+            comunicazione = String.Empty;
+            ClsLegno _legno = null;
+            MySqlConnection _connection = new MySqlConnection(stringaDiConnessione);
+
+            try
             {
-                ClsStrumentoMusicaleBL.Clona(legno1, ref legno2); //Copia dei dati di generalizzazione
+                //Apro la connessione
+                _connection.Open();
+
+                //Creo la query con la join tra strumentimusicali e legni
+                //Abbino le righe in base a ID <-> strumentomusicaleID
+                //E filtro per ID
+                string _query = "SELECT S.*, " +
+                    "L.strumento, " +
+                    "L.materialecorpo, " +
+                    "L.materialechiavi, " +
+                    "L.lunghezzacm," +
+                    "L.larghezzacm," +
+                    "L.altezzacm " +
+                    "FROM strumentimusicali AS S JOIN legni AS L " +
+                    "ON S.ID = L.strumentomusicaleID " +
+                    "WHERE S.ID = @ID";
+
+                //Creo il comando
+                MySqlCommand _cmd = new MySqlCommand(_query, _connection);
+
+                //Imposto i parametri del comando
+                _cmd.Parameters.AddWithValue("@ID", ID);
+
+                //Creo il DataReader e lo popolo eseguendo il comando
+                MySqlDataReader _dataReader = _cmd.ExecuteReader();
+
+                //Carico i dati dal DataReader
+                if (_dataReader.HasRows) //Controllo se la query ha restituito dei record
+                {
+                    _legno = new ClsLegno();
+                    while (_dataReader.Read()) //Se ne ha restituiti li leggo tutti
+                    {
+                        _legno = CaricaSingoloStrumentoLegno(ref _dataReader, false);
+                    }
+                }
+
+                _dataReader.Close();
+
+                comunicazione = "Strumento della famiglia dei legni caricato correttamente dal DataBase";
             }
-            legno2.Strumento = legno1.Strumento;
-            legno2.AltezzaCM = legno1.AltezzaCM;
-            legno2.LarghezzaCM = legno1.LarghezzaCM;
-            legno2.LunghezzaCM = legno1.LunghezzaCM;
-            legno2.MaterialeChiavi = legno1.MaterialeChiavi;
-            legno2.MaterialeCorpo = legno1.MaterialeCorpo;
+            catch (Exception ex)
+            {
+                comunicazione = ex.Message;
+                _legno = null;
+            }
+            finally
+            {
+                //Chiudo la connessione
+                _connection.Close();
+            }
+
+            return _legno;
         }
     }
 }

@@ -399,26 +399,27 @@ namespace NegozioStrumentiMusicali
         /// <summary>
         /// Prende un record da strumentimusicali in base alla chiave primaria ID
         /// </summary>
-        /// <param name="connection">Connessione al DB</param>
+        /// <param name="stringaDiConnessione"></param>
         /// <param name="ID"></param>
         /// <param name="comunicazione">Comunicazione in uscita</param>
         /// <returns>Il record ottenuto. Se è null la query non è andata a buon fine</returns>
-        public static ClsStrumentoMusicale GetOneStrumentoMusicale(ref MySqlConnection connection, long ID, out string comunicazione)
+        public static ClsStrumentoMusicale GetOneStrumentoMusicale(string stringaDiConnessione, long ID, out string comunicazione)
         {
             //VARIABILI
             comunicazione = String.Empty;
-            ClsStrumentoMusicale _strumentoMusicale = new ClsStrumentoMusicale();
+            ClsStrumentoMusicale _strumentoMusicale = null;
+            MySqlConnection _connection = new MySqlConnection(stringaDiConnessione);
 
             try
             {
                 //Apro la connessione
-                connection.Open();
+                _connection.Open();
 
                 //Compongo la query
                 string _query = "SELECT * FROM strumentimusicali WHERE ID = @ID";
 
                 //Creo l'oggetto command
-                MySqlCommand _cmd = new MySqlCommand(_query, connection);
+                MySqlCommand _cmd = new MySqlCommand(_query, _connection);
 
                 //Inserisco i valori
                 _cmd.Parameters.AddWithValue("@ID", ID);
@@ -428,6 +429,7 @@ namespace NegozioStrumentiMusicali
 
                 if(_dataReader.HasRows) //Controllo se la tabella ha dei record
                 {
+                    _strumentoMusicale = new ClsStrumentoMusicale();
                     while(_dataReader.Read()) //Se ne ha li leggo tutti
                     {
                         _strumentoMusicale = CaricaSingoloStrumento(ref _dataReader);
@@ -446,7 +448,7 @@ namespace NegozioStrumentiMusicali
             finally 
             {
                 //Chiudo la connessione
-                connection.Close();
+                _connection.Close();
             }
 
             return _strumentoMusicale;

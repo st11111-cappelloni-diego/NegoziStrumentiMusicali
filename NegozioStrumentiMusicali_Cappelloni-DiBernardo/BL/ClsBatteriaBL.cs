@@ -175,6 +175,18 @@ namespace NegozioStrumentiMusicali
             return _batteriaFinale;
         }
         /// <summary>
+        /// Copia i dati da una batteria1 ad una batteria2, compresi dati di specializzazione, senza mantenere i riferimenti in memoria
+        /// </summary>
+        /// <param name="batteria1"></param>
+        /// <param name="batteria2"></param>
+        public static void Clona(ClsBatteria batteria1, ref ClsBatteria batteria2, bool includiDatiDiGeneralizzazione)
+        {
+            if (includiDatiDiGeneralizzazione)
+            {
+                ClsStrumentoMusicaleBL.Clona(batteria1, ref batteria2); //Copia dei dati di generalizzazione
+            }
+        }
+        /// <summary>
         /// Prende tutti i record di batterie con anche le informazione della generalizzazione da strumentimusicali
         /// </summary>
         /// <param name="stringaDiConnessione">Connessione al DB</param>
@@ -253,17 +265,60 @@ namespace NegozioStrumentiMusicali
 
             return _batterie;
         }
-        /// <summary>
-        /// Copia i dati da una batteria1 ad una batteria2, compresi dati di specializzazione, senza mantenere i riferimenti in memoria
-        /// </summary>
-        /// <param name="batteria1"></param>
-        /// <param name="batteria2"></param>
-        public static void Clona(ClsBatteria batteria1, ref ClsBatteria batteria2, bool includiDatiDiGeneralizzazione)
+        public static ClsBatteria GetOneBatteria(string stringaDiConnessione, long ID, out string comunicazione)
         {
-            if(includiDatiDiGeneralizzazione)
+            //VARIABILI
+            comunicazione = String.Empty;
+            ClsBatteria _batteria = null;
+            MySqlConnection _connection = new MySqlConnection(stringaDiConnessione);
+
+            try
             {
-                ClsStrumentoMusicaleBL.Clona(batteria1, ref batteria2); //Copia dei dati di generalizzazione
+                //Apro la connessione
+                _connection.Open();
+
+                //Compongo la query
+                string _query =
+                    "SELECT S.* FROM strumentimusicali AS S JOIN " +
+                    "batterie AS B ON S.ID = B.strumentomusicaleID " +
+                    "WHERE S.ID = @ID";
+
+
+                //Creo l'oggetto command
+                MySqlCommand _cmd = new MySqlCommand(_query, _connection);
+
+                //Imposto i parametri del comando
+                _cmd.Parameters.AddWithValue("@ID", ID);
+
+
+                //Eseguo il comando creando il DataReader
+                MySqlDataReader _dataReader = _cmd.ExecuteReader();
+
+                if (_dataReader.HasRows) //Controllo se la join ha dei record
+                {
+                    _batteria = new ClsBatteria();
+                    while (_dataReader.Read()) //Se ne ha li leggo tutti
+                    {
+                        _batteria = CaricaSingoloStrumentoBatteria(ref _dataReader, false);
+                    }
+                }
+
+                _dataReader.Close();
+
+                comunicazione = "Batteria caricata correttamente dal DataBase";
             }
+            catch (Exception ex)
+            {
+                comunicazione = ex.Message;
+                _batteria = null;
+            }
+            finally
+            {
+                //Chiudo la connessione
+                _connection.Close();
+            }
+
+            return _batteria;
         }
     }
 }

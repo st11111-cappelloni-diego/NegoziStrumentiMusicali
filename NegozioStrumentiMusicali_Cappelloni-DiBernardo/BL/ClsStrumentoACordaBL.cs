@@ -320,6 +320,34 @@ namespace NegozioStrumentiMusicali
             return _strumentoACordaFinale;
         }
         /// <summary>
+        /// Copia i dati da uno strumentoACorda1 ad uno strumentoACorda2, compresi dati di specializzazione, senza mantenere i riferimenti in memoria
+        /// </summary>
+        /// <param name="strumentoACorda1"></param>
+        /// <param name="strumentoACorda2"></param>
+        public static void Clona(ClsStrumentoACorda strumentoACorda1, ref ClsStrumentoACorda strumentoACorda2, bool includiDatiDiGeneralizzazione)
+        {
+            if (includiDatiDiGeneralizzazione)
+            {
+                ClsStrumentoMusicaleBL.Clona(strumentoACorda1, ref strumentoACorda2); //Copia dei dati di generalizzazione
+            }
+            strumentoACorda2.Strumento = strumentoACorda1.Strumento;
+            strumentoACorda2.AmpiezzaCorpoCM = strumentoACorda1.AmpiezzaCorpoCM;
+            strumentoACorda2.AmpiezzaManicoCM = strumentoACorda1.AmpiezzaManicoCM;
+            strumentoACorda2.LunghezzaCorpoCM = strumentoACorda1.LunghezzaCorpoCM;
+            strumentoACorda2.LunghezzaManicoCM = strumentoACorda1.LunghezzaManicoCM;
+            strumentoACorda2.MaterialeCorde = strumentoACorda1.MaterialeCorde;
+            strumentoACorda2.MaterialeCorpo = strumentoACorda1.MaterialeCorpo;
+            strumentoACorda2.MaterialeManico = strumentoACorda1.MaterialeManico;
+            strumentoACorda2.MaterialeTastiera = strumentoACorda1.MaterialeTastiera;
+            strumentoACorda2.NumeroCorde = strumentoACorda1.NumeroCorde;
+            strumentoACorda2.Pickup1 = strumentoACorda1.Pickup1;
+            strumentoACorda2.Pickup2 = strumentoACorda1.Pickup2;
+            strumentoACorda2.Pickup3 = strumentoACorda1.Pickup3;
+            strumentoACorda2.SpessoreCorpoCM = strumentoACorda1.SpessoreCorpoCM;
+            strumentoACorda2.SpessoreManicoCM = strumentoACorda1.SpessoreManicoCM;
+            strumentoACorda2.Tasti = strumentoACorda1.Tasti;
+        }
+        /// <summary>
         /// Prende tutti i record di strumentiacorda con anche le informazione della generalizzazione da strumentimusicali
         /// </summary>
         /// <param name="stringaDiConnessione">Stringa per la connessione al DB</param>
@@ -415,33 +443,79 @@ namespace NegozioStrumentiMusicali
 
             return _strumentiACorda;
         }
-        /// <summary>
-        /// Copia i dati da uno strumentoACorda1 ad uno strumentoACorda2, compresi dati di specializzazione, senza mantenere i riferimenti in memoria
-        /// </summary>
-        /// <param name="strumentoACorda1"></param>
-        /// <param name="strumentoACorda2"></param>
-        public static void Clona(ClsStrumentoACorda strumentoACorda1, ref ClsStrumentoACorda strumentoACorda2, bool includiDatiDiGeneralizzazione)
+        public static ClsStrumentoACorda GetOneStrumentoACorda(string stringaDiConnessione, long ID, out string comunicazione)
         {
-            if(includiDatiDiGeneralizzazione)
+            //VARIABILI
+            comunicazione = String.Empty;
+            ClsStrumentoACorda _strumentoACorda = null;
+            MySqlConnection _connection = new MySqlConnection(stringaDiConnessione);
+
+            try
             {
-                ClsStrumentoMusicaleBL.Clona(strumentoACorda1, ref strumentoACorda2); //Copia dei dati di generalizzazione
+                //Apro la connessione
+                _connection.Open();
+
+                //Creo la query con la join tra strumentimusicali e strumentiacorda
+                //Abbino le righe in base a ID <-> strumentomusicaleID
+                //E filtro per ID
+                string _query = "SELECT S.*, " +
+                    "C.strumento, " +
+                    "C.numerocorde, " +
+                    "C.materialecorde, " +
+                    "C.lunghezzamanicocm, " +
+                    "C.ampiezzamanicocm, " +
+                    "C.spessoremanicocm, " +
+                    "C.materialemanico, " +
+                    "C.materialetastiera, " +
+                    "C.lunghezzacorpocm, " +
+                    "C.ampiezzacorpocm, " +
+                    "C.spessorecorpocm, " +
+                    "C.materialecorpo, " +
+                    "C.tasti, " +
+                    "C.pickup1, " +
+                    "C.pickup2, " +
+                    "C.pickup3 " +
+                    "FROM strumentimusicali AS S JOIN strumentiacorda AS C " +
+                    "ON S.ID = C.strumentomusicaleID " +
+                    "WHERE S.ID = @ID";
+
+                //Creo il comando
+                MySqlCommand _cmd = new MySqlCommand(_query, _connection);
+
+                //Imposto i parametri del comando
+                _cmd.Parameters.AddWithValue("@ID", ID);
+
+                //Creo il DataReader e lo popolo eseguendo il comando
+                MySqlDataReader _dataReader = _cmd.ExecuteReader();
+
+                //Carico i dati dal DataReader
+                if (_dataReader.HasRows) //Controllo se la query ha restituito dei record
+                {
+                    _strumentoACorda = new ClsStrumentoACorda();
+                    while (_dataReader.Read()) //Se ne ha restituiti li leggo tutti
+                    {
+                        _strumentoACorda = CaricaSingoloStrumentoStrumentoACorda(ref _dataReader, false);
+                    }
+                }
+
+                _dataReader.Close();
+
+                comunicazione = "Pianoforte caricato correttamente dal DataBase";
             }
-            strumentoACorda2.Strumento = strumentoACorda1.Strumento;
-            strumentoACorda2.AmpiezzaCorpoCM = strumentoACorda1.AmpiezzaCorpoCM;
-            strumentoACorda2.AmpiezzaManicoCM = strumentoACorda1.AmpiezzaManicoCM;
-            strumentoACorda2.LunghezzaCorpoCM = strumentoACorda1.LunghezzaCorpoCM;
-            strumentoACorda2.LunghezzaManicoCM = strumentoACorda1.LunghezzaManicoCM;
-            strumentoACorda2.MaterialeCorde = strumentoACorda1.MaterialeCorde;
-            strumentoACorda2.MaterialeCorpo = strumentoACorda1.MaterialeCorpo;
-            strumentoACorda2.MaterialeManico = strumentoACorda1.MaterialeManico;
-            strumentoACorda2.MaterialeTastiera = strumentoACorda1.MaterialeTastiera;
-            strumentoACorda2.NumeroCorde = strumentoACorda1.NumeroCorde;
-            strumentoACorda2.Pickup1 = strumentoACorda1.Pickup1;
-            strumentoACorda2.Pickup2 = strumentoACorda1.Pickup2;
-            strumentoACorda2.Pickup3 = strumentoACorda1.Pickup3;
-            strumentoACorda2.SpessoreCorpoCM = strumentoACorda1.SpessoreCorpoCM;
-            strumentoACorda2.SpessoreManicoCM = strumentoACorda1.SpessoreManicoCM;
-            strumentoACorda2.Tasti = strumentoACorda1.Tasti;
+            catch (Exception ex)
+            {
+                comunicazione = ex.Message;
+                _strumentoACorda = null;
+            }
+            finally
+            {
+                //Chiudo la connessione
+                _connection.Close();
+            }
+
+            return _strumentoACorda;
         }
     }
+
+
 }
