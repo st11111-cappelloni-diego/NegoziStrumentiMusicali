@@ -29,7 +29,7 @@ namespace NegozioStrumentiMusicali
         {
             cbStrumento.SelectedIndex = Convert.ToInt32(ottone.Strumento);
 
-            if(ottone.AltezzaCM <= 0)
+            if(ottone.AltezzaCM < Convert.ToSingle(nudAltezza.Minimum))
             {
                 nudAltezza.Value = nudAltezza.Minimum;
             }
@@ -37,7 +37,7 @@ namespace NegozioStrumentiMusicali
             {
                 nudAltezza.Value = Convert.ToDecimal(ottone.AltezzaCM);
             }
-            if (ottone.LarghezzaCM <= 0)
+            if (ottone.LarghezzaCM < Convert.ToSingle(nudLarghezza.Minimum))
             {
                 nudLarghezza.Value = nudLarghezza.Minimum;
             }
@@ -45,7 +45,7 @@ namespace NegozioStrumentiMusicali
             {
                 nudLarghezza.Value = Convert.ToDecimal(ottone.LarghezzaCM);
             }
-            if (ottone.LarghezzaCM <= 0)
+            if (ottone.LunghezzaCM < Convert.ToSingle(nudLunghezza.Minimum))
             {
                 nudLunghezza.Value = nudLunghezza.Minimum;
             }

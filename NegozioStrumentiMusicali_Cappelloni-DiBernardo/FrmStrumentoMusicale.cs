@@ -18,25 +18,11 @@ namespace NegozioStrumentiMusicali
         #region Variabili
         public ClsStrumentoMusicale _strumentoMusicale;
         public ClsVendere _vendereStrumentoMusicale;
-        /// <summary>
-        /// Serve in modalià inserimento
-        /// </summary>
+        private bool _bottoneAnnullaPremuto = false;
         private ClsBatteria _dettagliBatteria = new ClsBatteria();
-        /// <summary>
-        /// Serve in modalià inserimento
-        /// </summary>
         private ClsLegno _dettagliLegno = new ClsLegno();
-        /// <summary>
-        /// Serve in modalià inserimento
-        /// </summary>
         private ClsOttone _dettagliOttone = new ClsOttone();
-        /// <summary>
-        /// Serve in modalià inserimento
-        /// </summary>
         private ClsPianoforte _dettagliPianoforte = new ClsPianoforte();
-        /// <summary>
-        /// Serve in modalià inserimento
-        /// </summary>
         private ClsStrumentoACorda _dettagliStrumentoACorda = new ClsStrumentoACorda();
         private Program.eMODALITA_ENTRATA_DETAIL _modalitaEntrata = Program.eMODALITA_ENTRATA_DETAIL.Visualizzazione;
         private List<ClsCaratteristica> _altreCaratteristicheStrumento = new List<ClsCaratteristica>();
@@ -212,6 +198,7 @@ namespace NegozioStrumentiMusicali
             btnModificaCaratteristica.Enabled = controlliAbilitati;
             btnNuovaCaratteristica.Enabled = controlliAbilitati;
             btnSalva.Enabled = controlliAbilitati;
+            btnAnnulla.Enabled = controlliAbilitati;
         }
         #endregion
         public FrmStrumentoMusicale()
@@ -223,6 +210,9 @@ namespace NegozioStrumentiMusicali
             PopolaComboBox(cbNotaMinima, ClsArchivio.NoteMusicali);
             PopolaComboBox(cbCasaProduttrice, ClsArchivio.CaseProduttrici);
 
+            this.FormBorderStyle = FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
+
             nudID.Enabled = false;
             nudID.Minimum = 0;
             nudID.Maximum = Convert.ToDecimal(long.MaxValue);
@@ -232,7 +222,7 @@ namespace NegozioStrumentiMusicali
             nudPeso.Minimum = 0.01m;
             nudPeso.Maximum = 9999.99m;
             nudQuantita.Minimum = 0;
-            nudQuantita.Maximum = 9999999999;
+            nudQuantita.Maximum = Convert.ToDecimal(uint.MaxValue);
         }
 
         private void FrmStrumentoMusicale_Load(object sender, EventArgs e)
@@ -271,10 +261,18 @@ namespace NegozioStrumentiMusicali
                 //Modalità modifica o inserimento                
                 if(UtenteGestisceNegozioAttuale && ClsArchivio.UtenteAttuale.AdminSoftware == false)
                 {
-                    //L'utente gestisce il negozio ma non è admin software: abilito solo nudPrezzo e nudQuantità
+                    //L'utente gestisce il negozio ma non è admin software: abilito solo nudPrezzo e nudQuantità (se non sono in modalità inserimento)
                     AbilitaControlliGraficiInput(false);
-                    nudPrezzo.Enabled = true;
-                    nudQuantita.Enabled = true;
+                    if(ModalitaEntrata == Program.eMODALITA_ENTRATA_DETAIL.Modifica)
+                    {
+                        nudPrezzo.Enabled = true;
+                        nudQuantita.Enabled = true;
+                    }
+                    else
+                    {
+                        nudPrezzo.Enabled = false;
+                        nudQuantita.Enabled = false;
+                    }
                 }
                 else if(UtenteGestisceNegozioAttuale == false && ClsArchivio.UtenteAttuale.AdminSoftware)
                 {
@@ -400,22 +398,28 @@ namespace NegozioStrumentiMusicali
                 //Controllo di che tipo è lo strumento passato a questa form
                 if(_strumentoMusicale is ClsBatteria)
                 {
+                    //Passo alla form la variabile di dettaglio, copiando i dati (senza mantenere la stessa area di memoria)
+                    ClsBatteriaBL.Clona((ClsBatteria)_strumentoMusicale, ref _dettagliBatteria, true);
                     _formDaAprire = new FrmBatteria(ModalitaEntrata, (ClsBatteria)_strumentoMusicale);
                 }
                 else if(_strumentoMusicale is ClsLegno)
                 {
-                    _formDaAprire = new FrmLegno(ModalitaEntrata, (ClsLegno)_strumentoMusicale);
+                    ClsLegnoBL.Clona((ClsLegno)_strumentoMusicale, ref _dettagliLegno, true);
+                    _formDaAprire = new FrmLegno(ModalitaEntrata, _dettagliLegno);
                 }
                 else if(_strumentoMusicale is ClsOttone)
                 {
+                    ClsOttoneBL.Clona((ClsOttone)_strumentoMusicale, ref _dettagliOttone, true);
                     _formDaAprire = new FrmOttone(ModalitaEntrata, (ClsOttone)_strumentoMusicale);
                 }
                 else if(_strumentoMusicale is ClsPianoforte)
                 {
+                    ClsPianoforteBL.Clona((ClsPianoforte)_strumentoMusicale, ref _dettagliPianoforte, true);
                     _formDaAprire = new FrmPianoforte(ModalitaEntrata, (ClsPianoforte)_strumentoMusicale);
                 }
                 else if(_strumentoMusicale is ClsStrumentoACorda)
                 {
+                    ClsStrumentoACordaBL.Clona((ClsStrumentoACorda)_strumentoMusicale, ref _dettagliStrumentoACorda, true);
                     _formDaAprire = new FrmStrumentoACorda(ModalitaEntrata, (ClsStrumentoACorda)_strumentoMusicale);
                 }
             }
@@ -425,7 +429,223 @@ namespace NegozioStrumentiMusicali
 
         private void FrmStrumentoMusicale_FormClosing(object sender, FormClosingEventArgs e)
         {
+            if(ModalitaEntrata == Program.eMODALITA_ENTRATA_DETAIL.Visualizzazione)
+            {
+                //In modalità visualizzazione procedo sempre con la chiusura della form
+                e.Cancel = false;
+            }
+            else
+            {
+                //DR = OK quando è premuto 'Salva'
+                if (_bottoneAnnullaPremuto || this.DialogResult == DialogResult.OK)
+                {
+                    e.Cancel = false; //Procedo con la chiusura della form
+                }
+                else
+                {
+                    DialogResult _drMessageBox =
+                        MessageBox.Show("Sei sicur* di voler uscire senza salvare?", "ESCI", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+                    if (_drMessageBox == DialogResult.Yes)
+                    {
+                        e.Cancel = false; //Procedo con la chiusura della form
+                        this.DialogResult = DialogResult.Cancel;
+                    }
+                    else
+                    {
+                        e.Cancel = true; //Annullo la chiusuro della form
+                    }
+                }
+            }
+        }
 
+        private void btnSalva_Click(object sender, EventArgs e)
+        {
+            DialogResult _drMessageBox =
+                MessageBox.Show("Sei sicur* di voler salvare ed uscire?", "SALVA", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+
+            if(_drMessageBox == DialogResult.Yes)
+            {
+                bool _erroriNelSalvataggio = false;
+
+                //Salvataggio dei dati dello strumento: Solo se l'utente è admin software
+                if(ClsArchivio.UtenteAttuale.AdminSoftware)
+                {
+                    try
+                    {
+                        if (ModalitaEntrata == Program.eMODALITA_ENTRATA_DETAIL.Inserimento)
+                        {
+                            //Modalità inserimento: istanzio '_strumentoMusicale' come nuova istanza in base al tipo
+                            if (cbStrumento.SelectedIndex ==
+                                Convert.ToInt32(Program.eTIPO_STRUMENTO.Batteria))
+                            {
+                                _strumentoMusicale = new ClsBatteria();
+                            }
+                            else if (cbStrumento.SelectedIndex ==
+                                Convert.ToInt32(Program.eTIPO_STRUMENTO.Legno))
+                            {
+                                _strumentoMusicale = new ClsLegno();
+                            }
+                            else if (cbStrumento.SelectedIndex ==
+                                Convert.ToInt32(Program.eTIPO_STRUMENTO.Ottone))
+                            {
+                                _strumentoMusicale = new ClsOttone();
+                            }
+                            else if (cbStrumento.SelectedIndex ==
+                                Convert.ToInt32(Program.eTIPO_STRUMENTO.Pianoforte))
+                            {
+                                _strumentoMusicale = new ClsPianoforte();
+                            }
+                            else if (cbStrumento.SelectedIndex ==
+                                Convert.ToInt32(Program.eTIPO_STRUMENTO.Strumento_a_corda))
+                            {
+                                _strumentoMusicale = new ClsStrumentoACorda();
+                            }
+                        }
+
+                        //Salvo i dati generali
+                        _strumentoMusicale.CasaProduttriceID =
+                            ClsArchivio.CaseProduttrici[cbCasaProduttrice.SelectedIndex].ID;
+                        _strumentoMusicale.Colori = tbColori.Text;
+                        _strumentoMusicale.Immagine = null; //Gestione immagini ancora da implementare
+                        _strumentoMusicale.Modello = tbModello.Text;
+                        if (cbNotaMassima.Enabled)
+                        {
+                            _strumentoMusicale.NotaMassimaID =
+                                ClsArchivio.NoteMusicali[cbNotaMassima.SelectedIndex].ID;
+                        }
+                        else
+                        {
+                            _strumentoMusicale.NotaMassimaID = -1;
+                        }
+                        if (cbNotaMinima.Enabled)
+                        {
+                            _strumentoMusicale.NotaMinimaID =
+                                ClsArchivio.NoteMusicali[cbNotaMinima.SelectedIndex].ID;
+                        }
+                        _strumentoMusicale.PesoKG = Convert.ToSingle(nudPeso.Value);
+
+                        //Controllo il tipo di strumento creando un alias per copiare correttamente i dati mantenendo l'area di memoria di _strumentoMusicale
+                        //Poi, in base alla modalità di entrata, inserisco o aggiorno nel DataBase
+                        string _comunicazione = String.Empty;
+                        if (_strumentoMusicale is ClsBatteria batteria) //batteria = alias
+                        {
+                            //Metto in _strumentoMusicale i dati di _dettagliBatteria, lasciando invariati i dati di generalizzazione
+                            ClsBatteriaBL.Clona(_dettagliBatteria, ref batteria, false);
+                            if(ModalitaEntrata == Program.eMODALITA_ENTRATA_DETAIL.Inserimento)
+                            {
+                                batteria.ID = ClsBatteriaBL.InsertBatteria(Program._connectionString, batteria, out _comunicazione);
+                            }
+                            else if(ModalitaEntrata == Program.eMODALITA_ENTRATA_DETAIL.Modifica)
+                            {
+                                ClsBatteriaBL.UpdateBatteria(Program._connectionString, batteria, out _comunicazione);
+                            }
+                        }
+                        else if (_strumentoMusicale is ClsLegno legno)
+                        {
+                            ClsLegnoBL.Clona(_dettagliLegno, ref legno, false);
+                            if(ModalitaEntrata == Program.eMODALITA_ENTRATA_DETAIL.Inserimento)
+                            {
+                                legno.ID = ClsLegnoBL.InsertLegno(Program._connectionString, legno, out _comunicazione);
+                            }
+                            else if(ModalitaEntrata == Program.eMODALITA_ENTRATA_DETAIL.Modifica)
+                            {
+                                ClsLegnoBL.UpdateLegno(Program._connectionString, legno, out _comunicazione);
+                            }
+                        }
+                        else if (_strumentoMusicale is ClsOttone ottone)
+                        {
+                            ClsOttoneBL.Clona(_dettagliOttone, ref ottone, false);
+                            if(ModalitaEntrata == Program.eMODALITA_ENTRATA_DETAIL.Inserimento)
+                            {
+                                ottone.ID = ClsOttoneBL.InsertOttone(Program._connectionString, ottone, out _comunicazione);
+                            }
+                            else if(ModalitaEntrata == Program.eMODALITA_ENTRATA_DETAIL.Modifica)
+                            {
+                                ClsOttoneBL.UpdateOttone(Program._connectionString, ottone, out _comunicazione);
+                            }
+                        }
+                        else if (_strumentoMusicale is ClsPianoforte pianoforte)
+                        {
+                            ClsPianoforteBL.Clona(_dettagliPianoforte, ref pianoforte, false);
+                            if(ModalitaEntrata == Program.eMODALITA_ENTRATA_DETAIL.Inserimento)
+                            {
+                                pianoforte.ID = ClsPianoforteBL.InsertPianoforte(Program._connectionString, pianoforte, out _comunicazione);
+                            }
+                            else if(ModalitaEntrata == Program.eMODALITA_ENTRATA_DETAIL.Modifica)
+                            {
+                                ClsPianoforteBL.UpdatePianoforte(Program._connectionString, pianoforte, out _comunicazione);
+                            }
+                        }
+                        else if (_strumentoMusicale is ClsStrumentoACorda strumentoACorda)
+                        {
+                            ClsStrumentoACordaBL.Clona(_dettagliStrumentoACorda, ref strumentoACorda, false);
+                            if (ModalitaEntrata == Program.eMODALITA_ENTRATA_DETAIL.Inserimento)
+                            {
+                                strumentoACorda.ID = ClsStrumentoACordaBL.InsertStrumentoACorda(Program._connectionString, strumentoACorda, out _comunicazione);
+                            }
+                            else
+                            {
+                                ClsStrumentoACordaBL.UpdateStrumentoACorda(Program._connectionString, strumentoACorda, out _comunicazione);
+                            }
+                        }
+
+                        MessageBox.Show(_comunicazione, "SALVA", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        _erroriNelSalvataggio = false;
+                    }
+                    catch(Exception ex)
+                    {
+                        _erroriNelSalvataggio = true;
+                        MessageBox.Show("Errore nel salvataggio delle specifiche dello strumento:\r\n" + ex, "SALVA", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+
+                //Salvataggio dei dati della vendere: solo se l'utente gestisce il negozio attuale
+                //Si può solo modificare. Per aggiungerla devi fare da FrmSceltaInserimentoStrumentoMusicale
+                if(UtenteGestisceNegozioAttuale && ModalitaEntrata == Program.eMODALITA_ENTRATA_DETAIL.Modifica)
+                {
+                    try
+                    {
+                        string _comunicazione2 = String.Empty;
+
+                        _vendereStrumentoMusicale.Prezzo = nudPrezzo.Value;
+                        _vendereStrumentoMusicale.Quantita = Convert.ToUInt16(nudQuantita.Value);
+
+                        ClsVendereBL.UpdateVendere(Program._connectionString, _vendereStrumentoMusicale, out _comunicazione2);
+
+                        MessageBox.Show(_comunicazione2, "SALVA", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        _erroriNelSalvataggio = false;
+                    }
+                    catch(Exception ex)
+                    {
+                        _erroriNelSalvataggio = true;
+                        MessageBox.Show("Errore nel salvataggio del prezzo e/o della quantità:\r\n" + ex, "SALVA", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+
+                if(_erroriNelSalvataggio == false)
+                {
+                    this.DialogResult = DialogResult.OK;
+                    this.Close();
+                }
+            }
+        }
+
+        private void btnAnnulla_Click(object sender, EventArgs e)
+        {
+            DialogResult _drMessageBox =
+                MessageBox.Show("Sei sicur* di voler uscire senza salvare?", "ANNULLA", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+
+            if(_drMessageBox == DialogResult.Yes)
+            {
+                _bottoneAnnullaPremuto = true;
+                this.DialogResult = DialogResult.Cancel;
+                this.Close();
+            }
+            else
+            {
+                _bottoneAnnullaPremuto = false;
+            }
         }
     }
+    
 }

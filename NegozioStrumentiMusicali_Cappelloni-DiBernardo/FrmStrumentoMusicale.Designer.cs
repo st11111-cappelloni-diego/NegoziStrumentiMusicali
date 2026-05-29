@@ -70,9 +70,10 @@
             // label1
             // 
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(2, 9);
+            this.label1.Location = new System.Drawing.Point(3, 11);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(100, 23);
+            this.label1.Size = new System.Drawing.Size(133, 28);
             this.label1.TabIndex = 5;
             this.label1.Text = "Strumento:";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -82,18 +83,20 @@
             this.cbStrumento.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbStrumento.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cbStrumento.FormattingEnabled = true;
-            this.cbStrumento.Location = new System.Drawing.Point(108, 7);
+            this.cbStrumento.Location = new System.Drawing.Point(144, 9);
+            this.cbStrumento.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.cbStrumento.Name = "cbStrumento";
-            this.cbStrumento.Size = new System.Drawing.Size(680, 28);
+            this.cbStrumento.Size = new System.Drawing.Size(905, 33);
             this.cbStrumento.TabIndex = 4;
             this.cbStrumento.SelectedIndexChanged += new System.EventHandler(this.cbStrumento_SelectedIndexChanged);
             // 
             // label15
             // 
             this.label15.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label15.Location = new System.Drawing.Point(12, 68);
+            this.label15.Location = new System.Drawing.Point(16, 84);
+            this.label15.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(258, 20);
+            this.label15.Size = new System.Drawing.Size(344, 25);
             this.label15.TabIndex = 9;
             this.label15.Text = "ID";
             this.label15.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -101,22 +104,24 @@
             // nudID
             // 
             this.nudID.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.nudID.Location = new System.Drawing.Point(12, 93);
+            this.nudID.Location = new System.Drawing.Point(16, 114);
+            this.nudID.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.nudID.Maximum = new decimal(new int[] {
             1000,
             0,
             0,
             0});
             this.nudID.Name = "nudID";
-            this.nudID.Size = new System.Drawing.Size(258, 26);
+            this.nudID.Size = new System.Drawing.Size(344, 30);
             this.nudID.TabIndex = 10;
             // 
             // lblQuantita
             // 
             this.lblQuantita.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblQuantita.Location = new System.Drawing.Point(12, 122);
+            this.lblQuantita.Location = new System.Drawing.Point(16, 150);
+            this.lblQuantita.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblQuantita.Name = "lblQuantita";
-            this.lblQuantita.Size = new System.Drawing.Size(258, 20);
+            this.lblQuantita.Size = new System.Drawing.Size(344, 25);
             this.lblQuantita.TabIndex = 11;
             this.lblQuantita.Text = "Quantità";
             this.lblQuantita.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -124,22 +129,24 @@
             // nudQuantita
             // 
             this.nudQuantita.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.nudQuantita.Location = new System.Drawing.Point(12, 147);
+            this.nudQuantita.Location = new System.Drawing.Point(16, 181);
+            this.nudQuantita.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.nudQuantita.Maximum = new decimal(new int[] {
             1000,
             0,
             0,
             0});
             this.nudQuantita.Name = "nudQuantita";
-            this.nudQuantita.Size = new System.Drawing.Size(258, 26);
+            this.nudQuantita.Size = new System.Drawing.Size(344, 30);
             this.nudQuantita.TabIndex = 12;
             // 
             // label3
             // 
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(12, 228);
+            this.label3.Location = new System.Drawing.Point(16, 281);
+            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(258, 20);
+            this.label3.Size = new System.Drawing.Size(344, 25);
             this.label3.TabIndex = 13;
             this.label3.Text = "Colori";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -147,17 +154,19 @@
             // tbColori
             // 
             this.tbColori.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbColori.Location = new System.Drawing.Point(12, 251);
+            this.tbColori.Location = new System.Drawing.Point(16, 309);
+            this.tbColori.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tbColori.Name = "tbColori";
-            this.tbColori.Size = new System.Drawing.Size(258, 26);
+            this.tbColori.Size = new System.Drawing.Size(343, 30);
             this.tbColori.TabIndex = 14;
             // 
             // lblPrezzo
             // 
             this.lblPrezzo.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPrezzo.Location = new System.Drawing.Point(12, 176);
+            this.lblPrezzo.Location = new System.Drawing.Point(16, 217);
+            this.lblPrezzo.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblPrezzo.Name = "lblPrezzo";
-            this.lblPrezzo.Size = new System.Drawing.Size(258, 20);
+            this.lblPrezzo.Size = new System.Drawing.Size(344, 25);
             this.lblPrezzo.TabIndex = 15;
             this.lblPrezzo.Text = "Prezzo [euro]";
             this.lblPrezzo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -166,30 +175,33 @@
             // 
             this.nudPrezzo.DecimalPlaces = 2;
             this.nudPrezzo.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.nudPrezzo.Location = new System.Drawing.Point(12, 199);
+            this.nudPrezzo.Location = new System.Drawing.Point(16, 245);
+            this.nudPrezzo.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.nudPrezzo.Maximum = new decimal(new int[] {
             1410065407,
             2,
             0,
             0});
             this.nudPrezzo.Name = "nudPrezzo";
-            this.nudPrezzo.Size = new System.Drawing.Size(258, 26);
+            this.nudPrezzo.Size = new System.Drawing.Size(344, 30);
             this.nudPrezzo.TabIndex = 16;
             // 
             // tbModello
             // 
             this.tbModello.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbModello.Location = new System.Drawing.Point(12, 357);
+            this.tbModello.Location = new System.Drawing.Point(16, 439);
+            this.tbModello.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tbModello.Name = "tbModello";
-            this.tbModello.Size = new System.Drawing.Size(258, 26);
+            this.tbModello.Size = new System.Drawing.Size(343, 30);
             this.tbModello.TabIndex = 18;
             // 
             // label4
             // 
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(12, 334);
+            this.label4.Location = new System.Drawing.Point(16, 411);
+            this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(258, 20);
+            this.label4.Size = new System.Drawing.Size(344, 25);
             this.label4.TabIndex = 17;
             this.label4.Text = "Modello";
             this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -197,9 +209,10 @@
             // label5
             // 
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(12, 280);
+            this.label5.Location = new System.Drawing.Point(16, 345);
+            this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(258, 20);
+            this.label5.Size = new System.Drawing.Size(344, 25);
             this.label5.TabIndex = 19;
             this.label5.Text = "Casa produttrice";
             this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -209,17 +222,19 @@
             this.cbCasaProduttrice.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbCasaProduttrice.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cbCasaProduttrice.FormattingEnabled = true;
-            this.cbCasaProduttrice.Location = new System.Drawing.Point(12, 303);
+            this.cbCasaProduttrice.Location = new System.Drawing.Point(16, 373);
+            this.cbCasaProduttrice.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.cbCasaProduttrice.Name = "cbCasaProduttrice";
-            this.cbCasaProduttrice.Size = new System.Drawing.Size(258, 28);
+            this.cbCasaProduttrice.Size = new System.Drawing.Size(343, 33);
             this.cbCasaProduttrice.TabIndex = 20;
             // 
             // lblNotaMinima
             // 
             this.lblNotaMinima.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblNotaMinima.Location = new System.Drawing.Point(276, 70);
+            this.lblNotaMinima.Location = new System.Drawing.Point(368, 86);
+            this.lblNotaMinima.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblNotaMinima.Name = "lblNotaMinima";
-            this.lblNotaMinima.Size = new System.Drawing.Size(258, 20);
+            this.lblNotaMinima.Size = new System.Drawing.Size(344, 25);
             this.lblNotaMinima.TabIndex = 21;
             this.lblNotaMinima.Text = "Nota minima";
             this.lblNotaMinima.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -229,9 +244,10 @@
             this.cbNotaMinima.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbNotaMinima.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cbNotaMinima.FormattingEnabled = true;
-            this.cbNotaMinima.Location = new System.Drawing.Point(276, 93);
+            this.cbNotaMinima.Location = new System.Drawing.Point(368, 114);
+            this.cbNotaMinima.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.cbNotaMinima.Name = "cbNotaMinima";
-            this.cbNotaMinima.Size = new System.Drawing.Size(258, 28);
+            this.cbNotaMinima.Size = new System.Drawing.Size(343, 33);
             this.cbNotaMinima.TabIndex = 22;
             // 
             // cbNotaMassima
@@ -239,17 +255,19 @@
             this.cbNotaMassima.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbNotaMassima.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cbNotaMassima.FormattingEnabled = true;
-            this.cbNotaMassima.Location = new System.Drawing.Point(276, 145);
+            this.cbNotaMassima.Location = new System.Drawing.Point(368, 178);
+            this.cbNotaMassima.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.cbNotaMassima.Name = "cbNotaMassima";
-            this.cbNotaMassima.Size = new System.Drawing.Size(258, 28);
+            this.cbNotaMassima.Size = new System.Drawing.Size(343, 33);
             this.cbNotaMassima.TabIndex = 24;
             // 
             // lblNotaMassima
             // 
             this.lblNotaMassima.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblNotaMassima.Location = new System.Drawing.Point(276, 122);
+            this.lblNotaMassima.Location = new System.Drawing.Point(368, 150);
+            this.lblNotaMassima.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblNotaMassima.Name = "lblNotaMassima";
-            this.lblNotaMassima.Size = new System.Drawing.Size(258, 20);
+            this.lblNotaMassima.Size = new System.Drawing.Size(344, 25);
             this.lblNotaMassima.TabIndex = 23;
             this.lblNotaMassima.Text = "Nota massima";
             this.lblNotaMassima.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -257,9 +275,10 @@
             // label9
             // 
             this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Location = new System.Drawing.Point(276, 176);
+            this.label9.Location = new System.Drawing.Point(368, 217);
+            this.label9.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(258, 20);
+            this.label9.Size = new System.Drawing.Size(344, 25);
             this.label9.TabIndex = 25;
             this.label9.Text = "Peso [kg]";
             this.label9.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -268,43 +287,47 @@
             // 
             this.nudPeso.DecimalPlaces = 2;
             this.nudPeso.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.nudPeso.Location = new System.Drawing.Point(276, 199);
+            this.nudPeso.Location = new System.Drawing.Point(368, 245);
+            this.nudPeso.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.nudPeso.Maximum = new decimal(new int[] {
             1000,
             0,
             0,
             0});
             this.nudPeso.Name = "nudPeso";
-            this.nudPeso.Size = new System.Drawing.Size(258, 26);
+            this.nudPeso.Size = new System.Drawing.Size(344, 30);
             this.nudPeso.TabIndex = 26;
             // 
             // label10
             // 
             this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.Location = new System.Drawing.Point(276, 236);
+            this.label10.Location = new System.Drawing.Point(368, 290);
+            this.label10.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(512, 20);
+            this.label10.Size = new System.Drawing.Size(683, 25);
             this.label10.TabIndex = 27;
             this.label10.Text = "Altre caratteristiche";
             this.label10.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // btnSalva
             // 
-            this.btnSalva.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.btnSalva.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSalva.Location = new System.Drawing.Point(683, 477);
+            this.btnSalva.Location = new System.Drawing.Point(911, 587);
+            this.btnSalva.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnSalva.Name = "btnSalva";
-            this.btnSalva.Size = new System.Drawing.Size(105, 29);
+            this.btnSalva.Size = new System.Drawing.Size(140, 36);
             this.btnSalva.TabIndex = 30;
             this.btnSalva.Text = "Salva";
             this.btnSalva.UseVisualStyleBackColor = true;
+            this.btnSalva.Click += new System.EventHandler(this.btnSalva_Click);
             // 
             // btnInfoSpecifiche
             // 
             this.btnInfoSpecifiche.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnInfoSpecifiche.Location = new System.Drawing.Point(353, 477);
+            this.btnInfoSpecifiche.Location = new System.Drawing.Point(471, 587);
+            this.btnInfoSpecifiche.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnInfoSpecifiche.Name = "btnInfoSpecifiche";
-            this.btnInfoSpecifiche.Size = new System.Drawing.Size(211, 29);
+            this.btnInfoSpecifiche.Size = new System.Drawing.Size(281, 36);
             this.btnInfoSpecifiche.TabIndex = 31;
             this.btnInfoSpecifiche.Text = "Informazioni specifiche";
             this.btnInfoSpecifiche.UseVisualStyleBackColor = true;
@@ -312,9 +335,10 @@
             // 
             // pbImmagine
             // 
-            this.pbImmagine.Location = new System.Drawing.Point(540, 68);
+            this.pbImmagine.Location = new System.Drawing.Point(720, 84);
+            this.pbImmagine.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pbImmagine.Name = "pbImmagine";
-            this.pbImmagine.Size = new System.Drawing.Size(248, 157);
+            this.pbImmagine.Size = new System.Drawing.Size(331, 193);
             this.pbImmagine.TabIndex = 29;
             this.pbImmagine.TabStop = false;
             // 
@@ -322,9 +346,10 @@
             // 
             this.btnEliminaCaratteristica.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnEliminaCaratteristica.Image = global::NegozioStrumentiMusicali_Cappelloni_DiBernardo.Properties.Resources.iconaCestino1_35x35;
-            this.btnEliminaCaratteristica.Location = new System.Drawing.Point(276, 386);
+            this.btnEliminaCaratteristica.Location = new System.Drawing.Point(368, 475);
+            this.btnEliminaCaratteristica.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnEliminaCaratteristica.Name = "btnEliminaCaratteristica";
-            this.btnEliminaCaratteristica.Size = new System.Drawing.Size(40, 40);
+            this.btnEliminaCaratteristica.Size = new System.Drawing.Size(53, 49);
             this.btnEliminaCaratteristica.TabIndex = 54;
             this.btnEliminaCaratteristica.UseVisualStyleBackColor = true;
             // 
@@ -332,9 +357,10 @@
             // 
             this.btnModificaCaratteristica.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnModificaCaratteristica.Image = global::NegozioStrumentiMusicali_Cappelloni_DiBernardo.Properties.Resources.iconaModifica1_30x30;
-            this.btnModificaCaratteristica.Location = new System.Drawing.Point(322, 386);
+            this.btnModificaCaratteristica.Location = new System.Drawing.Point(429, 475);
+            this.btnModificaCaratteristica.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnModificaCaratteristica.Name = "btnModificaCaratteristica";
-            this.btnModificaCaratteristica.Size = new System.Drawing.Size(40, 40);
+            this.btnModificaCaratteristica.Size = new System.Drawing.Size(53, 49);
             this.btnModificaCaratteristica.TabIndex = 53;
             this.btnModificaCaratteristica.UseVisualStyleBackColor = true;
             // 
@@ -342,9 +368,10 @@
             // 
             this.btnNuovaCaratteristica.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnNuovaCaratteristica.Image = global::NegozioStrumentiMusicali_Cappelloni_DiBernardo.Properties.Resources.iconaNuovo1_30x30;
-            this.btnNuovaCaratteristica.Location = new System.Drawing.Point(368, 386);
+            this.btnNuovaCaratteristica.Location = new System.Drawing.Point(491, 475);
+            this.btnNuovaCaratteristica.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnNuovaCaratteristica.Name = "btnNuovaCaratteristica";
-            this.btnNuovaCaratteristica.Size = new System.Drawing.Size(40, 40);
+            this.btnNuovaCaratteristica.Size = new System.Drawing.Size(53, 49);
             this.btnNuovaCaratteristica.TabIndex = 52;
             this.btnNuovaCaratteristica.UseVisualStyleBackColor = true;
             // 
@@ -355,9 +382,10 @@
             this.chTesto});
             this.lvAltreCaratteristiche.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lvAltreCaratteristiche.HideSelection = false;
-            this.lvAltreCaratteristiche.Location = new System.Drawing.Point(276, 259);
+            this.lvAltreCaratteristiche.Location = new System.Drawing.Point(368, 319);
+            this.lvAltreCaratteristiche.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.lvAltreCaratteristiche.Name = "lvAltreCaratteristiche";
-            this.lvAltreCaratteristiche.Size = new System.Drawing.Size(512, 121);
+            this.lvAltreCaratteristiche.Size = new System.Drawing.Size(681, 148);
             this.lvAltreCaratteristiche.TabIndex = 55;
             this.lvAltreCaratteristiche.UseCompatibleStateImageBehavior = false;
             this.lvAltreCaratteristiche.View = System.Windows.Forms.View.Details;
@@ -376,28 +404,30 @@
             // 
             this.btnVisualizzaCaratteristica.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnVisualizzaCaratteristica.Image = global::NegozioStrumentiMusicali_Cappelloni_DiBernardo.Properties.Resources.iconaVisualizza1_30x21;
-            this.btnVisualizzaCaratteristica.Location = new System.Drawing.Point(414, 386);
+            this.btnVisualizzaCaratteristica.Location = new System.Drawing.Point(552, 475);
+            this.btnVisualizzaCaratteristica.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnVisualizzaCaratteristica.Name = "btnVisualizzaCaratteristica";
-            this.btnVisualizzaCaratteristica.Size = new System.Drawing.Size(40, 40);
+            this.btnVisualizzaCaratteristica.Size = new System.Drawing.Size(53, 49);
             this.btnVisualizzaCaratteristica.TabIndex = 82;
             this.btnVisualizzaCaratteristica.UseVisualStyleBackColor = true;
             // 
             // btnAnnulla
             // 
-            this.btnAnnulla.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnAnnulla.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAnnulla.Location = new System.Drawing.Point(570, 477);
+            this.btnAnnulla.Location = new System.Drawing.Point(760, 587);
+            this.btnAnnulla.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnAnnulla.Name = "btnAnnulla";
-            this.btnAnnulla.Size = new System.Drawing.Size(107, 29);
+            this.btnAnnulla.Size = new System.Drawing.Size(143, 36);
             this.btnAnnulla.TabIndex = 83;
             this.btnAnnulla.Text = "Annulla";
             this.btnAnnulla.UseVisualStyleBackColor = true;
+            this.btnAnnulla.Click += new System.EventHandler(this.btnAnnulla_Click);
             // 
             // FrmStrumentoMusicale
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 518);
+            this.ClientSize = new System.Drawing.Size(1067, 638);
             this.Controls.Add(this.btnAnnulla);
             this.Controls.Add(this.btnVisualizzaCaratteristica);
             this.Controls.Add(this.lvAltreCaratteristiche);
@@ -428,6 +458,7 @@
             this.Controls.Add(this.nudID);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.cbStrumento);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.MaximizeBox = false;
             this.Name = "FrmStrumentoMusicale";
             this.Text = "FrmStrumentoMusicale";

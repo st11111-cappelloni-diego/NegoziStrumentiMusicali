@@ -15,6 +15,7 @@ namespace NegozioStrumentiMusicali
         Program.eMODALITA_ENTRATA_DETAIL _visualizzazione;
         public FrmIndirizzo(ClsIndirizzo indirizzo, Program.eMODALITA_ENTRATA_DETAIL modalitaVisualizzazione)
         {
+
             InitializeComponent();
             _visualizzazione = modalitaVisualizzazione;
             if(_visualizzazione == Program.eMODALITA_ENTRATA_DETAIL.Visualizzazione)
@@ -25,9 +26,11 @@ namespace NegozioStrumentiMusicali
                 tbCodicePostale.Text = indirizzo.CodicePostale;
                 tbComune.Text = indirizzo.Comune;
                 tbVia.Text = indirizzo.Via;
-                
+                tbNumeroCivico.Text = indirizzo.NumeroCivico.ToString();
+                tbLetteraCivico.Text = indirizzo.LetteraCivico.ToString();
+                cbNazione.SelectedItem = indirizzo.Nazione;
             }
-            
+
         }
 
         private void FrmIndirizzo_Load(object sender, EventArgs e)

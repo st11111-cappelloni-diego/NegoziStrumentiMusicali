@@ -31,7 +31,7 @@ namespace NegozioStrumentiMusicali
             cbMaterialeCorpo.SelectedIndex = Convert.ToInt32(legno.MaterialeCorpo);
             cbMaterialeChiavi.SelectedIndex = Convert.ToInt32(legno.MaterialeChiavi);
 
-            if(legno.AltezzaCM <= 0)
+            if(legno.AltezzaCM < Convert.ToSingle(nudAltezza.Minimum))
             {
                 nudAltezza.Value = nudAltezza.Minimum;
             }
@@ -39,7 +39,7 @@ namespace NegozioStrumentiMusicali
             {
                 nudAltezza.Value = Convert.ToDecimal(legno.AltezzaCM);
             }
-            if(legno.LarghezzaCM <= 0)
+            if(legno.LarghezzaCM < Convert.ToSingle(nudLarghezza.Minimum))
             {
                 nudLarghezza.Value = nudLarghezza.Minimum;
             }
@@ -47,7 +47,7 @@ namespace NegozioStrumentiMusicali
             {
                 nudLarghezza.Value = Convert.ToDecimal(legno.LarghezzaCM);
             }
-            if(legno.LunghezzaCM <= 0)
+            if(legno.LunghezzaCM < Convert.ToSingle(nudLunghezza.Minimum))
             {
                 nudLunghezza.Value = nudLunghezza.Minimum;
             }

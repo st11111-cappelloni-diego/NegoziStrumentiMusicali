@@ -169,5 +169,10 @@ namespace NegozioStrumentiMusicali
             FrmIndirizzo _indirizzo = new FrmIndirizzo(ClsIndirizzoBL.GetOneIndirizzo(ref Program._connessioneAlDB, _indirizzoID, out _comunicazione), Program.eMODALITA_ENTRATA_DETAIL.Visualizzazione);
             _indirizzo.ShowDialog();
         }
+
+        private void btnVisualizzaArticolo_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
