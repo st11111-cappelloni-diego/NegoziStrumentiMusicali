@@ -41,6 +41,8 @@ namespace NegozioStrumentiMusicali
                 _negozi.Add(ClsNegozioBL.GetOneNegozio(ref Program._connessioneAlDB, gestire.NegozioID, out _comunicazioneNegozi));
             }
 
+            cbStato.DataSource = Enum.GetNames(typeof(ClsOrdine.eSTATO));
+
             PopolaCombobox(cbNegozio, _negozi);           
         }
 
@@ -106,7 +108,8 @@ namespace NegozioStrumentiMusicali
             PopolaListView(lvOrdini, _listOrdini, _negozioID);
 
             cbParametriDiOrdinamento.DataSource = Enum.GetNames(typeof(ePARAMETRI_DI_ORDINAMENTO));
-            
+
+            pnlDetail.Visible = false;
         }
 
         private void cbNegozio_SelectedIndexChanged(object sender, EventArgs e)
@@ -131,7 +134,7 @@ namespace NegozioStrumentiMusicali
 
         private void lvOrdini_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
         {
-            if(lvOrdini.SelectedItems.Count > 0)
+            if(lvOrdini.SelectedItems.Count == 1)
             {
                 //Recupero l’oggetto dal Tag e carico i dati della detail se è stato selezionato qualcosa
                 ClsOrdine _ordine = (ClsOrdine)lvOrdini.SelectedItems[0].Tag;
@@ -142,37 +145,86 @@ namespace NegozioStrumentiMusicali
                 nudIDArticolo.Enabled = false;
                 nudIDOrdine.Enabled = false;
 
+                cbStato.SelectedIndex = Convert.ToInt32(_ordine.Stato);
                 tbUsernameCliente.Text = _ordine.UsernameCliente;
                 dtpDataOrdine.Value = _ordine.DataOra;
                 nudIDOrdine.Value = _ordine.ID;
                 nudIDArticolo.Value = _ordine.StrumentoMusicaleID;
                 _indirizzoID = _ordine.IndirizzoID;
+                _negozioID = _ordine.NegozioID;
+            }
+            else
+            {
+                pnlDetail.Visible = false;
+                tbUsernameCliente.Enabled = false;
+                dtpDataOrdine.Enabled = false;
+                nudIDArticolo.Enabled = false;
+                nudIDOrdine.Enabled = false;
             }
 
         }
 
-        private void label9_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button1_Click(object sender, EventArgs e)
+        private void btnVisualizzaNegozio_Click(object sender, EventArgs e)
         {
             string _comunicazione;
             FrmNegozio _negozio = new FrmNegozio(ClsNegozioBL.GetOneNegozio(ref Program._connessioneAlDB, _negozioID, out _comunicazione), Program.eMODALITA_ENTRATA_DETAIL.Visualizzazione);
-            _negozio.ShowDialog();
+            _negozio.ShowDialog(this);
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void btnVisualizzaIndirizzo_Click(object sender, EventArgs e)
         {
             string _comunicazione;
             FrmIndirizzo _indirizzo = new FrmIndirizzo(ClsIndirizzoBL.GetOneIndirizzo(ref Program._connessioneAlDB, _indirizzoID, out _comunicazione), Program.eMODALITA_ENTRATA_DETAIL.Visualizzazione);
-            _indirizzo.ShowDialog();
+            _indirizzo.ShowDialog(this);
         }
 
         private void btnVisualizzaArticolo_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void btnVisualizzaUtente_Click(object sender, EventArgs e)
+        {
+            //Cerco l'utente dal DB
+            string _comunicazione = String.Empty;
+            ClsUtente _utente =
+                ClsUtenteBL.GetOneUtente(Program._connectionString, tbUsernameCliente.Text, out _comunicazione);
+
+            MessageBox.Show(_comunicazione, "VISUALIZZA UTENTE", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+            //Se è stato trovato apro la form detail utente in modalità visualizzazione ma non in modalità MioUtente
+            if(_utente != null)
+            {
+                FrmUtente _frmUtente = new FrmUtente(_utente, Program.eMODALITA_ENTRATA_DETAIL.Visualizzazione);
+                _frmUtente._frmMioUtente = false;
+                _frmUtente.ShowDialog(this);
+            }
+        }
+
+        private void lvOrdini_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnSalva_Click(object sender, EventArgs e)
+        {
+            string _comunicazione = String.Empty;
+
+            //Recupero l’oggetto dal Tag e carico i dati della detail se è stato selezionato qualcosa
+            ClsOrdine _ordine = (ClsOrdine)lvOrdini.SelectedItems[0].Tag;
+
+            //Salvo lo stato
+            _ordine.Stato = (ClsOrdine.eSTATO)cbStato.SelectedIndex;
+
+            //Aggiorno l'ordine nel DB 
+            ClsOrdineBL.UpdateOrdine(Program._connectionString, _ordine, out _comunicazione);
+
+            MessageBox.Show(_comunicazione, "SALVA", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+            //Ripopolo la listview
+            PopolaListView(lvOrdini, _listOrdini, _negozioID);
+
+            pnlDetail.Visible = false;
         }
     }
 }

@@ -128,8 +128,9 @@ namespace NegozioStrumentiMusicali
             if (Application.OpenForms["FrmUtente"] == null)
             {
                 //Se la form non è già aperta la instanzio
-                _frmUtente = new FrmUtente(ClsArchivio.UtenteAttuale, Program.eMODALITA_ENTRATA_DETAIL.Visualizzazione);
+                _frmUtente = new FrmUtente(ClsArchivio.UtenteAttuale, Program.eMODALITA_ENTRATA_DETAIL.Modifica);
             }
+            _frmUtente._frmMioUtente = true;
             MostraFormMDI(_frmUtente);
         }
         private void utentiToolStripMenuItem_Click(object sender, EventArgs e)
