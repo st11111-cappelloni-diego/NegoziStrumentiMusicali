@@ -267,11 +267,15 @@ namespace NegozioStrumentiMusicali
                     {
                         nudPrezzo.Enabled = true;
                         nudQuantita.Enabled = true;
+                        btnSalva.Enabled = true;
+                        btnAnnulla.Enabled = true;
                     }
                     else
                     {
                         nudPrezzo.Enabled = false;
                         nudQuantita.Enabled = false;
+                        btnSalva.Enabled = false;
+                        btnAnnulla.Enabled = false;
                     }
                 }
                 else if(UtenteGestisceNegozioAttuale == false && ClsArchivio.UtenteAttuale.AdminSoftware)

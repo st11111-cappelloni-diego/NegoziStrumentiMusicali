@@ -69,7 +69,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tbUsername.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbUsername.Location = new System.Drawing.Point(10, 32);
-            this.tbUsername.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tbUsername.Margin = new System.Windows.Forms.Padding(4);
             this.tbUsername.Name = "tbUsername";
             this.tbUsername.Size = new System.Drawing.Size(663, 37);
             this.tbUsername.TabIndex = 1;
@@ -80,7 +80,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tbEmail.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbEmail.Location = new System.Drawing.Point(10, 106);
-            this.tbEmail.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tbEmail.Margin = new System.Windows.Forms.Padding(4);
             this.tbEmail.Name = "tbEmail";
             this.tbEmail.Size = new System.Drawing.Size(663, 37);
             this.tbEmail.TabIndex = 3;
@@ -105,7 +105,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tbNome.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbNome.Location = new System.Drawing.Point(10, 179);
-            this.tbNome.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tbNome.Margin = new System.Windows.Forms.Padding(4);
             this.tbNome.Name = "tbNome";
             this.tbNome.Size = new System.Drawing.Size(663, 37);
             this.tbNome.TabIndex = 7;
@@ -130,7 +130,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tbCognome.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbCognome.Location = new System.Drawing.Point(10, 254);
-            this.tbCognome.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tbCognome.Margin = new System.Windows.Forms.Padding(4);
             this.tbCognome.Name = "tbCognome";
             this.tbCognome.Size = new System.Drawing.Size(663, 37);
             this.tbCognome.TabIndex = 9;
@@ -141,10 +141,10 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.ForeColor = System.Drawing.Color.Black;
-            this.label5.Location = new System.Drawing.Point(16, 231);
+            this.label5.Location = new System.Drawing.Point(10, 220);
             this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(664, 40);
+            this.label5.Size = new System.Drawing.Size(663, 30);
             this.label5.TabIndex = 8;
             this.label5.Text = "Cognome";
             this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -155,7 +155,7 @@
             this.btnEsci.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnEsci.ForeColor = System.Drawing.Color.Black;
             this.btnEsci.Location = new System.Drawing.Point(1357, 770);
-            this.btnEsci.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnEsci.Margin = new System.Windows.Forms.Padding(4);
             this.btnEsci.Name = "btnEsci";
             this.btnEsci.Size = new System.Drawing.Size(167, 59);
             this.btnEsci.TabIndex = 11;
@@ -169,7 +169,7 @@
             this.btnCambiaUtente.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCambiaUtente.ForeColor = System.Drawing.Color.Black;
             this.btnCambiaUtente.Location = new System.Drawing.Point(1183, 770);
-            this.btnCambiaUtente.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnCambiaUtente.Margin = new System.Windows.Forms.Padding(4);
             this.btnCambiaUtente.Name = "btnCambiaUtente";
             this.btnCambiaUtente.Size = new System.Drawing.Size(167, 59);
             this.btnCambiaUtente.TabIndex = 12;
@@ -182,7 +182,7 @@
             this.btnCancellaUtente.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCancellaUtente.ForeColor = System.Drawing.Color.Black;
             this.btnCancellaUtente.Location = new System.Drawing.Point(988, 770);
-            this.btnCancellaUtente.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnCancellaUtente.Margin = new System.Windows.Forms.Padding(4);
             this.btnCancellaUtente.Name = "btnCancellaUtente";
             this.btnCancellaUtente.Size = new System.Drawing.Size(187, 59);
             this.btnCancellaUtente.TabIndex = 13;
@@ -210,7 +210,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dtpDataDiNascita.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dtpDataDiNascita.Location = new System.Drawing.Point(10, 327);
-            this.dtpDataDiNascita.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dtpDataDiNascita.Margin = new System.Windows.Forms.Padding(4);
             this.dtpDataDiNascita.MinDate = new System.DateTime(1900, 1, 1, 0, 0, 0, 0);
             this.dtpDataDiNascita.Name = "dtpDataDiNascita";
             this.dtpDataDiNascita.Size = new System.Drawing.Size(663, 37);
@@ -238,7 +238,7 @@
             this.cbGenere.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cbGenere.FormattingEnabled = true;
             this.cbGenere.Location = new System.Drawing.Point(10, 400);
-            this.cbGenere.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cbGenere.Margin = new System.Windows.Forms.Padding(4);
             this.cbGenere.Name = "cbGenere";
             this.cbGenere.Size = new System.Drawing.Size(663, 38);
             this.cbGenere.TabIndex = 17;
@@ -248,7 +248,7 @@
             this.pbFotoProfilo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.pbFotoProfilo.Image = global::NegozioStrumentiMusicali_Cappelloni_DiBernardo.Properties.Resources.iconaUtente1_589x589;
             this.pbFotoProfilo.Location = new System.Drawing.Point(739, 11);
-            this.pbFotoProfilo.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pbFotoProfilo.Margin = new System.Windows.Forms.Padding(4);
             this.pbFotoProfilo.Name = "pbFotoProfilo";
             this.pbFotoProfilo.Size = new System.Drawing.Size(785, 725);
             this.pbFotoProfilo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -261,6 +261,7 @@
             this.panel1.Controls.Add(this.label1);
             this.panel1.Controls.Add(this.label7);
             this.panel1.Controls.Add(this.tbUsername);
+            this.panel1.Controls.Add(this.label5);
             this.panel1.Controls.Add(this.dtpDataDiNascita);
             this.panel1.Controls.Add(this.tbEmail);
             this.panel1.Controls.Add(this.label6);
@@ -283,10 +284,9 @@
             this.Controls.Add(this.btnCambiaUtente);
             this.Controls.Add(this.btnEsci);
             this.Controls.Add(this.pbFotoProfilo);
-            this.Controls.Add(this.label5);
             this.Controls.Add(this.panel1);
             this.ForeColor = System.Drawing.Color.Black;
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.MaximizeBox = false;
             this.Name = "FrmUtente";
             this.Text = "MioUtente";

@@ -48,7 +48,7 @@
             this.btnElimina = new System.Windows.Forms.Button();
             this.btnModifica = new System.Windows.Forms.Button();
             this.btnNuovo = new System.Windows.Forms.Button();
-            this.btnOrdinaStrumento = new System.Windows.Forms.Button();
+            this.btnOdina = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // lvStrumenti
@@ -67,7 +67,7 @@
             this.lvStrumenti.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lvStrumenti.FullRowSelect = true;
             this.lvStrumenti.HideSelection = false;
-            this.lvStrumenti.Location = new System.Drawing.Point(14, 99);
+            this.lvStrumenti.Location = new System.Drawing.Point(12, 99);
             this.lvStrumenti.MultiSelect = false;
             this.lvStrumenti.Name = "lvStrumenti";
             this.lvStrumenti.Size = new System.Drawing.Size(975, 580);
@@ -242,16 +242,17 @@
             this.btnNuovo.UseVisualStyleBackColor = true;
             this.btnNuovo.Click += new System.EventHandler(this.btnNuovo_Click);
             // 
-            // btnOrdinaStrumento
+            // btnOdina
             // 
-            this.btnOrdinaStrumento.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnOrdinaStrumento.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnOrdinaStrumento.Location = new System.Drawing.Point(1041, 639);
-            this.btnOrdinaStrumento.Name = "btnOrdinaStrumento";
-            this.btnOrdinaStrumento.Size = new System.Drawing.Size(102, 40);
-            this.btnOrdinaStrumento.TabIndex = 83;
-            this.btnOrdinaStrumento.Text = "ORDINA";
-            this.btnOrdinaStrumento.UseVisualStyleBackColor = true;
+            this.btnOdina.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnOdina.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnOdina.Location = new System.Drawing.Point(1041, 639);
+            this.btnOdina.Name = "btnOdina";
+            this.btnOdina.Size = new System.Drawing.Size(102, 40);
+            this.btnOdina.TabIndex = 84;
+            this.btnOdina.Text = "ORDINA";
+            this.btnOdina.UseVisualStyleBackColor = true;
+            this.btnOdina.Click += new System.EventHandler(this.btnOdina_Click);
             // 
             // FrmStrumentiMusicali
             // 
@@ -259,7 +260,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlDark;
             this.ClientSize = new System.Drawing.Size(1155, 686);
-            this.Controls.Add(this.btnOrdinaStrumento);
+            this.Controls.Add(this.btnOdina);
             this.Controls.Add(this.btnInfoNegozio);
             this.Controls.Add(this.btnVisualizza);
             this.Controls.Add(this.btnOrdina);
@@ -281,7 +282,6 @@
         }
 
         #endregion
-        private System.Windows.Forms.ListView lvStrumenti;
         private System.Windows.Forms.ColumnHeader chID;
         private System.Windows.Forms.ColumnHeader chCasaProduttrice;
         private System.Windows.Forms.ColumnHeader Modello;
@@ -300,7 +300,8 @@
         private System.Windows.Forms.ComboBox cbNegozio;
         private System.Windows.Forms.Button btnVisualizza;
         private System.Windows.Forms.Button btnInfoNegozio;
-        private System.Windows.Forms.Button btnOrdinaStrumento;
         private System.Windows.Forms.ColumnHeader chTipo;
+        private System.Windows.Forms.Button btnOdina;
+        public System.Windows.Forms.ListView lvStrumenti;
     }
 }
