@@ -177,6 +177,7 @@
             this.btnVisualizzaArticolo.Size = new System.Drawing.Size(61, 39);
             this.btnVisualizzaArticolo.TabIndex = 76;
             this.btnVisualizzaArticolo.UseVisualStyleBackColor = true;
+            this.btnVisualizzaArticolo.Click += new System.EventHandler(this.btnVisualizzaArticolo_Click);
             // 
             // btnVisualizzaUtente
             // 
@@ -188,7 +189,6 @@
             this.btnVisualizzaUtente.Size = new System.Drawing.Size(61, 39);
             this.btnVisualizzaUtente.TabIndex = 75;
             this.btnVisualizzaUtente.UseVisualStyleBackColor = true;
-            this.btnVisualizzaUtente.Click += new System.EventHandler(this.btnVisualizzaUtente_Click);
             // 
             // nudIDArticolo
             // 
