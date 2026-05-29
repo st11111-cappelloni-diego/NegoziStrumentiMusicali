@@ -666,5 +666,51 @@ namespace NegozioStrumentiMusicali
                 MessageBox.Show("Selezionare un elemento", "VISUALIZZA", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
         }
+
+        private void btnOrdinaStrumento_Click(object sender, EventArgs e)
+        {
+           
+        }
+
+        private void btnOdina_Click(object sender, EventArgs e)
+        {
+            if (lvStrumenti.SelectedIndices.Count > 0)
+            {
+                var tag = lvStrumenti.SelectedItems[0].Tag;
+
+                
+
+                if (tag is ClsBatteria batteria)
+                {
+                    // batteria è già un ClsBatteria
+                    FrmOrdine _ordineBatteria = new FrmOrdine(batteria, ClsArchivio.Negozi[cbNegozio.SelectedIndex].ID);
+                    _ordineBatteria.ShowDialog();
+                }
+                else if (tag is ClsLegno legno)
+                {
+                    // legno è già un ClsLegno
+                    FrmOrdine _ordineLegno = new FrmOrdine(legno, ClsArchivio.Negozi[cbNegozio.SelectedIndex].ID);
+                    _ordineLegno.ShowDialog();
+                }
+                else if (tag is ClsOttone ottone)
+                {
+                    // ottone è già un ClsOttone
+                    FrmOrdine _ordineOttone = new FrmOrdine(ottone, ClsArchivio.Negozi[cbNegozio.SelectedIndex].ID);
+                    _ordineOttone.ShowDialog();
+                }
+                else if (tag is ClsPianoforte piano)
+                {
+                    // piano è già un ClsPianoforte
+                    FrmOrdine _ordinePiano = new FrmOrdine(piano, ClsArchivio.Negozi[cbNegozio.SelectedIndex].ID);
+                    _ordinePiano.ShowDialog();
+                }
+                else if (tag is ClsStrumentoACorda corda)
+                {
+                    // corda è già un ClsStrumentoACorda
+                    FrmOrdine _ordineCorda = new FrmOrdine(corda, ClsArchivio.Negozi[cbNegozio.SelectedIndex].ID);
+                    _ordineCorda.ShowDialog();
+                }
+            }
+        }
     }
 }
