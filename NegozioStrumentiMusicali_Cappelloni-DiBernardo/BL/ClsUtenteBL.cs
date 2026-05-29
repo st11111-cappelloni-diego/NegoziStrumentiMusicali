@@ -144,6 +144,47 @@ namespace NegozioStrumentiMusicali
             }
         }
 
+        /// <summary>
+        /// Eliminazione di un record da utenti
+        /// </summary>
+        /// <param name="connection">Connessione al DB</param>
+        /// <param name="utenti">Record da eliminare</param>
+        /// <param name="comunicazione">Comunicazione in uscita</param>
+        public static void DeleteUtente(ref MySqlConnection connection, ClsUtente utente, out string comunicazione)
+        {
+            //VARIABILI LOCALI
+            comunicazione = String.Empty;
+
+            try
+            {
+                //Apro la connessione
+                connection.Open();
+
+                //Compongo il comando DML
+                string _dml = "DELETE FROM utenti WHERE username = @username";
+
+                //Creo l'oggetto command
+                MySqlCommand _cmd = new MySqlCommand(_dml, connection);
+
+                //Inserisco i valori
+                _cmd.Parameters.AddWithValue("@username", utente.Username);
+
+                //Eseguo il comando
+                _cmd.ExecuteNonQuery();
+
+                comunicazione = "Utente eliminato correttamente dal DataBase";
+            }
+            catch (Exception ex)
+            {
+                comunicazione = ex.Message;
+            }
+            finally
+            {
+                //Chiudo la connessione
+                connection.Close();
+            }
+        }
+
         public static ClsUtente GetOneUtente(ref MySqlConnection connection, string username, out string comunicazione)
         {
             //VARIABILI GLOBALI
