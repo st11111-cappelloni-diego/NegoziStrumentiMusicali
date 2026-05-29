@@ -17,7 +17,7 @@ namespace NegozioStrumentiMusicali
     public partial class FrmPianoforte : Form
     {
         #region Variabili
-        private ClsPianoforte _pianoforte = new ClsPianoforte();
+        private ClsPianoforte _pianoforte;
         private Program.eMODALITA_ENTRATA_DETAIL _modalitaEntrata;
         /// <summary>
         /// Variabile di backup del valore di cbMaterialeCorpoPFAcustico in caso di cambio del tipo di pianoforte
@@ -26,7 +26,6 @@ namespace NegozioStrumentiMusicali
 
         #endregion
         #region Proprietà
-        public ClsPianoforte Pianoforte { get => _pianoforte; set => _pianoforte = value; }
         public Program.eMODALITA_ENTRATA_DETAIL ModalitaEntrata { get => _modalitaEntrata; set => _modalitaEntrata = value; }
 
         #endregion
@@ -47,14 +46,46 @@ namespace NegozioStrumentiMusicali
             cbMaterialeTastiBianchi.SelectedIndex = Convert.ToInt32(pianoforte.MaterialeTastiBianchi);
             cbMaterialeTastiNeri.SelectedIndex = Convert.ToInt32(pianoforte.MaterialeTastiNeri);
 
-            nudAltezza.Value = Convert.ToDecimal(pianoforte.AltezzaCM);
-            nudLarghezza.Value = Convert.ToDecimal(pianoforte.LarghezzaCM);
-            nudProfondita.Value = Convert.ToDecimal(pianoforte.ProfonditaCM);
-            if(pianoforte.AltezzaGinocchioCM <= -1)
+            if(pianoforte.NumeroTasti < Convert.ToByte(nudNumeroTasti.Minimum))
+            {
+                nudNumeroTasti.Value = nudNumeroTasti.Minimum;
+            }
+            else
+            {
+                nudNumeroTasti.Value = pianoforte.NumeroTasti;
+            }
+            if(pianoforte.AltezzaCM < Convert.ToSingle(nudAltezza.Minimum))
+            {
+                nudAltezza.Value = nudAltezza.Minimum;
+            }
+            else
+            {
+                nudAltezza.Value = Convert.ToDecimal(pianoforte.AltezzaCM);
+            }
+            if(pianoforte.LarghezzaCM < Convert.ToSingle(nudLarghezza.Minimum))
+            {
+                nudLarghezza.Value = nudLarghezza.Minimum;
+            }
+            else
+            {
+                nudLarghezza.Value = Convert.ToDecimal(pianoforte.LarghezzaCM);
+            }
+            if(pianoforte.ProfonditaCM < Convert.ToSingle(nudProfondita.Minimum))
+            {
+                nudProfondita.Value = nudProfondita.Minimum;
+            }
+            else
+            {
+                nudProfondita.Value = Convert.ToDecimal(pianoforte.ProfonditaCM);
+            }
+            if(pianoforte.AltezzaGinocchioCM <= Convert.ToSingle(nudAltezzaGinocchio.Minimum))
             {
                 nudAltezzaGinocchio.Value = nudAltezzaGinocchio.Minimum;
-                ckbAltezzaGinocchio.Checked = false;
-                nudAltezzaGinocchio.Enabled = false;
+                if(pianoforte.AltezzaGinocchioCM <= -1)
+                {
+                    ckbAltezzaGinocchio.Checked = false;
+                    nudAltezzaGinocchio.Enabled = false;
+                }
             }
             else
             {
@@ -106,7 +137,7 @@ namespace NegozioStrumentiMusicali
             nudLarghezza.Minimum = 0.01m;
             nudLarghezza.Maximum = 999.99m;
 
-            Pianoforte = pianoforte;
+            _pianoforte = pianoforte;
             ModalitaEntrata = modalitaEntrata;
 
             ckbAltezzaGinocchio.Checked = true;
@@ -130,7 +161,7 @@ namespace NegozioStrumentiMusicali
             if (ModalitaEntrata == Program.eMODALITA_ENTRATA_DETAIL.Visualizzazione
                 || ModalitaEntrata == Program.eMODALITA_ENTRATA_DETAIL.Modifica)
             {
-                CaricaDati(Pianoforte);
+                CaricaDati(_pianoforte);
             }
         }
 
@@ -194,5 +225,63 @@ namespace NegozioStrumentiMusicali
                 nudAltezzaGinocchio.Enabled = false;
             }
         }
+
+        private void btnSalva_Click(object sender, EventArgs e)
+        {
+            if (ClsArchivio.UtenteAttuale.AdminSoftware)
+            {
+                DialogResult _dr =
+                    MessageBox.Show("Sei sicur* di voler salvare ed uscire?", "SALVA", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+
+                if (_dr == DialogResult.Yes)
+                {
+                    //Salvo i dati se l'utente è admin software
+                    try
+                    {
+                        _pianoforte.Tipo =
+                            (ClsPianoforte.eTIPO_PF)cbTipo.SelectedIndex;
+                        _pianoforte.AltezzaCM = Convert.ToSingle(nudAltezza.Value);
+                        if(nudAltezzaGinocchio.Enabled)
+                        {
+                            _pianoforte.AltezzaGinocchioCM = Convert.ToSingle(nudAltezzaGinocchio.Value);
+                        }
+                        else
+                        {
+                            _pianoforte.AltezzaGinocchioCM = -1;
+                        }
+                        _pianoforte.LarghezzaCM = Convert.ToSingle(nudLarghezza.Value);
+                        if(cbMaterialeCorpoPFAcustico.Enabled)
+                        {
+                            _pianoforte.MaterialeCorpoPFAcustico =
+                                (Program.eLEGNO)cbMaterialeCorpoPFAcustico.SelectedIndex;
+                        }
+                        else
+                        {
+                            _pianoforte.MaterialeCorpoPFAcustico = null;
+                        }
+                        _pianoforte.MaterialeTastiBianchi =
+                            (ClsPianoforte.eMATERIALE_TASTI_PF)cbMaterialeTastiBianchi.SelectedIndex;
+                        _pianoforte.MaterialeTastiNeri =
+                            (ClsPianoforte.eMATERIALE_TASTI_PF)cbMaterialeTastiNeri.SelectedIndex;
+                        _pianoforte.NumeroTasti = Convert.ToByte(nudNumeroTasti.Value);
+                        _pianoforte.ProfonditaCM = Convert.ToSingle(nudProfondita.Value);
+
+                        MessageBox.Show("Dati salvati con successo", "SALVA", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                        this.Close();
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Errore nel salvataggio dei dati:\r\n" + ex, "SALVA", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("Solo gli amministratori del software possono modificare le specifiche degli strumenti musicali",
+                    "SALVA", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
+        }
     }
+    
 }

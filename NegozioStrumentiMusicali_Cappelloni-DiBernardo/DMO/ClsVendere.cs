@@ -13,7 +13,7 @@ namespace NegozioStrumentiMusicali
     {
         #region Attributi
         private long _id;
-        private int _quantita;
+        private uint _quantita;
         private decimal _prezzo;
         private long _strumentoMusicaleID;
         private long _negozioID;
@@ -22,7 +22,7 @@ namespace NegozioStrumentiMusicali
 
         #region Proprietà
         public long ID { get => _id; set => _id = value; }
-        public int Quantita
+        public uint Quantita
         {
             get => _quantita;
             set

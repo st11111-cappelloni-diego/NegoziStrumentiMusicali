@@ -16,15 +16,13 @@ namespace NegozioStrumentiMusicali
     public partial class FrmSceltaInserimentoStrumentoMusicale : Form
     {
         #region Variabili
-        private ClsStrumentoMusicale _strumentoMusicale = new ClsStrumentoMusicale();
-        private ClsVendere _vendereStrumentoMusicale = new ClsVendere();
+        public ClsStrumentoMusicale _strumentoMusicale;
+        public ClsVendere _vendereStrumentoMusicale;
         private long _idNegozioSelezionato;
         private bool _utenteGestisceNegozio = false;
 
         #endregion
         #region Proprietà
-        public ClsStrumentoMusicale StrumentoMusicale { get => _strumentoMusicale; set => _strumentoMusicale = value; }
-        public ClsVendere VendereStrumentoMusicale { get => _vendereStrumentoMusicale; set => _vendereStrumentoMusicale = value; }
         public long IDNegozioSelezionato { get => _idNegozioSelezionato; set => _idNegozioSelezionato = value; }
         public bool UtenteGestisceNegozio { get => _utenteGestisceNegozio; set => _utenteGestisceNegozio = value; }
 
@@ -283,11 +281,11 @@ namespace NegozioStrumentiMusicali
             FrmStrumentoMusicale _frmStrumentoMusicale = new FrmStrumentoMusicale();
 
             //Istanzio ClsStrumentoMusicale e ClsVendere nelle form
-            StrumentoMusicale = new ClsStrumentoMusicale();
-            _frmStrumentoMusicale._strumentoMusicale = StrumentoMusicale;
-            VendereStrumentoMusicale = new ClsVendere();
-            VendereStrumentoMusicale.NegozioID = IDNegozioSelezionato;
-            _frmStrumentoMusicale._vendereStrumentoMusicale = VendereStrumentoMusicale;
+            _strumentoMusicale = new ClsStrumentoMusicale();
+            _frmStrumentoMusicale._strumentoMusicale = _strumentoMusicale;
+            _vendereStrumentoMusicale = new ClsVendere();
+            _vendereStrumentoMusicale.NegozioID = IDNegozioSelezionato;
+            _frmStrumentoMusicale._vendereStrumentoMusicale = _vendereStrumentoMusicale;
 
             _frmStrumentoMusicale.UtenteGestisceNegozioAttuale = UtenteGestisceNegozio;
 
@@ -295,7 +293,20 @@ namespace NegozioStrumentiMusicali
 
             //Apro la form in modalità inserimento
             _frmStrumentoMusicale.ModalitaEntrata = Program.eMODALITA_ENTRATA_DETAIL.Inserimento;
-            _frmStrumentoMusicale.ShowDialog(this);
+            DialogResult _dr = _frmStrumentoMusicale.ShowDialog(this);
+
+            this.DialogResult = _dr;
+
+            if(_dr == DialogResult.OK)
+            {
+                _strumentoMusicale = _frmStrumentoMusicale._strumentoMusicale;
+                this.Close();
+            }
+            else
+            {
+                _strumentoMusicale = null;
+            }
+            
         }
 
         private void btnVisualizza_Click(object sender, EventArgs e)
@@ -330,6 +341,56 @@ namespace NegozioStrumentiMusicali
             {
                 MessageBox.Show("Selezionare un elemento", "VISUALIZZA", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
+        }
+
+        private void btnAggiungiAlNegozio_Click(object sender, EventArgs e)
+        {
+            if(lvStrumentiMusicali.SelectedItems.Count == 1)
+            {                    
+                //Posso aggiungere uno strumento al negozio solo se l'utente lo gestisce
+                if (UtenteGestisceNegozio)
+                {
+                    DialogResult _dr =
+                        MessageBox.Show("Sei sicur* di voler aggiungere lo strumento al negozio?", "AGGIUNGI AL NEGOZIO", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+
+                    if(_dr == DialogResult.Yes)
+                    {
+                        try
+                        {
+                            _strumentoMusicale = null;
+
+                            _vendereStrumentoMusicale = new ClsVendere();
+                            _vendereStrumentoMusicale.NegozioID = IDNegozioSelezionato;
+                            ClsStrumentoMusicale _strumentoSelezionato =
+                                (ClsStrumentoMusicale)lvStrumentiMusicali.SelectedItems[0].Tag;
+                            _vendereStrumentoMusicale.StrumentoMusicaleID = _strumentoSelezionato.ID;
+                            _vendereStrumentoMusicale.Quantita = Convert.ToUInt32(nudQuantita.Value);
+                            _vendereStrumentoMusicale.Prezzo = nudPrezzo.Value;
+
+                            string _comunicazione = String.Empty;
+                            _vendereStrumentoMusicale.ID =
+                                ClsVendereBL.InsertVendere(Program._connectionString, _vendereStrumentoMusicale, out _comunicazione);
+
+                            MessageBox.Show(_comunicazione, "AGGIUNGI AL NEGOZIO", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            this.Close();
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show("Errore nell'aggiunta dello strumento al negozio:\r\n" + ex, "AGGIUNGI AL NEGOZIO", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Solo i gestori del negozio posso aggiungere ad esso uno strumento musicale", "AGGIUNGI AL NEGOZIO", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                }
+
+            }
+        }
+
+        private void FrmSceltaInserimentoStrumentoMusicale_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            this.DialogResult = DialogResult.Cancel;
         }
     }
 }
