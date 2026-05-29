@@ -65,7 +65,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tbComune.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbComune.Location = new System.Drawing.Point(4, 31);
-            this.tbComune.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tbComune.Margin = new System.Windows.Forms.Padding(4);
             this.tbComune.Name = "tbComune";
             this.tbComune.Size = new System.Drawing.Size(709, 37);
             this.tbComune.TabIndex = 3;
@@ -91,7 +91,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tbVia.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbVia.Location = new System.Drawing.Point(4, 105);
-            this.tbVia.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tbVia.Margin = new System.Windows.Forms.Padding(4);
             this.tbVia.Name = "tbVia";
             this.tbVia.Size = new System.Drawing.Size(711, 37);
             this.tbVia.TabIndex = 7;
@@ -130,11 +130,10 @@
             // 
             this.cbNazione.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.cbNazione.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbNazione.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cbNazione.FormattingEnabled = true;
             this.cbNazione.Location = new System.Drawing.Point(4, 325);
-            this.cbNazione.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cbNazione.Margin = new System.Windows.Forms.Padding(4);
             this.cbNazione.Name = "cbNazione";
             this.cbNazione.Size = new System.Drawing.Size(711, 38);
             this.cbNazione.TabIndex = 59;
@@ -145,7 +144,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.btnSalva.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSalva.Location = new System.Drawing.Point(463, 382);
-            this.btnSalva.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnSalva.Margin = new System.Windows.Forms.Padding(4);
             this.btnSalva.Name = "btnSalva";
             this.btnSalva.Size = new System.Drawing.Size(253, 54);
             this.btnSalva.TabIndex = 60;
@@ -159,7 +158,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tbCodicePostale.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbCodicePostale.Location = new System.Drawing.Point(4, 252);
-            this.tbCodicePostale.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tbCodicePostale.Margin = new System.Windows.Forms.Padding(4);
             this.tbCodicePostale.Name = "tbCodicePostale";
             this.tbCodicePostale.Size = new System.Drawing.Size(711, 37);
             this.tbCodicePostale.TabIndex = 61;
@@ -185,7 +184,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tbNumeroCivico.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbNumeroCivico.Location = new System.Drawing.Point(4, 178);
-            this.tbNumeroCivico.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tbNumeroCivico.Margin = new System.Windows.Forms.Padding(4);
             this.tbNumeroCivico.Name = "tbNumeroCivico";
             this.tbNumeroCivico.Size = new System.Drawing.Size(352, 37);
             this.tbNumeroCivico.TabIndex = 63;
@@ -196,7 +195,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tbLetteraCivico.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbLetteraCivico.Location = new System.Drawing.Point(365, 178);
-            this.tbLetteraCivico.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tbLetteraCivico.Margin = new System.Windows.Forms.Padding(4);
             this.tbLetteraCivico.Name = "tbLetteraCivico";
             this.tbLetteraCivico.Size = new System.Drawing.Size(349, 37);
             this.tbLetteraCivico.TabIndex = 64;
@@ -215,7 +214,7 @@
             this.pnlIndirizzo.Controls.Add(this.tbCodicePostale);
             this.pnlIndirizzo.Controls.Add(this.label5);
             this.pnlIndirizzo.Location = new System.Drawing.Point(1, 9);
-            this.pnlIndirizzo.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pnlIndirizzo.Margin = new System.Windows.Forms.Padding(4);
             this.pnlIndirizzo.Name = "pnlIndirizzo";
             this.pnlIndirizzo.Size = new System.Drawing.Size(715, 372);
             this.pnlIndirizzo.TabIndex = 65;
@@ -227,7 +226,7 @@
             this.ClientSize = new System.Drawing.Size(723, 446);
             this.Controls.Add(this.pnlIndirizzo);
             this.Controls.Add(this.btnSalva);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.MaximizeBox = false;
             this.Name = "FrmIndirizzo";
             this.Text = "Indirizzo";

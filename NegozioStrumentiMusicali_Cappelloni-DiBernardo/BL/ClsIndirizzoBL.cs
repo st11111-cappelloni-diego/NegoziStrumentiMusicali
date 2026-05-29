@@ -285,7 +285,7 @@ namespace NegozioStrumentiMusicali
                 connection.Close();
             }
 
-            return _indirizzo;
+            return _indirizzo;  
         }
 
         public static ClsIndirizzo CaricaSingoloIndirizzo(ref MySqlDataReader dataReader)
@@ -304,11 +304,24 @@ namespace NegozioStrumentiMusicali
 
             _indirizzo.Nazione = dataReader["nazione"].ToString();
 
-            //_indirizzo.LetteraCivico = Convert.ToChar(dataReader["letteracivico"]);
 
-            //_indirizzo.EssereSede = Convert.ToBoolean(dataReader["esseresede"]);
+            if (dataReader["letteracivico"] == DBNull.Value)
+                _indirizzo.LetteraCivico = ' ';
+            else
+                _indirizzo.LetteraCivico = Convert.ToChar(dataReader["letteracivico"]);
 
-            //_indirizzo.CasaProduttriceID = Convert.ToInt64(dataReader["casaproduttriceID"]);
+
+            if (dataReader["esseresede"] == DBNull.Value)
+                _indirizzo.EssereSede = false;
+            else
+                _indirizzo.EssereSede = Convert.ToBoolean(dataReader["esseresede"]);
+
+
+            if (dataReader["casaproduttriceID"] == DBNull.Value)
+                _indirizzo.CasaProduttriceID = -1;
+            else
+                _indirizzo.CasaProduttriceID = Convert.ToInt64(dataReader["casaproduttriceID"]);
+
 
             return _indirizzo;
         }
