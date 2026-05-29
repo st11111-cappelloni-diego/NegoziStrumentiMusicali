@@ -70,7 +70,21 @@ namespace NegozioStrumentiMusicali
         /// <summary>
         /// Questa proprietà e suo attributo sono nullable
         /// </summary>
-        public Program.eLEGNO? MaterialeCorpoPFAcustico { get => _materialeCorpoPFAcustico; set => _materialeCorpoPFAcustico = value; }
+        public Program.eLEGNO? MaterialeCorpoPFAcustico
+        {
+            get => _materialeCorpoPFAcustico; 
+            set
+            {
+                if(value == null && Tipo == eTIPO_PF.acustico)
+                {
+                    throw new Exception("Materiale del corpo non inserito o nullo");
+                }
+                else
+                {
+                    _materialeCorpoPFAcustico = value;
+                }
+            }
+        }
         public float AltezzaCM
         {
             get

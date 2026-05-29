@@ -329,7 +329,7 @@ namespace NegozioStrumentiMusicali
 
         }
 
-        private void btnNuovo_Click(object sender, EventArgs e)
+        private async void btnNuovo_Click(object sender, EventArgs e)
         {
             //Creo l'istanza della form di scelta
             FrmSceltaInserimentoStrumentoMusicale _frmSceltaInserimentoStrumentoMusicale = new FrmSceltaInserimentoStrumentoMusicale();
@@ -341,7 +341,115 @@ namespace NegozioStrumentiMusicali
             _frmSceltaInserimentoStrumentoMusicale.UtenteGestisceNegozio = UtenteGestisceNegozioSelezionato;
 
             //La apro
-            _frmSceltaInserimentoStrumentoMusicale.ShowDialog(this);
+            DialogResult _drForm = _frmSceltaInserimentoStrumentoMusicale.ShowDialog(this);
+
+            //Alla chiusura:
+
+            //Trovo le vendere del negozio selezionato ricaricandole dal DB
+            long _idNegozio = ClsArchivio.Negozi[cbNegozio.SelectedIndex].ID;
+            string _temp = String.Empty;
+            await Task.Run(() =>
+            {
+                ListaVendereNegozioSelezionato =
+                    ClsVendereBL.GetSomeVendere(
+                        Program._connectionString,
+                        _idNegozio,
+                        -1,
+                        out _temp
+                    );
+            });
+
+            //Aggiungo l'oggetto anche su RAM sulla lista principale
+            if(_frmSceltaInserimentoStrumentoMusicale._strumentoMusicale != null
+                || _drForm == DialogResult.OK) 
+            {
+                int _pos = 0;
+                if (_frmSceltaInserimentoStrumentoMusicale._strumentoMusicale is ClsBatteria batteria)
+                {
+                    //Trovo la posizione
+                    _pos = ClsArchivio.Batterie.FindLastIndex(b => b.ID == batteria.ID);
+
+                    if (_pos >= 0)
+                    {
+                        //Se l'ho trovata la aggiorno
+                        ClsArchivio.Batterie[_pos] = batteria;
+                    }
+                    else
+                    {
+                        //Se non l'ho trovata la aggiungo
+                        ClsArchivio.Batterie.Add(batteria);
+                    }
+                }
+                else if (_frmSceltaInserimentoStrumentoMusicale._strumentoMusicale is ClsLegno legno)
+                {
+                    //Trovo la posizione
+                    _pos = ClsArchivio.Legni.FindLastIndex(l => l.ID == legno.ID);
+
+                    if (_pos >= 0)
+                    {
+                        //Se l'ho trovata la aggiorno
+                        ClsArchivio.Legni[_pos] = legno;
+                    }
+                    else
+                    {
+                        //Se non l'ho trovata la aggiungo
+                        ClsArchivio.Legni.Add(legno);
+                    }
+                }
+                else if (_frmSceltaInserimentoStrumentoMusicale._strumentoMusicale is ClsOttone ottone)
+                {
+                    //Trovo la posizione
+                    _pos = ClsArchivio.Ottoni.FindLastIndex(o => o.ID == ottone.ID);
+
+                    if (_pos >= 0)
+                    {
+                        //Se l'ho trovata la aggiorno
+                        ClsArchivio.Ottoni[_pos] = ottone;
+                    }
+                    else
+                    {
+                        //Se non l'ho trovata la aggiungo
+                        ClsArchivio.Ottoni.Add(ottone);
+                    }
+                }
+                else if (_frmSceltaInserimentoStrumentoMusicale._strumentoMusicale is ClsPianoforte pianoforte)
+                {
+                    //Trovo la posizione
+                    _pos = ClsArchivio.Pianoforti.FindLastIndex(p => p.ID == pianoforte.ID);
+
+                    if (_pos >= 0)
+                    {
+                        //Se l'ho trovata la aggiorno
+                        ClsArchivio.Pianoforti[_pos] = pianoforte;
+                    }
+                    else
+                    {
+                        //Se non l'ho trovata la aggiungo
+                        ClsArchivio.Pianoforti.Add(pianoforte);
+                    }
+                }
+                else if (_frmSceltaInserimentoStrumentoMusicale._strumentoMusicale is ClsStrumentoACorda strumentoACorda)
+                {
+                    //Trovo la posizione
+                    _pos = ClsArchivio.StrumentiACorda.FindLastIndex(c => c.ID == strumentoACorda.ID);
+
+                    if (_pos >= 0)
+                    {
+                        //Se l'ho trovata la aggiorno
+                        ClsArchivio.StrumentiACorda[_pos] = strumentoACorda;
+                    }
+                    else
+                    {
+                        //Se non l'ho trovata la aggiungo
+                        ClsArchivio.StrumentiACorda.Add(strumentoACorda);
+                    }
+                }
+            }
+
+            //Ripopolo la listview
+            PopolaListView(lvStrumenti, ClsArchivio.StrumentiACorda,
+                ClsArchivio.Pianoforti, ClsArchivio.Ottoni, ClsArchivio.Legni, ClsArchivio.Batterie);
+
         }
 
         #endregion
@@ -420,6 +528,96 @@ namespace NegozioStrumentiMusicali
 
                 //Apro la form
                 _frmStrumentoMusicale.ShowDialog(this);
+
+                //Alla chiusura:
+                //Aggiorno l'oggetto anche su RAM sulla lista principale
+                //Questa cosa va fatta perchè c'è la possibilità che siano stati applicati dei filtri di ricerca
+                int _pos = 0;
+                if (_frmStrumentoMusicale._strumentoMusicale is ClsBatteria batteria)
+                {
+                    //Trovo la posizione
+                    _pos = ClsArchivio.Batterie.FindLastIndex(b => b.ID == batteria.ID);
+
+                    if(_pos >= 0)
+                    {
+                        //Se l'ho trovata la aggiorno
+                        ClsArchivio.Batterie[_pos] = batteria;
+                    }
+                    else
+                    {
+                        //Se non l'ho trovata la aggiungo
+                        ClsArchivio.Batterie.Add(batteria);
+                    }
+                }
+                else if(_frmStrumentoMusicale._strumentoMusicale is ClsLegno legno)
+                {
+                    //Trovo la posizione
+                    _pos = ClsArchivio.Legni.FindLastIndex(l => l.ID == legno.ID);
+
+                    if (_pos >= 0)
+                    {
+                        //Se l'ho trovata la aggiorno
+                        ClsArchivio.Legni[_pos] = legno;
+                    }
+                    else
+                    {
+                        //Se non l'ho trovata la aggiungo
+                        ClsArchivio.Legni.Add(legno);
+                    }
+                }
+                else if (_frmStrumentoMusicale._strumentoMusicale is ClsOttone ottone)
+                {
+                    //Trovo la posizione
+                    _pos = ClsArchivio.Ottoni.FindLastIndex(o => o.ID == ottone.ID);
+
+                    if (_pos >= 0)
+                    {
+                        //Se l'ho trovata la aggiorno
+                        ClsArchivio.Ottoni[_pos] = ottone;
+                    }
+                    else
+                    {
+                        //Se non l'ho trovata la aggiungo
+                        ClsArchivio.Ottoni.Add(ottone);
+                    }
+                }
+                else if (_frmStrumentoMusicale._strumentoMusicale is ClsPianoforte pianoforte)
+                {
+                    //Trovo la posizione
+                    _pos = ClsArchivio.Pianoforti.FindLastIndex(p => p.ID == pianoforte.ID);
+
+                    if (_pos >= 0)
+                    {
+                        //Se l'ho trovata la aggiorno
+                        ClsArchivio.Pianoforti[_pos] = pianoforte;
+                    }
+                    else
+                    {
+                        //Se non l'ho trovata la aggiungo
+                        ClsArchivio.Pianoforti.Add(pianoforte);
+                    }
+                }
+                else if (_frmStrumentoMusicale._strumentoMusicale is ClsStrumentoACorda strumentoACorda)
+                {
+                    //Trovo la posizione
+                    _pos = ClsArchivio.StrumentiACorda.FindLastIndex(c => c.ID == strumentoACorda.ID);
+
+                    if (_pos >= 0)
+                    {
+                        //Se l'ho trovata la aggiorno
+                        ClsArchivio.StrumentiACorda[_pos] = strumentoACorda;
+                    }
+                    else
+                    {
+                        //Se non l'ho trovata la aggiungo
+                        ClsArchivio.StrumentiACorda.Add(strumentoACorda);
+                    }
+                }
+
+                //Ripopolo la listview
+                PopolaListView(lvStrumenti, ClsArchivio.StrumentiACorda,
+                    ClsArchivio.Pianoforti, ClsArchivio.Ottoni, ClsArchivio.Legni, ClsArchivio.Batterie);
+
             }
             else if(lvStrumenti.SelectedItems.Count > 1)
             {
