@@ -12,7 +12,7 @@ namespace NegozioStrumentiMusicali
     public class ClsOrdine
     {
         #region Enumeratori
-        enum eSTATO
+        public enum eSTATO
         {
             non_visualizzato,
             visualizzato,
@@ -67,7 +67,7 @@ namespace NegozioStrumentiMusicali
         public long NegozioID { get => _negozioID; set => _negozioID = value; }
         public long IndirizzoID { get => _indirizzoID; set => _indirizzoID = value; }
         public string UsernameCliente { get => _usernameCliente; set => _usernameCliente = value; }
-        private eSTATO Stato { get => stato; set => stato = value; }
+        public eSTATO Stato { get => stato; set => stato = value; }
 
         #endregion
 

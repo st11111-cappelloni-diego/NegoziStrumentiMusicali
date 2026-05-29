@@ -16,17 +16,19 @@ namespace NegozioStrumentiMusicali
     /// </summary>
     public partial class FrmUtente : Form
     {
-        ClsUtente _utente; //creo una variabile per l'utente il quale si vuole vedere i dettagli 
-        public FrmUtente(ClsUtente utente, Program.eMODALITA_ENTRATA_DETAIL visualizzazione)
+        public ClsUtente _utente; //creo una variabile per l'utente il quale si vuole vedere i dettagli 
+        public bool _frmMioUtente;
+        private Program.eMODALITA_ENTRATA_DETAIL _modalitaEntrata;
+
+        public Program.eMODALITA_ENTRATA_DETAIL ModaliatEntrata { get => _modalitaEntrata; set => _modalitaEntrata = value; }
+
+        public FrmUtente(ClsUtente utente, Program.eMODALITA_ENTRATA_DETAIL modalitaEntrata)
         {
             InitializeComponent();
 
             _utente = utente;
+            ModaliatEntrata = modalitaEntrata;
 
-            if (visualizzazione == Program.eMODALITA_ENTRATA_DETAIL.Visualizzazione)
-            {
-                panel1.Enabled = false;
-            }
             //Popolo le combobox
             cbGenere.DataSource = Enum.GetNames(typeof(ClsUtente.eGENERE));
         }
@@ -39,26 +41,53 @@ namespace NegozioStrumentiMusicali
             tbNome.Text = _utente.Nome;
             dtpDataDiNascita.Value = _utente.DataDiNascita;
             tbCognome.Text = _utente.Cognome;
-        }
 
-        private void btnVisualizzaPassword_Click(object sender, EventArgs e)
-        {
-
+            if (ModaliatEntrata == Program.eMODALITA_ENTRATA_DETAIL.Visualizzazione)
+            {
+                panel1.Enabled = false;
+                btnCambiaUtente.Enabled = false;
+                btnCambiaUtente.Visible = false;
+                btnCancellaUtente.Enabled = false;
+                btnCancellaUtente.Visible = false;
+                btnEsci.Enabled = false;
+                btnEsci.Visible = false;
+            }
+            else
+            {
+                if (_frmMioUtente)
+                {
+                    btnCambiaUtente.Enabled = true;
+                    btnCambiaUtente.Visible = true;
+                    btnCancellaUtente.Enabled = true;
+                    btnCancellaUtente.Visible = true;
+                    btnEsci.Enabled = true;
+                    btnEsci.Visible = true;
+                }
+                else
+                {
+                    btnCambiaUtente.Enabled = false;
+                    btnCambiaUtente.Visible = false;
+                    btnCancellaUtente.Enabled = false;
+                    btnCancellaUtente.Visible = false;
+                    btnEsci.Enabled = false;
+                    btnEsci.Visible = false;
+                }
+            }
         }
 
         private void btnEsci_Click(object sender, EventArgs e)
         {
-            this.Close();
+            //Uscire dal'utente
         }
 
         private void btnCancellaUtente_Click(object sender, EventArgs e)
         {
-            DialogResult _risultato = MessageBox.Show("Sei sicuro di voler cancellare questo utente?", "Cancellazoione utente", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            DialogResult _risultato = MessageBox.Show("Sei sicur* di voler cancellare questo utente?", "Cancellazione utente", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
             if (_risultato == DialogResult.Yes)
             {
-                string _cominucazione;
-                ClsUtenteBL.DeleteUtente(ref Program._connessioneAlDB, _utente, out _cominucazione);
-                MessageBox.Show(_cominucazione, "andamento", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                string _comunicazione;
+                ClsUtenteBL.DeleteUtente(ref Program._connessioneAlDB, _utente, out _comunicazione);
+                MessageBox.Show(_comunicazione, "Andamento", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 this.Close();
                 FrmLogin _login = new FrmLogin();
                 _login.ShowDialog();

@@ -80,7 +80,7 @@ namespace NegozioStrumentiMusicali
                 //Criptare la password prima di fare il confronto
                 _password = Crittografia(_password);
 
-                ClsArchivio.UtenteAttuale = ClsUtenteBL.GetOneUtente(ref Program._connessioneAlDB, _username, out _comunicazione);
+                ClsArchivio.UtenteAttuale = ClsUtenteBL.GetOneUtente(Program._connectionString, _username, out _comunicazione);
                 if (ClsArchivio.UtenteAttuale == null) //L'utente con l'username inserito non esiste o altro problema legato al DB
                     MessageBox.Show("Il tuo accesso non è stato consentito:\nL'utente a cui stai cercando di accedere non è presente nel DataBase", "Accesso Negato", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 else

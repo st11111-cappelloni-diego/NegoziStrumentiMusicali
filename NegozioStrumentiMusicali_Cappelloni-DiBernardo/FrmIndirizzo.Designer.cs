@@ -137,6 +137,7 @@
             this.cbNazione.Name = "cbNazione";
             this.cbNazione.Size = new System.Drawing.Size(711, 38);
             this.cbNazione.TabIndex = 59;
+            this.cbNazione.SelectedIndexChanged += new System.EventHandler(this.cbNazione_SelectedIndexChanged);
             // 
             // btnSalva
             // 

@@ -10,6 +10,9 @@ using System.Windows.Forms;
 
 namespace NegozioStrumentiMusicali
 {
+    /// <summary>
+    /// GUI e Sviluppo: Leonardo Di Bernardo
+    /// </summary>
     public partial class FrmNegozio : Form
     {
         Program.eMODALITA_ENTRATA_DETAIL _visualizzazione;
@@ -35,6 +38,9 @@ namespace NegozioStrumentiMusicali
                 }
                 btnSalva.Text = "ESCI";
                 pnlDetail.Enabled = false;
+
+                this.MaximizeBox = false;
+                this.FormBorderStyle = FormBorderStyle.FixedSingle;
             }
         }
 
