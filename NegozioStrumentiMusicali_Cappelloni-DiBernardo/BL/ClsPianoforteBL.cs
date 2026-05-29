@@ -15,54 +15,62 @@ namespace NegozioStrumentiMusicali
         /// <summary>
         /// Inserimento di record in pianoforti + informazioni generali in strumentimusicali
         /// </summary>
-        /// <param name="connection">Connessione al DB</param>
+        /// <param name="stringaDiConnessione"></param>
         /// <param name="pianoforte">Oggetto da inserire</param>
         /// <param name="comunicazione">Comunicazione in uscita</param>
         /// <returns>ID del nuovo record. Se -1 insert non riuscito</returns>
-        public static long InsertPianoforte(ref MySqlConnection connection, ClsPianoforte pianoforte, out string comunicazione)
+        public static long InsertPianoforte(string stringaDiConnessione, ClsPianoforte pianoforte, out string comunicazione)
         {
             //VARIABILI LOCALI
             long _ID = -1;
             comunicazione = String.Empty;
+            MySqlConnection _connection = new MySqlConnection(stringaDiConnessione);
 
             try
             {
                 //Inserisco le informazioni generali in strumentimusicali
-                _ID = ClsStrumentoMusicaleBL.InsertStrumentoMusicale(ref connection, pianoforte, out comunicazione);
+                _ID = ClsStrumentoMusicaleBL.InsertStrumentoMusicale(stringaDiConnessione, pianoforte, out comunicazione);
 
-                //Riapro la connessione dopo che si è chiusa in InsertStrumentoMusicale
-                connection.Open();
+                //Apro la connessione
+                _connection.Open();
 
                 //Creo il comando DML per info specifiche del pianoforte
                 string _dml =
                     "INSERT into pianoforti " +
                     "(strumentomusicaleID, tipo, numerotasti, materialetastibianchi, materialetastineri, materialecorpopfacustico," +
-                    "altezzacm, lunghezzacm, profonditacm, altezzaginocchiocm)" +
+                    "altezzacm, larghezzacm, profonditacm, altezzaginocchiocm)" +
                     "VALUES (@strumentomusicaleID, @tipo, @numerotasti, @materialetastibianchi, @materialetastineri, @materialecorpopfacustico," +
-                    "@altezzacm, @lunghezzacm, @profonditacm, @altezzaginocchiocm)";
+                    "@altezzacm, @larghezzacm, @profonditacm, @altezzaginocchiocm)";
 
                 //Creo l'oggetto command
-                MySqlCommand _cmd = new MySqlCommand(_dml, connection);
+                MySqlCommand _cmd = new MySqlCommand(_dml, _connection);
 
                 //Inserisco i valori
                 _cmd.Parameters.AddWithValue("@strumentomusicaleID", _ID); //Prima di inserire il pianoforte bisogna inserire lo strumento musicale ad esso associato
-                _cmd.Parameters.AddWithValue("@tipo", "'" + pianoforte.Tipo.ToString().ToLower() + "'");
+                _cmd.Parameters.AddWithValue("@tipo", pianoforte.Tipo.ToString());
                 _cmd.Parameters.AddWithValue("@numerotasti", pianoforte.NumeroTasti);
                 if (pianoforte.Tipo == ClsPianoforte.eTIPO_PF.acustico)
                 {
-                    _cmd.Parameters.AddWithValue("materialecorpopfacustico", pianoforte.MaterialeCorpoPFAcustico.ToString().ToLower());
+                    _cmd.Parameters.AddWithValue("materialecorpopfacustico", pianoforte.MaterialeCorpoPFAcustico.ToString());
                 }
                 else
                 {
                     //Null se il pianoforte è elettrico
                     _cmd.Parameters.AddWithValue("materialecorpopfacustico", null);
                 }
-                _cmd.Parameters.AddWithValue("@materialetastibianchi", pianoforte.MaterialeTastiBianchi.ToString().ToLower());
-                _cmd.Parameters.AddWithValue("@materialetastineri", pianoforte.MaterialeTastiNeri.ToString().ToLower());
+                _cmd.Parameters.AddWithValue("@materialetastibianchi", pianoforte.MaterialeTastiBianchi.ToString());
+                _cmd.Parameters.AddWithValue("@materialetastineri", pianoforte.MaterialeTastiNeri.ToString());
                 _cmd.Parameters.AddWithValue("@altezzacm", pianoforte.AltezzaCM);
-                _cmd.Parameters.AddWithValue("@lunghezzacm", pianoforte.LarghezzaCM);
+                _cmd.Parameters.AddWithValue("@larghezzacm", pianoforte.LarghezzaCM);
                 _cmd.Parameters.AddWithValue("@profonditacm", pianoforte.ProfonditaCM);
-                _cmd.Parameters.AddWithValue("@altezzaginocchiocm", pianoforte.AltezzaGinocchioCM);
+                if(pianoforte.AltezzaGinocchioCM <= -1)
+                {
+                    _cmd.Parameters.AddWithValue("altezzaginocchiocm", null);
+                }
+                else
+                {
+                    _cmd.Parameters.AddWithValue("altezzaginocchiocm", pianoforte.AltezzaGinocchioCM); ;
+                }
 
                 //Eseguo il comando
                 _cmd.ExecuteNonQuery();
@@ -76,7 +84,7 @@ namespace NegozioStrumentiMusicali
             finally
             {
                 //Chiudo la connessione
-                connection.Close();
+                _connection.Close();
             }
 
             return _ID;
@@ -87,18 +95,19 @@ namespace NegozioStrumentiMusicali
         /// <param name="connection">Connessione al DB</param>
         /// <param name="pianoforte">Dati record da aggiornare</param>
         /// <param name="comunicazione">Stringa di comunicazione in uscita</param>
-        public static void UpdatePianoforte(ref MySqlConnection connection, ClsPianoforte pianoforte, out string comunicazione)
+        public static void UpdatePianoforte(string stringaDiConnessione, ClsPianoforte pianoforte, out string comunicazione)
         {
             //VARIABILI LOCALI
             comunicazione = String.Empty;
+            MySqlConnection _connection = new MySqlConnection(stringaDiConnessione);
 
             try
             {
                 //Aggiorno le info generali in strumentimusicali
-                ClsStrumentoMusicaleBL.UpdateStrumentoMusicale(ref connection, pianoforte, out comunicazione);
+                ClsStrumentoMusicaleBL.UpdateStrumentoMusicale(stringaDiConnessione, pianoforte, out comunicazione);
 
-                //Riapro la connessione dopo che si è chiusa in UpdateStrumentoMusicale
-                connection.Open();
+                //Apro la connessione
+                _connection.Open();
 
                 //Compongo il comando dml per dettagli specifici pianoforte
                 string _dml =
@@ -109,25 +118,32 @@ namespace NegozioStrumentiMusicali
                     "materialetastineri = @materialetastineri, " +
                     "materialecorpopfacustico = @materialecorpopfacustico, " +
                     "altezzacm = @altezzacm, " +
-                    "lunghezzacm = @lunghezzacm, " +
+                    "larghezzacm = @larghezzacm, " +
                     "profonditacm = @profonditacm, " +
                     "altezzaginocchiocm = @altezzaginocchiocm " +
                     "WHERE strumentomusicaleID = @ID";
 
 
                 //Creo l'oggetto command
-                MySqlCommand _cmd = new MySqlCommand(_dml, connection);
+                MySqlCommand _cmd = new MySqlCommand(_dml, _connection);
 
                 //Inserisco i valori
-                _cmd.Parameters.AddWithValue("@tipo", pianoforte.Tipo.ToString().ToLower());
+                _cmd.Parameters.AddWithValue("@tipo", pianoforte.Tipo.ToString());
                 _cmd.Parameters.AddWithValue("@numerotasti", pianoforte.NumeroTasti);
-                _cmd.Parameters.AddWithValue("@materialetastibianchi", pianoforte.MaterialeTastiBianchi.ToString().ToLower());
-                _cmd.Parameters.AddWithValue("@materialetastineri", pianoforte.MaterialeTastiNeri.ToString().ToLower());
-                _cmd.Parameters.AddWithValue("@materialecorpopfacustico", pianoforte.MaterialeCorpoPFAcustico.ToString().ToLower());
+                _cmd.Parameters.AddWithValue("@materialetastibianchi", pianoforte.MaterialeTastiBianchi.ToString());
+                _cmd.Parameters.AddWithValue("@materialetastineri", pianoforte.MaterialeTastiNeri.ToString());
+                _cmd.Parameters.AddWithValue("@materialecorpopfacustico", pianoforte.MaterialeCorpoPFAcustico.ToString());
                 _cmd.Parameters.AddWithValue("@altezzacm", pianoforte.AltezzaCM);
-                _cmd.Parameters.AddWithValue("@lunghezzacm", pianoforte.LarghezzaCM);
+                _cmd.Parameters.AddWithValue("@larghezzacm", pianoforte.LarghezzaCM);
                 _cmd.Parameters.AddWithValue("@profonditacm", pianoforte.ProfonditaCM);
-                _cmd.Parameters.AddWithValue("@altezzaginocchiocm", pianoforte.AltezzaGinocchioCM);
+                if (pianoforte.AltezzaGinocchioCM <= -1)
+                {
+                    _cmd.Parameters.AddWithValue("altezzaginocchiocm", null);
+                }
+                else
+                {
+                    _cmd.Parameters.AddWithValue("altezzaginocchiocm", pianoforte.AltezzaGinocchioCM); ;
+                }
                 _cmd.Parameters.AddWithValue("@ID", pianoforte.ID);
 
                 //Eseguo il comando
@@ -142,7 +158,7 @@ namespace NegozioStrumentiMusicali
             finally
             {
                 //Chiudo la connessione
-                connection.Close();
+                _connection.Close();
             }
         }
         /// <summary>
@@ -279,14 +295,7 @@ namespace NegozioStrumentiMusicali
         {
             ClsPianoforte _pianoforteFinale = pianoforte;
 
-            _pianoforteFinale.ID = strumento.ID;
-            _pianoforteFinale.Colori = strumento.Colori;
-            _pianoforteFinale.CasaProduttriceID = strumento.CasaProduttriceID;
-            _pianoforteFinale.Immagine = strumento.Immagine;
-            _pianoforteFinale.PesoKG = strumento.PesoKG;
-            _pianoforteFinale.NotaMassimaID = strumento.NotaMassimaID;
-            _pianoforteFinale.NotaMinimaID = strumento.NotaMinimaID;
-            _pianoforteFinale.Modello = strumento.Modello;
+            ClsStrumentoMusicaleBL.Clona(strumento, ref _pianoforteFinale);
 
             return _pianoforteFinale;
         }
@@ -379,5 +388,27 @@ namespace NegozioStrumentiMusicali
 
             return _pianoforti;
         }
+        /// <summary>
+        /// Copia i dati da un pianoforte1 ad una pianforte2, compresi dati di specializzazione, senza mantenere i riferimenti in memoria
+        /// </summary>
+        /// <param name="pianoforte1"
+        /// <param name="pianoforte2"
+        public static void Clona(ClsPianoforte pianoforte1, ref ClsPianoforte pianoforte2, bool includiDatiDiGeneralizzazione)
+        {
+            if(includiDatiDiGeneralizzazione)
+            {
+                ClsStrumentoMusicaleBL.Clona(pianoforte1, ref pianoforte2); //Copia dei dati di generalizzazione
+            }
+            pianoforte2.Tipo = pianoforte1.Tipo;
+            pianoforte2.AltezzaCM = pianoforte1.AltezzaCM;
+            pianoforte2.AltezzaGinocchioCM = pianoforte1.AltezzaGinocchioCM;
+            pianoforte2.LarghezzaCM = pianoforte1.LarghezzaCM;
+            pianoforte2.MaterialeCorpoPFAcustico = pianoforte1.MaterialeCorpoPFAcustico;
+            pianoforte2.MaterialeTastiBianchi = pianoforte1.MaterialeTastiBianchi;
+            pianoforte2.MaterialeTastiNeri = pianoforte1.MaterialeTastiNeri;
+            pianoforte2.NumeroTasti = pianoforte1.NumeroTasti;
+        }
     }
+
+
 }

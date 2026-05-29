@@ -15,23 +15,24 @@ namespace NegozioStrumentiMusicali
         /// <summary>
         /// Inserimento di record in ottoni + informazioni generali in strumentimusicali
         /// </summary>
-        /// <param name="connection">Connessione al DB</param>
+        /// <param name="stringaDiConnessione"
         /// <param name="ottone">Oggetto da inserire</param>
         /// <param name="comunicazione">Comunicazione in uscita</param>
         /// <returns>ID del nuovo record. Se -1 insert non riuscito</returns>
-        public static long InsertOttone(ref MySqlConnection connection, ClsOttone ottone, out string comunicazione)
+        public static long InsertOttone(string stringaDiConnessione, ClsOttone ottone, out string comunicazione)
         {
             //VARIABILI LOCALI
             long _ID = -1;
             comunicazione = String.Empty;
+            MySqlConnection _connection = new MySqlConnection(stringaDiConnessione);
 
             try
             {
                 //Inserisco le informazioni generali in strumentimusicali
-                _ID = ClsStrumentoMusicaleBL.InsertStrumentoMusicale(ref connection, ottone, out comunicazione);
+                _ID = ClsStrumentoMusicaleBL.InsertStrumentoMusicale(stringaDiConnessione, ottone, out comunicazione);
 
                 //Riapro la connessione dopo che si è chiusa in InsertStrumentoMusicale
-                connection.Open();
+                _connection.Open();
 
                 //Creo il comando DML
                 string _dml =
@@ -42,7 +43,7 @@ namespace NegozioStrumentiMusicali
                     "@rivestimentobocchino, @lunghezzacm, @larghezzacm, @altezzacm";
 
                 //Creo l'oggetto command
-                MySqlCommand _cmd = new MySqlCommand(_dml, connection);
+                MySqlCommand _cmd = new MySqlCommand(_dml, _connection);
 
                 //Inserisco i valori
                 _cmd.Parameters.AddWithValue("@strumentomusicaleID", _ID); //Prima di inserire lo strumento a corda bisogna inserire lo strumento musicale ad esso associato
@@ -68,7 +69,7 @@ namespace NegozioStrumentiMusicali
             finally
             {
                 //Chiudo la connessione
-                connection.Close();
+                _connection.Close();
             }
 
             return _ID;
@@ -76,21 +77,22 @@ namespace NegozioStrumentiMusicali
         /// <summary>
         /// Update di un record in ottoni + dettagli generali in strumentimusicali
         /// </summary>
-        /// <param name="connection">Connessione al DB</param>
+        /// <param name="stringaDiConnessione"></param>
         /// <param name="ottone">Dati record da aggiornare</param>
         /// <param name="comunicazione">Stringa di comunicazione in uscita</param>
-        public static void UpdateOttone(ref MySqlConnection connection, ClsOttone ottone, out string comunicazione)
+        public static void UpdateOttone(string stringaDiConnessione, ClsOttone ottone, out string comunicazione)
         {
             //VARIABILI LOCALI
             comunicazione = String.Empty;
+            MySqlConnection _connection = new MySqlConnection(stringaDiConnessione);
 
             try
             {
                 //Aggiorno le info generali in strumentimusicali
-                ClsStrumentoMusicaleBL.UpdateStrumentoMusicale(ref connection, ottone, out comunicazione);
+                ClsStrumentoMusicaleBL.UpdateStrumentoMusicale(stringaDiConnessione, ottone, out comunicazione);
 
                 //Riapro la connessione dopo che si è chiusa in UpdateStrumentoMusicale
-                connection.Open();
+                _connection.Open();
 
                 //Compongo il comando dml
                 string _dml =
@@ -108,16 +110,16 @@ namespace NegozioStrumentiMusicali
 
 
                 //Creo l'oggetto command
-                MySqlCommand _cmd = new MySqlCommand(_dml, connection);
+                MySqlCommand _cmd = new MySqlCommand(_dml, _connection);
 
                 //Inserisco i valori
-                _cmd.Parameters.AddWithValue("@strumentomusicaleID", ottone.ID);
-                _cmd.Parameters.AddWithValue("@strumento", ottone.Strumento.ToString().ToLower());
-                _cmd.Parameters.AddWithValue("@materialecorpo", ottone.MaterialeCorpo.ToString().ToLower());
-                _cmd.Parameters.AddWithValue("@laccatura", ottone.Laccatura.ToString().ToLower());
-                _cmd.Parameters.AddWithValue("@placcatura", ottone.Placcatura.ToString().ToLower());
-                _cmd.Parameters.AddWithValue("@materialebocchino", ottone.MaterialeBocchino.ToString().ToLower());
-                _cmd.Parameters.AddWithValue("@rivestimentobocchino", ottone.RivestimentoBocchino.ToString().ToLower());
+                _cmd.Parameters.AddWithValue("@ID", ottone.ID);
+                _cmd.Parameters.AddWithValue("@strumento", ottone.Strumento.ToString());
+                _cmd.Parameters.AddWithValue("@materialecorpo", ottone.MaterialeCorpo.ToString());
+                _cmd.Parameters.AddWithValue("@laccatura", ottone.Laccatura.ToString());
+                _cmd.Parameters.AddWithValue("@placcatura", ottone.Placcatura.ToString());
+                _cmd.Parameters.AddWithValue("@materialebocchino", ottone.MaterialeBocchino.ToString());
+                _cmd.Parameters.AddWithValue("@rivestimentobocchino", ottone.RivestimentoBocchino.ToString());
                 _cmd.Parameters.AddWithValue("@lunghezzacm", ottone.LunghezzaCM);
                 _cmd.Parameters.AddWithValue("@larghezzacm", ottone.LarghezzaCM);
                 _cmd.Parameters.AddWithValue("@altezzacm", ottone.AltezzaCM);
@@ -134,7 +136,7 @@ namespace NegozioStrumentiMusicali
             finally
             {
                 //Chiudo la connessione
-                connection.Close();
+                _connection.Close();
             }
         }
         /// <summary>
@@ -264,14 +266,7 @@ namespace NegozioStrumentiMusicali
         {
             ClsOttone _ottoneFinale = ottone;
 
-            _ottoneFinale.ID = strumento.ID;
-            _ottoneFinale.Colori = strumento.Colori;
-            _ottoneFinale.CasaProduttriceID = strumento.CasaProduttriceID;
-            _ottoneFinale.Immagine = strumento.Immagine;
-            _ottoneFinale.PesoKG = strumento.PesoKG;
-            _ottoneFinale.NotaMassimaID = strumento.NotaMassimaID;
-            _ottoneFinale.NotaMinimaID = strumento.NotaMinimaID;
-            _ottoneFinale.Modello = strumento.Modello;
+            ClsStrumentoMusicaleBL.Clona(strumento, ref _ottoneFinale);
 
             return _ottoneFinale;
         }
@@ -363,6 +358,27 @@ namespace NegozioStrumentiMusicali
             }
 
             return _ottoni;
+        }
+        /// <summary>
+        /// Copia i dati da un legno1 ad un legno2, compresi dati di specializzazione, senza mantenere i riferimenti in memoria
+        /// </summary>
+        /// <param name="ottone1"></param>
+        /// <param name="ottone2"></param>
+        public static void Clona(ClsOttone ottone1, ref ClsOttone ottone2, bool includiDatiDiGeneralizzazione)
+        {
+            if(includiDatiDiGeneralizzazione)
+            {
+                ClsStrumentoMusicaleBL.Clona(ottone1, ref ottone2); //Copia dei dati di generalizzazione
+            }
+            ottone2.Strumento = ottone1.Strumento;
+            ottone2.AltezzaCM = ottone1.AltezzaCM;
+            ottone2.Laccatura = ottone1.Laccatura;
+            ottone2.LarghezzaCM = ottone1.LarghezzaCM;
+            ottone2.LunghezzaCM = ottone1.LunghezzaCM;
+            ottone2.MaterialeBocchino = ottone1.MaterialeBocchino;
+            ottone2.MaterialeCorpo = ottone1.MaterialeCorpo;
+            ottone2.Placcatura = ottone1.Placcatura;
+            ottone2.RivestimentoBocchino = ottone1.RivestimentoBocchino;
         }
     }
 }

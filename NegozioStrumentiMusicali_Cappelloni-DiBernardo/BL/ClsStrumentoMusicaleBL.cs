@@ -12,29 +12,30 @@ namespace NegozioStrumentiMusicali
         /// <summary>
         /// Inserimento di un record in strumentimusicali
         /// </summary>
-        /// <param name="connection">Connessione al DB</param>
+        /// <param name="stringaDiConnessione"
         /// <param name="strumentoMusicale">Oggetto da inserire</param>
         /// <param name="comunicazione">Stringa di comunicazione in uscita</param>
         /// <returns>ID del nuovo record. Se -1 insert non riuscito</returns>
-        public static long InsertStrumentoMusicale(ref MySqlConnection connection, ClsStrumentoMusicale strumentoMusicale, out string comunicazione)
+        public static long InsertStrumentoMusicale(string stringaDiConnessione, ClsStrumentoMusicale strumentoMusicale, out string comunicazione)
         {
             //VARIABILI LOCALI
             long _ID = -1;
             comunicazione = String.Empty;
+            MySqlConnection _connection = new MySqlConnection(stringaDiConnessione);
 
             try
             {
                 //Apro la connessione
-                connection.Open();
+                _connection.Open();
 
                 //Creo il comando DML
                 string _dml =
                     "INSERT into strumentimusicali " +
-                    "(colori, pathimmagine, modello, pesokg, notaminimaID, notamassimaID) " +
-                    "VALUES (@colori, @pathimmagine, @modello, @pesokg, @notaminimaID, @notamassimaID)";
+                    "(colori, pathimmagine, modello, pesokg, notaminimaID, notamassimaID, casaproduttriceID) " +
+                    "VALUES (@colori, @pathimmagine, @modello, @pesokg, @notaminimaID, @notamassimaID, @casaproduttriceID)";
 
                 //Creo l'oggetto command
-                MySqlCommand _cmd = new MySqlCommand(_dml, connection);
+                MySqlCommand _cmd = new MySqlCommand(_dml, _connection);
 
                 //Inserisco i valori
                 _cmd.Parameters.AddWithValue("@colori", strumentoMusicale.Colori);
@@ -42,6 +43,8 @@ namespace NegozioStrumentiMusicali
                 _cmd.Parameters.AddWithValue("@pathimmagine", strumentoMusicale.Immagine);
 
                 _cmd.Parameters.AddWithValue("@modello", strumentoMusicale.Modello);
+
+                _cmd.Parameters.AddWithValue("@casaproduttriceID", strumentoMusicale.CasaProduttriceID);
 
                 if (strumentoMusicale.NotaMinimaID <= -1)
                 {
@@ -78,7 +81,7 @@ namespace NegozioStrumentiMusicali
             finally
             {
                 //Chiudo la connessione
-                connection.Close();
+                _connection.Close();
             }
 
             return _ID;
@@ -86,18 +89,19 @@ namespace NegozioStrumentiMusicali
         /// <summary>
         /// Update di un record di strumentimusicali
         /// </summary>
-        /// <param name="connection">Connessione al DB</param>
+        /// <param name="stringaDiConnessione"></param>
         /// <param name="strumentoMusicale">Dati record da aggiornare</param>
         /// <param name="comunicazione">Comunicazione in uscita</param>
-        public static void UpdateStrumentoMusicale(ref MySqlConnection connection, ClsStrumentoMusicale strumentoMusicale, out string comunicazione)
+        public static void UpdateStrumentoMusicale(string stringaDiConnessione, ClsStrumentoMusicale strumentoMusicale, out string comunicazione)
         {
             //VARIABILI LOCALI
             comunicazione = String.Empty;
+            MySqlConnection _connection = new MySqlConnection(stringaDiConnessione);
 
             try
             {
                 //Apro la connessione
-                connection.Open();
+                _connection.Open();
 
                 //Compongo il comando dml
                 string _dml =
@@ -112,7 +116,7 @@ namespace NegozioStrumentiMusicali
 
 
                 //Creo l'oggetto command
-                MySqlCommand _cmd = new MySqlCommand(_dml, connection);
+                MySqlCommand _cmd = new MySqlCommand(_dml, _connection);
 
                 //Inserisco i valori
                 _cmd.Parameters.AddWithValue("@colori", strumentoMusicale.Colori);
@@ -153,7 +157,7 @@ namespace NegozioStrumentiMusicali
             finally
             {
                 //Chiudo la connessione
-                connection.Close();
+                _connection.Close();
             }
         }
         /// <summary>
@@ -447,6 +451,109 @@ namespace NegozioStrumentiMusicali
 
             return _strumentoMusicale;
         }
+        /// <summary>
+        /// Copia i dati da strumento1 a strumento2 senza mantenere gli stessi riferimenti in memoria. In caso di specializzazione, va a copiare solo i dati generali
+        /// </summary>
+        /// <param name="strumento1"></param>
+        /// <param name="strumento2"
+        /// <returns></returns>
+        public static void Clona(ClsStrumentoMusicale strumento1, ref ClsStrumentoMusicale strumento2)
+        {
+            strumento2.ID = strumento1.ID;
+            strumento2.Immagine = strumento1.Immagine;
+            strumento2.Modello = strumento1.Modello;
+            strumento2.NotaMassimaID = strumento1.NotaMassimaID;
+            strumento2.NotaMinimaID = strumento1.NotaMinimaID;
+            strumento2.CasaProduttriceID = strumento1.CasaProduttriceID;
+            strumento2.Colori = strumento1.Colori;
+            strumento2.PesoKG = strumento1.PesoKG;
+        }
+        /// <summary>
+        /// Copia i dati da strumento1 a strumento2 (che è batteria) senza mantenere gli stessi riferimenti in memoria. In caso di specializzazione, va a copiare solo i dati generali
+        /// </summary>
+        /// <param name="strumento1"></param>
+        /// <param name="strumento2"
+        /// <returns></returns>
+        public static void Clona(ClsStrumentoMusicale strumento1, ref ClsBatteria strumento2)
+        {
+            strumento2.ID = strumento1.ID;
+            strumento2.Immagine = strumento1.Immagine;
+            strumento2.Modello = strumento1.Modello;
+            strumento2.NotaMassimaID = strumento1.NotaMassimaID;
+            strumento2.NotaMinimaID = strumento1.NotaMinimaID;
+            strumento2.CasaProduttriceID = strumento1.CasaProduttriceID;
+            strumento2.Colori = strumento1.Colori;
+            strumento2.PesoKG = strumento1.PesoKG;
+        }
+        /// <summary>
+        /// Copia i dati da strumento1 a strumento2 (che è legno) senza mantenere gli stessi riferimenti in memoria. In caso di specializzazione, va a copiare solo i dati generali
+        /// </summary>
+        /// <param name="strumento1"></param>
+        /// <param name="strumento2"
+        /// <returns></returns>
+        public static void Clona(ClsStrumentoMusicale strumento1, ref ClsLegno strumento2)
+        {
+            strumento2.ID = strumento1.ID;
+            strumento2.Immagine = strumento1.Immagine;
+            strumento2.Modello = strumento1.Modello;
+            strumento2.NotaMassimaID = strumento1.NotaMassimaID;
+            strumento2.NotaMinimaID = strumento1.NotaMinimaID;
+            strumento2.CasaProduttriceID = strumento1.CasaProduttriceID;
+            strumento2.Colori = strumento1.Colori;
+            strumento2.PesoKG = strumento1.PesoKG;
+        }
+        /// <summary>
+        /// Copia i dati da strumento1 a strumento2 (che è ottone) senza mantenere gli stessi riferimenti in memoria. In caso di specializzazione, va a copiare solo i dati generali
+        /// </summary>
+        /// <param name="strumento1"></param>
+        /// <param name="strumento2"
+        /// <returns></returns>
+        public static void Clona(ClsStrumentoMusicale strumento1, ref ClsOttone strumento2)
+        {
+            strumento2.ID = strumento1.ID;
+            strumento2.Immagine = strumento1.Immagine;
+            strumento2.Modello = strumento1.Modello;
+            strumento2.NotaMassimaID = strumento1.NotaMassimaID;
+            strumento2.NotaMinimaID = strumento1.NotaMinimaID;
+            strumento2.CasaProduttriceID = strumento1.CasaProduttriceID;
+            strumento2.Colori = strumento1.Colori;
+            strumento2.PesoKG = strumento1.PesoKG;
+        }
+        /// <summary>
+        /// Copia i dati da strumento1 a strumento2 (che è pianoforte) senza mantenere gli stessi riferimenti in memoria. In caso di specializzazione, va a copiare solo i dati generali
+        /// </summary>
+        /// <param name="strumento1"></param>
+        /// <param name="strumento2"
+        /// <returns></returns>
+        public static void Clona(ClsStrumentoMusicale strumento1, ref ClsPianoforte strumento2)
+        {
+            strumento2.ID = strumento1.ID;
+            strumento2.Immagine = strumento1.Immagine;
+            strumento2.Modello = strumento1.Modello;
+            strumento2.NotaMassimaID = strumento1.NotaMassimaID;
+            strumento2.NotaMinimaID = strumento1.NotaMinimaID;
+            strumento2.CasaProduttriceID = strumento1.CasaProduttriceID;
+            strumento2.Colori = strumento1.Colori;
+            strumento2.PesoKG = strumento1.PesoKG;
+        }
+        /// <summary>
+        /// Copia i dati da strumento1 a strumento2 (che è strumento a corda) senza mantenere gli stessi riferimenti in memoria. In caso di specializzazione, va a copiare solo i dati generali
+        /// </summary>
+        /// <param name="strumento1"></param>
+        /// <param name="strumento2"
+        /// <returns></returns>
+        public static void Clona(ClsStrumentoMusicale strumento1, ref ClsStrumentoACorda strumento2)
+        {
+            strumento2.ID = strumento1.ID;
+            strumento2.Immagine = strumento1.Immagine;
+            strumento2.Modello = strumento1.Modello;
+            strumento2.NotaMassimaID = strumento1.NotaMassimaID;
+            strumento2.NotaMinimaID = strumento1.NotaMinimaID;
+            strumento2.CasaProduttriceID = strumento1.CasaProduttriceID;
+            strumento2.Colori = strumento1.Colori;
+            strumento2.PesoKG = strumento1.PesoKG;
+        }
+
     }
 
 

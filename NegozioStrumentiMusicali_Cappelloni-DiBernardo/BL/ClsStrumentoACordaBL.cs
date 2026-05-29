@@ -15,23 +15,24 @@ namespace NegozioStrumentiMusicali
         /// <summary>
         /// Inserimento di record in strumentiacorda + informazioni generali in strumentimusicali
         /// </summary>
-        /// <param name="connection">Connessione al DB</param>
+        /// <param name="stringaDiConnessione"></param>
         /// <param name="strumentoACorda">Oggetto da inserire</param>
         /// <param name="comunicazione">Comunicazione in uscita</param>
         /// <returns>ID del nuovo record. Se -1 insert non riuscito</returns>
-        public static long InsertStrumentoACorda(ref MySqlConnection connection, ClsStrumentoACorda strumentoACorda, out string comunicazione)
+        public static long InsertStrumentoACorda(string stringaDiConnessione, ClsStrumentoACorda strumentoACorda, out string comunicazione)
         {
             //VARIABILI LOCALI
             long _ID = -1;
             comunicazione = String.Empty;
+            MySqlConnection _connection = new MySqlConnection(stringaDiConnessione);
 
             try
             {
                 //Inserisco le informazioni generali in strumentimusicali
-                _ID = ClsStrumentoMusicaleBL.InsertStrumentoMusicale(ref connection, strumentoACorda, out comunicazione);
+                _ID = ClsStrumentoMusicaleBL.InsertStrumentoMusicale(stringaDiConnessione, strumentoACorda, out comunicazione);
 
-                //Riapro la connessione dopo che si è chiusa in InsertStrumentoMusicale
-                connection.Open();
+                //Apro la connessione
+                _connection.Open();
 
                 //Creo il comando DML
                 string _dml =
@@ -44,7 +45,7 @@ namespace NegozioStrumentiMusicali
                     "@tasti, @pickup1, @pickup2, @pickup3)";
 
                 //Creo l'oggetto command
-                MySqlCommand _cmd = new MySqlCommand(_dml, connection);
+                MySqlCommand _cmd = new MySqlCommand(_dml, _connection);
 
                 //Inserisco i valori
                 _cmd.Parameters.AddWithValue("@strumentomusicaleID", _ID); //Prima di inserire lo strumento a corda bisogna inserire lo strumento musicale ad esso associato
@@ -76,7 +77,7 @@ namespace NegozioStrumentiMusicali
             finally
             {
                 //Chiudo la connessione
-                connection.Close();
+                _connection.Close();
             }
 
             return _ID;
@@ -84,21 +85,22 @@ namespace NegozioStrumentiMusicali
         /// <summary>
         /// Update di un record in strumentiacorda + dettagli generali in strumentimusicali
         /// </summary>
-        /// <param name="connection">Connessione al DB</param>
+        /// <param name="stringaDiConnessione"></param>
         /// <param name="strumentoACorda">Oggetto da inserire</param>
         /// <param name="comunicazione">Comunicazione in uscita</param>
-        public static void UpdateStrumentoACorda(ref MySqlConnection connection, ClsStrumentoACorda strumentoACorda, out string comunicazione)
+        public static void UpdateStrumentoACorda(string stringaDiConnessione, ClsStrumentoACorda strumentoACorda, out string comunicazione)
         {
             //VARIABILI
             comunicazione = String.Empty;
+            MySqlConnection _connection = new MySqlConnection(stringaDiConnessione);
 
             try
             {
                 //Aggiorno le info generali in strumentimusicali
-                ClsStrumentoMusicaleBL.UpdateStrumentoMusicale(ref connection, strumentoACorda, out comunicazione);
+                ClsStrumentoMusicaleBL.UpdateStrumentoMusicale(stringaDiConnessione, strumentoACorda, out comunicazione);
 
-                //Riapro la connessione dopo che si è chiusa in UpdateStrumentoMusicale
-                connection.Open();
+                //Apro la connessione
+                _connection.Open();
 
                 //Compongo il comando dml
                 string _dml =
@@ -122,7 +124,7 @@ namespace NegozioStrumentiMusicali
 
 
                 //Creo l'oggetto command
-                MySqlCommand _cmd = new MySqlCommand(_dml, connection);
+                MySqlCommand _cmd = new MySqlCommand(_dml, _connection);
 
                 //Inserisco i valori
                 _cmd.Parameters.AddWithValue("@strumento", strumentoACorda.Strumento.ToString().ToLower());
@@ -146,7 +148,7 @@ namespace NegozioStrumentiMusicali
                 //Eseguo il comando
                 _cmd.ExecuteNonQuery();
 
-                comunicazione = "Pianoforte aggiornato correttamente nel DataBase";
+                comunicazione = "Strumento a corda aggiornato correttamente nel DataBase";
             }
             catch (Exception ex)
             {
@@ -155,7 +157,7 @@ namespace NegozioStrumentiMusicali
             finally
             {
                 //Chiudo la connessione
-                connection.Close();
+                _connection.Close();
             }
         }
         /// <summary>
@@ -313,14 +315,7 @@ namespace NegozioStrumentiMusicali
         {
             ClsStrumentoACorda _strumentoACordaFinale = strumentoACorda;
 
-            _strumentoACordaFinale.ID = strumento.ID;
-            _strumentoACordaFinale.Colori = strumento.Colori;
-            _strumentoACordaFinale.CasaProduttriceID = strumento.CasaProduttriceID;
-            _strumentoACordaFinale.Immagine = strumento.Immagine;
-            _strumentoACordaFinale.PesoKG = strumento.PesoKG;
-            _strumentoACordaFinale.NotaMassimaID = strumento.NotaMassimaID;
-            _strumentoACordaFinale.NotaMinimaID = strumento.NotaMinimaID;
-            _strumentoACordaFinale.Modello = strumento.Modello;
+            ClsStrumentoMusicaleBL.Clona(strumento, ref _strumentoACordaFinale);
 
             return _strumentoACordaFinale;
         }
@@ -419,6 +414,34 @@ namespace NegozioStrumentiMusicali
             }
 
             return _strumentiACorda;
+        }
+        /// <summary>
+        /// Copia i dati da uno strumentoACorda1 ad uno strumentoACorda2, compresi dati di specializzazione, senza mantenere i riferimenti in memoria
+        /// </summary>
+        /// <param name="strumentoACorda1"></param>
+        /// <param name="strumentoACorda2"></param>
+        public static void Clona(ClsStrumentoACorda strumentoACorda1, ref ClsStrumentoACorda strumentoACorda2, bool includiDatiDiGeneralizzazione)
+        {
+            if(includiDatiDiGeneralizzazione)
+            {
+                ClsStrumentoMusicaleBL.Clona(strumentoACorda1, ref strumentoACorda2); //Copia dei dati di generalizzazione
+            }
+            strumentoACorda2.Strumento = strumentoACorda1.Strumento;
+            strumentoACorda2.AmpiezzaCorpoCM = strumentoACorda1.AmpiezzaCorpoCM;
+            strumentoACorda2.AmpiezzaManicoCM = strumentoACorda1.AmpiezzaManicoCM;
+            strumentoACorda2.LunghezzaCorpoCM = strumentoACorda1.LunghezzaCorpoCM;
+            strumentoACorda2.LunghezzaManicoCM = strumentoACorda1.LunghezzaManicoCM;
+            strumentoACorda2.MaterialeCorde = strumentoACorda1.MaterialeCorde;
+            strumentoACorda2.MaterialeCorpo = strumentoACorda1.MaterialeCorpo;
+            strumentoACorda2.MaterialeManico = strumentoACorda1.MaterialeManico;
+            strumentoACorda2.MaterialeTastiera = strumentoACorda1.MaterialeTastiera;
+            strumentoACorda2.NumeroCorde = strumentoACorda1.NumeroCorde;
+            strumentoACorda2.Pickup1 = strumentoACorda1.Pickup1;
+            strumentoACorda2.Pickup2 = strumentoACorda1.Pickup2;
+            strumentoACorda2.Pickup3 = strumentoACorda1.Pickup3;
+            strumentoACorda2.SpessoreCorpoCM = strumentoACorda1.SpessoreCorpoCM;
+            strumentoACorda2.SpessoreManicoCM = strumentoACorda1.SpessoreManicoCM;
+            strumentoACorda2.Tasti = strumentoACorda1.Tasti;
         }
     }
 }

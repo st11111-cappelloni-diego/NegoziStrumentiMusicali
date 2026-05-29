@@ -15,23 +15,24 @@ namespace NegozioStrumentiMusicali
         /// <summary>
         /// Inserimento di record in legni + informazioni generali in strumentimusicali
         /// </summary>
-        /// <param name="connection">Connessione al DB</param>
+        /// <param name="stringaDiConnessione"></param>
         /// <param name="legno">Oggetto da inserire</param>
         /// <param name="comunicazione">Comunicazione in uscita</param>
         /// <returns>ID del nuovo record. Se -1 insert non riuscito</returns>
-        public static long InsertLegno(ref MySqlConnection connection, ClsLegno legno, out string comunicazione)
+        public static long InsertLegno(string stringaDiConnessione, ClsLegno legno, out string comunicazione)
         {
             //VARIABILI LOCALI
             long _ID = -1;
             comunicazione = String.Empty;
+            MySqlConnection _connection = new MySqlConnection(stringaDiConnessione);
 
             try
             {
                 //Inserisco le informazioni generali in strumentimusicali
-                _ID = ClsStrumentoMusicaleBL.InsertStrumentoMusicale(ref connection, legno, out comunicazione);
+                _ID = ClsStrumentoMusicaleBL.InsertStrumentoMusicale(Program._connectionString, legno, out comunicazione);
 
-                //Riapro la connessione dopo che si è chiusa in InsertStrumentoMusicale
-                connection.Open();
+                //Apro la connessione
+                _connection.Open();
 
                 //Compongo il comando DML per info specifiche legno
                 string _dml =
@@ -39,10 +40,10 @@ namespace NegozioStrumentiMusicali
                     "VALUES(@strumentomusicaleID, @strumento, @materialecorpo, @materialechiavi, @lunghezzacm, @larghezzacm, @altezzacm)";
 
                 //Creo l'oggetto command
-                MySqlCommand _cmd = new MySqlCommand(_dml, connection);
+                MySqlCommand _cmd = new MySqlCommand(_dml, _connection);
 
                 //Inserisco i valori
-                _cmd.Parameters.AddWithValue("@strumentomusicaleID", legno.ID);
+                _cmd.Parameters.AddWithValue("@strumentomusicaleID", _ID);
                 _cmd.Parameters.AddWithValue("@strumento", legno.Strumento.ToString().ToLower());
                 _cmd.Parameters.AddWithValue("@materialecorpo", legno.MaterialeCorpo.ToString().ToLower());
                 _cmd.Parameters.AddWithValue("@materialechiavi", legno.MaterialeChiavi.ToString().ToLower());
@@ -62,7 +63,7 @@ namespace NegozioStrumentiMusicali
             finally
             {
                 //Chiudo la connessione
-                connection.Close();
+                _connection.Close();
             }
 
             return _ID;
@@ -70,21 +71,22 @@ namespace NegozioStrumentiMusicali
         /// <summary>
         /// Update di un record di legni + dettagli generali in strumentimusicali
         /// </summary>
-        /// <param name="connection">Connessione al DB</param>
+        /// <param name="stringaDiConnessione"></param>
         /// <param name="legno">Dati record da aggiornare</param>
         /// <param name="comunicazione">Stringa di comunicazione in uscita</param>
-        public static void UpdateLegno(ref MySqlConnection connection, ClsLegno legno, out string comunicazione)
+        public static void UpdateLegno(string stringaDiConnessione, ClsLegno legno, out string comunicazione)
         {
             //VARIABILI LOCALI
             comunicazione = String.Empty;
+            MySqlConnection _connection = new MySqlConnection(stringaDiConnessione);
 
             try
             {
                 //Aggiorno le info generali in strumentimusicali
-                ClsStrumentoMusicaleBL.UpdateStrumentoMusicale(ref connection, legno, out comunicazione);
+                ClsStrumentoMusicaleBL.UpdateStrumentoMusicale(stringaDiConnessione, legno, out comunicazione);
 
                 //Riapro la connessione dopo che si è chiusa in UpdateStrumentoMusicale
-                connection.Open();
+                _connection.Open();
 
                 //Compongo il comando DML
                 string _dml =
@@ -98,12 +100,12 @@ namespace NegozioStrumentiMusicali
                     "WHERE strumentomusicaleID = @ID";
 
                 //Creo l'oggetto command
-                MySqlCommand _cmd = new MySqlCommand(_dml, connection);
+                MySqlCommand _cmd = new MySqlCommand(_dml, _connection);
 
                 //Inserisco i valori
-                _cmd.Parameters.AddWithValue("@strumento", legno.Strumento.ToString().ToLower());
-                _cmd.Parameters.AddWithValue("@materialecorpo", legno.MaterialeCorpo.ToString().ToLower());
-                _cmd.Parameters.AddWithValue("@materialechiavi", legno.MaterialeChiavi.ToString().ToLower());
+                _cmd.Parameters.AddWithValue("@strumento", legno.Strumento.ToString());
+                _cmd.Parameters.AddWithValue("@materialecorpo", legno.MaterialeCorpo.ToString());
+                _cmd.Parameters.AddWithValue("@materialechiavi", legno.MaterialeChiavi.ToString());
                 _cmd.Parameters.AddWithValue("@lunghezzacm", legno.LunghezzaCM);
                 _cmd.Parameters.AddWithValue("@larghezzacm", legno.LarghezzaCM);
                 _cmd.Parameters.AddWithValue("@altezzacm", legno.AltezzaCM);
@@ -121,7 +123,7 @@ namespace NegozioStrumentiMusicali
             finally
             {
                 //Chiudo la connessione
-                connection.Close();
+                _connection.Close();
             }
         }
         /// <summary>
@@ -233,14 +235,7 @@ namespace NegozioStrumentiMusicali
         {
             ClsLegno _legnoFinale = legno;
 
-            _legnoFinale.ID = strumento.ID;
-            _legnoFinale.Colori = strumento.Colori;
-            _legnoFinale.CasaProduttriceID = strumento.CasaProduttriceID;
-            _legnoFinale.Immagine = strumento.Immagine;
-            _legnoFinale.PesoKG = strumento.PesoKG;
-            _legnoFinale.NotaMassimaID = strumento.NotaMassimaID;
-            _legnoFinale.NotaMinimaID = strumento.NotaMinimaID;
-            _legnoFinale.Modello = strumento.Modello;
+            ClsStrumentoMusicaleBL.Clona(strumento, ref _legnoFinale);
 
             return _legnoFinale;
         }
@@ -329,6 +324,24 @@ namespace NegozioStrumentiMusicali
             }
 
             return _legni;
+        }
+        /// <summary>
+        /// Copia i dati da un legno1 ad un legno2, compresi dati di specializzazione, senza mantenere i riferimenti in memoria
+        /// </summary>
+        /// <param name="legno1"></param>
+        /// <param name="legno2"></param>
+        public static void Clona(ClsLegno legno1, ref ClsLegno legno2, bool includiDatiDiGeneralizzazione)
+        {
+            if(includiDatiDiGeneralizzazione)
+            {
+                ClsStrumentoMusicaleBL.Clona(legno1, ref legno2); //Copia dei dati di generalizzazione
+            }
+            legno2.Strumento = legno1.Strumento;
+            legno2.AltezzaCM = legno1.AltezzaCM;
+            legno2.LarghezzaCM = legno1.LarghezzaCM;
+            legno2.LunghezzaCM = legno1.LunghezzaCM;
+            legno2.MaterialeChiavi = legno1.MaterialeChiavi;
+            legno2.MaterialeCorpo = legno1.MaterialeCorpo;
         }
     }
 }

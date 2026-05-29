@@ -15,20 +15,21 @@ namespace NegozioStrumentiMusicali
         /// <summary>
         /// Inserimento di un record in vendere
         /// </summary>
-        /// <param name="connection">Connessione al DB</param>
+        /// <param name="stringaDiConnessione"></param>
         /// <param name="vendere">Record da inserire</param>
         /// <param name="comunicazione">Comunicazione in uscita</param>
         /// <returns>L'ID del nuovo record. Se -1 insert non riuscito</returns>
-        public static long InsertVendere(ref MySqlConnection connection, ClsVendere vendere, out string comunicazione)
+        public static long InsertVendere(string stringaDiConnessione, ClsVendere vendere, out string comunicazione)
         {
             //VARIABILI 
             long _ID = -1;
             comunicazione = String.Empty;
+            MySqlConnection _connection = new MySqlConnection(stringaDiConnessione);
 
             try
             {
                 //Apro la connessione
-                connection.Open();
+                _connection.Open();
 
                 //Creo il comando DML
                 string _dml =
@@ -37,7 +38,7 @@ namespace NegozioStrumentiMusicali
                     "VALUES(@quantita, @prezzo, @strumentoMusicaleID, @negozioID)";
 
                 //Creo l'oggetto command
-                MySqlCommand _cmd = new MySqlCommand(_dml, connection);
+                MySqlCommand _cmd = new MySqlCommand(_dml, _connection);
 
                 //Inserisco i valori
                 _cmd.Parameters.AddWithValue("@quantita", vendere.Quantita);
@@ -61,7 +62,7 @@ namespace NegozioStrumentiMusicali
             finally
             {
                 //Chiudo la connessione
-                connection.Close();
+                _connection.Close();
             }
 
             return _ID;
@@ -69,18 +70,19 @@ namespace NegozioStrumentiMusicali
         /// <summary>
         /// Update di un record di vendere
         /// </summary>
-        /// <param name="connection">Connessione al DB</param>
+        /// <param name="stringaDiConnessione"></param>
         /// <param name="vendere">Dati record da aggiornare</param>
         /// <param name="comunicazione">Comunicazione in uscita</param>
-        public static void UpdateVendere(ref MySqlConnection connection, ClsVendere vendere, out string comunicazione)
+        public static void UpdateVendere(string stringaDiConnessione, ClsVendere vendere, out string comunicazione)
         {
             //VARIABILI
             comunicazione = String.Empty;
+            MySqlConnection _connection = new MySqlConnection(stringaDiConnessione);
 
             try
             {
                 //Apro la connessione
-                connection.Open();
+                _connection.Open();
 
                 //Compongo il comando dml
                 string _dml =
@@ -93,7 +95,7 @@ namespace NegozioStrumentiMusicali
 
 
                 //Creo l'oggetto command
-                MySqlCommand _cmd = new MySqlCommand(_dml, connection);
+                MySqlCommand _cmd = new MySqlCommand(_dml, _connection);
 
                 //Inserisco i valori
                 _cmd.Parameters.AddWithValue("@quantita", vendere.Quantita);
@@ -114,7 +116,7 @@ namespace NegozioStrumentiMusicali
             finally
             {
                 //Chiudo la connessione
-                connection.Close();
+                _connection.Close();
             }
         }
         /// <summary>
@@ -128,7 +130,7 @@ namespace NegozioStrumentiMusicali
 
             _vendere.ID = Convert.ToInt64(dataReader["ID"]);
             _vendere.Prezzo = Convert.ToDecimal(dataReader["prezzo"]);
-            _vendere.Quantita = Convert.ToInt32(dataReader["quantita"]);
+            _vendere.Quantita = Convert.ToUInt32(dataReader["quantita"]);
             _vendere.NegozioID = Convert.ToInt64(dataReader["negozioID"]);
             _vendere.StrumentoMusicaleID = Convert.ToInt64(dataReader["strumentomusicaleID"]);
 
