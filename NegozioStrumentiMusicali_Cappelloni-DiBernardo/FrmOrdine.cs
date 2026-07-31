@@ -47,7 +47,7 @@ namespace NegozioStrumentiMusicali
         private void btnSalva_Click(object sender, EventArgs e)
         {
 
-
+            /*
             ClsIndirizzo _indirizzo = new ClsIndirizzo();
             _indirizzo.ID = 0;
             _indirizzo.Comune = tbComune.Text;
@@ -61,7 +61,7 @@ namespace NegozioStrumentiMusicali
 
             string _comunicazione;
             ClsIndirizzoBL.InsertIndirizzo(ref Program._connessioneAlDB, _indirizzo, out _comunicazione);
-
+            */
         }
     }
 }
