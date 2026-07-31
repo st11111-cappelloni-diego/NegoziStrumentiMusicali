@@ -19,11 +19,12 @@ namespace NegozioStrumentiMusicali
         /// <param name="ordine">Record da inserire</param>
         /// <param name="comunicazione">Comunicazione in uscita</param>
         /// <returns>ID del nuovo record. Se -1 insert non riuscito</returns>
-        public static long InsertOrdine(ref MySqlConnection connection, ClsOrdine ordine, out string comunicazione)
+        public static long InsertOrdine(string stringaDiConnessione, ClsOrdine ordine, out string comunicazione)
         {
             //VARIABILI 
             long _ID = -1;
             comunicazione = String.Empty;
+            MySqlConnection connection = new MySqlConnection(stringaDiConnessione);
 
             try
             {
