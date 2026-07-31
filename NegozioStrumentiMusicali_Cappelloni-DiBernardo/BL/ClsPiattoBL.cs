@@ -16,20 +16,21 @@ namespace NegozioStrumentiMusicali
         /// <summary>
         /// Inserimento di un record in piatti
         /// </summary>
-        /// <param name="connection">Connessione al DB</param>
+        /// <param name="stringaDiConnessione">Stringa per la connessione al DataBase</param>
         /// <param name="piatto">Record da inserire</param>
         /// <param name="comunicazione">Comunicazione in uscita</param>
         /// <returns>ID del nuovo record. Se -1 insert non riuscito</returns>
-        public static long InsertPiatto(ref MySqlConnection connection, ClsPiatto piatto, out string comunicazione)
+        public static long InsertPiatto(string stringaDiConnessione, ClsPiatto piatto, out string comunicazione)
         {
             //VARIABILI LOCALI
             long _ID = -1;
             comunicazione = String.Empty;
+            MySqlConnection _connection = new MySqlConnection(stringaDiConnessione);
 
             try
             {
                 //Apro la connessione
-                connection.Open();
+                _connection.Open();
 
                 //Compongo il comando DML
                 string _dml =
@@ -37,7 +38,7 @@ namespace NegozioStrumentiMusicali
                     "VALUES(@tipo, @diametroin, @materiale)";
 
                 //Creo l'oggetto command
-                MySqlCommand _cmd = new MySqlCommand(_dml, connection);
+                MySqlCommand _cmd = new MySqlCommand(_dml, _connection);
 
                 //Inserisco i valori
                 _cmd.Parameters.AddWithValue("@tipo", piatto.Tipo.ToString().ToLower());
@@ -58,7 +59,7 @@ namespace NegozioStrumentiMusicali
             finally
             {
                 //Chiudo la connessione
-                connection.Close();
+                _connection.Close();
             }
 
             return _ID;
@@ -66,18 +67,19 @@ namespace NegozioStrumentiMusicali
         /// <summary>
         /// Update di un record in piatti
         /// </summary>
-        /// <param name="connection">Connessione al DB</param>
+        /// <param name="stringaDiConnessione">Stringa per la connessione al DB</param>
         /// <param name="piatto">Dati record da aggiornare</param>
         /// <param name="comunicazione">Comunicazione in uscita</param>
-        public static void UpdatePiatto(ref MySqlConnection connection, ClsPiatto piatto, out string comunicazione)
+        public static void UpdatePiatto(string stringaDiConnessione, ClsPiatto piatto, out string comunicazione)
         {
             //VARIABILI GLOBALI
             comunicazione = String.Empty;
+            MySqlConnection _connection = new MySqlConnection(stringaDiConnessione);
 
             try
             {
                 //Apro la connessione
-                connection.Open();
+                _connection.Open();
 
                 //Compongo il comando DML
                 string _dml =
@@ -88,7 +90,7 @@ namespace NegozioStrumentiMusicali
                     "WHERE ID = @ID";
 
                 //Creo l'oggetto command
-                MySqlCommand _cmd = new MySqlCommand(_dml, connection);
+                MySqlCommand _cmd = new MySqlCommand(_dml, _connection);
 
                 //Inserisco i valori
                 _cmd.Parameters.AddWithValue("@tipo", piatto.Tipo.ToString().ToLower());
@@ -108,7 +110,7 @@ namespace NegozioStrumentiMusicali
             finally
             {
                 //Chiudo la connessione
-                connection.Close();
+                _connection.Close();
             }
         }
         /// <summary>
