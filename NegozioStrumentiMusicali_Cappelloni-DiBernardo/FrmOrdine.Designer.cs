@@ -36,6 +36,7 @@
             this.button1 = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.pnlIndirizzo = new System.Windows.Forms.Panel();
+            this.nudCivico = new System.Windows.Forms.NumericUpDown();
             this.cbNazione = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -46,10 +47,12 @@
             this.label5 = new System.Windows.Forms.Label();
             this.tbCodicePostale = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
-            this.nudCivico = new System.Windows.Forms.NumericUpDown();
+            this.nudQuantita = new System.Windows.Forms.NumericUpDown();
+            this.label9 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.nudIDArticolo)).BeginInit();
             this.pnlIndirizzo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudCivico)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudQuantita)).BeginInit();
             this.SuspendLayout();
             // 
             // nudIDArticolo
@@ -64,7 +67,7 @@
             0});
             this.nudIDArticolo.Name = "nudIDArticolo";
             this.nudIDArticolo.ReadOnly = true;
-            this.nudIDArticolo.Size = new System.Drawing.Size(520, 31);
+            this.nudIDArticolo.Size = new System.Drawing.Size(547, 31);
             this.nudIDArticolo.TabIndex = 90;
             // 
             // label7
@@ -73,7 +76,7 @@
             this.label7.ForeColor = System.Drawing.Color.Black;
             this.label7.Location = new System.Drawing.Point(6, 79);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(519, 23);
+            this.label7.Size = new System.Drawing.Size(547, 23);
             this.label7.TabIndex = 89;
             this.label7.Text = "ID Articolo";
             this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -85,7 +88,7 @@
             this.dtpDataOrdine.Location = new System.Drawing.Point(6, 35);
             this.dtpDataOrdine.MinDate = new System.DateTime(1900, 1, 1, 0, 0, 0, 0);
             this.dtpDataOrdine.Name = "dtpDataOrdine";
-            this.dtpDataOrdine.Size = new System.Drawing.Size(519, 31);
+            this.dtpDataOrdine.Size = new System.Drawing.Size(548, 31);
             this.dtpDataOrdine.TabIndex = 86;
             // 
             // label6
@@ -94,7 +97,7 @@
             this.label6.ForeColor = System.Drawing.Color.Black;
             this.label6.Location = new System.Drawing.Point(6, 9);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(519, 23);
+            this.label6.Size = new System.Drawing.Size(547, 23);
             this.label6.TabIndex = 85;
             this.label6.Text = "Data ordine";
             this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -108,7 +111,7 @@
             this.btnSalva.Name = "btnSalva";
             this.btnSalva.Size = new System.Drawing.Size(136, 44);
             this.btnSalva.TabIndex = 91;
-            this.btnSalva.Text = "Salva";
+            this.btnSalva.Text = "Ordina";
             this.btnSalva.UseVisualStyleBackColor = true;
             this.btnSalva.Click += new System.EventHandler(this.btnSalva_Click);
             // 
@@ -148,10 +151,23 @@
             this.pnlIndirizzo.Controls.Add(this.label5);
             this.pnlIndirizzo.Controls.Add(this.tbCodicePostale);
             this.pnlIndirizzo.Controls.Add(this.label8);
-            this.pnlIndirizzo.Location = new System.Drawing.Point(6, 188);
+            this.pnlIndirizzo.Location = new System.Drawing.Point(6, 186);
             this.pnlIndirizzo.Name = "pnlIndirizzo";
-            this.pnlIndirizzo.Size = new System.Drawing.Size(536, 339);
+            this.pnlIndirizzo.Size = new System.Drawing.Size(547, 341);
             this.pnlIndirizzo.TabIndex = 94;
+            // 
+            // nudCivico
+            // 
+            this.nudCivico.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.nudCivico.Location = new System.Drawing.Point(8, 146);
+            this.nudCivico.Maximum = new decimal(new int[] {
+            99999999,
+            0,
+            0,
+            0});
+            this.nudCivico.Name = "nudCivico";
+            this.nudCivico.Size = new System.Drawing.Size(260, 31);
+            this.nudCivico.TabIndex = 65;
             // 
             // cbNazione
             // 
@@ -161,7 +177,7 @@
             this.cbNazione.FormattingEnabled = true;
             this.cbNazione.Location = new System.Drawing.Point(3, 264);
             this.cbNazione.Name = "cbNazione";
-            this.cbNazione.Size = new System.Drawing.Size(534, 33);
+            this.cbNazione.Size = new System.Drawing.Size(545, 33);
             this.cbNazione.TabIndex = 59;
             // 
             // label1
@@ -173,7 +189,7 @@
             this.label1.ForeColor = System.Drawing.Color.Black;
             this.label1.Location = new System.Drawing.Point(3, 3);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(534, 23);
+            this.label1.Size = new System.Drawing.Size(545, 23);
             this.label1.TabIndex = 4;
             this.label1.Text = "Comune";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -187,7 +203,7 @@
             this.label2.ForeColor = System.Drawing.Color.Black;
             this.label2.Location = new System.Drawing.Point(3, 59);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(534, 23);
+            this.label2.Size = new System.Drawing.Size(545, 23);
             this.label2.TabIndex = 6;
             this.label2.Text = "Via";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -199,7 +215,7 @@
             this.tbComune.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbComune.Location = new System.Drawing.Point(3, 25);
             this.tbComune.Name = "tbComune";
-            this.tbComune.Size = new System.Drawing.Size(533, 31);
+            this.tbComune.Size = new System.Drawing.Size(544, 31);
             this.tbComune.TabIndex = 3;
             // 
             // tbVia
@@ -209,7 +225,7 @@
             this.tbVia.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbVia.Location = new System.Drawing.Point(3, 85);
             this.tbVia.Name = "tbVia";
-            this.tbVia.Size = new System.Drawing.Size(534, 31);
+            this.tbVia.Size = new System.Drawing.Size(545, 31);
             this.tbVia.TabIndex = 7;
             // 
             // label4
@@ -221,7 +237,7 @@
             this.label4.ForeColor = System.Drawing.Color.Black;
             this.label4.Location = new System.Drawing.Point(3, 119);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(534, 23);
+            this.label4.Size = new System.Drawing.Size(545, 23);
             this.label4.TabIndex = 8;
             this.label4.Text = "Numero civico e lettera";
             this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -233,7 +249,7 @@
             this.tbLetteraCivico.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbLetteraCivico.Location = new System.Drawing.Point(274, 145);
             this.tbLetteraCivico.Name = "tbLetteraCivico";
-            this.tbLetteraCivico.Size = new System.Drawing.Size(263, 31);
+            this.tbLetteraCivico.Size = new System.Drawing.Size(274, 31);
             this.tbLetteraCivico.TabIndex = 64;
             // 
             // label5
@@ -245,7 +261,7 @@
             this.label5.ForeColor = System.Drawing.Color.Black;
             this.label5.Location = new System.Drawing.Point(3, 236);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(534, 23);
+            this.label5.Size = new System.Drawing.Size(545, 23);
             this.label5.TabIndex = 58;
             this.label5.Text = "Nazione";
             this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -257,7 +273,7 @@
             this.tbCodicePostale.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbCodicePostale.Location = new System.Drawing.Point(3, 205);
             this.tbCodicePostale.Name = "tbCodicePostale";
-            this.tbCodicePostale.Size = new System.Drawing.Size(534, 31);
+            this.tbCodicePostale.Size = new System.Drawing.Size(545, 31);
             this.tbCodicePostale.TabIndex = 61;
             // 
             // label8
@@ -269,24 +285,53 @@
             this.label8.ForeColor = System.Drawing.Color.Black;
             this.label8.Location = new System.Drawing.Point(3, 179);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(534, 23);
+            this.label8.Size = new System.Drawing.Size(545, 23);
             this.label8.TabIndex = 62;
             this.label8.Text = "Codice postale";
             this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // nudCivico
+            // nudQuantita
             // 
-            this.nudCivico.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.nudCivico.Location = new System.Drawing.Point(8, 146);
-            this.nudCivico.Name = "nudCivico";
-            this.nudCivico.Size = new System.Drawing.Size(260, 31);
-            this.nudCivico.TabIndex = 65;
+            this.nudQuantita.Enabled = false;
+            this.nudQuantita.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.nudQuantita.Location = new System.Drawing.Point(582, 105);
+            this.nudQuantita.Maximum = new decimal(new int[] {
+            32767,
+            0,
+            0,
+            0});
+            this.nudQuantita.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.nudQuantita.Name = "nudQuantita";
+            this.nudQuantita.Size = new System.Drawing.Size(100, 31);
+            this.nudQuantita.TabIndex = 91;
+            this.nudQuantita.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // label9
+            // 
+            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label9.ForeColor = System.Drawing.Color.Black;
+            this.label9.Location = new System.Drawing.Point(559, 79);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(138, 23);
+            this.label9.TabIndex = 95;
+            this.label9.Text = "Quantità";
+            this.label9.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // FrmOrdine
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(707, 498);
+            this.ClientSize = new System.Drawing.Size(707, 502);
+            this.Controls.Add(this.label9);
+            this.Controls.Add(this.nudQuantita);
             this.Controls.Add(this.pnlIndirizzo);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.label3);
@@ -302,6 +347,7 @@
             this.pnlIndirizzo.ResumeLayout(false);
             this.pnlIndirizzo.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudCivico)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudQuantita)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -327,5 +373,7 @@
         private System.Windows.Forms.TextBox tbCodicePostale;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.NumericUpDown nudCivico;
+        private System.Windows.Forms.NumericUpDown nudQuantita;
+        private System.Windows.Forms.Label label9;
     }
 }

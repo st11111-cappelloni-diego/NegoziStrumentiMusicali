@@ -19,11 +19,12 @@ namespace NegozioStrumentiMusicali
         /// <param name="indirizzo">Record da inserire</param>
         /// <param name="comunicazione">Comunicazione in uscita</param>
         /// <returns>ID del nuovo record. Se -1 insert non riuscito</returns>
-        public static long InsertIndirizzo(ref MySqlConnection connection, ClsIndirizzo indirizzo, out string comunicazione)
+        public static long InsertIndirizzo(string stringaDiConnessione, ClsIndirizzo indirizzo, out string comunicazione)
         {
             //VARIABILI 
             long _ID = -1;
             comunicazione = String.Empty;
+            MySqlConnection connection = new MySqlConnection(stringaDiConnessione);
 
             try
             {
@@ -289,7 +290,7 @@ namespace NegozioStrumentiMusicali
             return _indirizzo;  
         }
         public static ClsIndirizzo GetOneIndirizzo(string stringaDiConnessione, string codicePostale,
-            string comune, string via, ushort numeroCivico, char letteraCivico, string nazione, out string comunicazione)
+            string comune, string via, ushort numeroCivico, char? letteraCivico, string nazione, out string comunicazione)
         {
             //VARIABILI
             comunicazione = String.Empty;
@@ -322,6 +323,7 @@ namespace NegozioStrumentiMusicali
                 _cmd.Parameters.AddWithValue("@letteracivico", letteraCivico);
 
 
+
                 //Eseguo il comando creando il DataReader
                 MySqlDataReader _dataReader = _cmd.ExecuteReader();
 
@@ -335,7 +337,7 @@ namespace NegozioStrumentiMusicali
 
                 _dataReader.Close();
 
-                comunicazione = "Strumento musicale caricato correttamente dal DataBase";
+                comunicazione = "Indirizzo caricato correttamente dal DataBase";
             }
             catch (Exception ex)
             {
