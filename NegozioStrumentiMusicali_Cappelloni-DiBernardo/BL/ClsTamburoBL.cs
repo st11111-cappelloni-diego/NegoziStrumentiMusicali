@@ -15,20 +15,21 @@ namespace NegozioStrumentiMusicali
         /// <summary>
         /// Inserimento di un record in tamburi
         /// </summary>
-        /// <param name="connection">Connessione al DB</param>
+        /// <param name="stringaDiConnessione">Stringa per la connessione al DataBase</param>
         /// <param name="tamburo">Oggetto da inserire</param>
         /// <param name="comunicazione">Stringa di comunicazione in uscita</param>
         /// <returns>ID del nuovo record. Se -1 insert non riuscito</returns>
-        public static long InsertTamburo(ref MySqlConnection connection, ClsTamburo tamburo, out string comunicazione)
+        public static long InsertTamburo(string stringaDiConnessione, ClsTamburo tamburo, out string comunicazione)
         {
             //VARIABILI
             long _ID = -1;
             comunicazione = string.Empty;
+            MySqlConnection _connection = new MySqlConnection(stringaDiConnessione);
 
             try
             {
                 //Apro la connessione
-                connection.Open();
+                _connection.Open();
 
                 //Compongo il comando DML
                 string _dml =
@@ -36,7 +37,7 @@ namespace NegozioStrumentiMusicali
                     "VALUES(@tipo, @diametroin, @materiale, @strati)";
 
                 //Creo il command
-                MySqlCommand _cmd = new MySqlCommand(_dml, connection);
+                MySqlCommand _cmd = new MySqlCommand(_dml, _connection);
 
                 //Inserisco i valori
                 _cmd.Parameters.AddWithValue("@tipo", tamburo.Tipo.ToString().ToLower());
@@ -59,7 +60,7 @@ namespace NegozioStrumentiMusicali
             finally
             {
                 //Chiudo la connessione
-                connection.Close();
+                _connection.Close();
             }
 
             return _ID;
@@ -67,17 +68,18 @@ namespace NegozioStrumentiMusicali
         /// <summary>
         /// Update di un record di tamburi
         /// </summary>
-        /// <param name="connection">Connessione al DB</param>
+        /// <param name="stringaDiConnessione">Stringa per la connessione al DataBase</param>
         /// <param name="tamburo">Dati record da aggiornare</param>
         /// <param name="comunicazione">Comunicazione in uscita</param>
-        public static void UpdateTamburo(ref MySqlConnection connection, ClsTamburo tamburo, out string comunicazione)
+        public static void UpdateTamburo(string stringaDiConnessione, ClsTamburo tamburo, out string comunicazione)
         {
             comunicazione = String.Empty;
+            MySqlConnection _connection = new MySqlConnection(stringaDiConnessione);
 
             try
             {
                 //Apro la connessione
-                connection.Open();
+                _connection.Open();
 
                 //Compongo il comando DML
                 string _dml =
@@ -89,7 +91,7 @@ namespace NegozioStrumentiMusicali
                     "WHERE ID = @ID";
 
                 //Creo il command
-                MySqlCommand _cmd = new MySqlCommand(_dml, connection);
+                MySqlCommand _cmd = new MySqlCommand(_dml, _connection);
 
                 //Inserisco i valori
                 _cmd.Parameters.AddWithValue("@ID", tamburo.ID);
@@ -110,7 +112,7 @@ namespace NegozioStrumentiMusicali
             finally
             {
                 //Chiudo la connessione
-                connection.Close();
+                _connection.Close();
             }
         }
         /// <summary>

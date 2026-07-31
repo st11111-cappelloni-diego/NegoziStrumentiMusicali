@@ -396,6 +396,7 @@
             this.btnModificaTom.Size = new System.Drawing.Size(40, 40);
             this.btnModificaTom.TabIndex = 53;
             this.btnModificaTom.UseVisualStyleBackColor = true;
+            this.btnModificaTom.Click += new System.EventHandler(this.btnModificaTom_Click);
             // 
             // label20
             // 
