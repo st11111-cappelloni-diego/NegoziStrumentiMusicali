@@ -288,6 +288,11 @@ namespace NegozioStrumentiMusicali
             nudStratiRullante.Minimum = 1;
             nudStratiRullante.Maximum = byte.MaxValue;
 
+            lvToms.MultiSelect = false;
+            lvToms.FullRowSelect = true;
+            lvAltriPiatti.MultiSelect = false;
+            lvAltriPiatti.FullRowSelect = true;
+
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
 
@@ -310,6 +315,32 @@ namespace NegozioStrumentiMusicali
             else
             {
                 AbilitaControlliGraficiDiInput(false);
+            }
+        }
+
+        private void btnModificaTom_Click(object sender, EventArgs e)
+        {
+            if(lvToms.SelectedItems.Count <= 0)
+            {
+                MessageBox.Show("Selezionare un elemento", "MODIFICA TAMBURO", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
+            else if(lvToms.SelectedItems.Count == 1)
+            {
+                //Istanzio la form detail
+                FrmTamburo _frmTamburo = new FrmTamburo();
+
+                //Gli passo il tamburo selezionato
+                _frmTamburo._tamburo = (ClsTamburo)lvToms.SelectedItems[0].Tag;
+                _frmTamburo._batteriaTamburo = ClsBatteriaTamburoBL.
+
+                //Specifico la modalità di entrata
+                _frmTamburo._modalitaEntrataDetail = Program.eMODALITA_ENTRATA_DETAIL.Modifica;
+
+                //Apro la form
+                _frmTamburo.ShowDialog(this);
+
+                //Alla chiusura ripopolo la ListView
+                PopolaListView(lvToms, _tamburi, false, false);
             }
         }
     }

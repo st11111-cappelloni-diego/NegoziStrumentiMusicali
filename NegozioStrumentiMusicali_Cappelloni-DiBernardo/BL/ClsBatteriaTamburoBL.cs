@@ -293,6 +293,51 @@ namespace NegozioStrumentiMusicali
 
             return _listaBatteriaTamburo;
         }
+
+        public static ClsBatteriaTamburo GetOneBatteriaTamburo(string stringaDiConnessione, long batteriaID, long tamburoID, out string comunicazione)
+        {
+            //VARIABILI
+            comunicazione = String.Empty;
+            ClsBatteriaTamburo _batteriaTamburo = new ClsBatteriaTamburo();
+            MySqlConnection _connection = new MySqlConnection(stringaDiConnessione);
+
+            try
+            {
+                //Compongo la query
+                string _query = "SELECT * FROM batteriatamburo " +
+                    "WHERE batteriaID = @batteriaID AND " +
+                    "piattoID = @piattoID";
+
+                //Creo il comando
+                MySqlCommand _cmd = new MySqlCommand(_query, _connection);
+
+                _cmd.Parameters.AddWithValue("@batteriaID", batteriaID);
+                _cmd.Parameters.AddWithValue("@tamburoID", tamburoID);
+
+                //Eseguo il comando creando il DataReader
+                MySqlDataReader _dataReader = _cmd.ExecuteReader();
+
+                if (_dataReader.HasRows) //Controllo se la tabella ha dei record
+                {
+                    while (_dataReader.Read()) //Se ne ha li leggo tutti
+                    {
+                        //Carico i dati dal DB
+                        _batteriaTamburo = CaricaSingoloBatteriaTamburo(ref _dataReader);
+                    }
+                }
+            }
+            catch(Exception ex)
+            {
+                comunicazione = ex.Message;
+                _batteriaTamburo = null;
+            }
+            finally
+            {
+                _connection.Close();
+            }
+
+            return _batteriaTamburo;
+        }
     }
 }
 
