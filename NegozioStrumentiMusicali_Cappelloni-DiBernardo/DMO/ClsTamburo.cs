@@ -14,10 +14,10 @@ namespace NegozioStrumentiMusicali
         #region Enumeratori
         public enum eTIPO
         {
-            cassa,
-            rullante,
             timpano,
-            tom
+            tom,
+            cassa,
+            rullante
         }
         public enum eMATERIALE
         {

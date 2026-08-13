@@ -28,6 +28,7 @@ namespace NegozioStrumentiMusicali
             cbMateriale.SelectedIndex = Convert.ToInt32(tamburo.Materiale);
             nudDiametro.Value = Convert.ToDecimal(tamburo.DiametroIN);
             nudStrati.Value = Convert.ToDecimal(tamburo.Strati);
+            cbTipo.SelectedIndex = Convert.ToInt32(tamburo.Tipo);
         }
 
         private void AbilitaControlliGraficiInput(bool controlliAbilitati)
@@ -45,6 +46,12 @@ namespace NegozioStrumentiMusicali
             InitializeComponent();
 
             cbMateriale.DataSource = Enum.GetNames(typeof(ClsTamburo.eMATERIALE));
+            //Escludo cassa e rullante perchè si inseriscono dalla FrmBatteria
+            cbTipo.DataSource = new List<ClsTamburo.eTIPO>
+            {
+                ClsTamburo.eTIPO.timpano,
+                ClsTamburo.eTIPO.tom
+            };
         }
 
         private void FrmTamburo_Load(object sender, EventArgs e)
@@ -79,18 +86,48 @@ namespace NegozioStrumentiMusicali
                 {
                     string _comunicazione = String.Empty;
 
+                    _tamburo.Tipo = (ClsTamburo.eTIPO)cbTipo.SelectedIndex;
                     _tamburo.DiametroIN = Convert.ToByte(nudDiametro.Value);
                     _tamburo.Materiale = (ClsTamburo.eMATERIALE)cbMateriale.SelectedIndex;
                     _tamburo.Strati = Convert.ToByte(nudStrati.Value);
 
-                    if(_modalitaEntrataDetail == Program.eMODALITA_ENTRATA_DETAIL.Inserimento)
-                    {
-                        _tamburo.ID = ClsTamburoBL.InsertTamburo(Program._connectionString, _tamburo, out _comunicazione);
-                    }
-                    else if(_modalitaEntrataDetail == Program.eMODALITA_ENTRATA_DETAIL.Modifica)
-                    {
-                        ClsTamburoBL.UpdateTamburo(Program._connectionString, _tamburo, out _comunicazione);
-                    }
+                    ClsTamburo _ricercaTamburo = new ClsTamburo();
+
+                        //Controllo se già esiste il tamburo coi nuovi dati
+                        _ricercaTamburo = ClsTamburoBL.GetOneTamburo(Program._connectionString, _tamburo.Tipo, _tamburo.DiametroIN, _tamburo.Materiale, _tamburo.Strati, out _comunicazione);
+
+                        if(_ricercaTamburo == null)
+                        {
+                            //Non esiste: creo il nuovo tamburo
+                            _tamburo.ID = ClsTamburoBL.InsertTamburo(Program._connectionString, _tamburo, out _comunicazione);
+                        }
+                        else
+                        {
+                            //Esiste
+                            _tamburo.ID = _ricercaTamburo.ID;
+                        }
+
+                        //Associo il tamburo alla batteria in caso non ci sia già l'associazione
+                        ClsBatteriaTamburo _ricercaBT = new ClsBatteriaTamburo();
+                        _ricercaBT = ClsBatteriaTamburoBL.GetOneBatteriaTamburo(Program._connectionString, _batteriaTamburo.BatteriaID, _tamburo.ID, out _comunicazione);
+
+                        //Se non esiste l'associazione la creo ed elimino quella vecchia
+                        if(_ricercaBT == null)
+                        {
+                            if(_modalitaEntrataDetail == Program.eMODALITA_ENTRATA_DETAIL.Modifica)
+                            {
+                                ClsBatteriaTamburoBL.DeleteBatteriaTamburo(Program._connectionString, _batteriaTamburo, out _comunicazione);
+                            }
+
+                            ClsBatteriaTamburo _batteriaTamburoNew = new ClsBatteriaTamburo();
+                            _batteriaTamburoNew.BatteriaID = _batteriaTamburo.BatteriaID;
+                            _batteriaTamburoNew.TamburoID = _tamburo.ID;
+                            _batteriaTamburoNew.ID = ClsBatteriaTamburoBL.InsertBatteriaTamburo(Program._connectionString, _batteriaTamburoNew, out _comunicazione);
+                            _batteriaTamburo = _batteriaTamburoNew;
+                        }
+
+
+                    
 
                     MessageBox.Show(_comunicazione, "SALVATAGGIO DATI TAMBURO", MessageBoxButtons.OK, MessageBoxIcon.Information);
 

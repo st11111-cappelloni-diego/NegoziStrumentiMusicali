@@ -181,8 +181,9 @@ namespace NegozioStrumentiMusicali
             for (int i = 0; i < listaTamburi.Count(); i++)
             {
                 //Escludo il rullante e/o la cassa se richiesto
-                if(!(listaTamburi[i].Tipo == ClsTamburo.eTIPO.cassa && includiCassa == false)
-                    || !(listaTamburi[i].Tipo == ClsTamburo.eTIPO.rullante && includiRullante == false))
+                if((listaTamburi[i].Tipo != ClsTamburo.eTIPO.cassa || includiCassa)
+                    &&
+                    (listaTamburi[i].Tipo != ClsTamburo.eTIPO.rullante || includiRullante))
                 {
                     //Popolo il litview item
                     //Prima colonna: tipo
@@ -330,8 +331,10 @@ namespace NegozioStrumentiMusicali
                 FrmTamburo _frmTamburo = new FrmTamburo();
 
                 //Gli passo il tamburo selezionato
-                _frmTamburo._tamburo = (ClsTamburo)lvToms.SelectedItems[0].Tag;
-                _frmTamburo._batteriaTamburo = ClsBatteriaTamburoBL.
+                string _com = String.Empty;
+                ClsTamburo _tamburo = (ClsTamburo)lvToms.SelectedItems[0].Tag;
+                _frmTamburo._tamburo = _tamburo;
+                _frmTamburo._batteriaTamburo = ClsBatteriaTamburoBL.GetOneBatteriaTamburo(Program._connectionString, _batteria.ID, _tamburo.ID, out _com);
 
                 //Specifico la modalità di entrata
                 _frmTamburo._modalitaEntrataDetail = Program.eMODALITA_ENTRATA_DETAIL.Modifica;
