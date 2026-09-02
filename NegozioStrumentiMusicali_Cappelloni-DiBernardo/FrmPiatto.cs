@@ -16,8 +16,9 @@ namespace NegozioStrumentiMusicali
     public partial class FrmPiatto : Form
     {
         #region Variabili Globali
-        ClsPiatto _piatto;
-        Program.eMODALITA_ENTRATA_DETAIL _modalitaEntrataDetail;
+        public ClsPiatto _piatto;
+        public ClsBatteriaPiatto _batteriaPiatto;
+        public Program.eMODALITA_ENTRATA_DETAIL _modalitaEntrataDetail;
 
         #endregion
 
@@ -25,12 +26,14 @@ namespace NegozioStrumentiMusicali
         private void CaricaDati(ClsPiatto piatto)
         {
             cbMateriale.SelectedIndex = Convert.ToInt32(piatto.Materiale);
+            cbTipo.SelectedIndex = Convert.ToInt32(piatto.Tipo);
             nudDiametro.Value = Convert.ToDecimal(piatto.DiametroIN);
         }
 
         private void AbilitaControlliGraficiInput(bool controlliAbilitati)
         {
             cbMateriale.Enabled = controlliAbilitati;
+            cbTipo.Enabled = controlliAbilitati;
             nudDiametro.Enabled = controlliAbilitati;
             btnSalva.Enabled = controlliAbilitati;
         }
@@ -42,6 +45,7 @@ namespace NegozioStrumentiMusicali
             InitializeComponent();
 
             cbMateriale.DataSource = Enum.GetNames(typeof(ClsPiatto.eMATERIALE));
+            cbTipo.DataSource = Enum.GetNames(typeof(ClsPiatto.eTIPO));
         }
 
         private void FrmPiatto_Load(object sender, EventArgs e)
@@ -70,33 +74,63 @@ namespace NegozioStrumentiMusicali
             DialogResult _drMessageBox =
             MessageBox.Show("Sei sicur* di voler salvare ed uscire?", "SALVA", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
 
-                if (_drMessageBox == DialogResult.Yes)
+            if (_drMessageBox == DialogResult.Yes)
+            {
+                try
                 {
-                    try
+                    string _comunicazione = String.Empty;
+
+                    _piatto.Tipo = (ClsPiatto.eTIPO)cbTipo.SelectedIndex;
+                    _piatto.DiametroIN = Convert.ToByte(nudDiametro.Value);
+                    _piatto.Materiale = (ClsPiatto.eMATERIALE)cbMateriale.SelectedIndex;
+
+                    ClsPiatto _ricercaPiatto = new ClsPiatto();
+
+                    //Controllo se già esiste il tamburo coi nuovi dati
+                    _ricercaPiatto = ClsPiattoBL.GetOnePiatto(Program._connectionString, _piatto.Tipo, _piatto.DiametroIN, _piatto.Materiale, out _comunicazione);
+
+                    if (_ricercaPiatto == null)
                     {
-                        string _comunicazione = String.Empty;
-
-                        _piatto.DiametroIN = Convert.ToByte(nudDiametro.Value);
-                        _piatto.Materiale = (ClsPiatto.eMATERIALE)cbMateriale.SelectedIndex;
-
-                        if (_modalitaEntrataDetail == Program.eMODALITA_ENTRATA_DETAIL.Inserimento)
-                        {
-                            _piatto.ID = ClsPiattoBL.InsertPiatto(Program._connectionString, _piatto, out _comunicazione);
-                        }
-                        else if (_modalitaEntrataDetail == Program.eMODALITA_ENTRATA_DETAIL.Modifica)
-                        {
-                            ClsPiattoBL.UpdatePiatto(Program._connectionString, _piatto, out _comunicazione);
-                        }
-
-                        MessageBox.Show(_comunicazione, "SALVATAGGIO DATI PIATTO", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                        this.Close();
+                        //Non esiste: creo il nuovo tamburo
+                        _piatto.ID = ClsPiattoBL.InsertPiatto(Program._connectionString, _piatto, out _comunicazione);
                     }
-                    catch (Exception ex)
+                    else
                     {
-                        MessageBox.Show("Errore nel salvataggio del piatto:\r\n" + ex, "SALVA", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        //Esiste
+                        _piatto.ID = _ricercaPiatto.ID;
                     }
+
+                    //Associo il tamburo alla batteria in caso non ci sia già l'associazione
+                    ClsBatteriaPiatto _ricercaBP = new ClsBatteriaPiatto();
+                    _ricercaBP = ClsBatteriaPiattoBL.GetOneBatteriaPiatto(Program._connectionString, _batteriaPiatto.BatteriaID, _piatto.ID, out _comunicazione);
+
+                    //Se non esiste l'associazione la creo ed elimino quella vecchia
+                    if (_ricercaBP == null)
+                    {
+                        if (_modalitaEntrataDetail == Program.eMODALITA_ENTRATA_DETAIL.Modifica)
+                        {
+                            ClsBatteriaPiattoBL.DeleteBatteriaPiatto(Program._connectionString, _batteriaPiatto, out _comunicazione);
+                        }
+
+                        ClsBatteriaPiatto _batteriaPiattoNew = new ClsBatteriaPiatto();
+                        _batteriaPiattoNew.BatteriaID = _batteriaPiatto.BatteriaID;
+                        _batteriaPiattoNew.PiattoID = _piatto.ID;
+                        _batteriaPiattoNew.ID = ClsBatteriaPiattoBL.InsertBatteriaPiatto(Program._connectionString, _batteriaPiattoNew, out _comunicazione);
+                        _batteriaPiatto = _batteriaPiattoNew;
+                    }
+
+
+
+
+                    MessageBox.Show(_comunicazione, "SALVATAGGIO DATI PIATTO", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                    this.Close();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Errore nel salvataggio del piatto:\r\n" + ex, "SALVA", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
+        }
     }
 }
