@@ -42,7 +42,7 @@ namespace NegozioStrumentiMusicali
 
                 //Inserisco i valori
                 _cmd.Parameters.AddWithValue("@quantita", ordine.Quantita);
-                _cmd.Parameters.AddWithValue("@stato", ordine.Stato);
+                _cmd.Parameters.AddWithValue("@stato", ordine.Stato.ToString());
                 _cmd.Parameters.AddWithValue("@dataora", ordine.DataOra);
                 _cmd.Parameters.AddWithValue("@indirizzoID", ordine.IndirizzoID);
                 _cmd.Parameters.AddWithValue("@negozioID", ordine.NegozioID);

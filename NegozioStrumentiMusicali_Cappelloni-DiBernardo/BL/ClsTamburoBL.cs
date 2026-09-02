@@ -299,5 +299,65 @@ namespace NegozioStrumentiMusicali
 
             return _tamburo;
         }
+        public static ClsTamburo GetOneTamburo(string stringaDiConnessione, ClsTamburo.eTIPO tipo, byte diametroIN, ClsTamburo.eMATERIALE materiale, byte strati, out string comunicazione)
+        {
+            //VARIABILI
+            comunicazione = String.Empty;
+            ClsTamburo _tamburo = new ClsTamburo();
+            MySqlConnection _connection = new MySqlConnection(stringaDiConnessione);
+
+            try
+            {
+                //Compongo la query
+                string _query = "SELECT * FROM tamburi WHERE " +
+                    "tipo = @tipo AND " +
+                    "diametroin = @diametroin AND " +
+                    "materiale = @materiale AND " +
+                    "strati = @strati";
+
+                //Apro la connessione
+                _connection.Open();
+
+                //Creo l'oggetto command
+                MySqlCommand _cmd = new MySqlCommand(_query, _connection);
+
+                //Inserisco i parametri nel comando
+                _cmd.Parameters.AddWithValue("@tipo", tipo);
+                _cmd.Parameters.AddWithValue("@diametroin", diametroIN);
+                _cmd.Parameters.AddWithValue("@materiale", materiale);
+                _cmd.Parameters.AddWithValue("@strati", strati);
+
+                //Eseguo il comando creando il DataReader
+                MySqlDataReader _dataReader = _cmd.ExecuteReader();
+
+                if (_dataReader.HasRows) //Controllo se la query ha restituito dei record
+                {
+                    while (_dataReader.Read()) //Se ne ha restiuiti, li leggo tutti
+                    {
+                        _tamburo = CaricaSingoloTamburo(ref _dataReader);
+                    }
+                }
+                else
+                {
+                    _tamburo = null;
+                }
+
+                _dataReader.Close();
+
+                comunicazione = "Tamburo caricato correttamente dal DataBase";
+
+            }
+            catch(Exception ex)
+            {
+                comunicazione = ex.Message;
+                _tamburo = null;
+            }
+            finally
+            {
+                _connection.Close();
+            }
+
+            return _tamburo;
+        }
     }
 }
