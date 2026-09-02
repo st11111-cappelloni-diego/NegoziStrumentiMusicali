@@ -322,9 +322,9 @@ namespace NegozioStrumentiMusicali
                 MySqlCommand _cmd = new MySqlCommand(_query, _connection);
 
                 //Inserisco i parametri nel comando
-                _cmd.Parameters.AddWithValue("@tipo", tipo);
+                _cmd.Parameters.AddWithValue("@tipo", tipo.ToString());
                 _cmd.Parameters.AddWithValue("@diametroin", diametroIN);
-                _cmd.Parameters.AddWithValue("@materiale", materiale);
+                _cmd.Parameters.AddWithValue("@materiale", materiale.ToString());
                 _cmd.Parameters.AddWithValue("@strati", strati);
 
                 //Eseguo il comando creando il DataReader
