@@ -58,5 +58,10 @@ namespace NegozioStrumentiMusicali
                 tbRicerca.ForeColor = Color.Gray;
             }
         }
+
+        private void btnNuovo_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

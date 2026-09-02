@@ -65,6 +65,7 @@ namespace NegozioStrumentiMusicali
                 _indirizzo.CasaProduttriceID = 0;
 
                 string _comunicazione;
+
                 _indirizzo = ClsIndirizzoBL.GetOneIndirizzo(Program._connectionString, _indirizzo.CodicePostale, _indirizzo.Comune, _indirizzo.Via, _indirizzo.NumeroCivico, _indirizzo.LetteraCivico, _indirizzo.Nazione, out _comunicazione);
 
                 if (_indirizzo == null)
@@ -85,6 +86,8 @@ namespace NegozioStrumentiMusicali
 
                 _ordine.ID = ClsOrdineBL.InsertOrdine(Program._connectionString, _ordine, out _comunicazione);
                 MessageBox.Show(_comunicazione, "INSERIMENTO ORDINE NEL DB", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                this.Close();
             }
 
         }
