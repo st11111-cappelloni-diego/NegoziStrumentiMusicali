@@ -1,9 +1,6 @@
-﻿using System;
-using MySqlConnector;
+﻿using MySqlConnector;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NegozioStrumentiMusicali
 {
@@ -15,20 +12,21 @@ namespace NegozioStrumentiMusicali
         /// <summary>
         /// Inserimento di un record in batteriapiatto
         /// </summary>
-        /// <param name="connection">Connessione al DB</param>
+        /// <param name="stringaDiConnessione">Stringa per la connessione al DataBase</param>
         /// <param name="batteriaPiatto">Record da inserire</param>
         /// <param name="comunicazione">Comunicazione in uscita</param>
         /// <returns>ID del nuovo record. Se -1 insert non riuscito</returns>
-        public static long InsertBatteriaPiatto(ref MySqlConnection connection, ClsBatteriaPiatto batteriaPiatto, out string comunicazione)
+        public static long InsertBatteriaPiatto(string stringaDiConnessione, ClsBatteriaPiatto batteriaPiatto, out string comunicazione)
         {
             //VARIABILI
             long _ID = -1;
             comunicazione = String.Empty;
+            MySqlConnection _connection = new MySqlConnection(stringaDiConnessione);
 
             try
             {
                 //Apro la connessione
-                connection.Open();
+                _connection.Open();
 
                 //Compongo il comando DML
                 string _dml =
@@ -36,7 +34,7 @@ namespace NegozioStrumentiMusicali
                     "VALUES(@batteriaID, @piattoID)";
 
                 //Creo l'oggetto command
-                MySqlCommand _cmd = new MySqlCommand(_dml, connection);
+                MySqlCommand _cmd = new MySqlCommand(_dml, _connection);
 
                 //Inserisco i valori
                 _cmd.Parameters.AddWithValue("@batteriaID", batteriaPiatto.BatteriaID);
@@ -56,7 +54,7 @@ namespace NegozioStrumentiMusicali
             finally
             {
                 //Chiudo la connessione
-                connection.Close();
+                _connection.Close();
             }
 
             return _ID;
@@ -110,25 +108,26 @@ namespace NegozioStrumentiMusicali
         /// <summary>
         /// Eliminazione di un record da batteriapiatto
         /// </summary>
-        /// <param name="connection">Connessione al DB</param>
+        /// <param name="stringaDiConnessione">Stringa per la connessione al DataBase</param>
         /// <param name="batteriaPiatto">Record da eliminare</param>
         /// <param name="comunicazione">Comunicazione in uscita</param>
-        public static void DeleteBatteriaPiatto(ref MySqlConnection connection, ClsBatteriaPiatto batteriaPiatto, out string comunicazione)
+        public static void DeleteBatteriaPiatto(string stringaDiConnessione, ClsBatteriaPiatto batteriaPiatto, out string comunicazione)
         {
             //VARIABILI
             comunicazione = String.Empty;
+            MySqlConnection _connection = new MySqlConnection(stringaDiConnessione);
 
             try
             {
                 //Apro la connessione
-                connection.Open();
+                _connection.Open();
 
                 //Compongo il comando DML
                 string _dml =
                     "DELETE FROM batteriapiatto WHERE ID = @ID";
 
                 //Creo l'oggetto command
-                MySqlCommand _cmd = new MySqlCommand(_dml, connection);
+                MySqlCommand _cmd = new MySqlCommand(_dml, _connection);
 
                 //Inserisco i valori
                 _cmd.Parameters.AddWithValue("@ID", batteriaPiatto.ID);
@@ -145,7 +144,7 @@ namespace NegozioStrumentiMusicali
             finally
             {
                 //Chiudo la connessione
-                connection.Close();
+                _connection.Close();
             }
         }
         /// <summary>
@@ -293,6 +292,61 @@ namespace NegozioStrumentiMusicali
             }
 
             return _listaBatteriaPiatto;
+        }
+        public static ClsBatteriaPiatto GetOneBatteriaPiatto(string stringaDiConnessione, long batteriaID, long piattoID, out string comunicazione)
+        {
+            //VARIABILI
+            comunicazione = String.Empty;
+            ClsBatteriaPiatto _batteriaPiatto = new ClsBatteriaPiatto();
+            MySqlConnection _connection = new MySqlConnection(stringaDiConnessione);
+
+            try
+            {
+                _connection.Open();
+
+                //Compongo la query
+                string _query = "SELECT * FROM batteriapiatto " +
+                    "WHERE batteriaID = @batteriaID AND " +
+                    "piattoID = @piattoID";
+
+                //Creo il comando
+                MySqlCommand _cmd = new MySqlCommand(_query, _connection);
+
+                _cmd.Parameters.AddWithValue("@batteriaID", batteriaID);
+                _cmd.Parameters.AddWithValue("@piattoID", piattoID);
+
+                //Eseguo il comando creando il DataReader
+                MySqlDataReader _dataReader = _cmd.ExecuteReader();
+
+                if (_dataReader.HasRows) //Controllo se la tabella ha dei record
+                {
+                    while (_dataReader.Read()) //Se ne ha li leggo tutti
+                    {
+                        //Carico i dati dal DB
+                        _batteriaPiatto = CaricaSingoloBatteriaPiatto(ref _dataReader);
+                    }
+                }
+                else
+                {
+                    _batteriaPiatto = null;
+                }
+
+                _dataReader.Close();
+
+                comunicazione = "Relazione tra batteria e piatto caricata correttamente dal DataBase";
+
+            }
+            catch (Exception ex)
+            {
+                comunicazione = ex.Message;
+                _batteriaPiatto = null;
+            }
+            finally
+            {
+                _connection.Close();
+            }
+
+            return _batteriaPiatto;
         }
     }
 }

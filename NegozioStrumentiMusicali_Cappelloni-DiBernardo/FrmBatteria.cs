@@ -346,5 +346,33 @@ namespace NegozioStrumentiMusicali
                 PopolaListView(lvToms, _tamburi, false, false);
             }
         }
+
+        private void btnModificaPiatto_Click(object sender, EventArgs e)
+        {
+            if (lvAltriPiatti.SelectedItems.Count <= 0)
+            {
+                MessageBox.Show("Selezionare un elemento", "MODIFICA PIATTO", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
+            else if (lvAltriPiatti.SelectedItems.Count == 1)
+            {
+                //Istanzio la form detail
+                FrmPiatto _frmPiatto = new FrmPiatto();
+
+                //Gli passo il tamburo selezionato
+                string _com = String.Empty;
+                ClsPiatto _piatto = (ClsPiatto)lvAltriPiatti.SelectedItems[0].Tag;
+                _frmPiatto._piatto = _piatto;
+                _frmPiatto._batteriaPiatto = ClsBatteriaPiattoBL.GetOneBatteriaPiatto(Program._connectionString, _batteria.ID, _piatto.ID, out _com);
+
+                //Specifico la modalità di entrata
+                _frmPiatto._modalitaEntrataDetail = Program.eMODALITA_ENTRATA_DETAIL.Modifica;
+
+                //Apro la form
+                _frmPiatto.ShowDialog(this);
+
+                //Alla chiusura ripopolo la ListView
+                PopolaListView(lvAltriPiatti, _piatti, false);
+            }
+        }
     }
 }

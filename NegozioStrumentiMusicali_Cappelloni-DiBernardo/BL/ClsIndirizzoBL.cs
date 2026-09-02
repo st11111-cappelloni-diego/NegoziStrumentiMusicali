@@ -307,8 +307,8 @@ namespace NegozioStrumentiMusicali
                     "codicepostale = @codicepostale AND " +
                     "comune = @comune AND " +
                     "via = @via AND " +
-                    "numerocivico = @numerocivico AND " +
-                    "letteracivico = @letteracivico AND " +
+                    "numerocivico = @numerocivico AND (" +
+                    "letteracivico = @letteracivico OR (letteracivico IS NULL AND @letteracivico IS NULL)) AND " +
                     "nazione = @nazione";
 
                 //Creo l'oggetto command
