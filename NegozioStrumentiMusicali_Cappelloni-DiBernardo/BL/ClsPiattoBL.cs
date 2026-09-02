@@ -295,5 +295,64 @@ namespace NegozioStrumentiMusicali
 
             return _piatto;
         }
+
+        public static ClsPiatto GetOnePiatto(string stringaDiConnessione, ClsPiatto.eTIPO tipo, byte diametroIN, ClsPiatto.eMATERIALE materiale, out string comunicazione)
+        {
+            //VARIABILI
+            comunicazione = String.Empty;
+            ClsPiatto _piatto = new ClsPiatto();
+            MySqlConnection _connection = new MySqlConnection(stringaDiConnessione);
+
+            try
+            {
+                //Compongo la query
+                string _query = "SELECT * FROM piatti WHERE " +
+                    "tipo = @tipo AND " +
+                    "diametroin = @diametroin AND " +
+                    "materiale = @materiale";
+
+                //Apro la connessione
+                _connection.Open();
+
+                //Creo l'oggetto command
+                MySqlCommand _cmd = new MySqlCommand(_query, _connection);
+
+                //Inserisco i parametri nel comando
+                _cmd.Parameters.AddWithValue("@tipo", tipo.ToString());
+                _cmd.Parameters.AddWithValue("@diametroin", diametroIN);
+                _cmd.Parameters.AddWithValue("@materiale", materiale.ToString());
+
+                //Eseguo il comando creando il DataReader
+                MySqlDataReader _dataReader = _cmd.ExecuteReader();
+
+                if (_dataReader.HasRows) //Controllo se la query ha restituito dei record
+                {
+                    while (_dataReader.Read()) //Se ne ha restiuiti, li leggo tutti
+                    {
+                        _piatto = CaricaSingoloPiatto(ref _dataReader);
+                    }
+                }
+                else
+                {
+                    _piatto = null;
+                }
+
+                _dataReader.Close();
+
+                comunicazione = "Piatto caricato correttamente dal DataBase";
+
+            }
+            catch (Exception ex)
+            {
+                comunicazione = ex.Message;
+                _piatto = null;
+            }
+            finally
+            {
+                _connection.Close();
+            }
+
+            return _piatto;
+        }
     }
 }
