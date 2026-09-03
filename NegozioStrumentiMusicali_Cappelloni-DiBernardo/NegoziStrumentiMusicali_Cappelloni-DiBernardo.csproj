@@ -88,6 +88,7 @@
     <Compile Include="BL\ClsNegozioBL.cs" />
     <Compile Include="BL\ClsNotaMusicaleBL.cs" />
     <Compile Include="BL\ClsOrdineBL.cs" />
+    <Compile Include="BL\ClsOrdineStrumentoBL.cs" />
     <Compile Include="BL\ClsOttoneBL.cs" />
     <Compile Include="BL\ClsPianoforteBL.cs" />
     <Compile Include="BL\ClsPiattoBL.cs" />
@@ -96,6 +97,7 @@
     <Compile Include="BL\ClsTamburoBL.cs" />
     <Compile Include="BL\ClsUtenteBL.cs" />
     <Compile Include="BL\ClsVendereBL.cs" />
+    <Compile Include="DMO\ClsOrdineStrumento.cs" />
     <Compile Include="DMO\ClsArchivio.cs" />
     <Compile Include="DMO\ClsBatteria.cs" />
     <Compile Include="DMO\ClsBatteriaPiatto.cs" />
