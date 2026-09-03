@@ -45,7 +45,13 @@ namespace NegozioStrumentiMusicali
             InitializeComponent();
 
             cbMateriale.DataSource = Enum.GetNames(typeof(ClsPiatto.eMATERIALE));
-            cbTipo.DataSource = Enum.GetNames(typeof(ClsPiatto.eTIPO));
+            //Non metto il charleston perchè viene inserito su FrmBatteria
+            cbTipo.DataSource = new List<ClsPiatto.eTIPO>()
+            {
+                ClsPiatto.eTIPO.china,
+                ClsPiatto.eTIPO.crash,
+                ClsPiatto.eTIPO.ride
+            };
         }
 
         private void FrmPiatto_Load(object sender, EventArgs e)
@@ -103,7 +109,7 @@ namespace NegozioStrumentiMusicali
                     //Associo il tamburo alla batteria in caso non ci sia già l'associazione
                     ClsBatteriaPiatto _ricercaBP = new ClsBatteriaPiatto();
                     _ricercaBP = ClsBatteriaPiattoBL.GetOneBatteriaPiatto(Program._connectionString, _batteriaPiatto.BatteriaID, _piatto.ID, out _comunicazione);
-
+                    
                     //Se non esiste l'associazione la creo ed elimino quella vecchia
                     if (_ricercaBP == null)
                     {

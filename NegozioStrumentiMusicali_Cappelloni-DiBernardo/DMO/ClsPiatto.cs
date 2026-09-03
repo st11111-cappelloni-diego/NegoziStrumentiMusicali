@@ -11,10 +11,10 @@ namespace NegozioStrumentiMusicali
         #region Enumeratori
         public enum eTIPO
         {
-            charleston,
             china,
             crash,
-            ride
+            ride,
+            charleston
         }
         public enum eMATERIALE
         {
