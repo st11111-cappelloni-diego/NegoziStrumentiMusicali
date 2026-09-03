@@ -41,10 +41,9 @@
             // btnSalva
             // 
             this.btnSalva.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSalva.Location = new System.Drawing.Point(351, 260);
-            this.btnSalva.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnSalva.Location = new System.Drawing.Point(263, 211);
             this.btnSalva.Name = "btnSalva";
-            this.btnSalva.Size = new System.Drawing.Size(140, 36);
+            this.btnSalva.Size = new System.Drawing.Size(105, 29);
             this.btnSalva.TabIndex = 26;
             this.btnSalva.Text = "Salva";
             this.btnSalva.UseVisualStyleBackColor = true;
@@ -53,10 +52,9 @@
             // label12
             // 
             this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label12.Location = new System.Drawing.Point(17, 144);
-            this.label12.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label12.Location = new System.Drawing.Point(13, 117);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(473, 25);
+            this.label12.Size = new System.Drawing.Size(355, 20);
             this.label12.TabIndex = 20;
             this.label12.Text = "Materiale";
             this.label12.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -66,19 +64,17 @@
             this.cbMateriale.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbMateriale.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cbMateriale.FormattingEnabled = true;
-            this.cbMateriale.Location = new System.Drawing.Point(17, 172);
-            this.cbMateriale.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cbMateriale.Location = new System.Drawing.Point(13, 140);
             this.cbMateriale.Name = "cbMateriale";
-            this.cbMateriale.Size = new System.Drawing.Size(472, 33);
+            this.cbMateriale.Size = new System.Drawing.Size(355, 28);
             this.cbMateriale.TabIndex = 22;
             // 
             // label15
             // 
             this.label15.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label15.Location = new System.Drawing.Point(17, 77);
-            this.label15.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label15.Location = new System.Drawing.Point(13, 63);
             this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(473, 25);
+            this.label15.Size = new System.Drawing.Size(355, 20);
             this.label15.TabIndex = 21;
             this.label15.Text = "Diametro [in]";
             this.label15.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -86,24 +82,22 @@
             // nudDiametro
             // 
             this.nudDiametro.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.nudDiametro.Location = new System.Drawing.Point(17, 108);
-            this.nudDiametro.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.nudDiametro.Location = new System.Drawing.Point(13, 88);
             this.nudDiametro.Maximum = new decimal(new int[] {
             1000,
             0,
             0,
             0});
             this.nudDiametro.Name = "nudDiametro";
-            this.nudDiametro.Size = new System.Drawing.Size(473, 30);
+            this.nudDiametro.Size = new System.Drawing.Size(355, 26);
             this.nudDiametro.TabIndex = 23;
             // 
             // label1
             // 
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(18, 9);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label1.Location = new System.Drawing.Point(14, 7);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(472, 25);
+            this.label1.Size = new System.Drawing.Size(354, 20);
             this.label1.TabIndex = 27;
             this.label1.Text = "Tipo";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -113,17 +107,16 @@
             this.cbTipo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbTipo.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cbTipo.FormattingEnabled = true;
-            this.cbTipo.Location = new System.Drawing.Point(18, 40);
-            this.cbTipo.Margin = new System.Windows.Forms.Padding(4);
+            this.cbTipo.Location = new System.Drawing.Point(14, 32);
             this.cbTipo.Name = "cbTipo";
-            this.cbTipo.Size = new System.Drawing.Size(472, 33);
+            this.cbTipo.Size = new System.Drawing.Size(355, 28);
             this.cbTipo.TabIndex = 28;
             // 
             // FrmPiatto
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(504, 309);
+            this.ClientSize = new System.Drawing.Size(378, 251);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.cbTipo);
             this.Controls.Add(this.btnSalva);
@@ -131,7 +124,7 @@
             this.Controls.Add(this.cbMateriale);
             this.Controls.Add(this.label15);
             this.Controls.Add(this.nudDiametro);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.MaximizeBox = false;
             this.Name = "FrmPiatto";
             this.Text = "FrmPiatto";
             this.Load += new System.EventHandler(this.FrmPiatto_Load);

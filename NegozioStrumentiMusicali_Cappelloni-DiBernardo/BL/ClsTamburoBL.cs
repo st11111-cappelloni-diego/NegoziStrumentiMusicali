@@ -336,15 +336,17 @@ namespace NegozioStrumentiMusicali
                     {
                         _tamburo = CaricaSingoloTamburo(ref _dataReader);
                     }
+
+                    comunicazione = "Tamburo caricato correttamente dal DataBase";
                 }
                 else
                 {
                     _tamburo = null;
+
+                    comunicazione = "Tamburo non trovato nel DataBase";
                 }
 
-                _dataReader.Close();
-
-                comunicazione = "Tamburo caricato correttamente dal DataBase";
+                _dataReader.Close();                
 
             }
             catch(Exception ex)

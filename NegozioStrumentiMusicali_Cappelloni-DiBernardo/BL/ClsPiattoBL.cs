@@ -331,15 +331,19 @@ namespace NegozioStrumentiMusicali
                     {
                         _piatto = CaricaSingoloPiatto(ref _dataReader);
                     }
+
+                    comunicazione = "Piatto caricato correttamente dal DataBase";
                 }
                 else
                 {
                     _piatto = null;
+
+                    comunicazione = "Piatto non trovato nel DataBase";
                 }
 
                 _dataReader.Close();
 
-                comunicazione = "Piatto caricato correttamente dal DataBase";
+                
 
             }
             catch (Exception ex)
