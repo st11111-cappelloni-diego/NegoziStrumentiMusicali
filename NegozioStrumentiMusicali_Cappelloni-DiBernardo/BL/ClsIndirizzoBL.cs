@@ -46,7 +46,14 @@ namespace NegozioStrumentiMusicali
                 _cmd.Parameters.AddWithValue("@via", indirizzo.Via);
                 _cmd.Parameters.AddWithValue("@nazione", indirizzo.Nazione);
                 _cmd.Parameters.AddWithValue("@essereSede", indirizzo.EssereSede);
-                _cmd.Parameters.AddWithValue("@casaProduttriceID", indirizzo.CasaProduttriceID);
+                if(indirizzo.CasaProduttriceID <= -1)
+                {
+                    _cmd.Parameters.AddWithValue("@casaProduttriceID", DBNull.Value);
+                }
+                else
+                {
+                    _cmd.Parameters.AddWithValue("@casaProduttriceID", indirizzo.CasaProduttriceID);
+                }
                 _cmd.Parameters.AddWithValue("@numerocivico", indirizzo.NumeroCivico);
                 _cmd.Parameters.AddWithValue("@letteracivico", indirizzo.LetteraCivico);
 
@@ -294,7 +301,7 @@ namespace NegozioStrumentiMusicali
         {
             //VARIABILI
             comunicazione = String.Empty;
-            ClsIndirizzo _indirizzo = new ClsIndirizzo();
+            ClsIndirizzo _indirizzo = null;
             MySqlConnection _connection = new MySqlConnection(stringaDiConnessione);
 
             try

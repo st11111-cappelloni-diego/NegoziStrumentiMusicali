@@ -61,16 +61,16 @@ namespace NegozioStrumentiMusicali
                     _indirizzo.LetteraCivico = null;
                 else
                     _indirizzo.LetteraCivico = Convert.ToChar(tbLetteraCivico.Text);
-                _indirizzo.EssereSede = false;
-                _indirizzo.CasaProduttriceID = 0;
+                _indirizzo.EssereSede = null;
+                _indirizzo.CasaProduttriceID = -1;
 
                 string _comunicazione;
 
-                _indirizzo = ClsIndirizzoBL.GetOneIndirizzo(Program._connectionString, _indirizzo.CodicePostale, _indirizzo.Comune, _indirizzo.Via, _indirizzo.NumeroCivico, _indirizzo.LetteraCivico, _indirizzo.Nazione, out _comunicazione);
+                ClsIndirizzo _ricercaIndirizzo = ClsIndirizzoBL.GetOneIndirizzo(Program._connectionString, _indirizzo.CodicePostale, _indirizzo.Comune, _indirizzo.Via, _indirizzo.NumeroCivico, _indirizzo.LetteraCivico, _indirizzo.Nazione, out _comunicazione);
 
-                if (_indirizzo == null)
+                if (_ricercaIndirizzo == null)
                 {
-                    ClsIndirizzoBL.InsertIndirizzo(Program._connectionString, _indirizzo, out _comunicazione);
+                    _indirizzo.ID = ClsIndirizzoBL.InsertIndirizzo(Program._connectionString, _indirizzo, out _comunicazione);
                     MessageBox.Show(_comunicazione, "INSERIMENTO INDIRIZZO NEL DB", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
 
