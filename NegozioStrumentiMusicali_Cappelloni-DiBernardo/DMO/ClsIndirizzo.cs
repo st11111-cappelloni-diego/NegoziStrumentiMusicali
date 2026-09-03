@@ -97,6 +97,9 @@ namespace NegozioStrumentiMusicali
         }
 
         public bool? EssereSede { get => _essereSede; set => _essereSede = value; }
+        /// <summary>
+        /// Se minore o uguale a  -1 --> DBNull
+        /// </summary>
         public long CasaProduttriceID { get => _casaProduttriceID; set => _casaProduttriceID = value; }
         public ushort NumeroCivico { get => _numeroCivico; set => _numeroCivico = value; }
         public char? LetteraCivico { get => _letteraCivico; set => _letteraCivico = value; }
