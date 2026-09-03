@@ -46,7 +46,7 @@
             this.tbPassword.Location = new System.Drawing.Point(12, 243);
             this.tbPassword.Name = "tbPassword";
             this.tbPassword.Size = new System.Drawing.Size(900, 31);
-            this.tbPassword.TabIndex = 49;
+            this.tbPassword.TabIndex = 4;
             this.tbPassword.UseSystemPasswordChar = true;
             // 
             // label3
@@ -58,7 +58,7 @@
             this.label3.Location = new System.Drawing.Point(12, 217);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(900, 23);
-            this.label3.TabIndex = 48;
+            this.label3.TabIndex = 3;
             this.label3.Text = "Password";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -70,7 +70,7 @@
             this.tbUsername.Location = new System.Drawing.Point(12, 179);
             this.tbUsername.Name = "tbUsername";
             this.tbUsername.Size = new System.Drawing.Size(900, 31);
-            this.tbUsername.TabIndex = 45;
+            this.tbUsername.TabIndex = 2;
             // 
             // label1
             // 
@@ -81,7 +81,7 @@
             this.label1.Location = new System.Drawing.Point(12, 153);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(900, 23);
-            this.label1.TabIndex = 44;
+            this.label1.TabIndex = 1;
             this.label1.Text = "Username\r\n";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -92,7 +92,7 @@
             this.btnVisualizzaPassword.Location = new System.Drawing.Point(866, 215);
             this.btnVisualizzaPassword.Name = "btnVisualizzaPassword";
             this.btnVisualizzaPassword.Size = new System.Drawing.Size(46, 25);
-            this.btnVisualizzaPassword.TabIndex = 59;
+            this.btnVisualizzaPassword.TabIndex = 5;
             this.btnVisualizzaPassword.UseVisualStyleBackColor = true;
             this.btnVisualizzaPassword.Click += new System.EventHandler(this.btnVisualizzaPassword_Click);
             // 
@@ -108,7 +108,7 @@
             this.btnRegistrazione.Location = new System.Drawing.Point(407, 334);
             this.btnRegistrazione.Name = "btnRegistrazione";
             this.btnRegistrazione.Size = new System.Drawing.Size(111, 29);
-            this.btnRegistrazione.TabIndex = 76;
+            this.btnRegistrazione.TabIndex = 7;
             this.btnRegistrazione.Text = "Registrati";
             this.btnRegistrazione.UseVisualStyleBackColor = false;
             this.btnRegistrazione.Click += new System.EventHandler(this.btnRegistrazione_Click);
@@ -122,7 +122,7 @@
             this.btnAccedi.Location = new System.Drawing.Point(407, 280);
             this.btnAccedi.Name = "btnAccedi";
             this.btnAccedi.Size = new System.Drawing.Size(111, 48);
-            this.btnAccedi.TabIndex = 77;
+            this.btnAccedi.TabIndex = 6;
             this.btnAccedi.Text = "Accedi";
             this.btnAccedi.UseVisualStyleBackColor = false;
             this.btnAccedi.Click += new System.EventHandler(this.btnAccedi_Click);
@@ -136,7 +136,7 @@
             this.label2.Location = new System.Drawing.Point(4, 9);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(914, 123);
-            this.label2.TabIndex = 78;
+            this.label2.TabIndex = 0;
             this.label2.Text = "LOGIN";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 

@@ -325,16 +325,18 @@ namespace NegozioStrumentiMusicali
                         //Carico i dati dal DB
                         _batteriaPiatto = CaricaSingoloBatteriaPiatto(ref _dataReader);
                     }
+
+                    comunicazione = "Relazione tra batteria e piatto caricata correttamente dal DataBase";
                 }
                 else
                 {
                     _batteriaPiatto = null;
+                    comunicazione = "Relazione tra batteria e piatto non trovata nel DataBase";
                 }
 
                 _dataReader.Close();
 
-                comunicazione = "Relazione tra batteria e piatto caricata correttamente dal DataBase";
-
+               
             }
             catch (Exception ex)
             {

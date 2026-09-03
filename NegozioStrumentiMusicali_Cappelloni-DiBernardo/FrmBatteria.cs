@@ -374,5 +374,51 @@ namespace NegozioStrumentiMusicali
                 PopolaListView(lvAltriPiatti, _piatti, false);
             }
         }
+
+        private void btnNuovoTom_Click(object sender, EventArgs e)
+        {
+            //Istanzio la form detail
+            FrmTamburo _frmTamburo = new FrmTamburo();
+           
+            ClsTamburo _tamburo = new ClsTamburo();
+            _frmTamburo._tamburo = _tamburo;
+            _frmTamburo._batteriaTamburo = new ClsBatteriaTamburo();
+            _frmTamburo._batteriaTamburo.BatteriaID = _batteria.ID;
+
+            //Specifico la modalità di entrata
+            _frmTamburo._modalitaEntrataDetail = Program.eMODALITA_ENTRATA_DETAIL.Inserimento;
+
+            //Apro la form
+            _frmTamburo.ShowDialog(this);
+
+            string _comunicazione = String.Empty;
+            _tamburi = TrovaTamburi(_batteria.ID, out _comunicazione);
+
+            //Alla chiusura ripopolo la ListView
+            PopolaListView(lvToms, _tamburi, false, false);
+        }
+
+        private void btnNuovoPiatto_Click(object sender, EventArgs e)
+        {
+            //Istanzio la form detail
+            FrmPiatto _frmPiatto = new FrmPiatto();
+
+            ClsPiatto _piatto = new ClsPiatto();
+            _frmPiatto._piatto = _piatto;
+            _frmPiatto._batteriaPiatto = new ClsBatteriaPiatto();
+            _frmPiatto._batteriaPiatto.BatteriaID = _batteria.ID;
+
+            //Specifico la modalità di entrata
+            _frmPiatto._modalitaEntrataDetail = Program.eMODALITA_ENTRATA_DETAIL.Inserimento;
+
+            //Apro la form
+            _frmPiatto.ShowDialog(this);
+
+            string _comunicazione = String.Empty;
+            _piatti = TrovaPiatti(_batteria.ID, out _comunicazione);
+
+            //Alla chiusura ripopolo la ListView
+            PopolaListView(lvAltriPiatti, _piatti, false);
+        }
     }
 }
