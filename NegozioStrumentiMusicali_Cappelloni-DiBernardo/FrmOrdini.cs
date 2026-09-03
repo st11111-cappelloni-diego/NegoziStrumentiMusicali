@@ -93,8 +93,6 @@ namespace NegozioStrumentiMusicali
             
             _lvi.SubItems.Add(ordine.DataOra.ToString());
             _lvi.SubItems.Add(ordine.ID.ToString());        
-            _lvi.SubItems.Add(ordine.StrumentoMusicaleID.ToString());
-            _lvi.SubItems.Add(ordine.Quantita.ToString());
 
             _lvi.Tag = ordine;
 
@@ -104,7 +102,7 @@ namespace NegozioStrumentiMusicali
         private void FrmOrdini_Load(object sender, EventArgs e)
         {
             string _comunicazioneOrdine;
-            _listOrdini = ClsOrdineBL.GetSomeOrdini(Program._connectionString, _negozioID, -1, out _comunicazioneOrdine);
+            _listOrdini = ClsOrdineBL.GetSomeOrdini(Program._connectionString, _negozioID, out _comunicazioneOrdine);
             PopolaListView(lvOrdini, _listOrdini, _negozioID);
 
             cbParametriDiOrdinamento.DataSource = Enum.GetNames(typeof(ePARAMETRI_DI_ORDINAMENTO));
@@ -121,7 +119,7 @@ namespace NegozioStrumentiMusicali
 
                 // Recupera dal database solo gli ordini del negozio attualmente selezionato
                 string _comunicazioneOrdine;
-                _listOrdini = ClsOrdineBL.GetSomeOrdini(Program._connectionString, _negozioID, -1, out _comunicazioneOrdine);
+                _listOrdini = ClsOrdineBL.GetSomeOrdini(Program._connectionString, _negozioID, out _comunicazioneOrdine);
 
                 // Aggiorna la ListView con i nuovi dati
                 PopolaListView(lvOrdini, _listOrdini, _negozioID);
@@ -149,7 +147,6 @@ namespace NegozioStrumentiMusicali
                 tbUsernameCliente.Text = _ordine.UsernameCliente;
                 dtpDataOrdine.Value = _ordine.DataOra;
                 nudIDOrdine.Value = _ordine.ID;
-                nudIDArticolo.Value = _ordine.StrumentoMusicaleID;
                 _indirizzoID = _ordine.IndirizzoID;
                 _negozioID = _ordine.NegozioID;
             }

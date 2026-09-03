@@ -92,6 +92,7 @@ namespace NegozioStrumentiMusicali
                             //Utente esistente e password corretta e non è bandito
                             MessageBox.Show("Il tuo accesso è stato consentito", "Accesso Consentito", MessageBoxButtons.OK, MessageBoxIcon.Information);
                             FrmHome _frmHome = new FrmHome();
+                            _frmHome.WindowState = FormWindowState.Maximized;
                             _frmHome.Show();
 
                             this.Hide();

@@ -7,19 +7,9 @@ using System.Threading.Tasks;
 
 namespace NegozioStrumentiMusicali
 {
-    /// <summary>
-    /// Sviluppata da Leonardo Di Bernardo
-    /// </summary>
-    public static class ClsOrdineBL
+    class ClsOrdineStrumentoBL
     {
-        /// <summary>
-        /// Inserimento di record in ordini
-        /// </summary>
-        /// <param name="connection">Connessione al DB</param>
-        /// <param name="ordine">Record da inserire</param>
-        /// <param name="comunicazione">Comunicazione in uscita</param>
-        /// <returns>ID del nuovo record. Se -1 insert non riuscito</returns>
-        public static long InsertOrdine(string stringaDiConnessione, ClsOrdine ordine, out string comunicazione)
+        public static long InsertOrdineStrumento(string stringaDiConnessione, ClsOrdineStrumento ordineStrumento, out string comunicazione)
         {
             //VARIABILI 
             long _ID = -1;
@@ -33,19 +23,17 @@ namespace NegozioStrumentiMusicali
 
                 //Creo il comando DML
                 string _dml =
-                    "INSERT into ordini " +
-                    "(dataora, indirizzoID, negozioID, utenteUsername, stato)" +
-                    "VALUES(@dataora, @indirizzoID, @negozioID, @utenteUsername, @stato)";
+                    "INSERT into ordinestrumento " +
+                    "(ordineID, strumentomusicaleID, quantita)" +
+                    "VALUES(@ordineID, @strumentomusicaleID, @quantita)";
 
                 //Creo l'oggetto command
                 MySqlCommand _cmd = new MySqlCommand(_dml, connection);
 
                 //Inserisco i valori
-                _cmd.Parameters.AddWithValue("@stato", ordine.Stato.ToString());
-                _cmd.Parameters.AddWithValue("@dataora", ordine.DataOra);
-                _cmd.Parameters.AddWithValue("@indirizzoID", ordine.IndirizzoID);
-                _cmd.Parameters.AddWithValue("@negozioID", ordine.NegozioID);
-                _cmd.Parameters.AddWithValue("@utenteUsername", ordine.UsernameCliente);
+                _cmd.Parameters.AddWithValue("@ordineID", ordineStrumento.OrdineID.ToString());
+                _cmd.Parameters.AddWithValue("@strumentomusicaleID", ordineStrumento.StrumentoMusicaleID);
+                _cmd.Parameters.AddWithValue("@quantita", ordineStrumento.Quantita);
 
 
                 //Eseguo il comando
@@ -53,7 +41,7 @@ namespace NegozioStrumentiMusicali
                 if (_numRec == 1) //1 significa che il comando è stato eseguito con successo
                     _ID = _cmd.LastInsertedId; //Ottengo l'ID generato in automatico dal DBMS
 
-                comunicazione = "Ordine inserito con successo nel DataBase";
+                comunicazione = "OrdineStrumento inserito con successo nel DataBase";
             }
             catch (Exception ex)
             {
@@ -68,12 +56,12 @@ namespace NegozioStrumentiMusicali
             return _ID;
         }
         /// <summary>
-        /// Update di record di ordini
+        /// Update di record di ordinestrumento
         /// </summary>
         /// <param name="stringaDiConnessione"></param>
-        /// <param name="ordine">Dati record da aggiornare</param>
+        /// <param name="ordineStrumento">Dati record da aggiornare</param>
         /// <param name="comunicazione">Comunicazione in uscita</param>
-        public static void UpdateOrdine(string stringaDiConnessione, ClsOrdine ordine, out string comunicazione)
+        public static void UpdateOrdineStrumento(string stringaDiConnessione, ClsOrdineStrumento ordineStrumento, out string comunicazione)
         {
             //VARIABILI
             comunicazione = String.Empty;
@@ -86,12 +74,10 @@ namespace NegozioStrumentiMusicali
 
                 //Compongo il comando dml
                 string _dml =
-                    "UPDATE ordini SET " +
-                    "dataora = @dataora, " +
-                    "indirizzoID = @indirizzoID, " +
-                    "negozioID = @negozioID, " +
-                    "utenteUsername = @utenteUsername, " +
-                    "stato = @stato " +
+                    "UPDATE ordinestrumento SET " +
+                    "ordineID = @ordineID, " +
+                    "strumentomusicaleID = @strumentomusicaleID, " +
+                    "quantita = @quantita, " +
                     "WHERE ID = @ID";
 
 
@@ -99,17 +85,14 @@ namespace NegozioStrumentiMusicali
                 MySqlCommand _cmd = new MySqlCommand(_dml, _connection);
 
                 //Inserisco i valori
-                _cmd.Parameters.AddWithValue("@stato", ordine.Stato.ToString());
-                _cmd.Parameters.AddWithValue("@dataora", ordine.DataOra);
-                _cmd.Parameters.AddWithValue("@indirizzoID", ordine.IndirizzoID);
-                _cmd.Parameters.AddWithValue("@negozioID", ordine.NegozioID);
-                _cmd.Parameters.AddWithValue("@utenteUsername", ordine.UsernameCliente);
-                _cmd.Parameters.AddWithValue("@ID", ordine.ID);
+                _cmd.Parameters.AddWithValue("@ordineID", ordineStrumento.OrdineID.ToString());
+                _cmd.Parameters.AddWithValue("@strumentomusicaleID", ordineStrumento.StrumentoMusicaleID);
+                _cmd.Parameters.AddWithValue("@quantita", ordineStrumento.Quantita);
 
                 //Eseguo il comando
                 _cmd.ExecuteNonQuery();
 
-                comunicazione = "Ordine aggiornato correttamente nel DataBase";
+                comunicazione = "OrdineStrumento aggiornato correttamente nel DataBase";
             }
             catch (Exception ex)
             {
@@ -122,15 +105,15 @@ namespace NegozioStrumentiMusicali
             }
 
         }
-        
+
         /// <summary>
-        /// Eliminazione di un record da ordini
+        /// Eliminazione di un record da ordinestrumento
         /// </summary>
         /// <param name="connection">Connessione al DB</param>
-        /// <param name="ordine">Record da eliminare</param>
+        /// <param name="ordineStrumento">Record da eliminare</param>
         /// <param name="comunicazione">Comunicazione in uscita</param>
-        
-        public static void DeleteOrdine(ref MySqlConnection connection, ClsOrdine ordine, out string comunicazione)
+
+        public static void DeleteOrdineStrumento(ref MySqlConnection connection, ClsOrdineStrumento ordineStrumento, out string comunicazione)
         {
             //VARIABILI LOCALI
             comunicazione = String.Empty;
@@ -141,18 +124,18 @@ namespace NegozioStrumentiMusicali
                 connection.Open();
 
                 //Compongo il comando DML
-                string _dml = "DELETE FROM ordini WHERE ID = @ID";
+                string _dml = "DELETE FROM ordinestrumento WHERE ID = @ID";
 
                 //Creo l'oggetto command
                 MySqlCommand _cmd = new MySqlCommand(_dml, connection);
 
                 //Inserisco i valori
-                _cmd.Parameters.AddWithValue("@ID", ordine.ID);
+                _cmd.Parameters.AddWithValue("@ID", ordineStrumento.ID);
 
                 //Eseguo il comando
                 _cmd.ExecuteNonQuery();
 
-                comunicazione = "Ordine eliminato correttamente dal DataBase";
+                comunicazione = "OrdineStrumento eliminato correttamente dal DataBase";
             }
             catch (Exception ex)
             {
@@ -166,19 +149,19 @@ namespace NegozioStrumentiMusicali
         }
 
         /// <summary>
-        /// Caricamento di alcuni record di ordini in base a negozioID o strumentoMusicaleID.
+        /// Caricamento di alcuni record di ordinistrumento in base a ordineID o strumentoMusicaleID.
         /// Escludi negozioID passando come valore -1, escludi strumentoMusicaleID passando come valore -1
         /// </summary>
         /// <param name="stringDiConnessione"></param>
-        /// <param name="negozioID"></param>
+        /// <param name="ordineID"></param>
         /// <param name="strumentoMusicaleID"></param>
         /// <param name="comunicazione"></param>
         /// <returns></returns>
-        public static List<ClsOrdine> GetSomeOrdini(string stringDiConnessione, long negozioID, out string comunicazione)
+        public static List<ClsOrdineStrumento> GetSomeOrdiniStrumento(string stringDiConnessione, long ordineID, out string comunicazione)
         {
             //VARIABILI
             comunicazione = String.Empty;
-            List<ClsOrdine> _listaOrdini = new List<ClsOrdine>();
+            List<ClsOrdineStrumento> _listaOrdiniStrumenti = new List<ClsOrdineStrumento>();
             MySqlConnection connection = new MySqlConnection(stringDiConnessione);
 
             try
@@ -187,14 +170,14 @@ namespace NegozioStrumentiMusicali
                 connection.Open();
 
                 //Compongo la query
-                string _query = "SELECT * FROM ordini WHERE negozioID = @negozioID";
+                string _query = "SELECT * FROM ordinestrumento WHERE ordineID = @ordineID";
 
 
                 //Creo l'oggetto command
                 MySqlCommand _cmd = new MySqlCommand(_query, connection);
 
                 //Inserisco i valori
-                _cmd.Parameters.AddWithValue("@negozioID", negozioID);
+                _cmd.Parameters.AddWithValue("@ordineID", ordineID);
 
                 //Eseguo il comando creando il DataReader
                 MySqlDataReader _dataReader = _cmd.ExecuteReader();
@@ -203,7 +186,7 @@ namespace NegozioStrumentiMusicali
                 {
                     while (_dataReader.Read()) //Se ne ha li leggo tutti
                     {
-                        _listaOrdini.Add(CaricaSingoloOrdine(ref _dataReader));
+                        _listaOrdiniStrumenti.Add(CaricaSingoloOrdineStrumento(ref _dataReader));
                     }
                 }
 
@@ -214,7 +197,7 @@ namespace NegozioStrumentiMusicali
             catch (Exception ex)
             {
                 comunicazione = ex.Message;
-                _listaOrdini = null;
+                _listaOrdiniStrumenti = null;
             }
             finally
             {
@@ -222,7 +205,7 @@ namespace NegozioStrumentiMusicali
                 connection.Close();
             }
 
-            return _listaOrdini;
+            return _listaOrdiniStrumenti;
         }
 
         /// <summary>
@@ -230,24 +213,16 @@ namespace NegozioStrumentiMusicali
         /// </summary>
         /// <param name="dataReader"></param>
         /// <returns></returns>
-        private static ClsOrdine CaricaSingoloOrdine(ref MySqlDataReader dataReader)
+        private static ClsOrdineStrumento CaricaSingoloOrdineStrumento(ref MySqlDataReader dataReader)
         {
-            ClsOrdine _ordine = new ClsOrdine();
+            ClsOrdineStrumento _ordineStrumento = new ClsOrdineStrumento();
 
-            _ordine.ID = Convert.ToInt64(dataReader["ID"]);
-            _ordine.Stato =
-                (ClsOrdine.eSTATO)Enum.Parse
-                (
-                    typeof(ClsOrdine.eSTATO),
-                    dataReader["stato"].ToString()
-                );
-            _ordine.DataOra = Convert.ToDateTime(dataReader["dataora"]);
-            _ordine.IndirizzoID = Convert.ToInt64(dataReader["indirizzoID"]);
-            _ordine.NegozioID = Convert.ToInt64(dataReader["negozioID"]);
-            _ordine.UsernameCliente = Convert.ToString(dataReader["utenteusername"]);
-            
-            return _ordine;
+            _ordineStrumento.ID = Convert.ToInt64(dataReader["ID"]);
+            _ordineStrumento.OrdineID = Convert.ToInt64(dataReader["ordineID"]);
+            _ordineStrumento.StrumentoMusicaleID = Convert.ToInt64(dataReader["strumentomusicaleID"]);
+            _ordineStrumento.Quantita = Convert.ToInt32(dataReader["quantita"]);
+
+            return _ordineStrumento;
         }
-
     }
 }
