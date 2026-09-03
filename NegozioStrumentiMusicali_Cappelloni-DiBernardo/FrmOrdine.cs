@@ -76,9 +76,7 @@ namespace NegozioStrumentiMusicali
 
                 ClsOrdine _ordine = new ClsOrdine();
                 _ordine.ID = 0;
-                _ordine.Quantita = (int)nudQuantita.Value;
                 _ordine.DataOra = DateTime.Now;
-                _ordine.StrumentoMusicaleID = _strumento.ID;
                 _ordine.NegozioID = _negozioID;
                 _ordine.IndirizzoID = _indirizzo.ID;
                 _ordine.UsernameCliente = ClsArchivio.UtenteAttuale.Username;

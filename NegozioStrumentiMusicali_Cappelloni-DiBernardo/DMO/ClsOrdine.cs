@@ -22,9 +22,7 @@ namespace NegozioStrumentiMusicali
 
         #region Attributi
         long _id;
-        int _quantita;
         DateTime _dataOra;
-        private long _strumentoMusicaleID;
         private long _negozioID;
         private long _indirizzoID;
         private string _usernameCliente;
@@ -51,19 +49,7 @@ namespace NegozioStrumentiMusicali
             }
         }
 
-        public int Quantita
-        {
-            get
-            {
-                return _quantita;
-            }
-            set
-            {
-                _quantita = value;
-            }
-        }
         public DateTime DataOra { get => _dataOra; set => _dataOra = value; }
-        public long StrumentoMusicaleID { get => _strumentoMusicaleID; set => _strumentoMusicaleID = value; }
         public long NegozioID { get => _negozioID; set => _negozioID = value; }
         public long IndirizzoID { get => _indirizzoID; set => _indirizzoID = value; }
         public string UsernameCliente { get => _usernameCliente; set => _usernameCliente = value; }
