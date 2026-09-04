@@ -49,6 +49,7 @@
             this.btnModifica = new System.Windows.Forms.Button();
             this.btnNuovo = new System.Windows.Forms.Button();
             this.btnOdina = new System.Windows.Forms.Button();
+            this.BtnCarrello = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // lvStrumenti
@@ -254,12 +255,24 @@
             this.btnOdina.UseVisualStyleBackColor = true;
             this.btnOdina.Click += new System.EventHandler(this.btnOdina_Click);
             // 
+            // BtnCarrello
+            // 
+            this.BtnCarrello.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.BtnCarrello.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BtnCarrello.Location = new System.Drawing.Point(1041, 577);
+            this.BtnCarrello.Name = "BtnCarrello";
+            this.BtnCarrello.Size = new System.Drawing.Size(102, 56);
+            this.BtnCarrello.TabIndex = 85;
+            this.BtnCarrello.Text = "AGGIUNGI AL CARRELLO";
+            this.BtnCarrello.UseVisualStyleBackColor = true;
+            // 
             // FrmStrumentiMusicali
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlDark;
             this.ClientSize = new System.Drawing.Size(1155, 686);
+            this.Controls.Add(this.BtnCarrello);
             this.Controls.Add(this.btnOdina);
             this.Controls.Add(this.btnInfoNegozio);
             this.Controls.Add(this.btnVisualizza);
@@ -303,5 +316,6 @@
         private System.Windows.Forms.ColumnHeader chTipo;
         private System.Windows.Forms.Button btnOdina;
         public System.Windows.Forms.ListView lvStrumenti;
+        private System.Windows.Forms.Button BtnCarrello;
     }
 }

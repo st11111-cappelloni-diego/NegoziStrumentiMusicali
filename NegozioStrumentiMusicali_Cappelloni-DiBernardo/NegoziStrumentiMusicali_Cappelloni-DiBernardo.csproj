@@ -97,6 +97,7 @@
     <Compile Include="BL\ClsTamburoBL.cs" />
     <Compile Include="BL\ClsUtenteBL.cs" />
     <Compile Include="BL\ClsVendereBL.cs" />
+    <Compile Include="DMO\ClsCarrello.cs" />
     <Compile Include="DMO\ClsOrdineStrumento.cs" />
     <Compile Include="DMO\ClsArchivio.cs" />
     <Compile Include="DMO\ClsBatteria.cs" />
@@ -129,6 +130,12 @@
     </Compile>
     <Compile Include="FrmCaratteristica.Designer.cs">
       <DependentUpon>FrmCaratteristica.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmCarrello.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmCarrello.Designer.cs">
+      <DependentUpon>FrmCarrello.cs</DependentUpon>
     </Compile>
     <Compile Include="FrmCaseProduttrici.cs">
       <SubType>Form</SubType>
@@ -257,6 +264,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FrmCaratteristica.resx">
       <DependentUpon>FrmCaratteristica.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmCarrello.resx">
+      <DependentUpon>FrmCarrello.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmCaseProduttrici.resx">
       <DependentUpon>FrmCaseProduttrici.cs</DependentUpon>
@@ -387,6 +397,8 @@
   <ItemGroup>
     <None Include="Resources\iconaLogo1_323x323.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="Resources\iconaMeno1_30x30.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
