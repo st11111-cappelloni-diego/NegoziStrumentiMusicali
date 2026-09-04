@@ -348,6 +348,7 @@
             this.btnEliminaTom.Size = new System.Drawing.Size(40, 40);
             this.btnEliminaTom.TabIndex = 54;
             this.btnEliminaTom.UseVisualStyleBackColor = true;
+            this.btnEliminaTom.Click += new System.EventHandler(this.btnEliminaTom_Click);
             // 
             // lvToms
             // 
@@ -460,6 +461,7 @@
             this.btnEliminaPiatto.Size = new System.Drawing.Size(40, 40);
             this.btnEliminaPiatto.TabIndex = 57;
             this.btnEliminaPiatto.UseVisualStyleBackColor = true;
+            this.btnEliminaPiatto.Click += new System.EventHandler(this.btnEliminaPiatto_Click);
             // 
             // btnModificaPiatto
             // 

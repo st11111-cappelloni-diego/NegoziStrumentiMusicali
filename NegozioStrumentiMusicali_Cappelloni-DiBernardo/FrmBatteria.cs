@@ -71,7 +71,7 @@ namespace NegozioStrumentiMusicali
                 }
                 else //Se è nullo aggiungo alla lista degli errori del caricamento la comunicazione in uscita del GetOne
                 {
-                    comunicazione += "Errore nel caricamento del tamburo con ID = " 
+                    comunicazione += "Errore nel caricamento del tamburo con ID = "
                                      + _listaBatteriaTamburo[i].TamburoID.ToString() +
                                      ":\r\n";
                     comunicazione += _temp + "\r\n";
@@ -79,7 +79,7 @@ namespace NegozioStrumentiMusicali
             }
 
             //Se la stringa di comunicazione non è vuota aggiungo all'inizio un messaggio
-            if(!String.IsNullOrWhiteSpace(comunicazione))
+            if (!String.IsNullOrWhiteSpace(comunicazione))
             {
                 comunicazione = "Ci sono stati degli errori nel caricamento dei tamburi:\r\n" + comunicazione;
             }
@@ -120,7 +120,7 @@ namespace NegozioStrumentiMusicali
                     );
 
                 //Se il piatto non è null posso aggiungerlo alla lista
-                if(_piattoTemp != null)
+                if (_piattoTemp != null)
                 {
                     _piatti.Add(_piattoTemp);
                 }
@@ -149,10 +149,10 @@ namespace NegozioStrumentiMusicali
             //La ripopolo
             //Scorro tutta la lista dei piatti
             ListViewItem _lvi = new ListViewItem();
-            for(int i = 0; i < listaPiatti.Count(); i++)
+            for (int i = 0; i < listaPiatti.Count(); i++)
             {
                 //Escludo i charleston se è richiesto
-                if(!(listaPiatti[i].Tipo == ClsPiatto.eTIPO.charleston && includiCharleston == false))
+                if (!(listaPiatti[i].Tipo == ClsPiatto.eTIPO.charleston && includiCharleston == false))
                 {
                     //Popolo il litview item
                     //Prima colonna: tipo
@@ -181,7 +181,7 @@ namespace NegozioStrumentiMusicali
             for (int i = 0; i < listaTamburi.Count(); i++)
             {
                 //Escludo il rullante e/o la cassa se richiesto
-                if((listaTamburi[i].Tipo != ClsTamburo.eTIPO.cassa || includiCassa)
+                if ((listaTamburi[i].Tipo != ClsTamburo.eTIPO.cassa || includiCassa)
                     &&
                     (listaTamburi[i].Tipo != ClsTamburo.eTIPO.rullante || includiRullante))
                 {
@@ -307,7 +307,7 @@ namespace NegozioStrumentiMusicali
 
             //Se l'utente attuale è admin software e sono in modalità modifica o inserimento
             //Abilito i controlli grafici di input
-            if(ClsArchivio.UtenteAttuale.AdminSoftware &&
+            if (ClsArchivio.UtenteAttuale.AdminSoftware &&
                 (ModalitaEntrata == Program.eMODALITA_ENTRATA_DETAIL.Modifica
                 || ModalitaEntrata == Program.eMODALITA_ENTRATA_DETAIL.Inserimento))
             {
@@ -321,11 +321,11 @@ namespace NegozioStrumentiMusicali
 
         private void btnModificaTom_Click(object sender, EventArgs e)
         {
-            if(lvToms.SelectedItems.Count <= 0)
+            if (lvToms.SelectedItems.Count <= 0)
             {
                 MessageBox.Show("Selezionare un elemento", "MODIFICA TAMBURO", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
-            else if(lvToms.SelectedItems.Count == 1)
+            else if (lvToms.SelectedItems.Count == 1)
             {
                 //Istanzio la form detail
                 FrmTamburo _frmTamburo = new FrmTamburo();
@@ -379,7 +379,7 @@ namespace NegozioStrumentiMusicali
         {
             //Istanzio la form detail
             FrmTamburo _frmTamburo = new FrmTamburo();
-           
+
             ClsTamburo _tamburo = new ClsTamburo();
             _frmTamburo._tamburo = _tamburo;
             _frmTamburo._batteriaTamburo = new ClsBatteriaTamburo();
@@ -420,5 +420,83 @@ namespace NegozioStrumentiMusicali
             //Alla chiusura ripopolo la ListView
             PopolaListView(lvAltriPiatti, _piatti, false);
         }
+
+        private void btnEliminaTom_Click(object sender, EventArgs e)
+        {
+            if (lvToms.SelectedItems.Count <= 0)
+            {
+                MessageBox.Show("Selezionare un elemento", "RIMUOVI TAMBURO", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
+            else
+            {
+                DialogResult _dr = MessageBox.Show("Sei sicur* di voler rimuovere il tamburo dalla batteria?", "RIMUOVI TAMBURO", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+
+                if (_dr == DialogResult.Yes)
+                {
+                    string _comunicazione = String.Empty;
+
+                    //Tamburo da rimuovere
+                    ClsTamburo _tamburoDaRimuovere = (ClsTamburo)lvToms.SelectedItems[0].Tag;
+
+                    //Trovo il batteriatamburo
+                    ClsBatteriaTamburo _batteriaTamburo = ClsBatteriaTamburoBL.GetOneBatteriaTamburo(Program._connectionString, _batteria.ID, _tamburoDaRimuovere.ID, out _comunicazione);
+
+                    if (_batteriaTamburo == null)
+                    {
+                        MessageBox.Show(_comunicazione, "RIMUOVI TAMBURO", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    }
+                    else
+                    {
+                        ClsBatteriaTamburoBL.DeleteBatteriaTamburo(Program._connectionString, _batteriaTamburo, out _comunicazione);
+
+                        MessageBox.Show(_comunicazione, "RIMUOVI TAMBURO", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                        _tamburi = TrovaTamburi(_batteria.ID, out _comunicazione);
+
+                        PopolaListView(lvToms, _tamburi, false, false);
+                    }
+                }
+            }
+        }
+
+        private void btnEliminaPiatto_Click(object sender, EventArgs e)
+        {
+            if (lvToms.SelectedItems.Count <= 0)
+            {
+                MessageBox.Show("Selezionare un elemento", "RIMUOVI PIATTO", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
+            else
+            {
+                DialogResult _dr = MessageBox.Show("Sei sicur* di voler rimuovere il piatto dalla batteria?", "RIMUOVI PIATTO", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+
+                if (_dr == DialogResult.Yes)
+                {
+                    string _comunicazione = String.Empty;
+
+                    //Tamburo da rimuovere
+                    ClsPiatto _piattoDaRimuovere = (ClsPiatto)lvAltriPiatti.SelectedItems[0].Tag;
+
+                    //Trovo il batteriatamburo
+                    ClsBatteriaPiatto _batteriaPiatto = ClsBatteriaPiattoBL.GetOneBatteriaPiatto(Program._connectionString, _batteria.ID, _piattoDaRimuovere.ID, out _comunicazione);
+
+                    if (_batteriaPiatto == null)
+                    {
+                        MessageBox.Show(_comunicazione, "RIMUOVI PIATTO", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    }
+                    else
+                    {
+                        ClsBatteriaPiattoBL.DeleteBatteriaPiatto(Program._connectionString, _batteriaPiatto, out _comunicazione);
+
+                        MessageBox.Show(_comunicazione, "RIMUOVI PIATTO", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                        _piatti = TrovaPiatti(_batteria.ID, out _comunicazione);
+
+                        PopolaListView(lvAltriPiatti, _piatti, false);
+                    }
+                }
+            }
+
+        }
+
     }
 }

@@ -526,6 +526,10 @@ namespace NegozioStrumentiMusicali
                             _strumentoMusicale.NotaMinimaID =
                                 ClsArchivio.NoteMusicali[cbNotaMinima.SelectedIndex].ID;
                         }
+                        else
+                        {
+                            _strumentoMusicale.NotaMinimaID = -1;
+                        }
                         _strumentoMusicale.PesoKG = Convert.ToSingle(nudPeso.Value);
 
                         //Controllo il tipo di strumento creando un alias per copiare correttamente i dati mantenendo l'area di memoria di _strumentoMusicale
