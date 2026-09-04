@@ -113,6 +113,16 @@ namespace NegozioStrumentiMusicali_Cappelloni_DiBernardo.Properties {
         /// <summary>
         ///   Cerca una risorsa localizzata di tipo System.Drawing.Bitmap.
         /// </summary>
+        public static System.Drawing.Bitmap iconaMeno1_30x30 {
+            get {
+                object obj = ResourceManager.GetObject("iconaMeno1_30x30", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una risorsa localizzata di tipo System.Drawing.Bitmap.
+        /// </summary>
         public static System.Drawing.Bitmap iconaModifica1_30x30 {
             get {
                 object obj = ResourceManager.GetObject("iconaModifica1_30x30", resourceCulture);

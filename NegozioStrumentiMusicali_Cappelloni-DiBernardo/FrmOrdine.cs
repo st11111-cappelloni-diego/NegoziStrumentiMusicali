@@ -22,8 +22,6 @@ namespace NegozioStrumentiMusicali
             _negozioID = idNegozio;
             dtpDataOrdine.Value = DateTime.Now;
             dtpDataOrdine.Enabled = false;
-            nudIDArticolo.Value = _strumento.ID;
-            nudIDArticolo.Enabled = false;
 
         }
 
@@ -43,6 +41,64 @@ namespace NegozioStrumentiMusicali
         {
 
         }
+
+        //async void PopolaListView(ListView listView, List<ClsStrumentoACorda> listaStrumentiACorda,
+        //    List<ClsPianoforte> listaPianoforti, List<ClsOttone> listaOttoni, List<ClsLegno> listaLegni, List<ClsBatteria> listaBatterie)
+        //{
+        //    listView.Items.Clear();
+        //    List<ListViewItem> _lviListStrumentiACorda = new List<ListViewItem>();
+        //    List<ListViewItem> _lviListPianoforti = new List<ListViewItem>();
+        //    List<ListViewItem> _lviListOttoni = new List<ListViewItem>();
+        //    List<ListViewItem> _lviListLegni = new List<ListViewItem>();
+        //    List<ListViewItem> _lviListBatterie = new List<ListViewItem>();
+
+        //    //Trovo le liste di lvi di ogni tipo di strumento su dei processi separati
+        //    await Task.WhenAll
+        //    (
+        //        Task.Run(() =>
+        //            _lviListStrumentiACorda =
+        //            CreaListViewItems(
+        //                listaStrumentiACorda,
+        //                ListaVendereNegozioSelezionato
+        //            )
+        //        ),
+        //        Task.Run(() =>
+        //            _lviListPianoforti =
+        //            CreaListViewItems(
+        //                listaPianoforti,
+        //                ListaVendereNegozioSelezionato
+        //            )
+        //        ),
+        //        Task.Run(() =>
+        //            _lviListOttoni =
+        //            CreaListViewItems(
+        //                listaOttoni,
+        //                ListaVendereNegozioSelezionato
+        //            )
+        //        ),
+        //        Task.Run(() =>
+        //            _lviListLegni =
+        //            CreaListViewItems(
+        //                listaLegni,
+        //                ListaVendereNegozioSelezionato
+        //            )
+        //        ),
+        //        Task.Run(() =>
+        //            _lviListBatterie =
+        //            CreaListViewItems(
+        //                listaBatterie,
+        //                ListaVendereNegozioSelezionato
+        //            )
+        //        )
+        //    );
+
+        //    //Li aggiungo alla listview
+        //    listView.Items.AddRange(_lviListStrumentiACorda.ToArray());
+        //    listView.Items.AddRange(_lviListPianoforti.ToArray());
+        //    listView.Items.AddRange(_lviListOttoni.ToArray());
+        //    listView.Items.AddRange(_lviListLegni.ToArray());
+        //    listView.Items.AddRange(_lviListBatterie.ToArray());
+        //}
 
         private void btnSalva_Click(object sender, EventArgs e)
         {

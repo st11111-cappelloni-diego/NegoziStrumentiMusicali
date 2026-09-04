@@ -150,7 +150,6 @@ namespace NegozioStrumentiMusicali
 
         /// <summary>
         /// Caricamento di alcuni record di ordinistrumento in base a ordineID o strumentoMusicaleID.
-        /// Escludi negozioID passando come valore -1, escludi strumentoMusicaleID passando come valore -1
         /// </summary>
         /// <param name="stringDiConnessione"></param>
         /// <param name="ordineID"></param>
@@ -192,7 +191,7 @@ namespace NegozioStrumentiMusicali
 
                 _dataReader.Close();
 
-                comunicazione = "Ordini caricati correttamente dal DataBase";
+                comunicazione = "OrdiniStrumenti caricati correttamente dal DataBase";
             }
             catch (Exception ex)
             {

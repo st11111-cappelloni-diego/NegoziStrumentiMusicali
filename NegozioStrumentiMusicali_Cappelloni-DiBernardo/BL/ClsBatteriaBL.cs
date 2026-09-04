@@ -38,7 +38,7 @@ namespace NegozioStrumentiMusicali
                 MySqlCommand _cmd = new MySqlCommand(_dml, _connection);
 
                 //Inserisco i valori
-                _cmd.Parameters.AddWithValue("@strumentomusicaleID", batteria.ID);
+                _cmd.Parameters.AddWithValue("@strumentomusicaleID", _ID);
 
                 //Eseguo il comando
                 _cmd.ExecuteNonQuery();
