@@ -712,5 +712,25 @@ namespace NegozioStrumentiMusicali
                 }
             }
         }
+
+        
+
+        private void BtnCarrello_Click(object sender, EventArgs e)
+        {
+            if (lvStrumenti.SelectedIndices.Count > 0)
+            {
+                //prendo il tag dello strumento selezionato 
+                ClsStrumentoMusicale tag = (ClsStrumentoMusicale)lvStrumenti.SelectedItems[0].Tag;
+
+                //creo una nuova variabile di tipo carrello
+                ClsCarrello _carrello = new ClsCarrello();
+
+                _carrello.StrumentoMusicaleID = tag.ID;
+                _carrello.NegozioID = ClsArchivio.Negozi[cbNegozio.SelectedIndex].ID;
+                _carrello.Quantita = 1;
+
+                ClsArchivio.ListCarrello.Add(_carrello);
+
+        }
     }
 }
