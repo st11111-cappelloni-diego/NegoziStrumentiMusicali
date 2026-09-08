@@ -21,6 +21,7 @@ namespace NegozioStrumentiMusicali
         static private List<ClsUtente> _utenti = new List<ClsUtente>();
         static private ClsUtente _utenteAttuale = new ClsUtente();
         static private List<ClsIndirizzo> _indirizzi = new List<ClsIndirizzo>();
+        static private List<ClsCarrello> _listCarrello = new List<ClsCarrello>();
 
 
         #endregion
@@ -45,6 +46,7 @@ namespace NegozioStrumentiMusicali
         public static List<ClsStrumentoACorda> StrumentiACorda { get => _strumentiACorda; set => _strumentiACorda = value; }
         public static List<ClsBatteria> Batterie { get => _batterie; set => _batterie = value; }
         public static List<ClsGestire> ListaGestireUtenteAttuale { get => _listaGestireUtenteAttuale; set => _listaGestireUtenteAttuale = value; }
+        internal static List<ClsCarrello> ListCarrello { get => _listCarrello; set => _listCarrello = value; }
 
         #endregion
     }

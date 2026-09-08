@@ -52,6 +52,8 @@ namespace NegozioStrumentiMusicali
                 ClsPiatto.eTIPO.crash,
                 ClsPiatto.eTIPO.ride
             };
+
+            this.DialogResult = DialogResult.Cancel;
         }
 
         private void FrmPiatto_Load(object sender, EventArgs e)
@@ -92,7 +94,7 @@ namespace NegozioStrumentiMusicali
 
                     ClsPiatto _ricercaPiatto = new ClsPiatto();
 
-                    //Controllo se già esiste il tamburo coi nuovi dati
+                    //Controllo se già esiste il piatto coi nuovi dati
                     _ricercaPiatto = ClsPiattoBL.GetOnePiatto(Program._connectionString, _piatto.Tipo, _piatto.DiametroIN, _piatto.Materiale, out _comunicazione);
 
                     if (_ricercaPiatto == null)

@@ -389,10 +389,17 @@ namespace NegozioStrumentiMusicali
             _frmTamburo._modalitaEntrataDetail = Program.eMODALITA_ENTRATA_DETAIL.Inserimento;
 
             //Apro la form
-            _frmTamburo.ShowDialog(this);
+            DialogResult _dr = _frmTamburo.ShowDialog(this);
 
-            string _comunicazione = String.Empty;
-            _tamburi = TrovaTamburi(_batteria.ID, out _comunicazione);
+            if(_modalitaEntrata == Program.eMODALITA_ENTRATA_DETAIL.Modifica)
+            {
+                string _comunicazione = String.Empty;
+                _tamburi = TrovaTamburi(_batteria.ID, out _comunicazione);
+            }
+            else if(_dr == DialogResult.OK && _modalitaEntrata == Program.eMODALITA_ENTRATA_DETAIL.Inserimento)
+            {
+                _tamburi.Add(_tamburo);
+            }
 
             //Alla chiusura ripopolo la ListView
             PopolaListView(lvToms, _tamburi, false, false);
@@ -412,10 +419,17 @@ namespace NegozioStrumentiMusicali
             _frmPiatto._modalitaEntrataDetail = Program.eMODALITA_ENTRATA_DETAIL.Inserimento;
 
             //Apro la form
-            _frmPiatto.ShowDialog(this);
+            DialogResult _dr = _frmPiatto.ShowDialog(this);
 
-            string _comunicazione = String.Empty;
-            _piatti = TrovaPiatti(_batteria.ID, out _comunicazione);
+            if(_modalitaEntrata == Program.eMODALITA_ENTRATA_DETAIL.Modifica)
+            {
+                string _comunicazione = String.Empty;
+                _piatti = TrovaPiatti(_batteria.ID, out _comunicazione);
+            }
+            else if(_dr == DialogResult.OK && _modalitaEntrata == Program.eMODALITA_ENTRATA_DETAIL.Inserimento)
+            {
+                _piatti.Add(_piatto);
+            }
 
             //Alla chiusura ripopolo la ListView
             PopolaListView(lvAltriPiatti, _piatti, false);
@@ -461,7 +475,7 @@ namespace NegozioStrumentiMusicali
 
         private void btnEliminaPiatto_Click(object sender, EventArgs e)
         {
-            if (lvToms.SelectedItems.Count <= 0)
+            if (lvAltriPiatti.SelectedItems.Count <= 0)
             {
                 MessageBox.Show("Selezionare un elemento", "RIMUOVI PIATTO", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
@@ -498,5 +512,115 @@ namespace NegozioStrumentiMusicali
 
         }
 
+        private void btnSalva_Click(object sender, EventArgs e)
+        {
+            DialogResult _dr = MessageBox.Show("Sei sicur* di voler salvare ed uscire?", "SALVA ED ESCI", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+
+            if(_dr == DialogResult.Yes)
+            {
+                try
+                {
+                    string _comunicazione = String.Empty;
+
+                    //Salvo i dati della cassa
+                    _cassa.DiametroIN = Convert.ToByte(nudDiametroCassa.Value);
+                    _cassa.Tipo = ClsTamburo.eTIPO.cassa;
+                    _cassa.Strati = Convert.ToByte(nudStratiCassa.Value);
+                    _cassa.Materiale = (ClsTamburo.eMATERIALE)cbMaterialeCassa.SelectedIndex;
+
+                    //Salvo i dati del rullante
+                    _rullante.DiametroIN = Convert.ToByte(nudDiametroRullante.Value);
+                    _rullante.Tipo = ClsTamburo.eTIPO.rullante;
+                    _rullante.Strati = Convert.ToByte(nudDiametroRullante.Value);
+                    _rullante.Materiale = (ClsTamburo.eMATERIALE)cbMaterialeRullante.SelectedIndex;
+
+                    //Salvo i dati del charleston
+                    _charleston.DiametroIN = Convert.ToByte(nudDiametroCharleston.Value);
+                    _charleston.Tipo = ClsPiatto.eTIPO.charleston;
+                    _charleston.Materiale = (ClsPiatto.eMATERIALE)cbMaterialeCharleston.SelectedIndex;
+
+                    if(_modalitaEntrata == Program.eMODALITA_ENTRATA_DETAIL.Inserimento)
+                    {
+                        //Inserisco la batteria
+                        _batteria.ID = ClsBatteriaBL.InsertBatteria(Program._connectionString, _batteria, out _comunicazione);
+
+
+                        //Controllo se già esiste la cassa
+                        ClsTamburo _ricercaCassa = new ClsTamburo();
+                        _ricercaCassa = ClsTamburoBL.GetOneTamburo(Program._connectionString, _cassa.Tipo, _cassa.DiametroIN, _cassa.Materiale, _cassa.Strati, out _comunicazione);
+
+                        if (_ricercaCassa == null)
+                        {
+                            //Non esiste: creo il nuovo tamburo
+                            _cassa.ID = ClsTamburoBL.InsertTamburo(Program._connectionString, _cassa, out _comunicazione);
+                        }
+                        else
+                        {
+                            //Esiste
+                            _cassa.ID = _ricercaCassa.ID;
+                        }
+
+                        //Creo la relazione tra batteria e cassa
+                        ClsBatteriaTamburo _batteriaCassa = new ClsBatteriaTamburo();
+                        _batteriaCassa.BatteriaID = _batteria.ID;
+                        _batteriaCassa.TamburoID = _cassa.ID;
+
+                        _batteriaCassa.ID = ClsBatteriaTamburoBL.InsertBatteriaTamburo(Program._connectionString, _batteriaCassa, out _comunicazione);
+
+
+                        //Controllo se esiste già il rullante
+
+                        //Controllo se già esiste la cassa
+                        ClsTamburo _ricercaRullante = new ClsTamburo();
+                        _ricercaRullante = ClsTamburoBL.GetOneTamburo(Program._connectionString, _rullante.Tipo, _rullante.DiametroIN, _rullante.Materiale, _rullante.Strati, out _comunicazione);
+
+                        if (_ricercaRullante == null)
+                        {
+                            //Non esiste: creo il nuovo tamburo
+                            _rullante.ID = ClsTamburoBL.InsertTamburo(Program._connectionString, _rullante, out _comunicazione);
+                        }
+                        else
+                        {
+                            //Esiste
+                            _rullante.ID = _ricercaRullante.ID;
+                        }
+
+                        //Creo la relazione tra batteria e rullante
+                        ClsBatteriaTamburo _batteriaRullante = new ClsBatteriaTamburo();
+                        _batteriaRullante.BatteriaID = _batteria.ID;
+                        _batteriaRullante.TamburoID = _rullante.ID;
+
+                        _batteriaRullante.ID = ClsBatteriaTamburoBL.InsertBatteriaTamburo(Program._connectionString, _batteriaRullante, out _comunicazione);
+
+
+                        //Controllo se già esiste il charleston
+                        ClsPiatto _ricercaCharleston = new ClsPiatto();
+                        _ricercaCharleston = ClsPiattoBL.GetOnePiatto(Program._connectionString, _charleston.Tipo, _charleston.DiametroIN, _charleston.Materiale, out _comunicazione);
+
+                        if (_ricercaCharleston == null)
+                        {
+                            //Non esiste: creo il nuovo tamburo
+                            _charleston.ID = ClsPiattoBL.InsertPiatto(Program._connectionString, _charleston, out _comunicazione);
+                        }
+                        else
+                        {
+                            //Esiste
+                            _charleston.ID = _ricercaCharleston.ID;
+                        }
+
+                        //Creo la relazione tra batteria e charleston
+                        ClsBatteriaPiatto _batteriaCharleston = new ClsBatteriaPiatto();
+                        _batteriaCharleston.BatteriaID = _batteria.ID;
+                        _batteriaCharleston.PiattoID = _charleston.ID;
+
+                        _batteriaCharleston.ID = ClsBatteriaPiattoBL.InsertBatteriaPiatto(Program._connectionString, _batteriaCharleston, out _comunicazione);
+                    }
+                }
+                catch(Exception ex)
+                {
+
+                }
+            }
+        }
     }
 }

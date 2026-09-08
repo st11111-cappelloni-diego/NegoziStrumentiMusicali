@@ -1,4 +1,4 @@
-﻿namespace NegozioStrumentiMusicali_Cappelloni_DiBernardo
+﻿namespace NegozioStrumentiMusicali
 {
     partial class FrmCarrello
     {
@@ -35,9 +35,11 @@
             this.chColori = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.chPrezzo = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.chQuantità = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.chNegozio = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.btnRimossa = new System.Windows.Forms.Button();
             this.btnAggiunta = new System.Windows.Forms.Button();
+            this.btnInfoNegozio = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.cbNegozio = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // lvStrumenti
@@ -46,7 +48,6 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lvStrumenti.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.chNegozio,
             this.chTipo,
             this.chCasaProduttrice,
             this.Modello,
@@ -56,10 +57,10 @@
             this.lvStrumenti.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lvStrumenti.FullRowSelect = true;
             this.lvStrumenti.HideSelection = false;
-            this.lvStrumenti.Location = new System.Drawing.Point(12, 12);
+            this.lvStrumenti.Location = new System.Drawing.Point(12, 51);
             this.lvStrumenti.MultiSelect = false;
             this.lvStrumenti.Name = "lvStrumenti";
-            this.lvStrumenti.Size = new System.Drawing.Size(1083, 388);
+            this.lvStrumenti.Size = new System.Drawing.Size(927, 479);
             this.lvStrumenti.TabIndex = 61;
             this.lvStrumenti.UseCompatibleStateImageBehavior = false;
             this.lvStrumenti.View = System.Windows.Forms.View.Details;
@@ -95,16 +96,11 @@
             this.chQuantità.Text = "Quantità";
             this.chQuantità.Width = 110;
             // 
-            // chNegozio
-            // 
-            this.chNegozio.Text = "Negozio";
-            this.chNegozio.Width = 197;
-            // 
             // btnRimossa
             // 
             this.btnRimossa.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnRimossa.Image = global::NegozioStrumentiMusicali_Cappelloni_DiBernardo.Properties.Resources.iconaMeno1_30x30;
-            this.btnRimossa.Location = new System.Drawing.Point(1147, 74);
+            this.btnRimossa.Location = new System.Drawing.Point(991, 150);
             this.btnRimossa.Name = "btnRimossa";
             this.btnRimossa.Size = new System.Drawing.Size(40, 40);
             this.btnRimossa.TabIndex = 63;
@@ -114,17 +110,55 @@
             // 
             this.btnAggiunta.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnAggiunta.Image = global::NegozioStrumentiMusicali_Cappelloni_DiBernardo.Properties.Resources.iconaNuovo1_30x30;
-            this.btnAggiunta.Location = new System.Drawing.Point(1101, 74);
+            this.btnAggiunta.Location = new System.Drawing.Point(945, 150);
             this.btnAggiunta.Name = "btnAggiunta";
             this.btnAggiunta.Size = new System.Drawing.Size(40, 40);
             this.btnAggiunta.TabIndex = 62;
             this.btnAggiunta.UseVisualStyleBackColor = true;
+            this.btnAggiunta.Click += new System.EventHandler(this.btnAggiunta_Click);
+            // 
+            // btnInfoNegozio
+            // 
+            this.btnInfoNegozio.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnInfoNegozio.Image = global::NegozioStrumentiMusicali_Cappelloni_DiBernardo.Properties.Resources.iconaInformazioni1_45x45;
+            this.btnInfoNegozio.Location = new System.Drawing.Point(897, 5);
+            this.btnInfoNegozio.Name = "btnInfoNegozio";
+            this.btnInfoNegozio.Size = new System.Drawing.Size(42, 40);
+            this.btnInfoNegozio.TabIndex = 85;
+            this.btnInfoNegozio.UseVisualStyleBackColor = true;
+            // 
+            // label1
+            // 
+            this.label1.BackColor = System.Drawing.Color.Transparent;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.Color.Black;
+            this.label1.Location = new System.Drawing.Point(8, 11);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(105, 28);
+            this.label1.TabIndex = 84;
+            this.label1.Text = "Negozio:";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // cbNegozio
+            // 
+            this.cbNegozio.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.cbNegozio.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbNegozio.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbNegozio.FormattingEnabled = true;
+            this.cbNegozio.Location = new System.Drawing.Point(119, 11);
+            this.cbNegozio.Name = "cbNegozio";
+            this.cbNegozio.Size = new System.Drawing.Size(772, 28);
+            this.cbNegozio.TabIndex = 83;
             // 
             // FrmCarrello
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1265, 542);
+            this.ClientSize = new System.Drawing.Size(1043, 542);
+            this.Controls.Add(this.btnInfoNegozio);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.cbNegozio);
             this.Controls.Add(this.btnRimossa);
             this.Controls.Add(this.btnAggiunta);
             this.Controls.Add(this.lvStrumenti);
@@ -144,7 +178,9 @@
         private System.Windows.Forms.ColumnHeader chPrezzo;
         private System.Windows.Forms.ColumnHeader chQuantità;
         private System.Windows.Forms.Button btnAggiunta;
-        private System.Windows.Forms.ColumnHeader chNegozio;
         private System.Windows.Forms.Button btnRimossa;
+        private System.Windows.Forms.Button btnInfoNegozio;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ComboBox cbNegozio;
     }
 }
