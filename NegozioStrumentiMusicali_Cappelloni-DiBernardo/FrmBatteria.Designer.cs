@@ -429,6 +429,7 @@
             this.btnSalva.TabIndex = 20;
             this.btnSalva.Text = "Salva";
             this.btnSalva.UseVisualStyleBackColor = true;
+            this.btnSalva.Click += new System.EventHandler(this.btnSalva_Click);
             // 
             // pnlAltriPiatti
             // 
