@@ -265,6 +265,7 @@
             this.BtnCarrello.TabIndex = 85;
             this.BtnCarrello.Text = "AGGIUNGI AL CARRELLO";
             this.BtnCarrello.UseVisualStyleBackColor = true;
+            this.BtnCarrello.Click += new System.EventHandler(this.BtnCarrello_Click);
             // 
             // FrmStrumentiMusicali
             // 
