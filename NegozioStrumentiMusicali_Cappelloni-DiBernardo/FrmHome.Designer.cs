@@ -30,11 +30,12 @@
         {
             this.msHome = new System.Windows.Forms.MenuStrip();
             this.mioUtenteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.strumentiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ordiniToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.utentiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.negoziToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.ordiniToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.strumentiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.caseProduttriciToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.carrelloToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.msHome.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -44,68 +45,75 @@
             this.msHome.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.mioUtenteToolStripMenuItem,
             this.strumentiToolStripMenuItem,
+            this.carrelloToolStripMenuItem,
             this.ordiniToolStripMenuItem,
             this.utentiToolStripMenuItem,
             this.negoziToolStripMenuItem,
             this.caseProduttriciToolStripMenuItem});
             this.msHome.Location = new System.Drawing.Point(0, 0);
             this.msHome.Name = "msHome";
-            this.msHome.Padding = new System.Windows.Forms.Padding(8, 2, 0, 2);
-            this.msHome.Size = new System.Drawing.Size(1579, 28);
+            this.msHome.Size = new System.Drawing.Size(1155, 24);
             this.msHome.TabIndex = 0;
             this.msHome.Text = "menuStrip1";
             // 
             // mioUtenteToolStripMenuItem
             // 
             this.mioUtenteToolStripMenuItem.Name = "mioUtenteToolStripMenuItem";
-            this.mioUtenteToolStripMenuItem.Size = new System.Drawing.Size(123, 24);
+            this.mioUtenteToolStripMenuItem.Size = new System.Drawing.Size(101, 20);
             this.mioUtenteToolStripMenuItem.Text = "<nomeUtente>";
             this.mioUtenteToolStripMenuItem.Click += new System.EventHandler(this.mioUtenteToolStripMenuItem_Click);
+            // 
+            // strumentiToolStripMenuItem
+            // 
+            this.strumentiToolStripMenuItem.Name = "strumentiToolStripMenuItem";
+            this.strumentiToolStripMenuItem.Size = new System.Drawing.Size(71, 20);
+            this.strumentiToolStripMenuItem.Text = "Strumenti";
+            this.strumentiToolStripMenuItem.Click += new System.EventHandler(this.strumentiToolStripMenuItem_Click);
+            // 
+            // ordiniToolStripMenuItem
+            // 
+            this.ordiniToolStripMenuItem.Name = "ordiniToolStripMenuItem";
+            this.ordiniToolStripMenuItem.Size = new System.Drawing.Size(52, 20);
+            this.ordiniToolStripMenuItem.Text = "Ordini";
+            this.ordiniToolStripMenuItem.Click += new System.EventHandler(this.ordiniToolStripMenuItem_Click);
             // 
             // utentiToolStripMenuItem
             // 
             this.utentiToolStripMenuItem.Name = "utentiToolStripMenuItem";
-            this.utentiToolStripMenuItem.Size = new System.Drawing.Size(61, 24);
+            this.utentiToolStripMenuItem.Size = new System.Drawing.Size(51, 20);
             this.utentiToolStripMenuItem.Text = "Utenti";
             this.utentiToolStripMenuItem.Click += new System.EventHandler(this.utentiToolStripMenuItem_Click);
             // 
             // negoziToolStripMenuItem
             // 
             this.negoziToolStripMenuItem.Name = "negoziToolStripMenuItem";
-            this.negoziToolStripMenuItem.Size = new System.Drawing.Size(69, 24);
+            this.negoziToolStripMenuItem.Size = new System.Drawing.Size(56, 20);
             this.negoziToolStripMenuItem.Text = "Negozi";
             this.negoziToolStripMenuItem.Click += new System.EventHandler(this.negoziToolStripMenuItem_Click);
-            // 
-            // ordiniToolStripMenuItem
-            // 
-            this.ordiniToolStripMenuItem.Name = "ordiniToolStripMenuItem";
-            this.ordiniToolStripMenuItem.Size = new System.Drawing.Size(62, 24);
-            this.ordiniToolStripMenuItem.Text = "Ordini";
-            this.ordiniToolStripMenuItem.Click += new System.EventHandler(this.ordiniToolStripMenuItem_Click);
-            // 
-            // strumentiToolStripMenuItem
-            // 
-            this.strumentiToolStripMenuItem.Name = "strumentiToolStripMenuItem";
-            this.strumentiToolStripMenuItem.Size = new System.Drawing.Size(85, 24);
-            this.strumentiToolStripMenuItem.Text = "Strumenti";
-            this.strumentiToolStripMenuItem.Click += new System.EventHandler(this.strumentiToolStripMenuItem_Click);
             // 
             // caseProduttriciToolStripMenuItem
             // 
             this.caseProduttriciToolStripMenuItem.Name = "caseProduttriciToolStripMenuItem";
-            this.caseProduttriciToolStripMenuItem.Size = new System.Drawing.Size(126, 24);
+            this.caseProduttriciToolStripMenuItem.Size = new System.Drawing.Size(103, 20);
             this.caseProduttriciToolStripMenuItem.Text = "Case produttrici";
             this.caseProduttriciToolStripMenuItem.Click += new System.EventHandler(this.caseProduttriciToolStripMenuItem_Click);
             // 
+            // carrelloToolStripMenuItem
+            // 
+            this.carrelloToolStripMenuItem.Name = "carrelloToolStripMenuItem";
+            this.carrelloToolStripMenuItem.Size = new System.Drawing.Size(60, 20);
+            this.carrelloToolStripMenuItem.Text = "Carrello";
+            this.carrelloToolStripMenuItem.Click += new System.EventHandler(this.carrelloToolStripMenuItem_Click);
+            // 
             // FrmHome
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.ClientSize = new System.Drawing.Size(1579, 875);
+            this.ClientSize = new System.Drawing.Size(1155, 687);
             this.Controls.Add(this.msHome);
             this.MainMenuStrip = this.msHome;
-            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "FrmHome";
             this.Text = "Negozi di strumenti musicali";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FrmHome_FormClosed);
@@ -126,6 +134,7 @@
         private System.Windows.Forms.ToolStripMenuItem strumentiToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem utentiToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem caseProduttriciToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem carrelloToolStripMenuItem;
     }
 }
 
