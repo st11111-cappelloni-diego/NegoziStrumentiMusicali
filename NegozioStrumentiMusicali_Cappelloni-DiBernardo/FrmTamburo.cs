@@ -93,24 +93,24 @@ namespace NegozioStrumentiMusicali
                     _tamburo.Materiale = (ClsTamburo.eMATERIALE)cbMateriale.SelectedIndex;
                     _tamburo.Strati = Convert.ToByte(nudStrati.Value);
 
-                    if(_modalitaEntrataDetail == Program.eMODALITA_ENTRATA_DETAIL.Modifica)
+                    ClsTamburo _ricercaTamburo = new ClsTamburo();
+
+                    //Controllo se già esiste il tamburo coi nuovi dati
+                    _ricercaTamburo = ClsTamburoBL.GetOneTamburo(Program._connectionString, _tamburo.Tipo, _tamburo.DiametroIN, _tamburo.Materiale, _tamburo.Strati, out _comunicazione);
+
+                    if (_ricercaTamburo == null)
                     {
-                        ClsTamburo _ricercaTamburo = new ClsTamburo();
+                        //Non esiste: creo il nuovo tamburo
+                        _tamburo.ID = ClsTamburoBL.InsertTamburo(Program._connectionString, _tamburo, out _comunicazione);
+                    }
+                    else
+                    {
+                        //Esiste
+                        _tamburo.ID = _ricercaTamburo.ID;
+                    }
 
-                        //Controllo se già esiste il tamburo coi nuovi dati
-                        _ricercaTamburo = ClsTamburoBL.GetOneTamburo(Program._connectionString, _tamburo.Tipo, _tamburo.DiametroIN, _tamburo.Materiale, _tamburo.Strati, out _comunicazione);
-
-                        if (_ricercaTamburo == null)
-                        {
-                            //Non esiste: creo il nuovo tamburo
-                            _tamburo.ID = ClsTamburoBL.InsertTamburo(Program._connectionString, _tamburo, out _comunicazione);
-                        }
-                        else
-                        {
-                            //Esiste
-                            _tamburo.ID = _ricercaTamburo.ID;
-                        }
-
+                    if (_modalitaEntrataDetail == Program.eMODALITA_ENTRATA_DETAIL.Modifica)
+                    {
                         //Associo il tamburo alla batteria in caso non ci sia già l'associazione
                         ClsBatteriaTamburo _ricercaBT = new ClsBatteriaTamburo();
                         _ricercaBT = ClsBatteriaTamburoBL.GetOneBatteriaTamburo(Program._connectionString, _batteriaTamburo.BatteriaID, _tamburo.ID, out _comunicazione);

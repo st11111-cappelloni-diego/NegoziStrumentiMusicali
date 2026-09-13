@@ -25,6 +25,7 @@ namespace NegozioStrumentiMusicali
         FrmOrdini _frmOrdini;
         FrmStrumentiMusicali _frmStrumentiMusicali;
         FrmCaseProduttrici _frmCaseProduttrici;
+        FrmCarrello _frmCarrello;
 
         #endregion
 
@@ -179,6 +180,15 @@ namespace NegozioStrumentiMusicali
             MostraFormMDI(_frmCaseProduttrici);
         }
 
+        private void carrelloToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (Application.OpenForms["FrmCarrello"] == null)
+            {
+                //Se la form non è già aperta la instanzio
+                _frmCarrello = new FrmCarrello();
+            }
+            MostraFormMDI(_frmCarrello);
+        }
 
         #endregion
 
@@ -186,5 +196,7 @@ namespace NegozioStrumentiMusicali
         {
             Application.Exit();
         }
+
+
     }
 }

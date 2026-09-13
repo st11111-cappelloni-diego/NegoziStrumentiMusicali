@@ -53,7 +53,7 @@ namespace NegozioStrumentiMusicali
 
             //Tipo dello strumento
             string _tipoStrumento = String.Empty;
-            switch(strumento)
+            switch (strumento)
             {
                 case ClsBatteria b:
                     _tipoStrumento = "Batteria";
@@ -189,7 +189,7 @@ namespace NegozioStrumentiMusicali
             List<ListViewItem> _lviList = new List<ListViewItem>();
 
             //Scorro tutta la lista se non è nulla
-            if(listaPianoforti != null)
+            if (listaPianoforti != null)
             {
                 foreach (ClsPianoforte pianoforte in listaPianoforti)
                 {
@@ -257,14 +257,14 @@ namespace NegozioStrumentiMusicali
                         ListaVendereNegozioSelezionato
                     )
                 ),
-                Task.Run(()=>
+                Task.Run(() =>
                     _lviListPianoforti =
                     CreaListViewItems(
                         listaPianoforti,
                         ListaVendereNegozioSelezionato
                     )
                 ),
-                Task.Run(()=>
+                Task.Run(() =>
                     _lviListOttoni =
                     CreaListViewItems(
                         listaOttoni,
@@ -272,7 +272,7 @@ namespace NegozioStrumentiMusicali
                     )
                 ),
                 Task.Run(() =>
-                    _lviListLegni = 
+                    _lviListLegni =
                     CreaListViewItems(
                         listaLegni,
                         ListaVendereNegozioSelezionato
@@ -300,7 +300,7 @@ namespace NegozioStrumentiMusicali
             comboBox.Items.Clear();
 
             for (int i = 0; i < listaNegozi.Count; i++)
-            { 
+            {
                 comboBox.Items.Add(listaNegozi[i].Nome);
             }
 
@@ -360,8 +360,8 @@ namespace NegozioStrumentiMusicali
             });
 
             //Aggiungo l'oggetto anche su RAM sulla lista principale
-            if(_frmSceltaInserimentoStrumentoMusicale._strumentoMusicale != null
-                || _drForm == DialogResult.OK) 
+            if (_frmSceltaInserimentoStrumentoMusicale._strumentoMusicale != null
+                || _drForm == DialogResult.OK)
             {
                 int _pos = 0;
                 if (_frmSceltaInserimentoStrumentoMusicale._strumentoMusicale is ClsBatteria batteria)
@@ -462,11 +462,11 @@ namespace NegozioStrumentiMusicali
             UtenteGestisceNegozioSelezionato = false;
             if (ClsArchivio.ListaGestireUtenteAttuale != null)
             {
-                UtenteGestisceNegozioSelezionato = ClsArchivio.ListaGestireUtenteAttuale.Any(g => 
+                UtenteGestisceNegozioSelezionato = ClsArchivio.ListaGestireUtenteAttuale.Any(g =>
                 g.NegozioID == ClsArchivio.Negozi[cbNegozio.SelectedIndex].ID);
             }
 
-            if (UtenteGestisceNegozioSelezionato == false && 
+            if (UtenteGestisceNegozioSelezionato == false &&
                 ClsArchivio.UtenteAttuale.AdminSoftware == false)
             {
                 btnNuovo.Enabled = false;
@@ -502,7 +502,7 @@ namespace NegozioStrumentiMusicali
         private void btnModifica_Click(object sender, EventArgs e)
         {
             //Controllo se si è selezionato un solo elemento nella listView
-            if(lvStrumenti.SelectedItems.Count == 1)
+            if (lvStrumenti.SelectedItems.Count == 1)
             {
                 //Se si è selezionato:
 
@@ -538,7 +538,7 @@ namespace NegozioStrumentiMusicali
                     //Trovo la posizione
                     _pos = ClsArchivio.Batterie.FindLastIndex(b => b.ID == batteria.ID);
 
-                    if(_pos >= 0)
+                    if (_pos >= 0)
                     {
                         //Se l'ho trovata la aggiorno
                         ClsArchivio.Batterie[_pos] = batteria;
@@ -549,7 +549,7 @@ namespace NegozioStrumentiMusicali
                         ClsArchivio.Batterie.Add(batteria);
                     }
                 }
-                else if(_frmStrumentoMusicale._strumentoMusicale is ClsLegno legno)
+                else if (_frmStrumentoMusicale._strumentoMusicale is ClsLegno legno)
                 {
                     //Trovo la posizione
                     _pos = ClsArchivio.Legni.FindLastIndex(l => l.ID == legno.ID);
@@ -619,7 +619,7 @@ namespace NegozioStrumentiMusicali
                     ClsArchivio.Pianoforti, ClsArchivio.Ottoni, ClsArchivio.Legni, ClsArchivio.Batterie);
 
             }
-            else if(lvStrumenti.SelectedItems.Count > 1)
+            else if (lvStrumenti.SelectedItems.Count > 1)
             {
                 MessageBox.Show("Selezionare un solo elemento", "MODIFICA", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
@@ -669,7 +669,7 @@ namespace NegozioStrumentiMusicali
 
         private void btnOrdinaStrumento_Click(object sender, EventArgs e)
         {
-           
+
         }
 
         private void btnOdina_Click(object sender, EventArgs e)
@@ -678,7 +678,7 @@ namespace NegozioStrumentiMusicali
             {
                 var tag = lvStrumenti.SelectedItems[0].Tag;
 
-                
+
 
                 if (tag is ClsBatteria batteria)
                 {
@@ -713,7 +713,7 @@ namespace NegozioStrumentiMusicali
             }
         }
 
-        
+
 
         private void BtnCarrello_Click(object sender, EventArgs e)
         {
@@ -725,12 +725,17 @@ namespace NegozioStrumentiMusicali
                 //creo una nuova variabile di tipo carrello
                 ClsCarrello _carrello = new ClsCarrello();
 
-                _carrello.StrumentoMusicaleID = tag.ID;
+                _carrello.StrumentoMusicale = tag;
                 _carrello.NegozioID = ClsArchivio.Negozi[cbNegozio.SelectedIndex].ID;
                 _carrello.Quantita = 1;
 
+                ClsVendere vendere = _listaVendereNegozioSelezionato.FirstOrDefault(v => v.StrumentoMusicaleID == _carrello.StrumentoMusicale.ID);
+
+                _carrello.Prezo = vendere.Prezzo;
+
                 ClsArchivio.ListCarrello.Add(_carrello);
 
+            }
         }
     }
 }
