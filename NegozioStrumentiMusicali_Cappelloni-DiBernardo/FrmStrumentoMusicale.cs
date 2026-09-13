@@ -35,6 +35,17 @@ namespace NegozioStrumentiMusicali
         /// Variabile di backup di cbNotaMassima in caso di cambio di tipo strumento
         /// </summary>
         private int _indiceNotaMassima;
+        /// <summary>
+        /// Piatti della batteria (tranne charleston che ha una sua variabile)
+        /// </summary>
+        private List<ClsPiatto> _piatti = new List<ClsPiatto>();
+        /// <summary>
+        /// Tamburi della batteria (tranne cassa e rullante che hanno le proprie variabili)
+        /// </summary>
+        private List<ClsTamburo> _tamburi = new List<ClsTamburo>();
+        private ClsPiatto _charleston = new ClsPiatto();
+        private ClsTamburo _cassa = new ClsTamburo();
+        private ClsTamburo _rullante = new ClsTamburo();
 
         #endregion
         #region Proprietà
@@ -538,10 +549,55 @@ namespace NegozioStrumentiMusicali
                         if (_strumentoMusicale is ClsBatteria batteria) //batteria = alias
                         {
                             //Metto in _strumentoMusicale i dati di _dettagliBatteria, lasciando invariati i dati di generalizzazione
-                            ClsBatteriaBL.Clona(_dettagliBatteria, ref batteria, false);
+                            ClsBatteriaBL.Clona(_dettagliBatteria, ref batteria, false);                             
                             if(ModalitaEntrata == Program.eMODALITA_ENTRATA_DETAIL.Inserimento)
                             {
                                 batteria.ID = ClsBatteriaBL.InsertBatteria(Program._connectionString, batteria, out _comunicazione);
+
+                                //Controllo se già esiste la cassa
+                                ClsTamburo _ricercaCassa = new ClsTamburo();
+                                _ricercaCassa = ClsTamburoBL.GetOneTamburo(Program._connectionString, _cassa.Tipo, _cassa.DiametroIN, _cassa.Materiale, _cassa.Strati, out _comunicazione);
+
+                                if (_ricercaCassa == null)
+                                {
+                                    //Non esiste: creo il nuovo tamburo
+                                    _cassa.ID = ClsTamburoBL.InsertTamburo(Program._connectionString, _cassa, out _comunicazione);
+                                }
+                                else
+                                {
+                                    //Esiste
+                                    _cassa.ID = _ricercaCassa.ID;
+                                }
+
+                                //Controllo se esiste già il rullante
+                                ClsTamburo _ricercaRullante = new ClsTamburo();
+                                _ricercaRullante = ClsTamburoBL.GetOneTamburo(Program._connectionString, _rullante.Tipo, _rullante.DiametroIN, _rullante.Materiale, _rullante.Strati, out _comunicazione);
+
+                                if (_ricercaRullante == null)
+                                {
+                                    //Non esiste: creo il nuovo tamburo
+                                    _rullante.ID = ClsTamburoBL.InsertTamburo(Program._connectionString, _rullante, out _comunicazione);
+                                }
+                                else
+                                {
+                                    //Esiste
+                                    _rullante.ID = _ricercaRullante.ID;
+                                }
+
+                                //Controllo se già esiste il charleston
+                                ClsPiatto _ricercaCharleston = new ClsPiatto();
+                                _ricercaCharleston = ClsPiattoBL.GetOnePiatto(Program._connectionString, _charleston.Tipo, _charleston.DiametroIN, _charleston.Materiale, out _comunicazione);
+
+                                if (_ricercaCharleston == null)
+                                {
+                                    //Non esiste: creo il nuovo tamburo
+                                    _charleston.ID = ClsPiattoBL.InsertPiatto(Program._connectionString, _charleston, out _comunicazione);
+                                }
+                                else
+                                {
+                                    //Esiste
+                                    _charleston.ID = _ricercaCharleston.ID;
+                                }
                             }
                             else if(ModalitaEntrata == Program.eMODALITA_ENTRATA_DETAIL.Modifica)
                             {
