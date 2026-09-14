@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace NegozioStrumentiMusicali
 {
-    class ClsCarrello
+    /// <summary>
+    /// sviluppata da Leonardo Di Bernardo
+    /// </summary>
+    public class ClsCarrello
     {
         #region Attributi
         int _quantita;

@@ -16,6 +16,7 @@ namespace NegozioStrumentiMusicali
 
 
         public List<ClsVendere> ListaVendereNegozioSelezionato = new List<ClsVendere>();
+        public static List<ClsCarrello> _listaElementiCarrello = new List<ClsCarrello>();
 
         public FrmCarrello()
         {
@@ -101,7 +102,9 @@ namespace NegozioStrumentiMusicali
 
         private void btnInfoNegozio_Click(object sender, EventArgs e)
         {
-
+            //string _comunicazione;
+            //FrmNegozio _negozio = new FrmNegozio(ClsNegozioBL.GetOneNegozio(ref Program._connessioneAlDB, _negozioID, out _comunicazione), Program.eMODALITA_ENTRATA_DETAIL.Visualizzazione);
+            //_negozio.ShowDialog(this);
         }
 
         private void FrmCarrello_Load(object sender, EventArgs e)
@@ -123,6 +126,19 @@ namespace NegozioStrumentiMusicali
 
         private void cbNegozio_SelectedIndexChanged(object sender, EventArgs e)
         {
+            PopolaListView(lvStrumenti, ClsArchivio.ListCarrello, ClsArchivio.Negozi[cbNegozio.SelectedIndex].ID);
+        }
+
+        private void btnOdina_Click(object sender, EventArgs e)
+        {
+            foreach (ListViewItem item in lvStrumenti.Items)
+            {
+                ClsCarrello _elementoCarrello = (ClsCarrello)item.Tag;
+                _listaElementiCarrello.Add(_elementoCarrello);
+            }
+
+            FrmOrdine _ordini = new FrmOrdine(ClsArchivio.Negozi[cbNegozio.SelectedIndex].ID);
+            _ordini.ShowDialog();
             PopolaListView(lvStrumenti, ClsArchivio.ListCarrello, ClsArchivio.Negozi[cbNegozio.SelectedIndex].ID);
         }
     }
