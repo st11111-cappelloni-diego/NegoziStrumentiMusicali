@@ -19,7 +19,7 @@ namespace NegozioStrumentiMusicali
         /// <param name="strumentoACorda">Oggetto da inserire</param>
         /// <param name="comunicazione">Comunicazione in uscita</param>
         /// <returns>ID del nuovo record. Se -1 insert non riuscito</returns>
-        public static long InsertStrumentoACorda(string stringaDiConnessione, ClsStrumentoACorda strumentoACorda, out string comunicazione)
+        public static long InsertStrumentoACorda(string stringaDiConnessione, ClsStrumentoACorda strumentoACorda, out string comunicazione, bool restituisciAlChiamanteEventualiEccezioni = false)
         {
             //VARIABILI LOCALI
             long _ID = -1;
@@ -29,7 +29,7 @@ namespace NegozioStrumentiMusicali
             try
             {
                 //Inserisco le informazioni generali in strumentimusicali
-                _ID = ClsStrumentoMusicaleBL.InsertStrumentoMusicale(stringaDiConnessione, strumentoACorda, out comunicazione);
+                _ID = ClsStrumentoMusicaleBL.InsertStrumentoMusicale(stringaDiConnessione, strumentoACorda, out comunicazione, true);
 
                 //Apro la connessione
                 _connection.Open();
@@ -73,6 +73,10 @@ namespace NegozioStrumentiMusicali
             catch (Exception ex)
             {
                 comunicazione = ex.Message;
+                if(restituisciAlChiamanteEventualiEccezioni)
+                {
+                    throw ex;
+                }
             }
             finally
             {
@@ -88,7 +92,7 @@ namespace NegozioStrumentiMusicali
         /// <param name="stringaDiConnessione"></param>
         /// <param name="strumentoACorda">Oggetto da inserire</param>
         /// <param name="comunicazione">Comunicazione in uscita</param>
-        public static void UpdateStrumentoACorda(string stringaDiConnessione, ClsStrumentoACorda strumentoACorda, out string comunicazione)
+        public static void UpdateStrumentoACorda(string stringaDiConnessione, ClsStrumentoACorda strumentoACorda, out string comunicazione, bool restituisciAlChiamanteEventualiEccezioni = false)
         {
             //VARIABILI
             comunicazione = String.Empty;
@@ -153,6 +157,10 @@ namespace NegozioStrumentiMusicali
             catch (Exception ex)
             {
                 comunicazione = ex.Message;
+                if(restituisciAlChiamanteEventualiEccezioni)
+                {
+                    throw ex;
+                }
             }
             finally
             {

@@ -16,7 +16,7 @@ namespace NegozioStrumentiMusicali
         /// <param name="batteriaPiatto">Record da inserire</param>
         /// <param name="comunicazione">Comunicazione in uscita</param>
         /// <returns>ID del nuovo record. Se -1 insert non riuscito</returns>
-        public static long InsertBatteriaPiatto(string stringaDiConnessione, ClsBatteriaPiatto batteriaPiatto, out string comunicazione)
+        public static long InsertBatteriaPiatto(string stringaDiConnessione, ClsBatteriaPiatto batteriaPiatto, out string comunicazione, bool restituisciEventualiEccezioniAlChiamante = false)
         {
             //VARIABILI
             long _ID = -1;
@@ -50,6 +50,10 @@ namespace NegozioStrumentiMusicali
             catch(Exception ex)
             {
                 comunicazione = ex.Message;
+                if(restituisciEventualiEccezioniAlChiamante)
+                {
+                    throw ex;
+                }
             }
             finally
             {

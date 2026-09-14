@@ -16,7 +16,7 @@ namespace NegozioStrumentiMusicali
         /// <param name="batteria">Oggetto da inserire</param>
         /// <param name="comunicazione">Comunicazione in uscita</param>
         /// <returns>ID del nuovo record. Se -1 insert non riuscito</returns>
-        public static long InsertBatteria(string stringaDiConnessione, ClsBatteria batteria, out string comunicazione)
+        public static long InsertBatteria(string stringaDiConnessione, ClsBatteria batteria, out string comunicazione, bool restituisciAlChiamanteEventualiEccezioni = false)
         {
             //VARIABILI GLOBALI
             comunicazione = String.Empty;
@@ -26,7 +26,7 @@ namespace NegozioStrumentiMusicali
             try
             {
                 //Inserisco le informazione generali in strumentimusicali
-                _ID = ClsStrumentoMusicaleBL.InsertStrumentoMusicale(stringaDiConnessione, batteria, out comunicazione);
+                _ID = ClsStrumentoMusicaleBL.InsertStrumentoMusicale(stringaDiConnessione, batteria, out comunicazione, true);
 
                 //Apro la connessione
                 _connection.Open();
@@ -48,6 +48,10 @@ namespace NegozioStrumentiMusicali
             catch(Exception ex)
             {
                 comunicazione = ex.Message;
+                if(restituisciAlChiamanteEventualiEccezioni)
+                {
+                    throw ex;
+                }
             }
             finally
             {
@@ -63,7 +67,7 @@ namespace NegozioStrumentiMusicali
         /// <param name="stringaDiConnessione"></param>
         /// <param name="batteria">Dati record da aggiornare</param>
         /// <param name="comunicazione">Stringa di comunicazione in uscita</param>
-        public static void UpdateBatteria(string stringaDiConnessione, ClsBatteria batteria, out string comunicazione)
+        public static void UpdateBatteria(string stringaDiConnessione, ClsBatteria batteria, out string comunicazione, bool restituisciAlChiamanteEventualiEccezioni = false)
         {
             //VARIABILI 
             comunicazione = String.Empty;
@@ -72,13 +76,17 @@ namespace NegozioStrumentiMusicali
             try
             {
                 //Aggiorno le informazioni generali in strumentimusicali
-                ClsStrumentoMusicaleBL.UpdateStrumentoMusicale(stringaDiConnessione, batteria, out comunicazione);
+                ClsStrumentoMusicaleBL.UpdateStrumentoMusicale(stringaDiConnessione, batteria, out comunicazione, true);
 
                 comunicazione = "Batteria aggiornata correttamente nel DataBase";
             }
             catch(Exception ex)
             {
                 comunicazione = ex.Message;
+                if(restituisciAlChiamanteEventualiEccezioni)
+                {
+                    throw ex;
+                }
             }
             finally
             {

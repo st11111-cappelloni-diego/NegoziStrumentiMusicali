@@ -20,7 +20,7 @@ namespace NegozioStrumentiMusicali
         /// <param name="piatto">Record da inserire</param>
         /// <param name="comunicazione">Comunicazione in uscita</param>
         /// <returns>ID del nuovo record. Se -1 insert non riuscito</returns>
-        public static long InsertPiatto(string stringaDiConnessione, ClsPiatto piatto, out string comunicazione)
+        public static long InsertPiatto(string stringaDiConnessione, ClsPiatto piatto, out string comunicazione, bool restituisciAlChiamanteEventualiEccezioni = false)
         {
             //VARIABILI LOCALI
             long _ID = -1;
@@ -55,6 +55,10 @@ namespace NegozioStrumentiMusicali
             catch(Exception ex)
             {
                 comunicazione = ex.Message;
+                if(restituisciAlChiamanteEventualiEccezioni)
+                {
+                    throw ex;
+                }
             }
             finally
             {
@@ -296,7 +300,7 @@ namespace NegozioStrumentiMusicali
             return _piatto;
         }
 
-        public static ClsPiatto GetOnePiatto(string stringaDiConnessione, ClsPiatto.eTIPO tipo, byte diametroIN, ClsPiatto.eMATERIALE materiale, out string comunicazione)
+        public static ClsPiatto GetOnePiatto(string stringaDiConnessione, ClsPiatto.eTIPO tipo, byte diametroIN, ClsPiatto.eMATERIALE materiale, out string comunicazione, bool restituisciAlChiamanteEventualiEccezioni = false)
         {
             //VARIABILI
             comunicazione = String.Empty;
@@ -337,7 +341,6 @@ namespace NegozioStrumentiMusicali
                 else
                 {
                     _piatto = null;
-
                     comunicazione = "Piatto non trovato nel DataBase";
                 }
 
@@ -350,6 +353,10 @@ namespace NegozioStrumentiMusicali
             {
                 comunicazione = ex.Message;
                 _piatto = null;
+                if(restituisciAlChiamanteEventualiEccezioni)
+                {
+                    throw ex;
+                }
             }
             finally
             {
