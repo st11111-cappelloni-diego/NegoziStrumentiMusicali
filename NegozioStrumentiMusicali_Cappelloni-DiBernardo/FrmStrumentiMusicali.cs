@@ -683,31 +683,31 @@ namespace NegozioStrumentiMusicali
                 if (tag is ClsBatteria batteria)
                 {
                     // batteria è già un ClsBatteria
-                    FrmOrdine _ordineBatteria = new FrmOrdine(batteria, ClsArchivio.Negozi[cbNegozio.SelectedIndex].ID);
+                    FrmOrdine _ordineBatteria = new FrmOrdine(ClsArchivio.Negozi[cbNegozio.SelectedIndex].ID, batteria);
                     _ordineBatteria.ShowDialog();
                 }
                 else if (tag is ClsLegno legno)
                 {
                     // legno è già un ClsLegno
-                    FrmOrdine _ordineLegno = new FrmOrdine(legno, ClsArchivio.Negozi[cbNegozio.SelectedIndex].ID);
+                    FrmOrdine _ordineLegno = new FrmOrdine(ClsArchivio.Negozi[cbNegozio.SelectedIndex].ID, legno);
                     _ordineLegno.ShowDialog();
                 }
                 else if (tag is ClsOttone ottone)
                 {
                     // ottone è già un ClsOttone
-                    FrmOrdine _ordineOttone = new FrmOrdine(ottone, ClsArchivio.Negozi[cbNegozio.SelectedIndex].ID);
+                    FrmOrdine _ordineOttone = new FrmOrdine(ClsArchivio.Negozi[cbNegozio.SelectedIndex].ID, ottone);
                     _ordineOttone.ShowDialog();
                 }
                 else if (tag is ClsPianoforte piano)
                 {
                     // piano è già un ClsPianoforte
-                    FrmOrdine _ordinePiano = new FrmOrdine(piano, ClsArchivio.Negozi[cbNegozio.SelectedIndex].ID);
+                    FrmOrdine _ordinePiano = new FrmOrdine(ClsArchivio.Negozi[cbNegozio.SelectedIndex].ID, piano);
                     _ordinePiano.ShowDialog();
                 }
                 else if (tag is ClsStrumentoACorda corda)
                 {
                     // corda è già un ClsStrumentoACorda
-                    FrmOrdine _ordineCorda = new FrmOrdine(corda, ClsArchivio.Negozi[cbNegozio.SelectedIndex].ID);
+                    FrmOrdine _ordineCorda = new FrmOrdine(ClsArchivio.Negozi[cbNegozio.SelectedIndex].ID, corda);
                     _ordineCorda.ShowDialog();
                 }
             }

@@ -19,7 +19,7 @@ namespace NegozioStrumentiMusicali
         /// <param name="legno">Oggetto da inserire</param>
         /// <param name="comunicazione">Comunicazione in uscita</param>
         /// <returns>ID del nuovo record. Se -1 insert non riuscito</returns>
-        public static long InsertLegno(string stringaDiConnessione, ClsLegno legno, out string comunicazione)
+        public static long InsertLegno(string stringaDiConnessione, ClsLegno legno, out string comunicazione, bool restituisciAlChiamanteEventualiEccezioni = false)
         {
             //VARIABILI LOCALI
             long _ID = -1;
@@ -29,7 +29,7 @@ namespace NegozioStrumentiMusicali
             try
             {
                 //Inserisco le informazioni generali in strumentimusicali
-                _ID = ClsStrumentoMusicaleBL.InsertStrumentoMusicale(Program._connectionString, legno, out comunicazione);
+                _ID = ClsStrumentoMusicaleBL.InsertStrumentoMusicale(Program._connectionString, legno, out comunicazione, true);
 
                 //Apro la connessione
                 _connection.Open();
@@ -59,6 +59,10 @@ namespace NegozioStrumentiMusicali
             catch(Exception ex)
             {
                 comunicazione = ex.Message;
+                if(restituisciAlChiamanteEventualiEccezioni)
+                {
+                    throw ex;
+                }
             }
             finally
             {
@@ -74,7 +78,7 @@ namespace NegozioStrumentiMusicali
         /// <param name="stringaDiConnessione"></param>
         /// <param name="legno">Dati record da aggiornare</param>
         /// <param name="comunicazione">Stringa di comunicazione in uscita</param>
-        public static void UpdateLegno(string stringaDiConnessione, ClsLegno legno, out string comunicazione)
+        public static void UpdateLegno(string stringaDiConnessione, ClsLegno legno, out string comunicazione, bool restituisciAlChiamanteEventualiEccezioni = false)
         {
             //VARIABILI LOCALI
             comunicazione = String.Empty;
@@ -83,7 +87,7 @@ namespace NegozioStrumentiMusicali
             try
             {
                 //Aggiorno le info generali in strumentimusicali
-                ClsStrumentoMusicaleBL.UpdateStrumentoMusicale(stringaDiConnessione, legno, out comunicazione);
+                ClsStrumentoMusicaleBL.UpdateStrumentoMusicale(stringaDiConnessione, legno, out comunicazione, true);
 
                 //Riapro la connessione dopo che si è chiusa in UpdateStrumentoMusicale
                 _connection.Open();
@@ -119,6 +123,10 @@ namespace NegozioStrumentiMusicali
             catch(Exception ex)
             {
                 comunicazione = ex.Message;
+                if(restituisciAlChiamanteEventualiEccezioni)
+                {
+                    throw ex;
+                }
             }
             finally
             {
