@@ -14,11 +14,12 @@ namespace NegozioStrumentiMusicali
     {
         private ClsStrumentoMusicale _strumento;
         long _negozioID = 0;
-        public FrmOrdine(ClsStrumentoMusicale strumento, long idNegozio)
+        public FrmOrdine(long idNegozio, ClsStrumentoMusicale strumento = null)
         {
             InitializeComponent();
             cbNazione.DataSource = Program._nazioni;
-            _strumento = strumento;
+            if (strumento != null)
+                _strumento = strumento;
             _negozioID = idNegozio;
             dtpDataOrdine.Value = DateTime.Now;
             dtpDataOrdine.Enabled = false;
@@ -74,7 +75,6 @@ namespace NegozioStrumentiMusicali
                 }
 
                 ClsOrdine _ordine = new ClsOrdine();
-                _ordine.ID = 0;
                 _ordine.DataOra = DateTime.Now;
                 _ordine.NegozioID = _negozioID;
                 _ordine.IndirizzoID = _indirizzo.ID;
@@ -83,6 +83,38 @@ namespace NegozioStrumentiMusicali
 
                 _ordine.ID = ClsOrdineBL.InsertOrdine(Program._connectionString, _ordine, out _comunicazione);
                 MessageBox.Show(_comunicazione, "INSERIMENTO ORDINE NEL DB", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                if (_strumento != null)
+                {
+                    ClsOrdineStrumento _ordineStrumento = new ClsOrdineStrumento();
+                    _ordineStrumento.Quantita = 1;
+                    _ordineStrumento.StrumentoMusicaleID = _strumento.ID;
+                    _ordineStrumento.OrdineID = _ordine.ID;
+
+                    _ordineStrumento.ID = ClsOrdineStrumentoBL.InsertOrdineStrumento(Program._connectionString, _ordineStrumento, out _comunicazione);
+                }
+                else
+                {
+                    foreach (ClsCarrello _elementoCarrello in FrmCarrello._listaElementiCarrello)
+                    {
+                        if (_elementoCarrello.Quantita > 0)
+                        {
+                            ClsOrdineStrumento _ordineStrumento = new ClsOrdineStrumento();
+                            _ordineStrumento.Quantita = _elementoCarrello.Quantita;
+                            _ordineStrumento.StrumentoMusicaleID = _elementoCarrello.StrumentoMusicale.ID;
+                            _ordineStrumento.OrdineID = _ordine.ID;
+
+                            _ordineStrumento.ID = ClsOrdineStrumentoBL.InsertOrdineStrumento(Program._connectionString, _ordineStrumento, out _comunicazione);
+                        }
+                    }
+                    for (int i = ClsArchivio.ListCarrello.Count - 1; i >= 0; i--)      //foreach (ClsCarrello _carrello in ClsArchivio.ListCarrello)            
+                    {                
+                        if (ClsArchivio.ListCarrello[i].NegozioID == FrmCarrello._listaElementiCarrello[0].NegozioID)
+                        {
+                            ClsArchivio.ListCarrello.RemoveAt(i);
+                        }
+                    }
+                }
 
                 this.Close();
             }
