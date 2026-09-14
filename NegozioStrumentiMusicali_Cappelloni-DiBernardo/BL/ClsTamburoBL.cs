@@ -19,7 +19,7 @@ namespace NegozioStrumentiMusicali
         /// <param name="tamburo">Oggetto da inserire</param>
         /// <param name="comunicazione">Stringa di comunicazione in uscita</param>
         /// <returns>ID del nuovo record. Se -1 insert non riuscito</returns>
-        public static long InsertTamburo(string stringaDiConnessione, ClsTamburo tamburo, out string comunicazione)
+        public static long InsertTamburo(string stringaDiConnessione, ClsTamburo tamburo, out string comunicazione, bool restituisciAlChiamanteEventualiEccezioni = false)
         {
             //VARIABILI
             long _ID = -1;
@@ -56,6 +56,10 @@ namespace NegozioStrumentiMusicali
             catch (Exception ex)
             {
                 comunicazione = ex.Message;
+                if(restituisciAlChiamanteEventualiEccezioni)
+                {
+                    throw ex;
+                }
             }
             finally
             {
@@ -299,7 +303,7 @@ namespace NegozioStrumentiMusicali
 
             return _tamburo;
         }
-        public static ClsTamburo GetOneTamburo(string stringaDiConnessione, ClsTamburo.eTIPO tipo, byte diametroIN, ClsTamburo.eMATERIALE materiale, byte strati, out string comunicazione)
+        public static ClsTamburo GetOneTamburo(string stringaDiConnessione, ClsTamburo.eTIPO tipo, byte diametroIN, ClsTamburo.eMATERIALE materiale, byte strati, out string comunicazione, bool restituisciAlChiamanteEventualiEccezioni = false)
         {
             //VARIABILI
             comunicazione = String.Empty;
@@ -342,7 +346,6 @@ namespace NegozioStrumentiMusicali
                 else
                 {
                     _tamburo = null;
-
                     comunicazione = "Tamburo non trovato nel DataBase";
                 }
 
@@ -353,6 +356,10 @@ namespace NegozioStrumentiMusicali
             {
                 comunicazione = ex.Message;
                 _tamburo = null;
+                if(restituisciAlChiamanteEventualiEccezioni)
+                {
+                    throw ex;
+                }
             }
             finally
             {
