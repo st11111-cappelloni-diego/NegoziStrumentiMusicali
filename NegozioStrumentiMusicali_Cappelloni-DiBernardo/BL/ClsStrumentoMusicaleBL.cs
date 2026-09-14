@@ -16,7 +16,7 @@ namespace NegozioStrumentiMusicali
         /// <param name="strumentoMusicale">Oggetto da inserire</param>
         /// <param name="comunicazione">Stringa di comunicazione in uscita</param>
         /// <returns>ID del nuovo record. Se -1 insert non riuscito</returns>
-        public static long InsertStrumentoMusicale(string stringaDiConnessione, ClsStrumentoMusicale strumentoMusicale, out string comunicazione)
+        public static long InsertStrumentoMusicale(string stringaDiConnessione, ClsStrumentoMusicale strumentoMusicale, out string comunicazione, bool restituisciAlChiamanteEventualiEccezioni = false)
         {
             //VARIABILI LOCALI
             long _ID = -1;
@@ -77,6 +77,10 @@ namespace NegozioStrumentiMusicali
             catch (Exception ex)
             {
                 comunicazione = ex.Message;
+                if(restituisciAlChiamanteEventualiEccezioni)
+                {
+                    throw ex;
+                }
             }
             finally
             {
@@ -92,7 +96,7 @@ namespace NegozioStrumentiMusicali
         /// <param name="stringaDiConnessione"></param>
         /// <param name="strumentoMusicale">Dati record da aggiornare</param>
         /// <param name="comunicazione">Comunicazione in uscita</param>
-        public static void UpdateStrumentoMusicale(string stringaDiConnessione, ClsStrumentoMusicale strumentoMusicale, out string comunicazione)
+        public static void UpdateStrumentoMusicale(string stringaDiConnessione, ClsStrumentoMusicale strumentoMusicale, out string comunicazione, bool restituisciAlChiamanteEventualiEccezioni = false)
         {
             //VARIABILI LOCALI
             comunicazione = String.Empty;
@@ -153,6 +157,10 @@ namespace NegozioStrumentiMusicali
             catch (Exception ex)
             {
                 comunicazione = ex.Message;
+                if(restituisciAlChiamanteEventualiEccezioni)
+                {
+                    throw ex;
+                }
             }
             finally
             {
