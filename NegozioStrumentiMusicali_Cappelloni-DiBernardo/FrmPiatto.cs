@@ -108,23 +108,23 @@ namespace NegozioStrumentiMusicali
                         _piatto.ID = _ricercaPiatto.ID;
                     }
 
-                    //Associo il tamburo alla batteria in caso non ci sia già l'associazione
-                    ClsBatteriaPiatto _ricercaBP = new ClsBatteriaPiatto();
-                    _ricercaBP = ClsBatteriaPiattoBL.GetOneBatteriaPiatto(Program._connectionString, _batteriaPiatto.BatteriaID, _piatto.ID, out _comunicazione);
-                    
-                    //Se non esiste l'associazione la creo ed elimino quella vecchia
-                    if (_ricercaBP == null)
+                    if(_modalitaEntrataDetail == Program.eMODALITA_ENTRATA_DETAIL.Modifica)
                     {
-                        if (_modalitaEntrataDetail == Program.eMODALITA_ENTRATA_DETAIL.Modifica)
+                        //Associo il piatto alla batteria in caso non ci sia già l'associazione
+                        ClsBatteriaPiatto _ricercaBP = new ClsBatteriaPiatto();
+                        _ricercaBP = ClsBatteriaPiattoBL.GetOneBatteriaPiatto(Program._connectionString, _batteriaPiatto.BatteriaID, _piatto.ID, out _comunicazione);
+
+                        //Se non esiste l'associazione la creo ed elimino quella vecchia
+                        if (_ricercaBP == null)
                         {
                             ClsBatteriaPiattoBL.DeleteBatteriaPiatto(Program._connectionString, _batteriaPiatto, out _comunicazione);
-                        }
 
-                        ClsBatteriaPiatto _batteriaPiattoNew = new ClsBatteriaPiatto();
-                        _batteriaPiattoNew.BatteriaID = _batteriaPiatto.BatteriaID;
-                        _batteriaPiattoNew.PiattoID = _piatto.ID;
-                        _batteriaPiattoNew.ID = ClsBatteriaPiattoBL.InsertBatteriaPiatto(Program._connectionString, _batteriaPiattoNew, out _comunicazione);
-                        _batteriaPiatto = _batteriaPiattoNew;
+                            ClsBatteriaPiatto _batteriaPiattoNew = new ClsBatteriaPiatto();
+                            _batteriaPiattoNew.BatteriaID = _batteriaPiatto.BatteriaID;
+                            _batteriaPiattoNew.PiattoID = _piatto.ID;
+                            _batteriaPiattoNew.ID = ClsBatteriaPiattoBL.InsertBatteriaPiatto(Program._connectionString, _batteriaPiattoNew, out _comunicazione);
+                            _batteriaPiatto = _batteriaPiattoNew;
+                        }
                     }
 
 
