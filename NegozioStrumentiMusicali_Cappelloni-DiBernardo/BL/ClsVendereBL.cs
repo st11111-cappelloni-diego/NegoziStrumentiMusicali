@@ -73,7 +73,7 @@ namespace NegozioStrumentiMusicali
         /// <param name="stringaDiConnessione"></param>
         /// <param name="vendere">Dati record da aggiornare</param>
         /// <param name="comunicazione">Comunicazione in uscita</param>
-        public static void UpdateVendere(string stringaDiConnessione, ClsVendere vendere, out string comunicazione)
+        public static void UpdateVendere(string stringaDiConnessione, ClsVendere vendere, out string comunicazione, bool restituisciAlChiamanteEventualiEccezioni = false)
         {
             //VARIABILI
             comunicazione = String.Empty;
@@ -112,6 +112,10 @@ namespace NegozioStrumentiMusicali
             catch (Exception ex)
             {
                 comunicazione = ex.Message;
+                if(restituisciAlChiamanteEventualiEccezioni)
+                {
+                    throw ex;
+                }
             }
             finally
             {
