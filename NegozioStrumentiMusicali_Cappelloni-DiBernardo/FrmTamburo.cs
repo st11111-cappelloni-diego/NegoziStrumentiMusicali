@@ -18,6 +18,7 @@ namespace NegozioStrumentiMusicali
         #region Variabili globali
         public ClsTamburo _tamburo;
         public Program.eMODALITA_ENTRATA_DETAIL _modalitaEntrataDetail;
+        private Program.eMODALITA_ENTRATA_DETAIL _modalitaEntrataMaster;
         public ClsBatteriaTamburo _batteriaTamburo;
 
         #endregion
@@ -41,9 +42,14 @@ namespace NegozioStrumentiMusicali
 
         #endregion
 
-        public FrmTamburo()
+        public FrmTamburo(Program.eMODALITA_ENTRATA_DETAIL modalitaEntrataMaster)
         {
             InitializeComponent();
+
+            nudDiametro.Minimum = 1;
+            nudDiametro.Maximum = byte.MaxValue;
+            nudStrati.Minimum = 1;
+            nudStrati.Maximum = byte.MaxValue;
 
             cbMateriale.DataSource = Enum.GetNames(typeof(ClsTamburo.eMATERIALE));
             //Escludo cassa e rullante perchè si inseriscono dalla FrmBatteria
@@ -54,6 +60,8 @@ namespace NegozioStrumentiMusicali
             };
 
             this.DialogResult = DialogResult.Cancel;
+
+            _modalitaEntrataMaster = modalitaEntrataMaster;
         }
 
         private void FrmTamburo_Load(object sender, EventArgs e)
@@ -86,31 +94,31 @@ namespace NegozioStrumentiMusicali
             {
                 try
                 {
-                    string _comunicazione = String.Empty;
-
                     _tamburo.Tipo = (ClsTamburo.eTIPO)cbTipo.SelectedIndex;
                     _tamburo.DiametroIN = Convert.ToByte(nudDiametro.Value);
                     _tamburo.Materiale = (ClsTamburo.eMATERIALE)cbMateriale.SelectedIndex;
                     _tamburo.Strati = Convert.ToByte(nudStrati.Value);
 
-                    ClsTamburo _ricercaTamburo = new ClsTamburo();
-
-                    //Controllo se già esiste il tamburo coi nuovi dati
-                    _ricercaTamburo = ClsTamburoBL.GetOneTamburo(Program._connectionString, _tamburo.Tipo, _tamburo.DiametroIN, _tamburo.Materiale, _tamburo.Strati, out _comunicazione);
-
-                    if (_ricercaTamburo == null)
+                    if (_modalitaEntrataMaster == Program.eMODALITA_ENTRATA_DETAIL.Modifica)
                     {
-                        //Non esiste: creo il nuovo tamburo
-                        _tamburo.ID = ClsTamburoBL.InsertTamburo(Program._connectionString, _tamburo, out _comunicazione);
-                    }
-                    else
-                    {
-                        //Esiste
-                        _tamburo.ID = _ricercaTamburo.ID;
-                    }
+                        string _comunicazione = String.Empty;
 
-                    if (_modalitaEntrataDetail == Program.eMODALITA_ENTRATA_DETAIL.Modifica)
-                    {
+                        ClsTamburo _ricercaTamburo = new ClsTamburo();
+
+                        //Controllo se già esiste il tamburo coi nuovi dati
+                        _ricercaTamburo = ClsTamburoBL.GetOneTamburo(Program._connectionString, _tamburo.Tipo, _tamburo.DiametroIN, _tamburo.Materiale, _tamburo.Strati, out _comunicazione, true);
+
+                        if (_ricercaTamburo == null)
+                        {
+                            //Non esiste: creo il nuovo tamburo
+                            _tamburo.ID = ClsTamburoBL.InsertTamburo(Program._connectionString, _tamburo, out _comunicazione, true);
+                        }
+                        else
+                        {
+                            //Esiste
+                            _tamburo.ID = _ricercaTamburo.ID;
+                        }
+
                         //Associo il tamburo alla batteria in caso non ci sia già l'associazione
                         ClsBatteriaTamburo _ricercaBT = new ClsBatteriaTamburo();
                         _ricercaBT = ClsBatteriaTamburoBL.GetOneBatteriaTamburo(Program._connectionString, _batteriaTamburo.BatteriaID, _tamburo.ID, out _comunicazione);
@@ -118,29 +126,26 @@ namespace NegozioStrumentiMusicali
                         //Se non esiste l'associazione la creo ed elimino quella vecchia
                         if (_ricercaBT == null)
                         {
-                            ClsBatteriaTamburoBL.DeleteBatteriaTamburo(Program._connectionString, _batteriaTamburo, out _comunicazione);
+                            ClsBatteriaTamburoBL.DeleteBatteriaTamburo(Program._connectionString, _batteriaTamburo, out _comunicazione, true);
 
                             ClsBatteriaTamburo _batteriaTamburoNew = new ClsBatteriaTamburo();
                             _batteriaTamburoNew.BatteriaID = _batteriaTamburo.BatteriaID;
                             _batteriaTamburoNew.TamburoID = _tamburo.ID;
-                            _batteriaTamburoNew.ID = ClsBatteriaTamburoBL.InsertBatteriaTamburo(Program._connectionString, _batteriaTamburoNew, out _comunicazione);
+                            _batteriaTamburoNew.ID = ClsBatteriaTamburoBL.InsertBatteriaTamburo(Program._connectionString, _batteriaTamburoNew, out _comunicazione, true);
                             _batteriaTamburo = _batteriaTamburoNew;
                         }
-                    }
-                    else if(_modalitaEntrataDetail == Program.eMODALITA_ENTRATA_DETAIL.Inserimento)
-                    {
 
+                        MessageBox.Show(_comunicazione, "SALVATAGGIO DATI TAMBURO", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
 
-                    
-
-                    MessageBox.Show(_comunicazione, "SALVATAGGIO DATI TAMBURO", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    this.DialogResult = DialogResult.OK;
 
                     this.Close();
                 }
                 catch(Exception ex)
                 {
                     MessageBox.Show("Errore nel salvataggio del tamburo:\r\n" + ex, "SALVA", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    this.DialogResult = DialogResult.Cancel;
                 }
             }
         }
