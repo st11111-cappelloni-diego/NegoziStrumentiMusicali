@@ -165,7 +165,7 @@
             this.btnOdina.TabIndex = 86;
             this.btnOdina.Text = "CREA ORDINE NEGOZIO";
             this.btnOdina.UseVisualStyleBackColor = true;
-            this.btnOdina.Click += new System.EventHandler(this.btnOdina_Click);
+            this.btnOdina.Click += new System.EventHandler(this.btnOrdina_Click);
             // 
             // FrmCarrello
             // 
