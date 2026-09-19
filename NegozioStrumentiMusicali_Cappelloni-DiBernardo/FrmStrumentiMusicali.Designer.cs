@@ -72,7 +72,7 @@
             this.lvStrumenti.MultiSelect = false;
             this.lvStrumenti.Name = "lvStrumenti";
             this.lvStrumenti.Size = new System.Drawing.Size(975, 580);
-            this.lvStrumenti.TabIndex = 60;
+            this.lvStrumenti.TabIndex = 8;
             this.lvStrumenti.UseCompatibleStateImageBehavior = false;
             this.lvStrumenti.View = System.Windows.Forms.View.Details;
             // 
@@ -119,7 +119,7 @@
             this.cbParametriDiOrdinamento.Location = new System.Drawing.Point(121, 64);
             this.cbParametriDiOrdinamento.Name = "cbParametriDiOrdinamento";
             this.cbParametriDiOrdinamento.Size = new System.Drawing.Size(411, 28);
-            this.cbParametriDiOrdinamento.TabIndex = 79;
+            this.cbParametriDiOrdinamento.TabIndex = 4;
             // 
             // label2
             // 
@@ -129,7 +129,7 @@
             this.label2.Location = new System.Drawing.Point(10, 63);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(105, 28);
-            this.label2.TabIndex = 78;
+            this.label2.TabIndex = 3;
             this.label2.Text = "Ordina per:";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
@@ -141,7 +141,7 @@
             this.btnFiltriRicerca.Location = new System.Drawing.Point(538, 62);
             this.btnFiltriRicerca.Name = "btnFiltriRicerca";
             this.btnFiltriRicerca.Size = new System.Drawing.Size(451, 30);
-            this.btnFiltriRicerca.TabIndex = 77;
+            this.btnFiltriRicerca.TabIndex = 5;
             this.btnFiltriRicerca.Text = "Filtri di ricerca...";
             this.btnFiltriRicerca.UseVisualStyleBackColor = true;
             // 
@@ -153,7 +153,7 @@
             this.label1.Location = new System.Drawing.Point(10, 9);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(105, 28);
-            this.label1.TabIndex = 74;
+            this.label1.TabIndex = 0;
             this.label1.Text = "Negozio:";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
@@ -167,7 +167,7 @@
             this.cbNegozio.Location = new System.Drawing.Point(121, 9);
             this.cbNegozio.Name = "cbNegozio";
             this.cbNegozio.Size = new System.Drawing.Size(868, 28);
-            this.cbNegozio.TabIndex = 73;
+            this.cbNegozio.TabIndex = 1;
             this.cbNegozio.SelectedIndexChanged += new System.EventHandler(this.cbNegozio_SelectedIndexChanged);
             // 
             // btnInfoNegozio
@@ -177,7 +177,7 @@
             this.btnInfoNegozio.Location = new System.Drawing.Point(995, 3);
             this.btnInfoNegozio.Name = "btnInfoNegozio";
             this.btnInfoNegozio.Size = new System.Drawing.Size(40, 40);
-            this.btnInfoNegozio.TabIndex = 82;
+            this.btnInfoNegozio.TabIndex = 2;
             this.btnInfoNegozio.UseVisualStyleBackColor = true;
             // 
             // btnVisualizza
@@ -187,7 +187,7 @@
             this.btnVisualizza.Location = new System.Drawing.Point(995, 501);
             this.btnVisualizza.Name = "btnVisualizza";
             this.btnVisualizza.Size = new System.Drawing.Size(40, 40);
-            this.btnVisualizza.TabIndex = 81;
+            this.btnVisualizza.TabIndex = 9;
             this.btnVisualizza.UseVisualStyleBackColor = true;
             this.btnVisualizza.Click += new System.EventHandler(this.btnVisualizza_Click);
             // 
@@ -198,7 +198,7 @@
             this.btnOrdina.Location = new System.Drawing.Point(995, 95);
             this.btnOrdina.Name = "btnOrdina";
             this.btnOrdina.Size = new System.Drawing.Size(40, 40);
-            this.btnOrdina.TabIndex = 80;
+            this.btnOrdina.TabIndex = 7;
             this.btnOrdina.UseVisualStyleBackColor = true;
             // 
             // btnCerca
@@ -208,7 +208,7 @@
             this.btnCerca.Location = new System.Drawing.Point(995, 49);
             this.btnCerca.Name = "btnCerca";
             this.btnCerca.Size = new System.Drawing.Size(40, 40);
-            this.btnCerca.TabIndex = 76;
+            this.btnCerca.TabIndex = 6;
             this.btnCerca.UseVisualStyleBackColor = true;
             // 
             // btnElimina
@@ -218,7 +218,7 @@
             this.btnElimina.Location = new System.Drawing.Point(995, 547);
             this.btnElimina.Name = "btnElimina";
             this.btnElimina.Size = new System.Drawing.Size(40, 40);
-            this.btnElimina.TabIndex = 59;
+            this.btnElimina.TabIndex = 10;
             this.btnElimina.UseVisualStyleBackColor = true;
             // 
             // btnModifica
@@ -228,7 +228,7 @@
             this.btnModifica.Location = new System.Drawing.Point(995, 593);
             this.btnModifica.Name = "btnModifica";
             this.btnModifica.Size = new System.Drawing.Size(40, 40);
-            this.btnModifica.TabIndex = 58;
+            this.btnModifica.TabIndex = 11;
             this.btnModifica.UseVisualStyleBackColor = true;
             this.btnModifica.Click += new System.EventHandler(this.btnModifica_Click);
             // 
@@ -239,7 +239,7 @@
             this.btnNuovo.Location = new System.Drawing.Point(995, 639);
             this.btnNuovo.Name = "btnNuovo";
             this.btnNuovo.Size = new System.Drawing.Size(40, 40);
-            this.btnNuovo.TabIndex = 57;
+            this.btnNuovo.TabIndex = 12;
             this.btnNuovo.UseVisualStyleBackColor = true;
             this.btnNuovo.Click += new System.EventHandler(this.btnNuovo_Click);
             // 
@@ -250,7 +250,7 @@
             this.btnOdina.Location = new System.Drawing.Point(1041, 639);
             this.btnOdina.Name = "btnOdina";
             this.btnOdina.Size = new System.Drawing.Size(102, 40);
-            this.btnOdina.TabIndex = 84;
+            this.btnOdina.TabIndex = 14;
             this.btnOdina.Text = "ORDINA";
             this.btnOdina.UseVisualStyleBackColor = true;
             this.btnOdina.Click += new System.EventHandler(this.btnOdina_Click);
@@ -262,7 +262,7 @@
             this.BtnCarrello.Location = new System.Drawing.Point(1041, 577);
             this.BtnCarrello.Name = "BtnCarrello";
             this.BtnCarrello.Size = new System.Drawing.Size(102, 56);
-            this.BtnCarrello.TabIndex = 85;
+            this.BtnCarrello.TabIndex = 13;
             this.BtnCarrello.Text = "AGGIUNGI AL CARRELLO";
             this.BtnCarrello.UseVisualStyleBackColor = true;
             this.BtnCarrello.Click += new System.EventHandler(this.BtnCarrello_Click);

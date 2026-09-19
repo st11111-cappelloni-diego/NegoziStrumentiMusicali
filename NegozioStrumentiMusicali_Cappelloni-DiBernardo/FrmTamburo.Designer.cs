@@ -47,7 +47,7 @@
             this.label12.Location = new System.Drawing.Point(14, 172);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(355, 20);
-            this.label12.TabIndex = 11;
+            this.label12.TabIndex = 6;
             this.label12.Text = "Materiale";
             this.label12.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -59,7 +59,7 @@
             this.cbMateriale.Location = new System.Drawing.Point(14, 197);
             this.cbMateriale.Name = "cbMateriale";
             this.cbMateriale.Size = new System.Drawing.Size(355, 28);
-            this.cbMateriale.TabIndex = 13;
+            this.cbMateriale.TabIndex = 7;
             // 
             // label14
             // 
@@ -67,7 +67,7 @@
             this.label14.Location = new System.Drawing.Point(14, 120);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(356, 20);
-            this.label14.TabIndex = 15;
+            this.label14.TabIndex = 4;
             this.label14.Text = "Strati";
             this.label14.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -82,7 +82,7 @@
             0});
             this.nudStrati.Name = "nudStrati";
             this.nudStrati.Size = new System.Drawing.Size(355, 26);
-            this.nudStrati.TabIndex = 16;
+            this.nudStrati.TabIndex = 5;
             // 
             // label15
             // 
@@ -90,7 +90,7 @@
             this.label15.Location = new System.Drawing.Point(14, 65);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(355, 20);
-            this.label15.TabIndex = 12;
+            this.label15.TabIndex = 2;
             this.label15.Text = "Diametro [in]";
             this.label15.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -105,16 +105,15 @@
             0});
             this.nudDiametro.Name = "nudDiametro";
             this.nudDiametro.Size = new System.Drawing.Size(355, 26);
-            this.nudDiametro.TabIndex = 14;
+            this.nudDiametro.TabIndex = 3;
             // 
             // btnSalva
             // 
-            this.btnSalva.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.btnSalva.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSalva.Location = new System.Drawing.Point(265, 271);
             this.btnSalva.Name = "btnSalva";
             this.btnSalva.Size = new System.Drawing.Size(105, 29);
-            this.btnSalva.TabIndex = 19;
+            this.btnSalva.TabIndex = 8;
             this.btnSalva.Text = "Salva";
             this.btnSalva.UseVisualStyleBackColor = true;
             this.btnSalva.Click += new System.EventHandler(this.btnSalva_Click);
@@ -125,7 +124,7 @@
             this.label1.Location = new System.Drawing.Point(14, 9);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(354, 20);
-            this.label1.TabIndex = 20;
+            this.label1.TabIndex = 0;
             this.label1.Text = "Tipo";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -137,7 +136,7 @@
             this.cbTipo.Location = new System.Drawing.Point(14, 34);
             this.cbTipo.Name = "cbTipo";
             this.cbTipo.Size = new System.Drawing.Size(355, 28);
-            this.cbTipo.TabIndex = 21;
+            this.cbTipo.TabIndex = 1;
             // 
             // FrmTamburo
             // 

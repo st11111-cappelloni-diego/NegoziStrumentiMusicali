@@ -115,7 +115,7 @@ namespace NegozioStrumentiMusicali
         /// <param name="stringaDiConnessione">Stringa per la connessione al DataBase</param>
         /// <param name="batteriaPiatto">Record da eliminare</param>
         /// <param name="comunicazione">Comunicazione in uscita</param>
-        public static void DeleteBatteriaPiatto(string stringaDiConnessione, ClsBatteriaPiatto batteriaPiatto, out string comunicazione)
+        public static void DeleteBatteriaPiatto(string stringaDiConnessione, ClsBatteriaPiatto batteriaPiatto, out string comunicazione, bool restituisciEventualiEccezioniAlChiamante = false)
         {
             //VARIABILI
             comunicazione = String.Empty;
@@ -144,6 +144,10 @@ namespace NegozioStrumentiMusicali
             catch(Exception ex)
             {
                 comunicazione = ex.Message;
+                if(restituisciEventualiEccezioniAlChiamante)
+                {
+                    throw ex;
+                }
             }
             finally
             {
@@ -297,7 +301,7 @@ namespace NegozioStrumentiMusicali
 
             return _listaBatteriaPiatto;
         }
-        public static ClsBatteriaPiatto GetOneBatteriaPiatto(string stringaDiConnessione, long batteriaID, long piattoID, out string comunicazione)
+        public static ClsBatteriaPiatto GetOneBatteriaPiatto(string stringaDiConnessione, long batteriaID, long piattoID, out string comunicazione, bool restituisciEventualiEccezioniAlChiamante = false)
         {
             //VARIABILI
             comunicazione = String.Empty;
@@ -346,6 +350,10 @@ namespace NegozioStrumentiMusicali
             {
                 comunicazione = ex.Message;
                 _batteriaPiatto = null;
+                if(restituisciEventualiEccezioniAlChiamante)
+                {
+                    throw ex;
+                }
             }
             finally
             {

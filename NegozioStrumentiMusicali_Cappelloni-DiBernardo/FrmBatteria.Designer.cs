@@ -94,7 +94,7 @@
             this.pnlCassa.Location = new System.Drawing.Point(7, 12);
             this.pnlCassa.Name = "pnlCassa";
             this.pnlCassa.Size = new System.Drawing.Size(292, 224);
-            this.pnlCassa.TabIndex = 16;
+            this.pnlCassa.TabIndex = 0;
             // 
             // label12
             // 
@@ -102,7 +102,7 @@
             this.label12.Location = new System.Drawing.Point(3, 151);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(286, 20);
-            this.label12.TabIndex = 7;
+            this.label12.TabIndex = 5;
             this.label12.Text = "Materiale tamburo";
             this.label12.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -114,7 +114,7 @@
             this.cbMaterialeCassa.Location = new System.Drawing.Point(3, 176);
             this.cbMaterialeCassa.Name = "cbMaterialeCassa";
             this.cbMaterialeCassa.Size = new System.Drawing.Size(286, 28);
-            this.cbMaterialeCassa.TabIndex = 8;
+            this.cbMaterialeCassa.TabIndex = 6;
             // 
             // label14
             // 
@@ -122,7 +122,7 @@
             this.label14.Location = new System.Drawing.Point(3, 99);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(286, 20);
-            this.label14.TabIndex = 9;
+            this.label14.TabIndex = 3;
             this.label14.Text = "Strati";
             this.label14.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -137,7 +137,7 @@
             0});
             this.nudStratiCassa.Name = "nudStratiCassa";
             this.nudStratiCassa.Size = new System.Drawing.Size(286, 26);
-            this.nudStratiCassa.TabIndex = 10;
+            this.nudStratiCassa.TabIndex = 4;
             // 
             // label15
             // 
@@ -145,7 +145,7 @@
             this.label15.Location = new System.Drawing.Point(3, 45);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(286, 20);
-            this.label15.TabIndex = 7;
+            this.label15.TabIndex = 1;
             this.label15.Text = "Diametro [in]";
             this.label15.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -160,7 +160,7 @@
             0});
             this.nudDiametroCassa.Name = "nudDiametroCassa";
             this.nudDiametroCassa.Size = new System.Drawing.Size(286, 26);
-            this.nudDiametroCassa.TabIndex = 8;
+            this.nudDiametroCassa.TabIndex = 2;
             // 
             // label16
             // 
@@ -168,7 +168,7 @@
             this.label16.Location = new System.Drawing.Point(3, 16);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(286, 29);
-            this.label16.TabIndex = 7;
+            this.label16.TabIndex = 0;
             this.label16.Text = "Cassa";
             this.label16.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -184,7 +184,7 @@
             this.pnlRullante.Location = new System.Drawing.Point(305, 12);
             this.pnlRullante.Name = "pnlRullante";
             this.pnlRullante.Size = new System.Drawing.Size(293, 224);
-            this.pnlRullante.TabIndex = 17;
+            this.pnlRullante.TabIndex = 1;
             // 
             // label2
             // 
@@ -192,7 +192,7 @@
             this.label2.Location = new System.Drawing.Point(3, 151);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(287, 20);
-            this.label2.TabIndex = 7;
+            this.label2.TabIndex = 5;
             this.label2.Text = "Materiale tamburo";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -204,7 +204,7 @@
             this.cbMaterialeRullante.Location = new System.Drawing.Point(3, 176);
             this.cbMaterialeRullante.Name = "cbMaterialeRullante";
             this.cbMaterialeRullante.Size = new System.Drawing.Size(287, 28);
-            this.cbMaterialeRullante.TabIndex = 8;
+            this.cbMaterialeRullante.TabIndex = 6;
             // 
             // label3
             // 
@@ -212,7 +212,7 @@
             this.label3.Location = new System.Drawing.Point(3, 99);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(287, 20);
-            this.label3.TabIndex = 9;
+            this.label3.TabIndex = 3;
             this.label3.Text = "Strati";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -227,7 +227,7 @@
             0});
             this.nudStratiRullante.Name = "nudStratiRullante";
             this.nudStratiRullante.Size = new System.Drawing.Size(287, 26);
-            this.nudStratiRullante.TabIndex = 10;
+            this.nudStratiRullante.TabIndex = 4;
             // 
             // label4
             // 
@@ -235,7 +235,7 @@
             this.label4.Location = new System.Drawing.Point(3, 45);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(287, 20);
-            this.label4.TabIndex = 7;
+            this.label4.TabIndex = 1;
             this.label4.Text = "Diametro [in]";
             this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -250,7 +250,7 @@
             0});
             this.nudDiametroRullante.Name = "nudDiametroRullante";
             this.nudDiametroRullante.Size = new System.Drawing.Size(287, 26);
-            this.nudDiametroRullante.TabIndex = 8;
+            this.nudDiametroRullante.TabIndex = 2;
             // 
             // label5
             // 
@@ -258,7 +258,7 @@
             this.label5.Location = new System.Drawing.Point(3, 16);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(287, 29);
-            this.label5.TabIndex = 7;
+            this.label5.TabIndex = 0;
             this.label5.Text = "Rullante";
             this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -272,7 +272,7 @@
             this.pnlCharleston.Location = new System.Drawing.Point(604, 12);
             this.pnlCharleston.Name = "pnlCharleston";
             this.pnlCharleston.Size = new System.Drawing.Size(300, 224);
-            this.pnlCharleston.TabIndex = 17;
+            this.pnlCharleston.TabIndex = 2;
             // 
             // label6
             // 
@@ -280,7 +280,7 @@
             this.label6.Location = new System.Drawing.Point(3, 99);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(294, 20);
-            this.label6.TabIndex = 7;
+            this.label6.TabIndex = 3;
             this.label6.Text = "Materiale piatto";
             this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -292,7 +292,7 @@
             this.cbMaterialeCharleston.Location = new System.Drawing.Point(3, 121);
             this.cbMaterialeCharleston.Name = "cbMaterialeCharleston";
             this.cbMaterialeCharleston.Size = new System.Drawing.Size(294, 28);
-            this.cbMaterialeCharleston.TabIndex = 8;
+            this.cbMaterialeCharleston.TabIndex = 4;
             // 
             // label8
             // 
@@ -300,7 +300,7 @@
             this.label8.Location = new System.Drawing.Point(3, 45);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(294, 20);
-            this.label8.TabIndex = 7;
+            this.label8.TabIndex = 1;
             this.label8.Text = "Diametro [in]";
             this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -315,7 +315,7 @@
             0});
             this.nudDiametroCharleston.Name = "nudDiametroCharleston";
             this.nudDiametroCharleston.Size = new System.Drawing.Size(294, 26);
-            this.nudDiametroCharleston.TabIndex = 8;
+            this.nudDiametroCharleston.TabIndex = 2;
             // 
             // label9
             // 
@@ -323,7 +323,7 @@
             this.label9.Location = new System.Drawing.Point(3, 16);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(294, 29);
-            this.label9.TabIndex = 7;
+            this.label9.TabIndex = 0;
             this.label9.Text = "Charleston";
             this.label9.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -337,7 +337,7 @@
             this.pnlToms.Location = new System.Drawing.Point(7, 242);
             this.pnlToms.Name = "pnlToms";
             this.pnlToms.Size = new System.Drawing.Size(508, 339);
-            this.pnlToms.TabIndex = 19;
+            this.pnlToms.TabIndex = 3;
             // 
             // btnEliminaTom
             // 
@@ -346,7 +346,7 @@
             this.btnEliminaTom.Location = new System.Drawing.Point(463, 291);
             this.btnEliminaTom.Name = "btnEliminaTom";
             this.btnEliminaTom.Size = new System.Drawing.Size(40, 40);
-            this.btnEliminaTom.TabIndex = 54;
+            this.btnEliminaTom.TabIndex = 4;
             this.btnEliminaTom.UseVisualStyleBackColor = true;
             this.btnEliminaTom.Click += new System.EventHandler(this.btnEliminaTom_Click);
             // 
@@ -364,7 +364,7 @@
             this.lvToms.MultiSelect = false;
             this.lvToms.Name = "lvToms";
             this.lvToms.Size = new System.Drawing.Size(496, 234);
-            this.lvToms.TabIndex = 8;
+            this.lvToms.TabIndex = 1;
             this.lvToms.UseCompatibleStateImageBehavior = false;
             this.lvToms.View = System.Windows.Forms.View.Details;
             // 
@@ -395,7 +395,7 @@
             this.btnModificaTom.Location = new System.Drawing.Point(417, 291);
             this.btnModificaTom.Name = "btnModificaTom";
             this.btnModificaTom.Size = new System.Drawing.Size(40, 40);
-            this.btnModificaTom.TabIndex = 53;
+            this.btnModificaTom.TabIndex = 3;
             this.btnModificaTom.UseVisualStyleBackColor = true;
             this.btnModificaTom.Click += new System.EventHandler(this.btnModificaTom_Click);
             // 
@@ -405,7 +405,7 @@
             this.label20.Location = new System.Drawing.Point(7, 16);
             this.label20.Name = "label20";
             this.label20.Size = new System.Drawing.Size(496, 29);
-            this.label20.TabIndex = 7;
+            this.label20.TabIndex = 0;
             this.label20.Text = "Toms e timpani";
             this.label20.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -416,7 +416,7 @@
             this.btnNuovoTom.Location = new System.Drawing.Point(371, 291);
             this.btnNuovoTom.Name = "btnNuovoTom";
             this.btnNuovoTom.Size = new System.Drawing.Size(40, 40);
-            this.btnNuovoTom.TabIndex = 52;
+            this.btnNuovoTom.TabIndex = 2;
             this.btnNuovoTom.UseVisualStyleBackColor = true;
             this.btnNuovoTom.Click += new System.EventHandler(this.btnNuovoTom_Click);
             // 
@@ -426,7 +426,7 @@
             this.btnSalva.Location = new System.Drawing.Point(788, 587);
             this.btnSalva.Name = "btnSalva";
             this.btnSalva.Size = new System.Drawing.Size(116, 41);
-            this.btnSalva.TabIndex = 20;
+            this.btnSalva.TabIndex = 5;
             this.btnSalva.Text = "Salva";
             this.btnSalva.UseVisualStyleBackColor = true;
             this.btnSalva.Click += new System.EventHandler(this.btnSalva_Click);
@@ -441,7 +441,7 @@
             this.pnlAltriPiatti.Location = new System.Drawing.Point(521, 242);
             this.pnlAltriPiatti.Name = "pnlAltriPiatti";
             this.pnlAltriPiatti.Size = new System.Drawing.Size(383, 339);
-            this.pnlAltriPiatti.TabIndex = 21;
+            this.pnlAltriPiatti.TabIndex = 4;
             // 
             // label1
             // 
@@ -449,7 +449,7 @@
             this.label1.Location = new System.Drawing.Point(7, 16);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(370, 29);
-            this.label1.TabIndex = 55;
+            this.label1.TabIndex = 0;
             this.label1.Text = "Altri piatti";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -460,7 +460,7 @@
             this.btnEliminaPiatto.Location = new System.Drawing.Point(340, 291);
             this.btnEliminaPiatto.Name = "btnEliminaPiatto";
             this.btnEliminaPiatto.Size = new System.Drawing.Size(40, 40);
-            this.btnEliminaPiatto.TabIndex = 57;
+            this.btnEliminaPiatto.TabIndex = 4;
             this.btnEliminaPiatto.UseVisualStyleBackColor = true;
             this.btnEliminaPiatto.Click += new System.EventHandler(this.btnEliminaPiatto_Click);
             // 
@@ -471,7 +471,7 @@
             this.btnModificaPiatto.Location = new System.Drawing.Point(294, 291);
             this.btnModificaPiatto.Name = "btnModificaPiatto";
             this.btnModificaPiatto.Size = new System.Drawing.Size(40, 40);
-            this.btnModificaPiatto.TabIndex = 56;
+            this.btnModificaPiatto.TabIndex = 3;
             this.btnModificaPiatto.UseVisualStyleBackColor = true;
             this.btnModificaPiatto.Click += new System.EventHandler(this.btnModificaPiatto_Click);
             // 
@@ -488,7 +488,7 @@
             this.lvAltriPiatti.MultiSelect = false;
             this.lvAltriPiatti.Name = "lvAltriPiatti";
             this.lvAltriPiatti.Size = new System.Drawing.Size(373, 234);
-            this.lvAltriPiatti.TabIndex = 55;
+            this.lvAltriPiatti.TabIndex = 1;
             this.lvAltriPiatti.UseCompatibleStateImageBehavior = false;
             this.lvAltriPiatti.View = System.Windows.Forms.View.Details;
             // 
@@ -514,7 +514,7 @@
             this.btnNuovoPiatto.Location = new System.Drawing.Point(248, 291);
             this.btnNuovoPiatto.Name = "btnNuovoPiatto";
             this.btnNuovoPiatto.Size = new System.Drawing.Size(40, 40);
-            this.btnNuovoPiatto.TabIndex = 55;
+            this.btnNuovoPiatto.TabIndex = 2;
             this.btnNuovoPiatto.UseVisualStyleBackColor = true;
             this.btnNuovoPiatto.Click += new System.EventHandler(this.btnNuovoPiatto_Click);
             // 

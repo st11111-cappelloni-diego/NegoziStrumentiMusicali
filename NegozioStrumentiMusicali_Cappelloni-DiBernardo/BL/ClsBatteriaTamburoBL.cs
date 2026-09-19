@@ -118,7 +118,7 @@ namespace NegozioStrumentiMusicali
         /// <param name="stringaDiConnessione"></param>
         /// <param name="batteriaTamburo">Record da eliminare</param>
         /// <param name="comunicazione">Comunicazione in uscita</param>
-        public static void DeleteBatteriaTamburo(string stringaDiConnessione, ClsBatteriaTamburo batteriaTamburo, out string comunicazione)
+        public static void DeleteBatteriaTamburo(string stringaDiConnessione, ClsBatteriaTamburo batteriaTamburo, out string comunicazione, bool restituisciEventualiEccezioniAlChiamante = false)
         {
             //VARIABILI
             comunicazione = String.Empty;
@@ -147,6 +147,10 @@ namespace NegozioStrumentiMusicali
             catch (Exception ex)
             {
                 comunicazione = ex.Message;
+                if(restituisciEventualiEccezioniAlChiamante)
+                {
+                    throw ex;
+                }
             }
             finally
             {
