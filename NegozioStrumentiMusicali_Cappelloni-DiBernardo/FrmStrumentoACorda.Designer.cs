@@ -116,7 +116,7 @@
             this.label2.Location = new System.Drawing.Point(3, 45);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(258, 20);
-            this.label2.TabIndex = 2;
+            this.label2.TabIndex = 1;
             this.label2.Text = "Quantità";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -128,7 +128,7 @@
             this.cbMaterialeCorde.Location = new System.Drawing.Point(3, 122);
             this.cbMaterialeCorde.Name = "cbMaterialeCorde";
             this.cbMaterialeCorde.Size = new System.Drawing.Size(258, 28);
-            this.cbMaterialeCorde.TabIndex = 5;
+            this.cbMaterialeCorde.TabIndex = 4;
             // 
             // label3
             // 
@@ -136,7 +136,7 @@
             this.label3.Location = new System.Drawing.Point(3, 99);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(258, 20);
-            this.label3.TabIndex = 4;
+            this.label3.TabIndex = 3;
             this.label3.Text = "Materiale";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -150,7 +150,7 @@
             this.pnlCorde.Location = new System.Drawing.Point(12, 40);
             this.pnlCorde.Name = "pnlCorde";
             this.pnlCorde.Size = new System.Drawing.Size(266, 176);
-            this.pnlCorde.TabIndex = 6;
+            this.pnlCorde.TabIndex = 0;
             // 
             // nudCorde
             // 
@@ -163,7 +163,7 @@
             0});
             this.nudCorde.Name = "nudCorde";
             this.nudCorde.Size = new System.Drawing.Size(258, 26);
-            this.nudCorde.TabIndex = 13;
+            this.nudCorde.TabIndex = 2;
             // 
             // label4
             // 
@@ -171,7 +171,7 @@
             this.label4.Location = new System.Drawing.Point(3, 16);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(258, 29);
-            this.label4.TabIndex = 6;
+            this.label4.TabIndex = 0;
             this.label4.Text = "Corde";
             this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -189,7 +189,7 @@
             this.pnlManico.Location = new System.Drawing.Point(12, 222);
             this.pnlManico.Name = "pnlManico";
             this.pnlManico.Size = new System.Drawing.Size(266, 258);
-            this.pnlManico.TabIndex = 7;
+            this.pnlManico.TabIndex = 3;
             // 
             // label9
             // 
@@ -217,7 +217,7 @@
             this.label8.Location = new System.Drawing.Point(3, 133);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(258, 20);
-            this.label8.TabIndex = 11;
+            this.label8.TabIndex = 5;
             this.label8.Text = "Spessore [cm]";
             this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -233,7 +233,7 @@
             0});
             this.nudSpessoreManico.Name = "nudSpessoreManico";
             this.nudSpessoreManico.Size = new System.Drawing.Size(258, 26);
-            this.nudSpessoreManico.TabIndex = 12;
+            this.nudSpessoreManico.TabIndex = 6;
             // 
             // label7
             // 
@@ -241,7 +241,7 @@
             this.label7.Location = new System.Drawing.Point(3, 81);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(258, 20);
-            this.label7.TabIndex = 9;
+            this.label7.TabIndex = 3;
             this.label7.Text = "Ampiezza [cm]";
             this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -257,7 +257,7 @@
             0});
             this.nudAmpiezzaManico.Name = "nudAmpiezzaManico";
             this.nudAmpiezzaManico.Size = new System.Drawing.Size(258, 26);
-            this.nudAmpiezzaManico.TabIndex = 10;
+            this.nudAmpiezzaManico.TabIndex = 4;
             // 
             // label6
             // 
@@ -265,7 +265,7 @@
             this.label6.Location = new System.Drawing.Point(3, 29);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(258, 20);
-            this.label6.TabIndex = 7;
+            this.label6.TabIndex = 1;
             this.label6.Text = "Lunghezza [cm]";
             this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -281,7 +281,7 @@
             0});
             this.nudLunghezzaManico.Name = "nudLunghezzaManico";
             this.nudLunghezzaManico.Size = new System.Drawing.Size(258, 26);
-            this.nudLunghezzaManico.TabIndex = 8;
+            this.nudLunghezzaManico.TabIndex = 2;
             // 
             // label5
             // 
@@ -289,7 +289,7 @@
             this.label5.Location = new System.Drawing.Point(3, 0);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(258, 29);
-            this.label5.TabIndex = 7;
+            this.label5.TabIndex = 0;
             this.label5.Text = "Manico";
             this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -299,7 +299,7 @@
             this.label10.Location = new System.Drawing.Point(3, 33);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(258, 20);
-            this.label10.TabIndex = 13;
+            this.label10.TabIndex = 1;
             this.label10.Text = "Materiale";
             this.label10.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -311,7 +311,7 @@
             this.cbMaterialeTastiera.Location = new System.Drawing.Point(3, 56);
             this.cbMaterialeTastiera.Name = "cbMaterialeTastiera";
             this.cbMaterialeTastiera.Size = new System.Drawing.Size(258, 28);
-            this.cbMaterialeTastiera.TabIndex = 14;
+            this.cbMaterialeTastiera.TabIndex = 2;
             // 
             // pnlCorpo
             // 
@@ -327,7 +327,7 @@
             this.pnlCorpo.Location = new System.Drawing.Point(284, 40);
             this.pnlCorpo.Name = "pnlCorpo";
             this.pnlCorpo.Size = new System.Drawing.Size(266, 276);
-            this.pnlCorpo.TabIndex = 15;
+            this.pnlCorpo.TabIndex = 1;
             // 
             // label12
             // 
@@ -355,7 +355,7 @@
             this.label13.Location = new System.Drawing.Point(3, 156);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(258, 20);
-            this.label13.TabIndex = 11;
+            this.label13.TabIndex = 5;
             this.label13.Text = "Spessore [cm]";
             this.label13.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -371,7 +371,7 @@
             0});
             this.nudSpessoreCorpo.Name = "nudSpessoreCorpo";
             this.nudSpessoreCorpo.Size = new System.Drawing.Size(258, 26);
-            this.nudSpessoreCorpo.TabIndex = 12;
+            this.nudSpessoreCorpo.TabIndex = 6;
             // 
             // label14
             // 
@@ -379,7 +379,7 @@
             this.label14.Location = new System.Drawing.Point(3, 99);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(258, 20);
-            this.label14.TabIndex = 9;
+            this.label14.TabIndex = 3;
             this.label14.Text = "Ampiezza [cm]";
             this.label14.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -395,7 +395,7 @@
             0});
             this.nudAmpiezzaCorpo.Name = "nudAmpiezzaCorpo";
             this.nudAmpiezzaCorpo.Size = new System.Drawing.Size(258, 26);
-            this.nudAmpiezzaCorpo.TabIndex = 10;
+            this.nudAmpiezzaCorpo.TabIndex = 4;
             // 
             // label15
             // 
@@ -403,7 +403,7 @@
             this.label15.Location = new System.Drawing.Point(3, 45);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(258, 20);
-            this.label15.TabIndex = 7;
+            this.label15.TabIndex = 1;
             this.label15.Text = "Lunghezza [cm]";
             this.label15.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -419,7 +419,7 @@
             0});
             this.nudLunghezzaCorpo.Name = "nudLunghezzaCorpo";
             this.nudLunghezzaCorpo.Size = new System.Drawing.Size(258, 26);
-            this.nudLunghezzaCorpo.TabIndex = 8;
+            this.nudLunghezzaCorpo.TabIndex = 2;
             // 
             // label16
             // 
@@ -427,7 +427,7 @@
             this.label16.Location = new System.Drawing.Point(3, 16);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(258, 29);
-            this.label16.TabIndex = 7;
+            this.label16.TabIndex = 0;
             this.label16.Text = "Corpo";
             this.label16.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -441,7 +441,7 @@
             this.pnlTastiera.Location = new System.Drawing.Point(284, 322);
             this.pnlTastiera.Name = "pnlTastiera";
             this.pnlTastiera.Size = new System.Drawing.Size(266, 158);
-            this.pnlTastiera.TabIndex = 16;
+            this.pnlTastiera.TabIndex = 4;
             // 
             // lblTasti
             // 
@@ -449,7 +449,7 @@
             this.lblTasti.Location = new System.Drawing.Point(3, 87);
             this.lblTasti.Name = "lblTasti";
             this.lblTasti.Size = new System.Drawing.Size(258, 20);
-            this.lblTasti.TabIndex = 15;
+            this.lblTasti.TabIndex = 3;
             this.lblTasti.Text = "Tasti";
             this.lblTasti.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -464,7 +464,7 @@
             0});
             this.nudTasti.Name = "nudTasti";
             this.nudTasti.Size = new System.Drawing.Size(258, 26);
-            this.nudTasti.TabIndex = 16;
+            this.nudTasti.TabIndex = 4;
             // 
             // label11
             // 
@@ -472,7 +472,7 @@
             this.label11.Location = new System.Drawing.Point(3, 1);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(258, 29);
-            this.label11.TabIndex = 13;
+            this.label11.TabIndex = 0;
             this.label11.Text = "Tastiera";
             this.label11.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -488,7 +488,7 @@
             this.pnlPickup.Location = new System.Drawing.Point(556, 40);
             this.pnlPickup.Name = "pnlPickup";
             this.pnlPickup.Size = new System.Drawing.Size(266, 211);
-            this.pnlPickup.TabIndex = 16;
+            this.pnlPickup.TabIndex = 2;
             // 
             // label20
             // 
@@ -496,7 +496,7 @@
             this.label20.Location = new System.Drawing.Point(3, 156);
             this.label20.Name = "label20";
             this.label20.Size = new System.Drawing.Size(258, 20);
-            this.label20.TabIndex = 11;
+            this.label20.TabIndex = 6;
             this.label20.Text = "Pickup 3";
             this.label20.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -508,7 +508,8 @@
             this.cbPickup3.Location = new System.Drawing.Point(3, 178);
             this.cbPickup3.Name = "cbPickup3";
             this.cbPickup3.Size = new System.Drawing.Size(258, 28);
-            this.cbPickup3.TabIndex = 12;
+            this.cbPickup3.TabIndex = 7;
+            this.cbPickup3.TabStop = false;
             // 
             // label19
             // 
@@ -516,7 +517,7 @@
             this.label19.Location = new System.Drawing.Point(3, 99);
             this.label19.Name = "label19";
             this.label19.Size = new System.Drawing.Size(258, 20);
-            this.label19.TabIndex = 9;
+            this.label19.TabIndex = 4;
             this.label19.Text = "Pickup 2";
             this.label19.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -528,7 +529,7 @@
             this.cbPickup2.Location = new System.Drawing.Point(3, 126);
             this.cbPickup2.Name = "cbPickup2";
             this.cbPickup2.Size = new System.Drawing.Size(258, 28);
-            this.cbPickup2.TabIndex = 10;
+            this.cbPickup2.TabIndex = 5;
             // 
             // label18
             // 
@@ -536,7 +537,7 @@
             this.label18.Location = new System.Drawing.Point(3, 45);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(258, 20);
-            this.label18.TabIndex = 7;
+            this.label18.TabIndex = 2;
             this.label18.Text = "Pickup 1";
             this.label18.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -548,7 +549,7 @@
             this.cbPickup1.Location = new System.Drawing.Point(3, 68);
             this.cbPickup1.Name = "cbPickup1";
             this.cbPickup1.Size = new System.Drawing.Size(258, 28);
-            this.cbPickup1.TabIndex = 8;
+            this.cbPickup1.TabIndex = 3;
             // 
             // label22
             // 
@@ -556,7 +557,7 @@
             this.label22.Location = new System.Drawing.Point(3, 16);
             this.label22.Name = "label22";
             this.label22.Size = new System.Drawing.Size(258, 29);
-            this.label22.TabIndex = 7;
+            this.label22.TabIndex = 1;
             this.label22.Text = "Pickup";
             this.label22.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -566,7 +567,7 @@
             this.label21.Location = new System.Drawing.Point(559, 248);
             this.label21.Name = "label21";
             this.label21.Size = new System.Drawing.Size(258, 20);
-            this.label21.TabIndex = 13;
+            this.label21.TabIndex = 5;
             this.label21.Text = "Lunghezza totale [cm]";
             this.label21.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -577,7 +578,7 @@
             this.tbLunghezzaTotale.Name = "tbLunghezzaTotale";
             this.tbLunghezzaTotale.ReadOnly = true;
             this.tbLunghezzaTotale.Size = new System.Drawing.Size(258, 26);
-            this.tbLunghezzaTotale.TabIndex = 17;
+            this.tbLunghezzaTotale.TabIndex = 6;
             // 
             // btnSalva
             // 
@@ -585,7 +586,7 @@
             this.btnSalva.Location = new System.Drawing.Point(717, 451);
             this.btnSalva.Name = "btnSalva";
             this.btnSalva.Size = new System.Drawing.Size(105, 29);
-            this.btnSalva.TabIndex = 18;
+            this.btnSalva.TabIndex = 8;
             this.btnSalva.Text = "Salva";
             this.btnSalva.UseVisualStyleBackColor = true;
             this.btnSalva.Click += new System.EventHandler(this.btnSalva_Click);
@@ -596,7 +597,7 @@
             this.btnAnnulla.Location = new System.Drawing.Point(606, 451);
             this.btnAnnulla.Name = "btnAnnulla";
             this.btnAnnulla.Size = new System.Drawing.Size(105, 29);
-            this.btnAnnulla.TabIndex = 19;
+            this.btnAnnulla.TabIndex = 7;
             this.btnAnnulla.Text = "Annulla";
             this.btnAnnulla.UseVisualStyleBackColor = true;
             // 

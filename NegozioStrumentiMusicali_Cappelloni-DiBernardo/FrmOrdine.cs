@@ -10,6 +10,9 @@ using System.Windows.Forms;
 
 namespace NegozioStrumentiMusicali
 {
+    /// <summary>
+    /// Sviluppo e GUI: Leonardo Di Bernardo
+    /// </summary>
     public partial class FrmOrdine : Form
     {
         private ClsStrumentoMusicale _strumento;
@@ -72,6 +75,10 @@ namespace NegozioStrumentiMusicali
                 {
                     _indirizzo.ID = ClsIndirizzoBL.InsertIndirizzo(Program._connectionString, _indirizzo, out _comunicazione);
                     MessageBox.Show(_comunicazione, "INSERIMENTO INDIRIZZO NEL DB", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    _indirizzo.ID = _ricercaIndirizzo.ID;
                 }
 
                 ClsOrdine _ordine = new ClsOrdine();

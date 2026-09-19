@@ -731,9 +731,16 @@ namespace NegozioStrumentiMusicali
 
                 ClsVendere vendere = _listaVendereNegozioSelezionato.FirstOrDefault(v => v.StrumentoMusicaleID == _carrello.StrumentoMusicale.ID);
 
-                _carrello.Prezo = vendere.Prezzo;
+                _carrello.Prezzo = vendere.Prezzo;
 
-                ClsArchivio.ListCarrello.Add(_carrello);
+                //controllo se esiste già
+                ClsCarrello _ricercaCarrello = new ClsCarrello();
+                _ricercaCarrello = ClsArchivio.ListCarrello.FirstOrDefault(c => c.NegozioID == _carrello.NegozioID && c.StrumentoMusicale.ID == _carrello.StrumentoMusicale.ID);
+
+                if(_ricercaCarrello == null) //per evitare doppioni
+                {
+                    ClsArchivio.ListCarrello.Add(_carrello);
+                }
 
             }
         }
