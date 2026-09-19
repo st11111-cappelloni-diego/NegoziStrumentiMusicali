@@ -257,7 +257,7 @@ namespace NegozioStrumentiMusicali
             PopolaListView(lvAltriPiatti, _piatti, false);
             PopolaListView(lvToms, _tamburi, false, false);
 
-            if(ModalitaEntrata == Program.eMODALITA_ENTRATA_DETAIL.Modifica)
+            if(ModalitaEntrata == Program.eMODALITA_ENTRATA_DETAIL.Modifica || ModalitaEntrata == Program.eMODALITA_ENTRATA_DETAIL.Visualizzazione)
             {
                 //Trovo la cassa, il rullante ed il charleston
                 //(solo la prima occorrenza perchè per ogni batteria ci può essere solo uno per componente tra queste 3)
@@ -353,7 +353,7 @@ namespace NegozioStrumentiMusicali
             else if (lvToms.SelectedItems.Count == 1)
             {
                 //Istanzio la form detail
-                FrmTamburo _frmTamburo = new FrmTamburo();
+                FrmTamburo _frmTamburo = new FrmTamburo(ModalitaEntrata);
 
                 //Gli passo il tamburo selezionato
                 string _com = String.Empty;
@@ -381,7 +381,7 @@ namespace NegozioStrumentiMusicali
             else if (lvAltriPiatti.SelectedItems.Count == 1)
             {
                 //Istanzio la form detail
-                FrmPiatto _frmPiatto = new FrmPiatto();
+                FrmPiatto _frmPiatto = new FrmPiatto(ModalitaEntrata);
 
                 //Gli passo il tamburo selezionato
                 string _com = String.Empty;
@@ -403,7 +403,7 @@ namespace NegozioStrumentiMusicali
         private void btnNuovoTom_Click(object sender, EventArgs e)
         {
             //Istanzio la form detail
-            FrmTamburo _frmTamburo = new FrmTamburo();
+            FrmTamburo _frmTamburo = new FrmTamburo(ModalitaEntrata);
 
             ClsTamburo _tamburo = new ClsTamburo();
             _frmTamburo._tamburo = _tamburo;
@@ -433,7 +433,7 @@ namespace NegozioStrumentiMusicali
         private void btnNuovoPiatto_Click(object sender, EventArgs e)
         {
             //Istanzio la form detail
-            FrmPiatto _frmPiatto = new FrmPiatto();
+            FrmPiatto _frmPiatto = new FrmPiatto(ModalitaEntrata);
 
             ClsPiatto _piatto = new ClsPiatto();
             _frmPiatto._piatto = _piatto;
@@ -477,31 +477,31 @@ namespace NegozioStrumentiMusicali
                     //Tamburo da rimuovere
                     ClsTamburo _tamburoDaRimuovere = (ClsTamburo)lvToms.SelectedItems[0].Tag;
 
-                    //Trovo il batteriatamburo
-                    ClsBatteriaTamburo _batteriaTamburo = ClsBatteriaTamburoBL.GetOneBatteriaTamburo(Program._connectionString, _batteria.ID, _tamburoDaRimuovere.ID, out _comunicazione);
-
-                    if (_batteriaTamburo == null)
+                    if(ModalitaEntrata == Program.eMODALITA_ENTRATA_DETAIL.Modifica)
                     {
-                        MessageBox.Show(_comunicazione, "RIMUOVI TAMBURO", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                    }
-                    else
-                    {
-                        ClsBatteriaTamburoBL.DeleteBatteriaTamburo(Program._connectionString, _batteriaTamburo, out _comunicazione);
+                        //Trovo il batteriatamburo
+                        ClsBatteriaTamburo _batteriaTamburo = ClsBatteriaTamburoBL.GetOneBatteriaTamburo(Program._connectionString, _batteria.ID, _tamburoDaRimuovere.ID, out _comunicazione);
 
-                        MessageBox.Show(_comunicazione, "RIMUOVI TAMBURO", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                        if (_modalitaEntrata == Program.eMODALITA_ENTRATA_DETAIL.Modifica)
+                        if (_batteriaTamburo == null)
                         {
+                            MessageBox.Show(_comunicazione, "RIMUOVI TAMBURO", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                        }
+                        else
+                        {
+                            ClsBatteriaTamburoBL.DeleteBatteriaTamburo(Program._connectionString, _batteriaTamburo, out _comunicazione);
+
+                            MessageBox.Show(_comunicazione, "RIMUOVI TAMBURO", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
                             _comunicazione = String.Empty;
                             _tamburi = TrovaTamburi(_batteria.ID, out _comunicazione);
                         }
-                        else if (_modalitaEntrata == Program.eMODALITA_ENTRATA_DETAIL.Inserimento)
-                        {
-                            _tamburi.Remove(_tamburoDaRimuovere);
-                        }
-
-                        PopolaListView(lvToms, _tamburi, false, false);
                     }
+                    else if(ModalitaEntrata == Program.eMODALITA_ENTRATA_DETAIL.Inserimento)
+                    {
+                        _tamburi.Remove(_tamburoDaRimuovere);
+                    }
+
+                    PopolaListView(lvToms, _tamburi, false, false);
                 }
             }
         }
@@ -523,31 +523,31 @@ namespace NegozioStrumentiMusicali
                     //Tamburo da rimuovere
                     ClsPiatto _piattoDaRimuovere = (ClsPiatto)lvAltriPiatti.SelectedItems[0].Tag;
 
-                    //Trovo il batteriatamburo
-                    ClsBatteriaPiatto _batteriaPiatto = ClsBatteriaPiattoBL.GetOneBatteriaPiatto(Program._connectionString, _batteria.ID, _piattoDaRimuovere.ID, out _comunicazione);
-
-                    if (_batteriaPiatto == null)
+                    if(ModalitaEntrata == Program.eMODALITA_ENTRATA_DETAIL.Modifica)
                     {
-                        MessageBox.Show(_comunicazione, "RIMUOVI PIATTO", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                    }
-                    else
-                    {
-                        ClsBatteriaPiattoBL.DeleteBatteriaPiatto(Program._connectionString, _batteriaPiatto, out _comunicazione);
+                        //Trovo il batteriatamburo
+                        ClsBatteriaPiatto _batteriaPiatto = ClsBatteriaPiattoBL.GetOneBatteriaPiatto(Program._connectionString, _batteria.ID, _piattoDaRimuovere.ID, out _comunicazione);
 
-                        MessageBox.Show(_comunicazione, "RIMUOVI PIATTO", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                        if (_modalitaEntrata == Program.eMODALITA_ENTRATA_DETAIL.Modifica)
+                        if (_batteriaPiatto == null)
                         {
+                            MessageBox.Show(_comunicazione, "RIMUOVI PIATTO", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                        }
+                        else
+                        {
+                            ClsBatteriaPiattoBL.DeleteBatteriaPiatto(Program._connectionString, _batteriaPiatto, out _comunicazione);
+
+                            MessageBox.Show(_comunicazione, "RIMUOVI PIATTO", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
                             _comunicazione = String.Empty;
                             _piatti = TrovaPiatti(_batteria.ID, out _comunicazione);
                         }
-                        else if (_modalitaEntrata == Program.eMODALITA_ENTRATA_DETAIL.Inserimento)
-                        {
-                            _piatti.Remove(_piattoDaRimuovere);
-                        }
-
-                        PopolaListView(lvAltriPiatti, _piatti, false);
                     }
+                    else if(ModalitaEntrata == Program.eMODALITA_ENTRATA_DETAIL.Inserimento)
+                    {
+                        _piatti.Remove(_piattoDaRimuovere);
+                    }
+
+                    PopolaListView(lvAltriPiatti, _piatti, false);
                 }
             }
 
@@ -584,7 +584,7 @@ namespace NegozioStrumentiMusicali
                 }
                 catch(Exception ex)
                 {
-
+                    MessageBox.Show(ex.Message, "SALVA ED ESCI", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }
