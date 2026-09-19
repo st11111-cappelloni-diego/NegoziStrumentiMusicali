@@ -10,6 +10,9 @@ using System.Windows.Forms;
 
 namespace NegozioStrumentiMusicali
 {
+    /// <summary>
+    /// Sviluppo e GUI: Leonardo Di Bernardo
+    /// </summary>
     public partial class FrmCarrello : Form
     {
         ClsStrumentoMusicale _strumentoAttuale = new ClsStrumentoMusicale();
@@ -79,7 +82,7 @@ namespace NegozioStrumentiMusicali
                     _lvi.SubItems.Add(carrello.StrumentoMusicale.Modello);
                     _lvi.SubItems.Add(carrello.StrumentoMusicale.Colori);
                     _lvi.SubItems.Add(carrello.Quantita.ToString());
-                    _lvi.SubItems.Add((carrello.Quantita * carrello.Prezo).ToString());
+                    _lvi.SubItems.Add((carrello.Quantita * carrello.Prezzo).ToString());
                     _lvi.Tag = carrello;
 
                     lvStrumenti.Items.Add(_lvi);
@@ -129,17 +132,25 @@ namespace NegozioStrumentiMusicali
             PopolaListView(lvStrumenti, ClsArchivio.ListCarrello, ClsArchivio.Negozi[cbNegozio.SelectedIndex].ID);
         }
 
-        private void btnOdina_Click(object sender, EventArgs e)
+        private void btnOrdina_Click(object sender, EventArgs e)
         {
+            decimal _prezzoTotale = 0;
+
             foreach (ListViewItem item in lvStrumenti.Items)
             {
                 ClsCarrello _elementoCarrello = (ClsCarrello)item.Tag;
                 _listaElementiCarrello.Add(_elementoCarrello);
+                _prezzoTotale += _elementoCarrello.Prezzo * _elementoCarrello.Quantita;
             }
 
-            FrmOrdine _ordini = new FrmOrdine(ClsArchivio.Negozi[cbNegozio.SelectedIndex].ID);
-            _ordini.ShowDialog();
-            PopolaListView(lvStrumenti, ClsArchivio.ListCarrello, ClsArchivio.Negozi[cbNegozio.SelectedIndex].ID);
+            DialogResult _dr = MessageBox.Show("Il totale dell'ordine è di €" + _prezzoTotale.ToString() + "\r\nProcedere?", "ORDINA", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+
+            if(_dr == DialogResult.Yes)
+            {
+                FrmOrdine _frmOrdine = new FrmOrdine(ClsArchivio.Negozi[cbNegozio.SelectedIndex].ID);
+                _frmOrdine.ShowDialog(this);
+                PopolaListView(lvStrumenti, ClsArchivio.ListCarrello, ClsArchivio.Negozi[cbNegozio.SelectedIndex].ID);
+            }
         }
     }
 }
