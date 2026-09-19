@@ -32,7 +32,7 @@ namespace NegozioStrumentiMusicali
         }
         public long NegozioID { get => _negozioID; set => _negozioID = value; }
         public ClsStrumentoMusicale StrumentoMusicale { get => _strumentoMusicale; set => _strumentoMusicale = value; }
-        public decimal Prezo { get => _prezo; set => _prezo = value; }
+        public decimal Prezzo { get => _prezo; set => _prezo = value; }
 
         #endregion
 
@@ -47,7 +47,7 @@ namespace NegozioStrumentiMusicali
             StrumentoMusicale = strumentoMusicale;
             NegozioID = negozioID;
             Quantita = quantita;
-            Prezo = prezzo;
+            Prezzo = prezzo;
         }
         #endregion
 
